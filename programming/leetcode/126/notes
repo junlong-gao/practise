@@ -1,0 +1,45 @@
+the standard procedure would be using the bfs search
+however, a bidirectional bfs search would greatly improve the performence
+the provided codes have several points of interest that are worthy to be noted here:
+
+(1) the elements of bfs is: 
+	(a) representation and enmu of nodes
+	(b) identifying visited and unvisited nodes
+	(c) how to expand the frontier and stop the search
+	(d) how to trace back result path(s)
+
+(2) in this problem, nodes are not come in factory-made, rather, it is calculated
+during the search, together with the problem of marking visited or not
+if the vertix are in a pre-made list (adj table or matrix), one can create a huge
+bool list to "tick" visited: remember that by discovering new frontier, it is 
+essential that we cannot add visited nodes(in old frontier) to the new frontier
+
+(3) when considering node rep, it is essential that speed and performence is 
+considered. If it is NOT PRE_GIVEN, we have a huge problem by using adj list or 
+matrix. A NEW method must be devised
+
+(4) using hashing table (unordered_set) have several advantages
+	(a) one can fast traversal all stored element, insert and delete take O1
+	(b) one can perform inquirary, which can be used as adj search
+	(c) one can delete element from vertix set to realize visited flag: since
+		bfs will guarantee that each node will be visited once
+
+(5) in conclusion, for a plain one directional bfs, one will
+	(a) use a hash table to store all v: dict
+	(b) keep a hash table for current frontier: starting
+	(c) build a hash table for the newly discovered frontier from the : frontier
+	(d) during adj enum, if we found the dest node, we stop the search by 
+	 "turning on a flag". This is cleverly done in this piece of code:
+	 	return done || bfs(...)
+
+	 what is the difference between this frontier-recurrsion call approach and the queue approach? Roughly speaking, queue will maintain a list of new frontier
+	 until it is poped out, and there is a nice correspondence between each LEVEL of call of function and the types of nodes in the queue: once a call of function is initiated, that means a level of frontier is taken out of queue, which will push more new node into queue as new frontier passed down to next call, thus each call corresponds to a seq of pop of queue. Due to the nature of queue, unless this level of frontier is all visited, next level of new frontier nodes will not be visited, just as the call functions behave.
+
+	 For bi-directional bfs, it is better to use recurrsion call rather than queue, since in queue it is hard to tell whether we need to flip to another side of frontier
+
+(6) to keep track of solution path, one need an addtional hash table to keep record of parent or childREN the newly added frontier node.
+	(a) if we are to find ONLY ONE solution via bfs, we can take the advantage that the solution path is a unique path (which in general determined by the order you enum the nodes) by recording the PARENT of each node, i.e., through which node did we discovered this new node. Note that PARENT is UNIQUE, thus the additional hash table is a node->node set.
+
+	Once we get this inforamtion, we can trace from the end point to starting point in a trivial manner
+
+	(b) if we are to find ALL solutions via bfs, we need a different way to keep record and generate path. The idea is quite simple: for each node we keep a list of children in bfs (children, not child, is indeed not unique, since different path may have overlap sub path, and they certianly share the same starting point). To generate solutions, we can start from starting point, and for each children, we generate the solutions from child to end, this is clearly a recurrison approach and can be easily implemented by passing and pushing the solution vector to a container of solutions at the terminal of call (which is start == end).

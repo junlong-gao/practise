@@ -1,0 +1,8 @@
+*.dSYM
+*.DS_Store
+*.idea
+*build
+*vs
+*xcode
+*.*.swp
+*.out
