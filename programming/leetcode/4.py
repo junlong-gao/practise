@@ -28,8 +28,19 @@ class Solution(object):
         :type s1: List[int]
         :type s2: List[int]
         :rtype: float
+	>>> s = Solution()
+	>>> s.findMedianSortedArrays([1, 2], [-1, 3])
+	1.5
+	>>> s.findMedianSortedArrays([1, 2, 3], [-1, 3])
+	2
         """
         l = len(s1) + len(s2)
         if l % 2 == 1:
             return find_kth(s1, s2, l/2)
         return (find_kth(s1, s2, (l - 1)/2) + find_kth(s1, s2, (l + 1)/2)) / 2.0
+
+"""
+if __name__ == "__main__":
+	import doctest
+	doctest.testmod()
+"""
