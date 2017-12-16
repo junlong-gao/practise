@@ -1,11 +1,3 @@
-#include <iostream>
-#include <cassert>
-#include <unordered_map>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
 class Solution {
     class trie {
         unordered_map<char, trie*> children;
@@ -90,8 +82,7 @@ public:
         assert(rst == expect);
     }
     
-    void search(vector<string> ws, trie& root, vector<vector<string>>& ret,
-    unordered_map<string, int>& count) {
+    void search(vector<string> ws, trie& root, vector<vector<string>>& ret) {
       if (ws.size() == ws.front().length()) {
         ret.push_back(ws);
         return;
@@ -105,48 +96,23 @@ public:
       }
       root.find_prefix(prefix, words);
       for(auto& w: words) {
-        if(count[w] > 0) {
-          count[w]--;
-          ws.push_back(w);
-          search(ws, root, ret, count);
-          ws.pop_back();
-          count[w]++;
-        }
+        ws.push_back(w);
+        search(ws, root, ret);
+        ws.pop_back();
       }
     }
     
     vector<vector<string>> wordSquares(const vector<string>& words) {
       trie root;
       vector<vector<string>> ret;
-      unordered_map<string, int> count;
       int l = words.front().length();
       for(auto& w : words) {
         root.add_word(w);
-        count[w]++;
       }
       for (auto& w:words) {
         vector<string> ws{w};
-        count[w]--;
-        search(ws, root, ret, count);
-        count[w]++;
+        search(ws, root, ret);
       }
      return ret;
     }
 };
-
-int main() {
-  Solution s;
-  auto ret = s.wordSquares({
-    "aab",
-    "aac",
-    "bbb",
-    "bce"
-  });
-  for (auto s: ret) {
-    cout << "[";
-    for (auto w:s) {
-      cout << w <<" ";
-    }
-    cout << "]"<< endl;
-  }
-}
