@@ -31,7 +31,7 @@ public:
                 continue;
               }
           }
-          if (cur != INT_MAX) {
+          if (cur != maxInt) {
             dp[i] = cur + A[i];
           }
         }
