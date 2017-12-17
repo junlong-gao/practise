@@ -1,5 +1,6 @@
-all:lint
-	jbuilder build @runtest 
+all:
+	jbuilder build @runlc;
+	jbuilder build @runcw
 
 clean:
 	git clean -fdx

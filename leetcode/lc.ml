@@ -120,5 +120,11 @@ module PolyVariant = struct
            `Basic(`Blue, `Regular);];
     );
     [%expect {|
+      basic color to int
+      0 1 1
+      color to int
+      100 201
+      extended color to int
+      1330 201
    |}]
 end

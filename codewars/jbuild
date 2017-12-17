@@ -1,0 +1,10 @@
+(jbuild_version 1)
+
+(library
+   (
+      (name cw)
+      (library_flags -linkall)
+      (libraries (core base))
+      (preprocess (pps (ppx_jane)))
+   )
+)
