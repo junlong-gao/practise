@@ -1,0 +1,11 @@
+*.pdf*
+*MC_TE.out
+*MC.out
+
+*_SnapShot_*
+
+*-*-*-*-*-*
+
+*.log
+*.aux
+*.pdf
