@@ -128,3 +128,50 @@ module PolyVariant = struct
       1330 201
    |}]
 end
+
+module Preorder = struct
+
+   let rec search (preorder_list:int array) (lower:int) (upper:int) s e =
+      if   e == s then 0
+      else let r = preorder_list.(s) in
+           let valid_bst = (r < upper) && (r >= lower)
+           in
+           if   not valid_bst then 0
+           else let mid = (search preorder_list lower r (s + 1) e ) in
+                    1 + (mid + (search preorder_list (r + 1) upper (s + 1 + mid) e))
+
+    let is_valid_preorder preorder_list =
+       let n = (Array.length preorder_list)
+       in
+       n = (search preorder_list Int.min_value Int.max_value 0 n)
+
+    let%expect_test "preorder bst" =
+       ignore(
+          List.iter ~f:(fun c ->
+             Printf.printf "%B\n"
+             (is_valid_preorder c)
+          )
+          [
+             [||];
+             [|1|];
+             [|1; 2|];
+             [|2; 1; 3|];
+             [|3; 1; 2|];
+             [|3; 4; 5; 1|];
+             [|1; 4; 5; 6|];
+             [|1; 0; 4; -1|];
+          ];
+       );
+    [%expect
+    {|
+      true
+      true
+      true
+      true
+      true
+      false
+      true
+      false
+
+     |}]
+end
