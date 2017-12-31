@@ -1,0 +1,11 @@
+*.dSYM
+*.DS_Store
+*.idea
+*vs
+*xcode
+*.*.swp
+*.out
+
+*.pyc
+*_build*
+*.merlin*

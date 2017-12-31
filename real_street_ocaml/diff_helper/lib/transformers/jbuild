@@ -1,0 +1,10 @@
+(jbuild_version 1)
+
+(library
+ (
+  (name transformers)
+  (library_flags (-linkall))
+  (libraries (core util parsers core_extended))
+  (preprocess (pps (ppx_jane)))
+ )
+)

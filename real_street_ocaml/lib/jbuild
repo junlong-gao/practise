@@ -2,9 +2,9 @@
 
 (library
    (
-      (name cw)
+      (name lib)
       (library_flags -linkall)
-      (libraries (core base))
+      (libraries (core base yojson))
       (preprocess (pps (ppx_jane)))
    )
 )

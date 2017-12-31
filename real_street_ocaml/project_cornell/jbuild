@@ -1,0 +1,12 @@
+(jbuild_version 1)
+
+(library
+ (
+  (name project_cornell)
+  (library_flags (-linkall))
+  (libraries 
+    (core core_extended)
+  )
+  (preprocess (pps (ppx_jane)))
+ )
+)

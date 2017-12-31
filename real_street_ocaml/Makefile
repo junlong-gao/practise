@@ -1,6 +1,5 @@
 all:
-	jbuilder build @runlc;
-	jbuilder build @runcw
+	jbuilder build @runtest 
 
 clean:
 	git clean -fdx

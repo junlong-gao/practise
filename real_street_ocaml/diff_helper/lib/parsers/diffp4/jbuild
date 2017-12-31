@@ -1,0 +1,16 @@
+(jbuild_version 1)
+
+(menhir
+    ((flags ())
+     (modules (parser ast.ml))))
+
+(ocamllex (lexer))
+
+(library
+ (
+  (name diffp4)
+  (library_flags (-linkall))
+  (libraries (core base str util))
+  (preprocess (pps (ppx_jane)))
+ )
+)
