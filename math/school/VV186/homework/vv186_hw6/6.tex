@@ -1,0 +1,178 @@
+\input my_macros
+\mydoc
+\baselineskip 16pt plus 2pt
+\vv6 November {1}
+\snum1
+\+a) &Local minimum point: $x=\!-1$\qquad &Global minimum point: $x=-1$ \cr
+\+	&Local maximum point: $x=1$ &Global maximum point: $x=1$\cr
+\medskip
+\+b) &Local minimum point: $x=1$\qquad &Global minimum point: $x=1$\cr
+\+	&Local maximum point: $x=\!-1/2$ &Global maximum point:  $x=\!-1/2$\cr
+\medskip
+\noindent c) The derivative of $f(x)$ is
+$$
+f'(x)=-{x^2+1\over{(x^2-1)}^2}<0
+$$
+Which is discontinuous on $I$. In fact, we have a infinite discontinuous point $x=1$,
+checking the boundary points gives us
+
+\+\phantom{b)} &Local minimum: $x=5$\qquad &Global minimum: none \cr
+\+	&Local maximum: $x=0$ &Global maximum: none\cr
+
+\bigskip
+
+\pnum2
+Since the speed of light is constant, to minimize time is to minimize distance， according to the setting, we have distance function:
+$$
+f(x)=\sqrt{a^2+x^2}+\sqrt{(1-x)^2+b^2},\qquad x\in[\,0,1\,]
+$$
+And it's derivative:
+$$
+f'(x)={x\over\sqrt{(a^2+x^2)}}-{(1-x)\over\sqrt{(1-x)^2+b^2}},
+\qquad x\in[\,0,1\,]
+$$
+Finally, since $f'(0)<0$, $f'(1)>0$, the local minimum point is solved by letting $f'(x)=0$, which gives us:
+$$
+{x\over\sqrt{(a^2+x^2)}}={(1-x)\over\sqrt{(1-x)^2+b^2}}
+$$
+That's exactly
+$$
+\cos\alpha=\cos\beta\Longrightarrow\alpha=\beta
+$$
+Since they are acute angles.
+
+
+\bigskip
+
+
+\pnum3
+Let $h(x)=f(x)-g(x)$ defined on $I$, then it's differentiable on $int\,I$ and continuous on $I$, also by the setting we have:
+$$
+h(x_0)=f(x_0)-g(x_0)\le0,\quad h'=f'-g'\le0;\qquad x\in int\,I
+$$
+Now we show that for any $x$ by mean value theorem that there exists $\xi\in(x_0,x)$ such that
+$$
+h(x)-h(x_0)=h'(\xi)(x-x_0)\le0
+$$
+so $h(x)\le h(x_0)\le 0$. Thus for all $x\in int\,I$, $h(x)\le0$, that is, $f(x)\le g(x)$.
+\bigskip
+
+
+\snum4
+In order to use L'~H\^opital's rule, the limit must be the form of ${0\over0}$ or ${\infty\over\infty}$. Clearly the original limit doesn't satisfy the condition.
+
+\bigskip
+
+\pnum5
+\noindent i) Consider arbitrary interval $[a,b\,]\subseteq I$, according to the setting in question we have
+$$
+f(ta+(1-t)b)<tf(a)+(1-t)f(b),\quad \forall t\in(0,1)
+$$
+Now substitute $ta+(1-t)b$ by $x$, we can show that 
+$$
+x-a=(1-t)(a+b)>0,\quad x-b=t(a-b)<0\qquad \forall t\in(0,1)
+$$
+Namely $x$ continuously takes on all numbers in $(a,b)$, now we plug in $t={x-b\over
+a-b}$, then we have:
+$$\eqalign{
+f(x)&<{x-b\over a-b}f(a)+{a-x\over a-b}f(b)\cr
+\Longrightarrow f(x)-f(a)&<{x-a\over a-b}f(a)+{a-x\over a-b}f(b)\hfill\cr
+\Longrightarrow {f(x)-f(a)\over x-a}&<{f(b)-f(a)\over a-b}\hfill\cr
+}$$
+For all $x\in(a,b)$.
+\smallskip
+\noindent Conversely, suppose for some $I\subset\Omega$, $f(x)$ is convex, we have:
+$$
+{f(x)-f(a)\over x-a}<{f(b)-f(a)\over a-b}
+$$
+For all $a<x<b$ in $I$. Then we may substitute $t={x-b\over a-b}$ which gives us:
+$$\eqalign{
+&f(x)-f(a)<{x-a\over a-b}f(a)+{a-x\over a-b}f(b)\cr
+&\Longrightarrow f(x)<{x-b\over a-b}f(a)+{a-x\over a-b}f(b)\cr
+&\Longrightarrow f(ta+(1-t)b)<tf(a)+(1-t)f(b)\cr}
+$$
+
+\noindent ii) For point $x_0\in I$, fix it and pick $x_1>x_0$ in $I$, we consider the secant line
+$$
+y-f(x_0)={f(x_1)-f(x_0)\over x_1-x_0}(x-x_0)
+$$
+Now given $\epsilon>0$ and fixed, we have $\exists\,\delta_1>0$ such that $x_0<x<x_0+\delta_1$ implies~$y-f(x_0)<\epsilon$. Also, since $f(x)$ lies below the line, we have $f(x)<y$ for all $x\in(x_0,x_1)$, thus we conclude that $f(x)-f(x_0)<y-f(x_0)<\epsilon$. 
+
+Now, if $f(x)> f(x_0)$ for all $x\in(x_0,x_1)$, the proof is done. Otherwise if we have $f(x)< f(x_0)$ for some $x>x_0$, we must have some $x_2<x_0$ such that $f(x')<f(x_0)$ by its convexity, then  we consider the secant line
+$$
+y-f(x_0)={f(x_2)-f(x_0)\over x_2-x_0}(x-x_0)
+$$
+also we will end up some $\delta_2>$ such that $x_0-\delta_2<x<x_0$ implies~$y-f(x_0)<\epsilon$ because on the left side secant line is above the graph. But when this secant line goes through $(x_0,f(x_0))$, the line must go below the graph, a graph is illustrated beside. Thus for $x_0<x<x_0+\delta_2$, $f(x_0)-f(x)>f(x_0)-y>\,$-$\epsilon$. Combining the two we have: $f(x)\to f(x_0) $ as $x\to x_0^+$ 
+
+We can also get the left side limit  $f(x)\to f(x_0) $ as $x\to x_0^-$ similarly,
+so $f(x)$ is continuous at $x_0\in I$. Since $x_0$ is arbitrary in $I$, $f(x)$ is continuous on $I$.
+\medskip
+\noindent iii) $f(x)$ may have a jump at $x=a$ or $x=b$, making it discontinuous at these boundary points. A graph is illustrated in the end of the paper.
+\bigskip
+\snum6
+See in the end of the paper.
+\bigskip
+\pnum7
+\noindent i) First we have:
+$$
+T_n^{(k)}(x\,;\,x_0)=f^{(k)}(x)+\sum_{j=k+1}^{n}{j!\over n!}f^{(j)}(x_0)(x-x_0)^{j-k},\qquad 0\le k\le n.
+$$
+Letting $x=x_0$ will make the latter sum vanish, thus we have $f^{(k)}(x_0)=T_n^{(k)}(x_0,x_0)$.
+\medskip
+\noindent ii)
+After a few computing we find:
+$$
+f^{(k)}(x)={1\over k!}{1/2\choose k}(1+x)^{{1\over2}-k},\qquad |x|\le1
+$$
+Where 
+$$
+{1/2\choose k}\,=\,{{1\over2}({1\over2}-1)({1\over2}-2)\cdots({1\over2}-k+1)\over k!}
+$$
+Now we are ready to write out $T_n(x,x_n)$:
+$$
+T_n(x\,;0)=\sum_{k=0}^{n}{1/2\choose k}x^k
+$$
+To do approximate calculation, as the exercise shows below, all we have to do 
+is calculate $T_3(1/9,0)\approx f(1/9)= \sqrt{1/9}$:
+$$\eqalign{
+T_3=\sum_{k=0}^{3}{1/2\choose k}x^k&={1/2\choose 0}+{1/2\choose 1}{1\over9}
++{1/2\choose 2}{1\over9^2}+{1/2\choose 3}{1\over9^3}\cr
+&=1+{{1\over 2}\over1!}\,{1\over 9}+{{1\over 2}(-{1\over 2})\over2!}\,{1\over 81}+{{1\over 2}(-{1\over 2})(-{3\over 2})\over3!}\,{1\over729}\cr
+&\approx1.0541
+}
+$$
+\noindent Thus $\sqrt10=3T_3=3.1623$
+
+\noindent iii) By setting we have:
+$$r_n(x\,;x_0)=f(x)-T_n(x\,;x_0)
+$$
+Then by Cauchy mean value theorem, we know there exists $\xi\in[\,x_0,x\,]$ (or $[\,x,x_0\,]$) such that:
+$$
+{r_n(x\,;x)-r_n(x\,;x_0)\over r'_n(x\,;\xi)}={\varphi(x)-\varphi(x_0)\over\varphi'(\xi)}\eqno(*)
+$$
+The trick is to take the derivative with respect to the second parameter of $r_n(a\,;\,b)$ :
+$$\eqalign{
+r'_n(x\,;\xi)=0-T'_n(x\,;\xi)&=-\sum_{k=0}^{n}{1\over k!}f^{(k+1)}(\xi)(x-\xi)^{k}
++{1\over {k-1}!}f^{k}(\xi)(x-\xi)^{k-1}\cr
+&=-\sum_{k=0}^{n}{1\over k!}f^{(k+1)}(\xi)(x-\xi)^{k}+
+\sum_{k=0}^{n-1}{1\over {k}!}f^{(k+1)}(\xi)(x-\xi)^{k}\cr
+&=-{1\over {n}!}f^{n+1}(\xi)(x-\xi)^{n}\cr
+}
+$$
+Finally $r_n(x\,;\,x)=f(x)-T(x\,;\,x)=0$, plug them into $(*)$ we have 
+$$
+r_n(x\,;x_0)={\varphi(x)-\varphi(x_0)\over\varphi'(\xi)n!}f^{(n+1)}(\xi)(x-\xi)^{n}\eqno(**)
+$$
+\medskip
+\noindent iv) $\varphi'(t)=-1$, $\varphi(x)=0$, $\varphi(x_0)=x-x_0$. Plug them into $(**)$ we have:
+$$\eqalign{
+r_n(x\,;x_0)&={(0-x+x_0)\over(-1)\,n!}f^{(n+1)}(\xi)(x-\xi)^{n}\cr
+			&={1\over n!}f^{(n+1)}(\xi)(x-\xi)^{n}(x-\xi)\cr
+			}$$
+\medskip
+\noindent v) $\varphi'(t)=-(n+1)(x-t)^{n}$, $\varphi(x)=0$, $\varphi(x_0)=(x-x_0)^{n+1}$. Plug them into $(**)$ we have:
+$$\eqalign{
+r_n(x\,;x_0)&={0-(x-x_0)^{n+1}\over-(n+1)(x-\xi)^{n}n!}f^{(n+1)}(\xi)(x-\xi)^{n}\cr
+			&={1\over (n+1)!}f^{(n+1)}(\xi)(x-x_0)^{n+1}\cr
+			}$$
+\bye

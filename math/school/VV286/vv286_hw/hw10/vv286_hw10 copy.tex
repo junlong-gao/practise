@@ -1,0 +1,393 @@
+
+
+
+\input mla.tex
+
+\begin{document}
+\begin{vv286}{9}
+  \begin{vv286_mp}{1}
+  \item[(i)]
+    By definition:
+    \begin{align*}
+      {\L}[f](p)&=\int_{0}^{+\infty}f(t)e^{-tp}\, dt\\
+      &=\int_0^{T}f(t)e^{-tp}\, dt+\int_{T}^{+\infty}f(t)e^{-tp}\, dt\\
+      &=\int_0^{T}f(t)e^{-tp}+e^{-tp}\L[f](p)
+    \end{align*}
+    and we solve for $\L[f](p)$ to obtain
+    \begin{equation*}
+      \L[f](p)=\frac{1}{1-e^{-pT}}\int_0^{T}f(t)e^{-tp}
+    \end{equation*}
+   \item[(ii)]
+     \begin{align*}
+       \L[f](p)=\ff{1}{1-e^{-pT}}\int_0^{T}ate^{-tp}=a\left(\ff{1}{p^2}-\ff{1}{p}\frac{e^{-p}}{1-e^{-p}}\right)
+     \end{align*}
+  \end{vv286_mp}
+  \begin{vv286_mp}{2}
+  \item[(i)]h
+    We first notice that the residues are at:
+    \begin{align*}
+      p_{-1}=\frac{1}{2}&
+      p_{k}=(2k+1)i\pi\quad k\in\Z
+    \end{align*}
+    thus we let $\b>0$, and notice that the integral exists along it, we
+    calculate the residue:
+   \begin{align*}
+     &\res{f}{0}=\frac{1}{2}\\
+     &\res{f}{p_k}=-\frac{e^{p_kt}}{p_k}
+   \end{align*}
+   and we pair $k$ with $-k-1$ to get:
+   \begin{align*}
+     \frac{e^{p_kt}}{p_k}+\frac{e^{p_{-k-1}t}}{p_{-k-1}}=
+     \frac{1}{(2k+1)i\pi}e^{(2k+1)i\pi t}-\frac{1}{(2k+1)i\pi}e^{(-2k-1)i\pi
+     t}
+     =\frac{2}{\pi}\frac{\sin (2k+1)\pi t}{2k+1}
+   \end{align*}
+   for $k\ge0$.\\
+   Close the integral, and notice by Jordan's Lemma the integral on the
+   greater circle vanishes. We therefore obtain:
+   \begin{align*}
+     \frac{1}{2\pi i}\int_{\b-i\infty}^{\b+i\infty}e^{pt}F(p)\, dp=
+     \frac{1}{2}-\frac{2}{\pi}\sum_{k=0}^{\infty}\frac{\sin (2k+1)\pi t}{2k+1}
+   \end{align*}
+ \item[(ii)]
+   Again we calculate the residue by pairing $k$ with $-k-1$:
+   \begin{align*}
+     &\res{f}{0}=1\\
+     &\res{f}{p_k}+\res{f}{p_{-k-1}}=\frac{4}{(-1)^{k+1}\pi}\frac{\cos p_kt}{2k+1}\quad
+     p_k=\frac{2k+1}{2}i\pi, \, k\in Z
+   \end{align*}
+    Close the integral, and notice by Jordan's Lemma the integral on the
+   greater circle vanishes. We therefore obtain:
+ \begin{align*}
+     \frac{1}{2\pi i}\int_{\b-i\infty}^{\b+i\infty}e^{pt}F(p)\, dp=
+     1-\frac{4}{\pi}\sum_{k=0}^{\infty}\frac{(-1)^k}{2k+1}\cos \frac{(2k+1)\pi t}{2}
+   \end{align*}
+  \end{vv286_mp}
+  \begin{vv286_ms}{3}
+  \item[]
+    From exercise 1 we have:
+    \begin{align*}
+      \L[f](p)=\frac{2}{p}\frac{1}{1+e^{-p}}=\frac{1}{p}(1+\frac{e^{p/2}-e^{-p/2}}{e^{p/2}+e^{-p/2}})=\frac{1+\tanh(p/2)}{p}
+    \end{align*}
+    And the series expansion:
+   \begin{align*}
+     f(t)=\L^{-1}L[f](t)=y=1+\frac{4}{\pi }\sum_{k=1}^{30}{\frac{\sin \left( \left( 2k-1 \right)\pi x \right)}{2k-1}}
+   \end{align*}
+   See the plots in the attachment.
+   (Note: careful in pairing since we need to make sure $k$ and
+   $-k+1$ enumerates all possible integers, with NO repetition.)\\
+   Observation:
+Notice the functions converges to the square-wave function in the {\bf open} set $(0,2)$, and the it's safe to notice that for all sufficiently small $\epsilon>0$, on $(0+\epsilon,  1-\epsilon)$ and $(1+\epsilon,  2-\epsilon)$ the convergence is uniform, while near boundary the convergence is no longer uniform. For example, when $x=0$ the approximation always gives the wrong result $y=1$ while the number of approximation increases the uniform convergence (hence point wise convergence)region increases (approaching to $(0,1)$ and $(1,2)$)
+
+  \end{vv286_ms}
+  \begin{vv286_ms}{4}
+  \item[(i)]
+    The solution is
+    \begin{align*}
+      y=\frac{\sin t}{2}-\frac{t\cos t}{2}+H(t-\pi)\sin (t-\pi)
+    \end{align*}
+   \item[(ii)]
+     The solution is
+     \begin{align*}
+       y=&\frac{2}{\sq{3}}e^{-1/2t}\sin (\frac{\sq3}{2}t+\ff{\pi}{3})\\
+       &\quad+\frac{4}{\sq3}H(t-1)e^{-1/2(t-1)}\sin \frac{\sq3}{2}(t-1)+
+       \frac{2}{\sq3}H(t-2)e^{-1/2(t-2)}\sin \frac{\sq3}{2}(t-2)
+     \end{align*}
+  \end{vv286_ms}
+
+  \begin{vv286_ms}{5}
+  \item[(i)]
+    By Laplace transformation we have the solution
+    \begin{align*}
+      y=\sum_{j=0}^{\infty}H(t-j\pi)\sin (t-j\pi)
+    \end{align*}
+    and we notice that when $2k\pi<t<(2k+1)\pi$, the last term
+    of none zero is:
+    \begin{align*}
+      H(t-2k\pi)\sin (t-2k\pi)=\sin  t
+    \end{align*}
+    and this cancels out the previous term:
+    \begin{align*}
+      H(t-(2k-1)\pi)\sin (t-(2k-1)\pi)=-\sin t
+    \end{align*}
+    This cancellation goes all the way to the very first term
+    that survives:
+    \begin{align*}
+      H(t)\sin t=\sin t
+    \end{align*}
+    and for $(2k+1)\pi<t<(2k+2)\pi$, we adopt the previous
+    result:
+    \begin{align*}
+      y=\sum=\sin t+H(t-(2k+1)\pi)\sin (t-(2k+1)\pi)=\sin t-\sin t=0
+    \end{align*}
+    as desired.
+    In conclusion:
+\begin{equation*}
+ y(t)= \left\{\begin{aligned}
+    &\sin t &\text{n is even}\\
+    &0 &\text{n is odd}
+       \end{aligned}
+ \right.
+ \qquad
+ \end{equation*}
+\item[(ii)]
+  The solution is
+  \begin{align*}
+    y(t)=\sum_{j=0}^{\infty}H(t-2j\pi)\sin (t-2j\pi)
+  \end{align*}
+  and, we see that when $2n\pi<t<(2n+2)\pi$, the last none zero
+  term is $H(t-2n\pi)\sin (t-2n\pi)=\sin t$, and there are
+  $0,1, \ldots n$ contributions, namely $n+1$, all takes on the
+  effective value $\sin t$, $t\in[0, 2\pi]$, resulting
+  \begin{align*}
+    y=(n+1)\sin t \quad 2n\pi<t<2(n+1)\pi
+  \end{align*}
+  \end{vv286_ms}
+  \begin{vv286_mp}{6}
+  \item[(i)]
+    By definition:
+    \begin{align*}
+      \widehat{\Pi}(\xi)&=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty}\Pi(x)e^{-i\xi
+      x}\, dx\\
+      &=\frac{1}{\sqrt{2\pi}}\int_{-1}^{1}e^{-i\xi x}\, dx\\
+      &=\frac{1}{\sqrt{2\pi}}\frac{1}{i\xi}(e^{i\xi}-e^{-i\xi})\\
+      &=\sqrt{\frac{2}{\pi}}\frac{\sin \xi}{\xi}
+    \end{align*}
+   \item[(ii)]
+     We are to evaluate:
+     \begin{align*}
+       \int_{\R}e^{ix\xi}\frac{\sin \xi}{\xi}\, d\xi
+       \numberthis{eq:1}
+     \end{align*}
+     We first notice that:
+     \eq
+     {
+     \ff{\sin z}{z}=\ff{1}{2zi}(e^{iz}-e^{-iz})
+     }
+     does not have a decay at infinity (consider $z=ia$, $a\in \mathbb{R}$), {\bf thus Jordan lemma doesn't work for $\sin z/z$}.\\
+     By separating the integrand:
+     \begin{align*}
+       \int\frac{\sin z}{z}e^{izx}=\int\frac{1}{2iz}
+       e^{iz(x+1)}-\int\frac{1}{2iz}e^{iz(x-1)}
+       \numberthis{eq:3}
+     \end{align*}
+    If $x>1$ we choose the path rotating in the upper
+     half plane (for $x>1$) around the greater circle
+     $C_R^+$ and near the origin rotating clockwise
+     $C_{\varepsilon}^-$ to close the path {\bf in the upper half
+     plane} (thus no residue inside the path) and apply Jordan's lemma to $e^{iz(x+1)}$ and $e^{iz(x-1)}$ separately on the greater circle. (Note now we can use Jordan's lemma), then the integral on the great circle vanishes. 
+     Then, we have 
+     \begin{align*}
+       0=\oint\frac{e^{iz(x+1)}}{2iz}\,dz=\int_{-R}^{+R}+\int_{C_{\varepsilon}^-}
+       \numberthis{3}
+     \end{align*}
+Note the path on $C_{\varepsilon}^-$ can be tackled by noticing that 
+\eq
+{
+\frac{e^{iz(x+1)}}{2iz}=\ff{1}{2iz}+h(z)
+}
+where $h(z)$ is holomorphic including $z=0$ by using Laurent expansion around 0. Thus the integral:
+\eq{
+ \left|\int_{C_{\varepsilon}^-}\frac{e^{iz(x+1)}}{2iz}\,dz\right|=\left|\int_{C_{\varepsilon}^-}\ff{1}{2iz}+h(z)\,
+       dz\right|=\left|\int_{C_{\varepsilon}^-}\ff{1}{2iz}\right|+\e |h|\to\left|\int_{C_{\varepsilon}^-}\ff{1}{2iz}\right|
+       }
+       therefore 
+       \eq
+       {
+       \int_{C_{\varepsilon}^-}\frac{e^{iz(x+1)}}{2iz}\,dz=\int_{C_{\varepsilon}^-}\ff{1}{2iz}=-\ff{\pi}{2}
+       }
+       Since the path for two integrand is {\bf the same}, we have:
+       \eq
+       {
+       \int_{C_{\varepsilon}^-}\frac{e^{iz(x-1)}}{2iz}\,dz=\int_{C_{\varepsilon}^-}\ff{1}{2iz}=-\ff{\pi}{2}
+       }
+       Back to \eqref{3} and plugging in \eqref{eq:3} we have:
+       \eq
+       {
+       \int\frac{\sin z}{z}e^{izx}=0\quad\text{$|x|>1$}
+       }
+     On the other hand, if $-1<x<1$, we again separate the 
+     integrand:
+     \begin{align*}
+       \frac{\sin z}{z}e^{izx}=\frac{1}{2iz}\left(
+       e^{iz(x+1)}-e^{iz(x-1)}
+       \right)
+       \numberthis{eq:3}
+     \end{align*}
+     and the first exponent has positive
+     coefficient $x+1$ whereas the second exponent has the {\bf negative}
+     coefficient $x-1$. Now, 
+     \begin{align*}
+       \int_{-\infty}^{+\infty}\frac{\sin z}{z}e^{izx}=\int_{-\infty}^{+\infty}\frac{e^{iz(x+1)}}{2iz}\,dz-
+       \int_{-\infty}^{+\infty}\frac{e^{iz(x-1)}}{2iz}
+       \numberthis{3}
+     \end{align*}
+     and let the first path to be rotating around the greater circle
+     $C_R^+$ and near the origin rotating clockwise
+     $C_{\varepsilon}^-$ to close the path {\bf in the upper half
+     plane} (thus no residue inside the path). The second path is the symmetric one {\bf in the lower
+     half plane.}(note the path for two integrand is different, unlike when $|x|>1$, to make Jordan lemma work, and this is the sole reason why the integration is different.)\\
+     Then, we have 
+     \begin{align*}
+       \oint\frac{e^{iz(x+1)}}{2iz}\,dz=\int_{-R}^{+R}+\int_{C_R^+}+\int_{C_{\varepsilon}^-}=0
+     \end{align*}
+     Again the integral on the greater circle vanishes as
+     $R\to+\infty$, the
+     function is homomorphic in the enclosed path, and:
+     \begin{align*}
+       \int_{C_{\varepsilon}^-}\frac{1}{2iz}
+       \,dz=-\frac{\pi}{2}
+     \end{align*}
+  as argued previously.\\
+       Thus we have
+       \begin{align*}
+	 \int_{-\infty}^{+\infty}\frac{e^{iz(x+1)}}{2iz}\,dz=\frac{\pi}{2}
+       \end{align*}
+       A similar procedure, yet performed on the lower half
+       plane gives:
+ \begin{align*}
+	 \int_{-\infty}^{+\infty}\frac{e^{iz(x-1)}}{2iz}\,dz=-\frac{\pi}{2}
+       \end{align*}
+       Plugging the inverse transform: 
+       \begin{align*}
+	 \frac{1}{\sqrt{2\pi}}\int_{\R}e^{ix\xi}\widehat{\Pi}({\xi})\,
+	 d\xi=\frac{1}{\pi}\int_{\R}e^{ix\xi}\frac{\sin \xi}{\xi}\, d\xi
+	 =\frac{1}{2}+\frac{1}{2}=1
+       \end{align*}
+       Finally, if $x=1$, we tentatively notice that in the
+       previous procedure:
+       \begin{align*}
+	 \int_{-\infty}^{+\infty}\frac{e^{iz(x-1)}}{2iz}\,dz=0
+       \end{align*}
+       since it is odd on the path of integration,
+       and the total integral will leave us only $ \int_{-\infty}^{+\infty}\frac{e^{iz(x+1)}}{2iz}\,dz=\frac{\pi}{2}$, thus
+ \begin{align*}
+	 \frac{1}{\sqrt{2\pi}}\int_{\R}e^{ix\xi}\widehat{\Pi}({\xi})\,
+	 d\xi=\frac{1}{\pi}\int_{\R}e^{ix\xi}\frac{\sin \xi}{\xi}\, d\xi
+	 =\frac{1}{\pi}
+	 \int_{-\infty}^{+\infty}\frac{e^{iz(x+1)}}{2iz}\,dz=\frac{1}{2}
+       \end{align*}
+and for similar reason we have when $x=-1$:
+ \begin{align*}
+	 \frac{1}{\sqrt{2\pi}}\int_{\R}e^{ix\xi}\widehat{\Pi}({\xi})\,
+	 d\xi=\frac{1}{\pi}\int_{\R}e^{ix\xi}\frac{\sin \xi}{\xi}\, d\xi
+	 =-\frac{1}{\pi}
+	 \int_{-\infty}^{+\infty}\frac{e^{iz(x-1)}}{2iz}\,dz=\frac{1}{2}
+       \end{align*}
+       and this completes the proof.
+  \end{vv286_mp}
+   \begin{vv286_ms}{7}
+       \item[]
+	 We integrate by parts:
+	 \eq
+	 {
+	 \widehat{f}(\xi+i\eta)&=\ff{1}{\sq{2\pi}}\int_0^{\infty}x^2e^{(\eta-i\xi)}\,dx\\
+	 &=\ff{e^{cx}}{\sq{2\pi}}\left(\ff{x^2}{c}-\ff{2x}{c^2}+\ff{2}{c^3}\right)\Big|_{0}^{\infty}\quad\text{$c=\eta-i\xi$}
+	 }
+	 and notice that the integral
+	 converges only if $\eta<0$
+	 \begin{align*}
+	   \widehat{f}(\xi+i\eta)=-\frac{2}{\sq{2\pi}(\eta-i\xi)^3}
+	 \end{align*}
+       \end{vv286_ms}
+       \begin{vv286_ms}{8}
+    \item[(i)]
+      We assume the solution has the series expansion:
+      \begin{align*}
+	x(t)=\sum_{k=0}^{\infty}a_kt^k
+      \end{align*}
+      Then:
+      \begin{align*}
+	x''&=\sum_{k=0}^{\infty}a_{k+2}(k+2)(k+1)t^k\\
+	-2 x'&=\sum_{k=0}^{\infty}(-2)a_kkt^k\\
+	\lam x&=\sum_{k=0}^{\infty}\lam a_k t^k
+      \end{align*}
+      plugging into the differential equation we have:
+      \begin{align*}
+	&2a_2+\lam a_0=0\\
+	&a_{k+2}(k+2)(k+1)-2a_kk+\lam a_k=0\quad
+	k\ge2\numberthis{1}
+      \end{align*}
+      Thus $a_0$ and $a_1$ yields two independent solutions:
+      \begin{align*}
+	&x_1(t)=a_1\sum_{k=0}^{\infty}\frac{(2-\lam)(6-\lam)\cdots
+	(4k+2-\lam)}{(2k+1)!}t^{2k+1}\\
+	&x_2(t)=a_0+a_0\sum_{k=1}^{\infty}\frac{(-\lam)(4-\lam)\cdots(4k-\lam)}{(2k)!}t^{2k}
+      \end{align*}
+    \item[(ii)]
+      This follows from the solution that if $\lam=2n$, the
+      first
+      series vanishes at $k=(2n-2)/4=(n-1)/2$, the second
+      vanishes at $k=2n/4=n/2$. In both cases we have the
+      exponent cut at $n$, leaving us a polynomial of degree
+      $n$.
+    \end{vv286_ms}
+    \begin{vv286_ms}{9}
+    \item[(i)]
+    First we inspect a solution:
+      \begin{align*}
+	&y_1=e^t\\
+      \end{align*}
+      And consider the reduction of order:
+      \begin{align*}
+	y=y_1v
+      \end{align*}
+      Plugging in the equation gives us a second independent solution:
+      \eq
+      {
+      	&y_2=e^t\int \frac{e^{-t}}{\sqrt{t}}
+	}
+
+    \item[(ii)]
+    We assume the solution has the series expansion:
+      \begin{align*}
+	y(t)=\sum_{k=0}^{\infty}a_kt^k
+      \end{align*}
+      Then:
+      \begin{align*}
+	t^2y''&=\sum_{k=0}^{\infty}a_{k+2}(k+2)(k+1)t^{k+2}\\
+	(t-t^2) y'&=\sum_{k=0}^{\infty}a_kk(t^{k+1}-t^{k+2})\\
+	-y&=\sum_{k=0}^{\infty}- a_k t^k
+      \end{align*}
+      plugging into the differential equation we have:
+
+      \begin{align*}
+	&y_1=\frac{e^{t}}{t}\\
+      \end{align*}
+       And consider the reduction of order:
+      \begin{align*}
+	y=y_1v
+      \end{align*}
+      Plugging in the equation gives us a second independent solution:
+      \eq{
+      	&y_2=1+\frac{1}{t}
+	}
+
+   \item[(iii)]
+   We assume the solution has the series expansion:
+      \begin{align*}
+	y(t)=\sum_{k=0}^{\infty}a_kt^k
+      \end{align*}
+      Then:
+      \begin{align*}
+	t^2y''&=\sum_{k=0}^{\infty}a_{k+2}(k+2)(k+1)t^{k+2}\\
+	-(t+t^2) y'&=\sum_{k=0}^{\infty}-a_kk(t^{k+1}+t^{k+2})\\
+	y&=\sum_{k=0}^{\infty} a_k t^k
+      \end{align*}
+      plugging into the differential equation we have:
+
+      \begin{align*}
+       &y_1=te^t\\
+      \end{align*}
+     And consider the reduction of order:
+      \begin{align*}
+	y=y_1v
+      \end{align*}
+      Plugging in the equation gives us a second independent solution:
+      \eq{
+y_2=te^t\int \frac{e^{-t}}{t}
+	}
+    \end{vv286_ms}
+\end{vv286}
+\end{document}
+

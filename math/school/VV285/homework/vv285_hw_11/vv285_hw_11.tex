@@ -1,0 +1,153 @@
+\documentclass{article}
+\input mla
+\begin{document}
+\titlehm{11}
+\ms{1}
+{
+\item[i)]
+\eq{
+\int_E\,dV=\int_{-c}^c\,dz\int_{\ff{x^2}{a^2(1-z^2/c^2)}+\ff{y^2}{b^2(1-z^2/c^2)}=1}\,dxdy=\int_{-c}^cab\left(1-\ff{z^2}{c^2}\right)\pi\,dz=\ff{4}{3}abc\pi
+}
+\item[ii)]
+\eq{
+\int_{B^4}\,dV =\int_0^1\,dr\int_0^{\pi}\,d\ta_1\int_0^{\pi}\,d\ta_2
+\int_0^{2\pi}r^3\sin^2\ta_1\st_2\,d\ta_3=\pi^2/2
+}
+}
+\ms{2}
+{
+\item[i)]
+\eq{
+U(p)=U(0,0,r)=-\ff{M}{r}G
+}
+\item[ii)]
+\eq{
+U(p)=U(0,0,r)=-2\pi G\rho(R^2_b-R^2_a)=-\ff{3}{2}GM\left(\ff{R^2_b-R^2_a}{R_b^3-R_a^3}\right)
+}
+\item[iii)]
+\eq{
+U(p)=U(0,0,r)=-\ff{GM}{2}\left(\ff{3}{R}-\ff{r^2}{R^3}\right)
+}
+}
+\ms{3}
+{
+\item[i)]
+\eq{
+V(p)=V(0,0,d)=
+\begin{cases}
+\ff{\rho}{2\epsilon_0}\left(R^2-\ff{1}{3}r^2\right),\quad{0<r<R}\\
+\ff{\rho R^3}{3\epsilon_0 r},\quad{R\leq r}
+\end{cases}
+}
+\item[ii)]
+\eq{
+W_e=\ff{3}{20}\ff{Q^2}{\pi\epsilon_0 R}
+}
+\item[iii)]
+\eq{
+\ff{3}{20}\ff{Q^2}{\pi\epsilon_0 R}=m_ec^2\Longrightarrow R=\ff{1}{m_ec^2}
+\ff{3}{5}\ff{Q^2}{4\pi\epsilon_0}=1.68\times 10^{-15}\m
+}
+}
+\ms{4}
+{
+We setup the integral:
+\item[]
+\eq{
+V(0,0,r)=\ff{1}{4\pi\e_0}\int_0^{\pi}\,d\ta\int_0^{R}\rho_c\ff{\rho\,d\rho}{\sq{\rho^2+r^2}}-\ff{1}{4\pi\e_0}\int_{\pi}^{2\pi}\,d\ta\int_0^{R}\rho_c\ff{\rho\,d\rho}{\sq{\rho^2+r^2}}=0
+}
+This is obviously true: if we move a charged particle along the $z$ axis the force is alway perpendicular to the motion and no potential change here.
+}
+\mp{5}
+{
+First on $x$:
+\eq
+{
+\int_0^1\int_0^1\,f(x,y)\,dxdy=\int_0^1
+\left(\int_0^yy^{-2}\,dx+\int_y^1-x^{-2}\,dx\right)\,dy=1
+}
+and on $y$:
+\eq
+{
+\int_0^1\int_0^1\,f(x,y)\,dydx=\int_0^1
+\left(\int_0^x-x^{-2}\,dy+\int_x^1y^{-2}\,dx\right)\,dx=-1
+}
+We observe that the function is unbounded in the every neighborhood of $(0,0)$, thus it does not contradict Fubini's  theorem because it is not
+integrable in the region. (Of course the unbounded behavior does not imply it is not integrable, but since Fubini's law doesn't apply, this must be the case).
+}
+\mp{6}
+{
+\item[]
+We start by considering the implicit mapping $(x,y)\mapsto(p,q)$ defined by
+\eq
+{
+&x^2+y^2-2px-2\sq{r^2-p^2}y=0\\
+&x^2+y^2-2qy-2\sq{r^2-q^2}x=0
+}
+and from above we have:
+\eq
+{
+\pd{p}{x}=\ff{x-p}{x-py/q},\quad\pd{q}{y}=\ff{y-q}{y-qx/p}
+}
+therefore:
+\eq
+{
+\pd{p}{x}+\pd{q}{y}=\ff{qx-pq}{qx-py}+\ff{py-pq}{py-px}=1
+}
+}
+\ms{7}
+{
+\item[i)]
+Consider the parameterization:
+\eq
+{
+\Gamma_1:x=t,\,y=t^2,\, t:0\to 1\quad\Gamma_2:x=t,\,y=t,\,t:1\to0
+} 
+Then
+\eq
+{
+\int_{\partial R}=\int_{\Gamma_1}+\int_{\Gamma_2}=\ff{3}{4}+\ff{1}{5}-1=-\ff{1}{20}
+}
+\item[ii)]
+By Green's theorem:
+\eq
+{
+\int_{\partial R}(xy+y^2)\,dx+x^2\,dy=\int_{R}2x-x-2y\,dxdy=\int_0^1\,dx\int_{x}^{x^2}x-2y\,dy=-\ff{1}{20}
+}
+}
+\ms{8}
+{
+\item[i)]
+\eq
+{
+\ff{1}{4}A=\int_0^a(a^{2/3}-x^{2/3})^{3/2}\,dx=\ff{1}{32}a^2\pi
+}
+thus the area is 
+\eq
+{
+A=\ff{3}{8}a^2\pi
+}
+\item[ii)]
+By Green's theorem we have:
+\eq
+{
+2\times\ff{1}{4}A=\int_{{\rm astroid}, x>0,\,y>0}x\,dy-y\,dx+\int_a^00\,dy
++\int_{0}^a-0\,dx
+}
+consider parameterization:
+\eq
+{
+x=a\cos^3\ta,\,y=a\sin^3\ta,\quad \ta:0\to\pi/2
+}
+notice the path along the $x$ and $y$ axis has zero contribution to the line integral, we have:
+\eq{
+\ff{1}{2}A=a^2\int_0^{\pi/2}3\cos^4\ta\sin^2\ta+3\sin^4\ta\cos^2\ta\,d\ta=\ff{3}{16}a^2\pi
+}
+which reproduces 
+\eq
+{
+A=\ff{3}{8}\pi a^2
+}
+}
+}
+\end{document}

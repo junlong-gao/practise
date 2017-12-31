@@ -1,0 +1,253 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{amsmath} 
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\linespread{1.4}
+\geometry{a4paper,centering,scale=0.8}
+\rmfamily 
+\normalsize
+\setlength{\parindent}{0em}
+
+\begin{document} 
+\begin{flushleft}
+  Junlong Gao 5133709126\\ 
+  Prof.  Hohberger\\ 
+  Vv186 HW 3\\
+  \today 
+\end{flushleft}
+
+
+\textbf{Exercise 1}\\ 
+\textit{Proof:}\\
+i) First $(y_n)$ is monotonic decreasing since 
+$\sup\{x_m:m\ge n\}\ge\sup\{x_m:m\ge n+1\}$, 
+and bounded since
+$y_n=\sup\{x_m:m\ge n\}\leq \sup\{x_m:m\ge 1\}$.
+This shows that ${y_n}$ must converge.\\
+
+ii) Let $(x_n)$ to be a bounded real sequence and
+$y_n=\inf\{x_m:m\ge n\} $. 
+Now the sequence converges, and the limit
+$\displaystyle\lim_{n\to\infty}y_n$ 
+is denoted by
+$\displaystyle\varliminf_{n \to \infty}x_n$
+and is called \textit{limit inferior}.\\
+a)
+$\displaystyle\varlimsup_{n\to\infty}x_n=0;\qquad
+\varliminf_{n \to \infty}x_n=0$;\\
+b)
+$\displaystyle\varlimsup_{n\to\infty}x_n=0;\qquad
+\varliminf_{n \to \infty}x_n=0$;\\
+c)
+$\displaystyle\varlimsup_{n\to\infty}x_n=1;\qquad
+\varliminf_{n \to \infty}x_n=-1$;\\
+
+iii) For any $n$, we have $$\inf_{m>n} x_n\le\sup_{m>n} x_n$$Take the limit on both
+sides gives us $$\varliminf_{n\to\infty}x_n\le\varlimsup_{n\to\infty}x_n$$
+
+iv) First let's prove its maximum and minimum is in $A$. If $A$ is finite, then the proof is done. Otherwise let $a=\sup{A}$, so for given $\epsilon>0$, there exists $b\in A$ such that $|a-b|<\epsilon/2$, yet $b$ is an accumulation point of $(x_n)$, thus for all $N>0$ there exits $n>N$ such that  $|b-x_n|<\epsilon/2$. Combining the two inequality we have $|a-x_n|\leq|a-b|+|b-x_n|<\epsilon/2+\epsilon/2=\epsilon$, making $a=\sup{A}$ to be an accumulation point. So $a=\sup{A}\in A$ means $a=\max{A}$.\\
+The proof for the the counterpart is symmetry by simply letting $-A=\{-x|x\in A\}$, then $\inf A=\sup (-A)$, $\min{A}=\max{(-A)}$ \\%!
+
+Now for second part of the proof, first we denote $\max{A}=a$. For given and fixed $\epsilon>0$, since $a$ is the largest accumulation point, there are only finite many $x_n\ge a+\epsilon$, namely there exists $N_{\epsilon}>0$ such that for all $n>N_{\epsilon}$ we have $x_n<a+\epsilon$. Noticing that fix $m$, $\displaystyle y_m=\sup_{m>n}x_n$, so we conclude that $y_m-a<\epsilon$. Also, since $y_m$ is the superior of $(x_n)$ by deleting only finite many terms (until $m$), only finite many $x_n$ are greater than $y_m$, but no matter how small the interval containing $a$ we choose, there are infinite many $x_n$'s near $a$,  thus we must have $y_n>a$. Putting them altogether we get $|y_n-a|<\epsilon$, thus $\displaystyle\lim_{n\to\infty}y_n=a=\max{A}$\\
+
+Again, the proof of the counterpart is quite symmetry. We denote $\min{A}=b$. For given and fixed $\epsilon>0$, since $b$ is the smallest accumulation point, there are only finite many $x_n\le b-\epsilon$, namely there exists $N_{\epsilon}>0$ such that for all $n>N_{\epsilon}$ we have $x_n>b-\epsilon$. Noticing that $y_n=\displaystyle\inf_{m>n}x_n$, we also have $y_n>b-\epsilon$. Also, since $y_n$ is the infimum of $(x_n)$ by deleting only finite many terms, only finite many $x_n$ less than $y_n$, but there are infinite many terms near $b$, no matter how small the interval containing $b$ we choose, thus we must have $y_n<b$. Putting them altogether we get $|y_n-b|<\epsilon$, thus $\displaystyle\lim_{n\to\infty}y_n=b=\min{A}$.\\
+
+v) Given a bounded sequence $(x_n)$ that has a single accumulation point $a$, then given $\epsilon>0$, $|x_n-a|<\epsilon$ holds for all but finite many $n$, otherwise the infinite bounded set of these $|x_n-a|\ge\epsilon$ will generate a another  accumulation point of $(x_n)$ (By Theorem 2.2.35). Thus there exists $N_{\epsilon}$ such that for all $n>N_{\epsilon}$, $|x_n-a|<\epsilon$, namely $x_n\to a$. \\
+Conversely, if  $x_n\to a$ then $a$ is an accumulation point immediately from definition.\qed\\
+By this, we may concluded that if $\displaystyle\varlimsup_{n\to\infty}x_n=\varliminf_{n\to\infty}x_n$ then $(x_n)$ has unique accumulation point by iv), thus $\displaystyle\lim_{n\to\infty}x_n=\varlimsup_{n\to\infty}x_n=\varliminf_{n\to\infty}x_n$. \\
+Conversely, $\displaystyle\lim_{n\to\infty}x_n$ exists yields one  accumulation point, and by iv) we have $\displaystyle\lim_{n\to\infty}x_n=\varlimsup_{n\to\infty}x_n=\varliminf_{n\to\infty}x_n$.\qed\\
+
+vi) a) First, if $\displaystyle y>\varlimsup_{n\to\infty}x_n$ then there are only finite many $x_n>y$, otherwise there will be another accumulation point(By Theorem 2.2.35) $y'\ge y>\displaystyle \varlimsup_{n\to\infty}x_n$. Then $\displaystyle \varlimsup_{n\to\infty}x_n$ will not be the greatest accumulation point, contradiction to iv). Thus $y$ is an almost upper bound of ${\rm ran}(x_n)$ if $\displaystyle y>\varlimsup_{n\to\infty}x_n$.\\
+b) Second if $\displaystyle y<\varlimsup_{n\to\infty}x_n$ then since $y_n$ is decreasing to its limit, we certainly have $y_n>y$ for all $n$, also, for each $n$, we can find $x_m$ such that $y<x_m<y_n$, otherwise $\displaystyle y_n=\sup_{m>n}{x_m}\leq y$ leads to a contradiction. Thus there are infinite many $x_m>y$, that is, $y$ is not an almost upper bound if $\displaystyle y<\varlimsup_{n\to\infty}x_n$.\\
+By a) and b), we conclude that $\displaystyle\varlimsup_{n\to\infty}x_n$ is the infimum of all almost upper bounds, that is, $\varlimsup{\rm ran}(x_n)$.\qed\\
+\eject
+\textbf{Exercise 2}\\ 
+\textit{Solution:}\\
+i)
+\begin{align*}
+&a_0=1;& a_{n+1}=\sqrt{2a_n}&
+\end{align*}
+Where $f$ is on $(0,+\infty)$.\\
+ii)
+\[
+a_n=2^{1-\frac{1}{2^n}}
+\]
+\textit{Induction:}\\
+When $n=1$ it holds: $a_1=2^{\frac{1}{2}}=\sqrt2$,\\
+Suppose it holds for $n-1$, then
+\[
+a_n=f(a_n)=\sqrt{2\times2^{1-\frac{1}{2^{n-1}}}}=\sqrt{2^{\frac{2^n-1}{2^{n-1}}}}=2^{1-\frac{1}{2^n}}~\qed
+\]
+
+iii)
+$a_n$ is bounded below by 0 and above by 2, since 
+$a_1=\sqrt2<2$, and suppose $a_n<2$, then $a_{n+1}=f(a_n)=\sqrt{2a_n}<\sqrt{2\times2}=2$, done.\\
+Also, $a_n$ is monotonic increasing since $a_{n+1}-a_n=\sqrt{a_n}(\sqrt2-\sqrt{a_n})>0$ follows from its upper bound.\\
+
+\textbf{Exercise 3}\\ 
+\textit{Proof:}\\
+i) Since given $m,k\in \mathbb{N}$
+\[
+(1-c)\sum_{i=0}^{k}c^{m+i}=\sum_{i=0}^{k}c^{m+i}-\sum_{i=0}^{k}c^{m+1+i}=\sum_{i=0}^{k}c^{m+i}-\sum_{i=1}^{k+1}c^{m+i}=c^m-c^{m+k+1}
+\]
+We deduce that
+\[
+\sum_{i=0}^{k}c^{m+i}=\frac{c^m-c^{m+k+1}}{1-c}
+\]
+ii) By triangle inequality, we have
+\begin{align*}
+\rho(y_{n+k},y_{n})&<\rho(y_{n+k},y_{n+k-1})+\rho(y_{n+k-1},y_{n})\\
+			       &=r^{n+k-1}\rho(y_1,y_0)+	\rho(y_{n+k-1},y_{n})
+\end{align*}			    
+We can unfold this repeatly:
+\begin{align*}
+\rho(y_{n+k},y_{n})&<\rho(y_1,y_0)\sum_{i=0}^{k-1}r^{n+i}<\rho(y_1,y_0)\frac{r^n-r^{n+k}}{1-r}	<\rho(y_1,y_0)\frac{r^n}{1-r}		    		
+\end{align*}
+Now since $\frac{r^n}{1-r}\to 0$, given $\epsilon>0$, $\exists N_{\epsilon}>0$, such that $\forall n>N_{\epsilon}$,
+\[
+\frac{r^n}{1-r}<\frac{\epsilon}{\rho(y_1,y_0)}
+\]
+fix that $N_{\epsilon}$, $\forall n>N_{\epsilon}$, $m=n+k>N_{\epsilon}$, 
+\[
+\rho(y_{n+k},y_{n})<\rho(y_1,y_0)\frac{r^n}{1-r}<~\epsilon
+\]
+thus $(y_n)$ is Cauchy sequence. Since $(X,\rho)$ is complete, $(y_n)$ converges.\\
+iii) Since $y_{n+1}=Ty_n$, we may take limits on both sides:
+\[
+\lim_{n\to\infty}y_{n+1}=\lim_{n\to\infty}Ty_n=T(\lim_{n\to\infty}y_n)
+\]
+Since the mapping is continuous, the order of taking the limit doesn't matter. Thus we have $x_0=Tx_0$\\
+iv) Assuming that $\exists\,x_1=Tx_1$, then 
+\[
+\rho(x_0,x_1)=\rho(Tx_0,Tx_1)<r\rho(x_0,x_1)
+\]
+which certainly is a contradiction since $0<r<1$.\qed
+
+\textbf{Exercise 4}\\ 
+\textit{Solution:}\\
+First let's assume $a>0$, then since both the limit in the problem and $\displaystyle\lim_{x\to\infty}\beta$ exists, we have 
+\[
+\lim_{x\to\infty}\left(\sqrt{ax^2+bx+c}-\alpha x-\beta \right)+\lim_{x\to\infty}\beta=\lim_{x\to\infty}\left(\sqrt{ax^2+bx+c}-\alpha x \right)
+\] exists.
+And for the right hand side:
+\[
+\sqrt{ax^2+bx+c}-\alpha x=\alpha x\left(\frac{\sqrt{ax^2+bx+c}}{\alpha x}-1 \right)=
+\alpha x\left(\sqrt{\frac{a}{{\alpha}^2}+\frac{b}{{\alpha}^2x}+\frac{c}{{\alpha}^2x^2}}-1 \right)
+\]
+In order to let the limit exist, we conclude that 
+\[
+\sqrt{\frac{a}{{\alpha}^2}+\frac{b}{{\alpha}^2x}+\frac{c}{{\alpha}^2x^2}}-1\to 0
+\]
+That is, $\alpha=\sqrt a$, under this condition, we also have
+\[
+\sqrt{ax^2+bx+c}-\sqrt a x=\frac{ax^2+bx+c- ax^2}{\sqrt{ax^2+bx+c}+\sqrt a x}=\frac{b+c/x}{\sqrt{a+b/x+c/{x^2}}+\sqrt a}\to 0
+\]
+As $x\to\infty$, making $\beta=b/(2\sqrt{a})$\\
+If $a=0$, the only way for the limit to exist is to have $b=0$ and therefore $\alpha=0$, $\beta=\sqrt{c}$.\\
+Now we assume that there exists another pair of $\alpha'$, $\beta'$ satisfying the original limit, we may take the difference of them:
+\[
+0=\lim_{x\to\infty}\left(\sqrt{ax^2+bx+c}-\alpha x-\beta \right)-\lim_{x\to\infty}\left(\sqrt{ax^2+bx+c}-\alpha' x-\beta' \right)=\lim_{x\to\infty}(\alpha'-\alpha)\,x+\beta'-\beta
+\]
+Whose limit should exists and equal to 0, making $\alpha'=\alpha$, $\beta'=\beta$. Thus choice of  $\alpha$, $\beta$ is unique.\qed\\
+
+\textbf{Exercise 5}\\ 
+\textit{Proof:}\\
+a,b) 
+{\sl Interpretation:} This allow us to do addition and multiplication over Big-$O$ :\\
+Given $h(x)=O(f(x))$, $l(x)=O(g(x))$, we have
+\begin{align*}
+\exists\, &C_1>0 , \exists\, \epsilon_1>0, \forall\, x\in\Omega\quad |x-x_0|<\epsilon_1 \Rightarrow |h(x)|\leq C_1|f(x)|\\
+\exists\, &C_2>0 , \exists\, \epsilon_2>0, \forall\, x\in\Omega\quad |x-x_0|<\epsilon_2 \Rightarrow |l(x)|\leq C_2|g(x)|
+\end{align*}
+Now we start by letting $|x-x_0|<\min(\epsilon_1,\epsilon_2)$, we have
+\begin{align*}
+|h(x)+l(x)|\leq|h(x)|+|l(x)|&\leq(C_1+C_2)\left||f(x)|+|g(x)|\right|\\
+|h(x)l(x)|&\leq C_1C_2|f(x)g(x)|
+\end{align*}
+That is, 
+\begin{align*}
+h(x)+l(x)&=O(|f(x)|+|g(x)|)\\
+h(x)l(x)&= O(f(x)g(x))
+\end{align*}
+thus we conclude 
+\begin{align*}
+O(f(x))+O(g(x))&=O(|f(x)|+|g(x)|)\\
+O(f(x))O(g(x))&= O(f(x)g(x))
+\end{align*}
+
+c) {\sl Interpretation:} This allow us to do ``absorb''  Big-$O$ notation into Little-$o$ notation by multiplication : \\
+Given $h(x)=O(f(x))$, $l(x)=o(g(x))$, we have
+\[
+\exists\, C>0 , \exists\, \epsilon>0, \forall\, x\in\Omega\quad |x-x_0|<\epsilon \Rightarrow |h(x)|\leq C|f(x)|
+\]
+\[
+  \lim_{x\to x_0}\frac{l(x)}{g(x)}=0
+  \]
+ Now if we were given $\epsilon>0$, first we pick $C$ such that there exists $\epsilon_{C}$
+\begin{align*}
+ |x-x_0|<\epsilon_{C} \Rightarrow \frac{|h(x)|}{|f(x)|}\leq C
+\end{align*}
+for $|f(x)|\neq0$, also we can find $\delta>0$ such that
+\[
+ |x-x_0|<\delta' \Rightarrow \frac{|l(x)|}{|g(x)|} <\frac{\epsilon}{C}
+\]
+Now we pick $\delta=\min(\delta' ,\epsilon_{C})$, we have
+\[
+\frac{|h(x)l(x)|}{|f(x)g(x)|}=\frac{|h(x)|}{|f(x)|}\frac{|l(x)|}{|g(x)|}<\epsilon
+\]
+Namely
+\[
+\lim_{x\to x_0}\frac{|h(x)l(x)|}{|f(x)g(x)|}=0
+\]
+That is, $h(x)l(x)=o(f(x)g(x))$ 
+thus we conclude %think about it!
+\[
+O(f(x))o(g(x))= o(f(x)g(x))
+\]
+
+d) {\sl Interpretation:} This allow us to do ``absorb''  Big-$O$ notation into an adjacent Big-$O$ notation: \\
+Suppose we have $h(x)=O(O(f(x)))$, $l(x)=O(f(x))$, then
+\begin{align*}
+&\exists\, C_1>0\, \exists\, \epsilon_1>0, |x-x_0|<\epsilon_1 \Rightarrow |l(x)|\leq C_1|f(x)|\\
+&\exists\, C_2>0\, \exists\, \epsilon_2>0, |x-x_0|<\epsilon_2 \Rightarrow |h(x)|\leq C_2|O(f(x))|
+\end{align*}
+Thus we can choice $C=C_1C_2$, $\epsilon<\min(\epsilon_1,\epsilon_2)$:
+\[
+|x-x_0|<\epsilon \Rightarrow |h(x)|\leq C_1C_2|f(x)|
+\]
+That is, $h(x)=O(f(x))$, namely
+\[
+O(Of(x))=O(f(x))
+\]
+This allow us to do ``absorb''  Big-$O$ notation into an adjacent Big-$O$ notation.\\
+e) {\sl Interpretation:} This allow us to do ``absorb''  Big-$O$ notation into an adjacent Little-$o$ notation :\\
+Suppose we have $h(x)=o\bigl(O(f(x))\bigr)$, $l(x)=O(f(x))$, then given $\epsilon>0$, we can find sufficiently small
+$\delta$ and $C$ such that $|x-x_0|<\delta$ implies
+\begin{align*}
+\frac{|h(x)|}{|l(x)|}&<\frac{\epsilon}{C}&
+\frac{|l(x)|}{|f(x)|}&<C
+\end{align*}
+Multiply them we get 
+\[
+\frac{|h(x)|}{|f(x)|}<\epsilon
+\]
+Thus $h(x)=o(f(x))$, that is, $o\bigl(O(f(x))\bigr)=o(f(x))$\\
+\eject
+
+\textbf{Exercise 6}\\ 
+\textit{Solution:}\\
+i)\phantom{i} $(-\infty, 0\,]$\\
+ii) $(-\infty, 0)$\\
+iii) First given $f(x)=o(\phi(x))$, according to definition of Little-$o$,  $\forall\epsilon>0$, there exists $\delta>0$ such that $|x-0|<\delta$ implies $\displaystyle\frac{|f(x)|}{|\phi(x)|}=\bigl|\frac{f(x)}{\phi(x)}-0\bigr|<\epsilon$, that is
+\[
+\lim_{x\to 0}\frac{|f(x)|}{|\phi(x)|}=0
+\]
+Conversely, given $\displaystyle\lim_{x\to 0}\frac{|f(x)|}{|\phi(x)|}=0$, by the definition of limit:
+\[
+\forall\, C>0, \exists\,\epsilon>0, |x-x_0|<\epsilon \Rightarrow \frac{|f(x)|}{|\phi(x)|}<C
+\]
+Then we immediately obtain $f(x)=o(\phi(x))$ by the Little-$o$ definition.\\
+iv) Just take $\phi(x)=1$, $f(x)=\sin(\frac{1}{x})$, by definition $|f(x)|<|\phi(x)|$ for all $|x|<1$,
+that is, $\sin(\frac{1}{x})=O(1)$ as $x\to 0$, but clearly $\displaystyle \lim_{x\to 0}\frac{|f(x)|}{|\phi(x)|}$ doesn't exists.
+\end{document}

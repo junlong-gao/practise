@@ -1,0 +1,288 @@
+\input vv285mla
+\begin{document}
+\titlehm{6}
+\ep{1}{
+\item[(i)] Let $\|\cdot\|$ denote the infinity norm $\|\cdot\|_{\infty}$:
+\eq{
+\|g(x_1,x_{2})-g(0,0)\|=
+\|(x_{1}^{2}+x_{2}^{2})\sin{\ff{1}{\sq{x_{1}^{2}+x_{2}^{2}}}}\|
+\leq \|x\|\cdot 1
+=\|x\|,\qquad \quad 0<\|x\|<1
+}
+Using the infinity norm we see that given $\epsilon>0$ we let $\delta=\epsilon/2$
+and $\|x\|<\delta$ implies $\|g(x_1,x_{2})-g(0,0)\|<\delta<\epsilon$
+\item[(ii)]
+\def\uu{{\ff{1}{\sq{x_{1}^{2}+x_{2}^{2}}}}}
+Now we use convention: $\partial_{x_{1}}g=g_{1}$
+For the points not equal to $(0,0)$:
+\ed{
+&g_{1}(x_{1},x_{2})=x_{1}(2\sin\uu-\uu\cos\uu)\label{eq:1}\\
+&g_{2}(x_{1},x_{2})=x_{2}(2\sin\uu-\uu\cos\uu)\label{eq:2}
+}
+and for partials at $(0,0)$:
+\eq{
+&g_{1}(x_{1},0)=\lim_{x_{1}\to0}\ff{x_{1}^{2}\sin\ff{1}{|x_{1}|}-0}{x_{1}-0}=0\\
+&g_{2}(0,x_{2})=\lim_{x_{2}\to0}\ff{x_{2}^{2}\sin\ff{1}{|x_{2}|}-0}{x_{2}-0}=0
+}
+Now we notice that since
+\eq{
+\ff{x_{1}}{\sq{x_{1}^{2}+x_{2}^{2}}}=\ff{1}{\sq{1+x_{2}^{2}/x_{1}^{2}}}
+}
+remains bounded when $(x_{1},x_{2})\to(0,0)$, yet 
+\eq{
+\sin\uu,\qquad\cos\uu
+}
+fails to exist when $(x_{1},x_{2})\to(0,0)$, we conclude that (\ref{eq:1}) and 
+(\ref{eq:2}) all fail to exist at $(0,0)$, therefore the partial derivatives are not continous at $(0,0)$.
+\item[(iii)] It is differentiable at the origin since 
+\eq{
+g(h_1,h_2)-g(0,0)&=(h_{1}^{2}+h_{2}^{2})\sin{\ff{1}{\sq{h_{1}^{2}+h_{2}^{2}}}}\\
+&\quad=0+o(\|h\|)
+}
+since $(h_{1}^{2}+h_{2}^{2})\sin{\ff{1}{\sq{h_{1}^{2}+h_{2}^{2}}}}\leq\|h\|^{2}\cdot1<\|h\|$ for sufficiently small $\|h\|$, therefore it's differentiable at origin, its differential being zero mapping.
+}
+\es{2}{
+\item[(i)]
+We set $G:t\mapsto(f(t),g(t))$, and $H:(x,y)\mapsto F(x,y)$, then $F=H\circ G$
+in question, therefore
+\eq{
+\ff{d}{dt}F(t)=DF\at{t}=DH\at{G(t)}\circ DG\at{t}
+}
+where
+\eq{
+DH\at{G(t)}=\mm{\pd{F}{x}(x(t),y(t))&\pd{F}{y}(x(t),y(t))}\qquad
+DG\at{t}=\mm{f'(t)\\g'(t)}
+}
+plugging in we obtain:
+\eq{
+\ff{d}{dt}F(x(t),y(t))&=DF\at{t}=\mm{\pd{F}{x}(x(t),y(t))&\pd{F}{y}(x(t),y(t))}
+\mm{f'(t)\\g'(t)}\\
+&=\quad f'(t)\partial_{1}F(x(t),y(t))+g'(t)\partial_{2}F(x(t),y(t))
+}
+\item[(ii)]
+We set $G:y\mapsto(y,\a(y),\b(y))$, $H:(y,\a,\b)\mapsto\int_{\a}^{\b}f(x,y)\,dx$ 
+then the mapping $I=H\circ G$
+we apply chain rule:
+\eq{
+I'=DI=DH\circ DG
+}
+and 
+\eq{
+DG=\mm{1\\\a'(y)\\\b'(y)}
+}
+Now, we proceed by theorem:
+\eq{
+\pd{H}{y}=\int_{\a}^{\b}\pd{f}{y}(x,y)\,dx
+}
+and observe that
+\eq{
+&\pd{H}{\a}=\ff{d}{d\a}\int_{\a}^{\b}f(x,y)\,dx=-\ff{d}{d\a}\int_{\b}^{\a}f(x,y)\,dx=-f(\a,y)\\
+&\pd{H}{\b}=\ff{d}{d\b}\int_{\a}^{\b}f(x,y)\,dx=f(\b,y)
+}
+by the fundamental theorem of calculus.\\
+Now we expand out the differential of $H$:
+\eq{
+DH\at{G(y)}=\mm{\int_{\a(y)}^{\b(y)}\pd{f}{y}(x,y)\,dx&-f(\a(y),y)&f(\b(y),y)}
+}
+And plugging in:
+\eq{
+I'(y)=DI\at{y}=DH\at{G(y)}\circ DG\at{y}=\int_{\a(y)}^{\b(y)}\pd{f}{y}(x,y)\,dx-f(\a(y),y)\a'(y)+f(\b(y),y)\b'(y)
+} 
+}
+\es{3}{
+\item{$f(x,y)$:}
+\eq{
+&\dpd{f}{x}=2e^{xy}+4xye^{xy}+y^{2}(x^{2}+y^{2})e^{xy}\\
+&\ff{\partial^{2}f}{\partial x\partial y}=\ff{\partial^{2}f}{\partial y\partial x}=
+2x^{2}e^{xy}+xye^{xy}(x^{2}+y^{2})+2y^{2}e^{xy}\\
+&\dpd{f}{y}=2e^{xy}+2xye^{xy}+x^{2}(x^{2}+y^{2})e^{xy}+2xye^{xy}
+}
+\item{$g(x,y,z)$:}
+\def\sss{\sin(x+y+z)}
+\def\css{\cos(x+y+z)}
+\def\damm#1#2#3{
+\eq{
+&\dpd{g}{#1}=2#2#3\cos(#1+#2+#3)-#1#2#3\sin(#1+#2+#3)\\
+&\spd{g}{#2}{#1}=#3\sss+#2#3\css+#1#3\css-#1#2#3\sss\\
+&\spd{g}{#3}{#1}=#2\sss+#2#3\css+#1#2\css-#1#2#3\sss
+}
+}
+\damm{x}{y}{z}
+\damm{y}{x}{z}
+\damm{z}{y}{x}
+}
+\es{4}{
+\item[(i)]
+First
+\eq{
+f\times g=\mm{s^{3}t^{2}-4st^{2}\\
+			2s^{2}t-2st^{2}-t^{2}s^{2}-t^{3}s\\
+			2st+2t^{2}-s^{3}+s^{2}t}
+}
+then differentiate it:
+\eq{
+D(f\times g)=\mm{3s^{2}t^{2}-4t^{2}&2s^{3}t-8st\\
+				4st-2t^{2}-2st^{2}-t^{3}&2s^{2}-4st-2ts^{2}-3t^{2}s\\
+				2t-3s^{2}+2ts&2s+4t+s^{2}	
+			}
+}
+\item[(ii)]
+Now we calculate the differential seperately:
+\eq{
+Df=\mm{1&1\\
+		2s&0\\
+		2t&2s}
+\qquad
+Dg=\mm{1&-1\\
+		0&2\\
+		t^{2}&2ts}
+}
+And use the product formula:
+\eq{
+&Df\at{(s,t)}(h)\times g+f\times Dg\at{(s,t)}(h)\\
+&=\mm{h_{1}(2s^{2}t^{2}-4t^{2})-4sth_{2}\\
+		h_{1}(2st-2t^{2}-t^{2}s)+h_{2}(2s^{2}-2st-t^{2}s)\\
+		h_{1}(2t-2s^{2}+2ts)+2th_{2}}
+\\&\quad+\mm{h_{1}s^{2}t^{2}+h_{2}(2ts^{3}-4st)\\
+		h_{1}(2st-st^{2}-t^{3})+h_{2}(-2st-2ts^{2}-2^{2}s)\\
+		h_{1}(-s^{2})+h_{2}(2s+2t+s^{2})}\\
+		&\quad=D(f\times g)\at{(s,t)}(h)\qquad\hbox{from (i)}
+}
+as desired.
+}
+\es{5}{
+\def\p{\varphi}
+\def\P{\Phi}
+\def\cp{\cos{\varphi}}
+\def\ccp{\cos^{2}{\varphi}}
+\def\sp{\sin{\varphi}}
+\def\ssp{\sin^{2}{\varphi}}
+\item[]
+Now we consider mapping: $f:(x_{1},x_{2})\mapsto f(x_{1},x_{2})$, and $\Phi:
+(r,\varphi)\mapsto (x_{1},x_{2})$ and now we need to find the second differential of the composite mapping $g:=f\circ\Phi$\\
+First, by chain rule:
+\eq{
+Dg&=Df\at{\Phi(r,\p)}\circ D\P\at{(r,\p)}=\mm{\pd{f}{x_{1}}&\pd{f}{x_{2}}}
+\mm{\cp&-r\sp\\
+	\sp&r\cp}\\
+	&\quad=\mm{f_{1}\cp+f_{2}\sp&-f_{1}r\sp+f_{2}r\cp}
+}
+On the other hand, we know from the definition of Jacobian:
+\eq{
+Dg=\mm{\pd{g}{r}&\pd{g}{\phi}}=\mm{\pd{f}{r}(r\cp,r\sp)&\pd{f}{\p}(r\cp,r\sp)}
+}
+Again we have use the convention $f_{1}=\pd{f}{x_{1}}$.\\
+Now in order to get the second differential we need to differentiate $f_{1}\circ\P$ and $f_{2}\circ\P$, by treating them as before by simply replacing $f$ in $f\circ\P$  by $f_{1}$ and $f_{2}$, then we get that
+\eq{
+&\mm{\pd{f_{1}}{r}(r\cp,r\sp)&\pd{f_{1}}{\p}(r\cp,r\sp)}
+=\mm{f_{11}\cp+f_{21}\sp&-f_{11}r\sp+f_{21}r\cp}\\
+&\mm{\pd{f_{2}}{r}(r\cp,r\sp)&\pd{f_{2}}{\p}(r\cp,r\sp)}=\mm{f_{12}\cp+f_{22}\sp&-f_{12}r\sp+f_{22}r\cp}
+} 
+Now we plug the second differential:
+\eq{
+&\mm{\dpd{f}{r}(r\cp,r\sp)&\spd{f}{r}{\p}(r\cp,r\sp)\\
+	\spd{f}{\p}{r}(r\cp,r\sp)&\dpd{f}{\p}(r\cp,r\sp)}\\
+	&\quad=D^{2}g=\mm{\pd{}{r}(f_{1}\cp+f_{2}\sp)&(*)\\
+						(*)&\pd{}{\p}(-f_{1}r\sp+f_{2}r\cp)}
+}
+where we merely need the first and the last entry:
+\eq{
+\dpd{f}{r}(r\cp,r\sp)&=\pd{}{r}(f_{1}\cp+f_{2}\sp)&\\
+&=f_{11}\ccp+f_{12}\sp\cp+f_{11}\sp\cp+f_{12}\ssp&\\
+\ff{1}{r^{2}}\dpd{f}{\p}(r\cp,r\sp)&
+=\ff{1}{r^2}\pd{}{\p}(-f_{1}r\sp+f_{2}r\cp)&\\
+&=(f_{11}\sp-f_{12}\cp\sp)\sp-\ff{1}{r}\cp f_{1}&\\
+&+(-f_{12}\sp+f_{22}\cp)r\cp+(-\ff{1}{r}f_{2}\sp)&\\
+\ff{1}{r}\pd{f}{r}(r\cp,r\sp)&=\ff{1}{r}f_{1}\cp+\ff{1}{r}f_{2}\sp&
+}
+Finally, we add them together to have:
+\eq{
+(\dpd{}{r}+\ff{1}{r^{2}}\dpd{}{\p}+\ff{1}{r}\pd{}{r})f(r\cp,r\sp)=f_{11}+f_{22}=(\dpd{}{x_{1}}+\dpd{}{x_{2}})f(x_{1},x_{2})
+}
+which completes the proof.
+}
+\es{6}{
+\item[]
+First we calculate:
+\eq{
+DF=\mm{-1&-1\\2x_{1}&2x_{2}}\qquad DFy=\mm{-3\\2x_{1}+4x_{2}}\qquad x+ty=\mm{t\\2t}
+}
+Then
+\eq{
+&F(x+y)-F(x)=\mm{-2\\5}-\mm{1\\0}=\mm{-3\\5}\\
+&\int_{0}^{1}DF\at{x+ty}y\,dt=\int_{0}^{1}\mm{-3\\2t+8t}\,dt=\mm{-3\\5}\\
+&\left(\int_{0}^{1}DF\at{x+ty}\,dt\right)y=\mm{-1&-1\\1&2}\mm{1\\2}=\mm{-3\\5}
+}
+Therefore
+\eq{
+F(x+y)-F(x)=\int_{0}^{1}DF\at{x+ty}y\,dt=\left(\int_{0}^{1}DF\at{x+ty}\,dt\right)y
+}
+}
+\es{7}{
+\def\ii{\int_{0}^{\infty}}
+\item[(1)]
+\eq{
+g'(x)=\ff{d}{dt}\int_{0}^{\infty}\ff{\sin t}{t}e^{-xt}\,dt=\int_{0}^{\infty}\ff{\sin t}{t}
+(-t)e^{-xt}\,dt=(-1)\int_{0}^{\infty}\sin te^{-xt}\,dt
+}
+and by integration by parts we obtain:
+\eq
+{
+g'(x)=-\ff{1}{1+x^{2}}
+}
+\item[(2)]
+Consider function $f(t)=\sin t-t$ which is an odd function:
+\eq{
+f'(t)=\cos t-1\leq0\Longrightarrow f(t)\leq f(0)=0
+}
+This shows that $\sin t\leq t$ when $0<t<1<\pi$ and therefore $|f(t)|/t\leq 1$ for $0<t<1$, and for $t>1$ it's trivial that $|\sin t|<1$\\
+Using this inequality we can estimate that
+\eq{
+|g(x)|\leq\ii|\ff{\sin t}{t}e^{-xt}|\leq\ii e^{-xt}\,dt=\ff{1}{x}
+}
+therefore $g(+\infty):=\lim_{x\to\infty}g(x)=0$
+\item[(iii)]
+Now we apply Newton's formula:
+\eq{
+g(+\infty)-g(0)=\ii g'(x)\,dx=-\ii\ff{1}{1+x^{2}}\,dx=-\arctan x\Big|_{0}^{+\infty}=-\ff{\pi}{2}
+}
+and by previous results:
+\eq{
+\ii\ff{\sin t}{t}\,dt=g(0)=\ff{\pi}{2}
+}
+}
+\es{8}{
+\def\io{\int_{0}^{1}}
+\item[]
+Due to the decay of $e^{-\ff{1}{y}}$ when $y$ is near $0$, the integrals here are all proper.\\
+When $x\neq 0$:
+\eq{
+\io\ff{x^{3}}{y^{2}}e^{-\ff{x^{2}}{y}}\,dy=xe^{-\ff{x^{2}}{y}}\Big|_{0}^{1}=xe^{-x^{2}}
+}
+and when $x=0$
+\eq{
+\io 0\,dy=0}
+For another integral, when $x\neq 0$:
+\eq{
+\pd{}{x}f(x,y)=e^{-\ff{x^{2}}{y}}\left(\ff{3x^{2}}{y^{2}}-\ff{2x^{4}}{y^{3}}\right)
+}
+then
+\eq{
+\io \pd{}{x}f(x,y)\,dy=(1-2x^{2})e^{-x^{2}}
+}
+again for $x=0$:
+\eq{
+\pd{}{x}f(x,y)=0\Longrightarrow\io \pd{}{x}f(x,y)\,dy=0
+}
+then finally 
+\eq{
+&\ff{d}{dx}\io f(x,y)\,dy\at{x=0}=\lim_{x\to0}\ff{xe^{-x^{2}}-0}{x-0}=1\\
+&\io \pd{}{x}f(x,y)\,dy\at{x=0}=0\\
+&\qquad\Longrightarrow
+\ff{d}{dx}\io f(x,y)\,dy\at{x=0}\neq\io \pd{}{x}f(x,y)\,dy\at{x=0}
+}
+\it Note: this is due to the fact that $f(x,y)$ is not continous at $(0,0)$ since 
+if we consider the path $y=x^{2}$
+}
+\end{document}
+

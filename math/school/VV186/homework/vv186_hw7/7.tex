@@ -1,0 +1,237 @@
+%lead
+\input my_macros
+\mydoc
+\baselineskip 16pt plus 2pt
+\vv7 November {9}
+%
+
+%problem 1
+\snum1
+\noindent iii) is a real vector space, i) and ii) are not.
+\bigskip
+
+%problem 2
+\pnum2
+\noindent Simply setting $\lambda_i={1\over n}$ for all $1\le i\le n$ we get
+$${\root n \of {a_1\cdot a_2\cdots a_n}}\le{a_1+\cdots+a_n\over n}
+$$
+Now, apply it to ${\root n \of n}=
+{\root n\of {\sqrt n \cdot \sqrt n \cdot 1 \cdot 1\cdots 1}}$ we have:
+$$
+1\le{\root n\of {\sqrt n \cdot \sqrt n \cdot 1 \cdot 1\cdots 1}}\le{2\sqrt n+n-2\over n}=1
++{2\over\sqrt n}-{2\over n}
+$$
+So by squeeze theorem we have $\displaystyle\lim_{n\to\infty}{\root n \of n}=1$
+
+\noindent Also, for any fixed number $x>0$, if $x\ge1$, we can find $N$ such that for all $n>N$, $n\ge x$, so for $a_n={\root n \of x}$, we have 
+$$
+1\le {\root n \of x}\le {\root n \of n},\qquad \hbox{\rm for all }n>N
+$$
+By squeeze theorem we have $\displaystyle\lim_{n\to\infty}{\root n \of x}=1$. 
+
+\noindent As for $0<x<1$, we have $1/x>1$, thus $1/a_n={\root n\of{1\over x}}\to 1$ as $n\to\infty$ by previous proof, we also have $a_n\to 1$, which completes the proof.
+\bigskip
+
+%problem 3
+\pnum3
+\noindent i) By Jensen's inequality, setting $n=2$ and  $a_1=a^p, a_2=b^q$, we have 
+$$
+ab=(a^p)^{1/p}(b^q)^{1/q}\le a^p/p+a^q/q
+$$
+Consider $x'=x/\|x\|_p$, $y'=y/\|y\|_q$, now we have
+$$
+\sum |x'_jy'_j|\le\sum x_j^p/p\|x\|_p^p+y_j^q/q\|y\|_q^q=
+{1\over \|x\|_p^p}\sum x_j^p/p+{1\over \|y\|_q^q}\sum y_j^p/q={1\over p}+{1\over q}=1
+$$
+Thus we have 
+$$
+\sum_{j=1}^{n}|x_jy_j|\le\|x\|_p\|y\|_q=\Big(\sum_{j=1}^{n}x_j^p\Big)^{1/p}\Big(\sum_{j=1}^{n}y_j^p\Big)^{1/p}
+$$
+\medskip
+\noindent ii) By fact that  $|x_j+y_j|^p\le(|x_j|+|y_j|)|x_j+y_j|^{p-1}$ we have
+$$
+\sum |x_j+y_j|^p\le \sum (|x_j|+|y_j|)|x_j+y_j|^{p-1}
+$$
+Now we apply Holder's inequlity:
+$$
+\eqalign{
+ &\quad\sum (|x_j|+|y_j|)|x_j+y_j|^{p-1}\cr
+  &=\sum |x_j||x_j+y_j|^{p-1}+\sum|y_j||x_j+y_j|^{p-1}\cr
+ &\le \Big(\sum |x_j|^p\Big)^{1/p}\Big(\sum |x_j+y_j|^{q(p-1)}\Big)^{1/q}
++\Big(\sum|y_j|^p\Big)^{1/p}\Big(\sum |x_j+y_j|^{q(p-1)}\Big)^{1/q}\cr
+ &= \Big(\sum |x_j|^p\Big)^{1/p}\Big(\sum |x_j+y_j|^{p}\Big)^{1/q}
++\Big(\sum|y_j|^p\Big)^{1/p}\Big(\sum |x_j+y_j|^{p}\Big)^{1/q}\cr
+}
+$$
+where $1/q=1-1/p$, so dividing $\Big(\sum |x_j+y_j|^{p}\Big)^{1/q}$ on both sides yields
+$$
+\Big(\sum_{j=1}^{n} |x_j+y_j|^{p}\Big)^{1/p}\le \Big(\sum_{j=1}^{n}  |x_j|^p\Big)^{1/p}+\Big(\sum_{j=1}^{n} |y_j|^p\Big)^{1/p}
+$$
+\medskip
+\noindent iii) First we check that, since all terms are non-negative, we conclude that $\|x\|_p\ge 0$ and $\|x\|_p=0$ iff all terms are zero, namely $x=0$.
+\medskip
+\noindent Second, for all real $\lambda\in{\rm I\!R}$  
+$$\|\lambda x\|_p=
+\Big(\sum |\lambda x_j|^p\Big)^{1/p}=
+|\lambda|\Big(\sum |x_j|^p\Big)^{1/p}=|\lambda| \|x\|_p
+$$
+ Finally, by ii) we have $\|x+y\|_p\le\|x\|_p+\|y\|_p$, so it defines a norm.
+\medskip
+\noindent iv) Now we set $\xi=\|x\|_p$, and by definition we have $|x_j|^p\le\xi^p$, therefore  $|x_j|\le\xi$. Since $|x_j|/\xi\le1$, we conclude that $(|x_j|/\xi)^q\le(|x_j|/\xi)^p$ for $p<q$, hence
+$$
+\sum_{j=1}^n \Big({|x_j|\over\xi}\Big)^q\le
+\sum_{j=1}^n \Big({|x_j|\over\xi}\Big)^p\,=1
+$$
+Therefore
+$$
+\|x\|_q=\Big(\sum_{j=1}^n |x_j|^q\Big)^{1/q}\le\xi=\|x\|_p
+$$
+\medskip
+\noindent v) First we check that, since all terms are non-negative, we conclude that $\displaystyle\|x\|_{\infty}=\max_{1\le j\le n}|x_j|\ge 0$ and $\|x\|_{\infty}=0$ iff all terms are zero, namely $x=0$.
+\smallskip
+Second, for all real $\lambda \in {\rm I\!R}$  
+$$\|\lambda x\|_{\infty}=
+\max_{1\le j\le n}|\lambda x_j|
+=|\lambda|\max_{1\le j\le n}|x_j|=|\lambda|\,\|x\|_{\infty}
+$$
+Finally, the maximum has the property that
+$$\|x+y\|_{\infty}=\max_{1\le j\le n}|x_j+y_j|
+\le\max_{1\le j\le n}|x_j|+\max_{1\le j\le n}|y_j|
+=\|x\|_{\infty}+\|y\|_{\infty}
+$$
+so it defines a norm. 
+
+\noindent Now we observe that, for any $x\in {\rm I\!R}^n$
+$$
+\max_{1\le j\le n}|x_j|^p\le \sum |x_j|^p\le n\max_{1\le j\le n}|x_j|^p
+$$
+Namely 
+$$
+\|x\|_{\infty}\le\|x\|_p\le {\root p \of n} \|x\|_{\infty}
+$$
+By Exercise 2 we have ${\root p \of n}\to 1$ as $n\to \infty$, so by squeeze theorem we have 
+$$
+\lim_{p\to\infty}\|x\|_p=\|x\|_{\infty}
+$$
+\medskip
+\noindent vi) See at the end of the paper.
+\medskip
+\noindent vii) Consider any Cauchy sequence $(x_m)\in{\rm I\!R}^n$, given $\varepsilon>0$:
+$$
+0\le||{x_n}_j|-|{x_m}_j||\le\max_{1\le j\le n}||{x_n}_j|-|{x_m}_j||
+\le\max_{1\le j\le n}|\,{x_n}_j-{x_m}_j|=\|x_n-x_m\|_{\infty}<\varepsilon
+$$
+for sufficiently large $n,m$. This tells us that each component ${x_n}_j$ is Cauchy sequence in ${\rm I\!R}$, therefore they each converges to, say, $x'_j$ as $n\to\infty$. They form a vector $x'\in{\rm I\!R}^n$. Now for any $\varepsilon>0$, we can find $N_1,N_2,\ldots N_n$, such that for all $n>N_j$ the difference $|{x_n}_j-x'_j|<\varepsilon$ for $1\le j\le n$. Pick $\displaystyle n>\max_{1\le j\le n}N_j$, we have
+$$
+\|x_n-x'\|=\max_{1\le j\le n}|{x_n}_j-x'_j|<\varepsilon
+$$
+So it converges. This proves that the space is complete.
+\medskip
+\noindent viii) Using the fact that
+$$
+{|x_1|^p+|x_2|^p+\cdots+|x_n|^p\over n}\le\max_{1\le j\le n}|x_j|^p\le |x_1|^p+|x_2|^p+\cdots+|x_n|^p
+$$
+Thus if we take $c_p=n^{-1/p}>0$, $C_p=1>0$, we have
+$$
+0\le c_p\|x\|_p\le\|x\|_{\infty}\le C_p\|x\|_p
+$$
+Now for any Cauchy sequence $(x_m)\in{\rm I\!R}^n$, given $\varepsilon>0$:
+$$
+0\le \|x_m-x_k\|_{\infty}\le C_p\|x_m-x_k\|_{p}\le C_p {\varepsilon\over C_p}=\varepsilon
+$$
+Which means that it is also a Cauchy sequence in $({\rm I\!R}^n,\|\cdot\|_{\infty})$, and converges to $x'$, so the difference $\|x_m-x'\|_p\le {1\over c_p}\|x_m-x_k\|_{\infty}\le {1\over c_p}\,c_p\,\varepsilon<\varepsilon$ for any $\varepsilon>0$. So it converges in $({\rm I\!R}^n,\|\cdot\|_{p})$. This proves that the space is complete.
+\bigskip
+
+
+
+%problem 4
+\snum4
+\noindent i)$$f(x)=\cases{0,&if $x=0$;\cr
+                    1,&if $0<x\le1$.\cr}$$
+The convergence is {\bf not} uniform since the pointwise limit is not continous.
+\medskip
+\noindent ii) $f(x)=x$, \quad dom $f_n={\rm I\!R}.$
+The convergence is {\bf not} uniform if we consider
+$$
+\|f(x)-{nx\over1+n+x}\|_{\infty}=\sup_{x\in[0,+\infty)}|x+1+n+{n^2+n\over1+n+x}-2n-1|
+$$
+which is {\bf unbounded} and the suprmum doesn't exists.
+\medskip
+\noindent iii) $f(x)=0$, \quad dom $f_n={\rm I\!R}.$
+The convergence is uniform since
+$$\|f(x)-f_n(x)\|_{\infty}\le{1\over n}\to 0
+$$
+\medskip
+\noindent iv) $f(x)=0$, \quad dom $f_n=(0,\infty).$
+The convergence is uniform since
+$$
+\|f(x)-f_n(x)\|_{\infty}=\sup_{x\in(0,\infty)}|\sqrt{x+1/n}-\sqrt{x}|=\sup_{x\in(0,\infty)}\Big|{1/n\over\sqrt{x+1/n}+\sqrt{x}}\Big |\le\sqrt{1/n}\to 0
+$$
+\medskip
+\noindent v) $f(x)={1\over2\sqrt{x}}$,\quad dom $f_n=(0,\infty).$
+The convergence is {\bf not} uniform since 
+$$
+\|f(x)-f_n(x)\|_{\infty}=\sup_{x\in(0,\infty)}|n\Big(\sqrt{x+1/n}-\sqrt{x}\Big)|=\sup_{x\in(0,\infty)}\Big |{1\over\sqrt{x+1/n}+\sqrt{x}}\Big |=\sqrt{n}\to +\infty
+$$
+
+
+
+
+
+
+
+
+
+\bigskip
+%problem 5
+\snum5
+Total distance travelled
+$$
+\sum_{k\ge0}h\,r^k={h\over1-r}
+$$
+\bigskip
+
+
+
+%problem 6
+\pnum6
+We can divide natural numbers by digits. If a number has $k$ digits, then if $n\in X$, we know that $n$ runs from $1\underbrace{0\ldots0}_{k-1}.$ to $\underbrace{88\ldots8}_{k}.$ escaping all terms having 9. Thus the total number of these numbers are $8\times9\times9\ldots\times9=8\times9^{k-1}$, so
+$$
+\sum_{n\in X, \rm n\,has\,k\,digits}{1\over n}\,\le\,{8\times9^{k-1}\over 10^{k-1}}=8\Big({9\over 10}\Big)^{k-1}
+$$
+So 
+$$
+\sum_{n\in X}{1\over n}\le\sum_{k\ge1}8\Big({9\over 10}\Big)^{k-1}
+$$
+The right side converges, thus $\sum_{n\in X}{1\over n}$ converges by comparison test. Also, since 
+$$
+\sum_{1\le n\le m}{1\over n}=\sum_{1\le n\le m\atop n\in X}{1\over n}
++\sum_{1\le n\le m\atop n\in N^*/X}{1\over n}
+$$
+We conclude that $\sum_{n\in N^*/X}{1\over n}$ diverges.
+\bigskip
+%problem 7
+\snum7
+It can extend horizontally to infinity.
+
+For simplicity let us suppose that each brick is 2 units long and 1 unit weight. Let $d_n$ denote the furthest the $n$  such bricks can reach horizontally. We have $d_1=2$, and after having placed $n$ such bricks, we add the $n+1$ st brick to the {\bf bottom} of the already placed tower, and to avoid toppling, we have to make sure that the center of gravity of top $n$ bricks lies just above the edge of the $n+1$ st (A graph is illustrated beside) brick. Now we have a recurrence:
+$$
+d_{n+1}-2={d_n-1+d_{n-1}-1+\cdots+d_1-1\over n}
+$$
+or namely
+$$
+nd_{n+1} =d_n+d_{n-1}+\cdots+d_1+n\quad n\in{\rm I\!N}\qquad d_1=2;
+$$
+for $n>1$, we have 
+$$
+(n-1)d_{n} =d_{n-1}  +d_{n-1}  +\cdots+d_1+n-1
+$$
+Subtracting the two we have
+$$
+\eqalign{
+nd_{n+1}-(n-1)d_n&=d_n+1;\cr
+nd_{n+1}&=nd_n+1;\cr
+d_{n+1}&=d_n+{1\over n}\cr}
+$$
+So $d_n$ is simply $2+1+1/2+1/3+\cdots+1/(n-1)$ and it diverges to infinity. Thus in this way the tower can extend horizontally to infinity.
+\end

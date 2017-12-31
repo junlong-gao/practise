@@ -1,0 +1,158 @@
+\documentclass{article}
+\input mla
+\begin{document}
+\titlehm{10}
+\ms{1}{
+\item[i)]
+See the attachment
+\item[ii)]
+See the attachment, streamlines are hand drawn.
+\item[iii)]
+In the following order:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Field&Grad&Rot\\
+\hline
+i)&$0$&$-c$\\
+ii)&$0$&$2cy$\\
+iii)&$0$&$2c$\\
+iv)&$0$&$0$\\
+v)&$0$&$0$\\
+vi)&$0$&$0$\\
+\hline
+\end{tabular}
+\end{center}
+\item[iv)]
+In the following order (counter-clockwise):
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Field&Flux&Circulation\\
+\hline
+i)&$0$&$-c\pi$\\
+ii)&$0$&$0$\\
+iii)&$0$&$2c\pi$\\
+iv)&$0$&$2c\pi$\\
+v)&$2\pi c$&$0$\\
+vi)&$0$&$0$\\
+\hline
+\end{tabular}
+\end{center}
+}
+\ms{2}{
+\item[i)]
+We check the first component of rot$(\phi F)$:
+\eq{
+(\curl{(\phi F)})_1=\pd{}{y}(\phi F_3)-\pd{}{z}(\phi F_2)&=\pd{\phi}{y}F_3+\phi\pd{F_3}{y}
+-\pd{\phi}{z}F_2-\phi\pd{F_2}{z}\\
+&=\phi\left(\pd{F_3}{y}-\pd{F_2}{z}\right)+\left(F_3\pd{\phi}{y}-F_2\pd{\phi}{z}\right)\\
+&=(\phi\curl{F})_1+((\grad{\phi})\times F)_1
+}
+the other two components follow a similar proof.
+\item[ii)]
+We check the first term of div$(\phi F)$:
+\eq{
+(\hbox{the first term of }\diver{(\phi F)})&=F_1\pd{\phi}{x}+\phi\pd{F_1}{x}\\
+&=(\hbox{the first term of }\dotp{F}{\grad{\phi}})+(\hbox{the first term of }\phi\diver{F})
+}
+the other two terms follow a similar proof.
+\item[iii)]
+For div$(F\times G)$:
+\eq
+{
+(\diver{(F\times G)})=\,&\pd{}{x}(F_2G_3-F_3G_2)+\pd{}{y}(F_3G_1-F_1G_3)+
+\pd{}{z}(F_1G_2-F_2G_1)\\
+=\,&G_1\left(\pd{F_3}{y}-\pd{F_2}{z}\right)-F_1\left(\pd{G_2}{z}-\pd{G_3}{y}\right)\\
+& G_1\left(\pd{F_3}{y}-\pd{F_2}{z}\right)-F_1\left(\pd{G_2}{z}-\pd{G_3}{y}\right)\\
+&G_1\left(\pd{F_3}{y}-\pd{F_2}{z}\right)-F_1\left(\pd{G_2}{z}-\pd{G_3}{y}\right)\\
+&=\dotp{G}{{\curl{F}}}-\dotp{F}{\curl{G}}
+}
+\item[iv)]
+Again we check the first component of rot$($rot$F)$:
+\eq
+{
+(\curl{(\curl{F})})_1&=\curl\left({\pd{F_3}{y}-\pd{F_2}{z}}\,
+,{\pd{F_1}{z}-\pd{F_3}{x}},\,
+{\pd{F_2}{x}-\pd{F_1}{y}}\right)_1\\
+&=\dpd{F_1}{x}+\spd{F_2}{y}{x}+\spd{F_3}{z}{x}-\left(\dpd{}{x}+\dpd{}{y}+\dpd{}{z}\right)F\\
+&=(\grad{(\diver{F})})_1-(\Delta{F})_1
+}
+other two components follows a similar proof.
+\item[v)]
+Again we check the first component of rot$($grad$\phi)$
+\eq
+{
+(\curl{(\grad{\phi})})_1=\pd{}{y}\pd{\phi}{z}-\pd{}{z}\pd{\phi}{y}=0
+}
+other two components follows a similar proof to be $0$.
+}
+\ms{4}
+{
+\item[]
+First we notice that the differential operators communicate with each
+other:
+\eq{
+\pd{}{t}\nabla=\nabla\pd{}{t}
+}
+since for arbitrary coordinates $\pd{}{x}\pd{}{t}=\pd{}{t}\pd{}{x}$.
+Then we may proceed by 
+\def\u{\mu_0}
+\def\e{\epsilon_0}
+\def\c{c_0}
+\eq
+{
+-\curl{(\curl{E})}&=\u\curl{\pd{H}{t}}=\u\pd{}{t}\curl{H}=\u\e\dpd{E}{t}
+}
+and the left hand side is 
+\eq
+{
+\curl{(\curl{E})}=\Delta E-\grad({\diver{E}})=\Delta E
+}
+the above two give us the relation:
+\eq
+{
+\ff{1}{\u\e}\Delta E=\c^2\Delta E =\dpd{E}{t}
+}
+The conjugate counterpart for $H$ is completely analogy:
+\eq
+{
+-\curl{(\curl{H})}&=\e\curl{\pd{E}{t}}=\e\pd{}{t}\curl{E}=\e\u\dpd{H}{t}
+}
+and the left hand side is 
+\eq
+{
+\curl{(\curl{H})}=\Delta H-\grad({\diver{H}})=\Delta H
+}
+the above two give us the relation:
+\eq
+{
+\ff{1}{\u\e}\Delta H=\c^2\Delta H =\dpd{H}{t}
+}
+}
+\ms{5}
+{
+We calculate the rot$F$:
+\eq
+{
+\curl{F}=(b-a,\,0,\,0)=(0,\,0,\,0)
+}
+gives us 
+\eq
+{
+b=a
+}
+and we proceed setting $u=\grad{F}$ and replacing $b$ by $a$:
+\eq
+{
+\pd{u}{x}&=x^2+xy\\
+\pd{u}{y}&=\ff{x^2}{2}+y+az\\
+\pd{u}{z}&=ay
+}
+giving us:
+\eq
+{
+u=\ff{1}{3}x^3+\ff{1}{2}x^2y+\ff{1}{2}y^2+ayz+\rm const
+}
+}
+\end{document}

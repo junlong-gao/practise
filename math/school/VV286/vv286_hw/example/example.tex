@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+%\usepackage{euler}
+%\usepackage{concmath}
+\usepackage{amsmath} 
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{cases}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{gauss}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
+\usepackage{tkz-graph}
+\usetikzlibrary{arrows}
+\tikzset{>=stealth}
+\usepackage{pgfplots} 
+ \usepgfplotslibrary{polar} 
+ 
+
+\linespread{1.4}
+\geometry{a4paper,centering,scale=0.8}
+%\rmfamily 
+\normalsize
+\setlength{\parindent}{0em}
+
+%%course environment??????????????
+
+\newcommand{\titlehm}[1]{
+\begin{flushleft}
+  Junlong Gao 5133709126\\ 
+  Prof.  Hohberger\\ 
+  VV286 Assignment #1\\
+  \today 
+\end{flushleft}
+}
+
+\newenvironment{vv286}[1]
+{
+	\titlehm{#1}
+}
+
+\newenvironment{vv286_ms}[1]
+	{{\bf Exercise #1}\\
+	{\it Solutions:}
+	\begin{itemize}\nopagebreak
+ 	\setlength{\itemsep}{2pt}
+ 	\setlength{\parskip}{0pt}
+ 	\setlength{\parsep}{0pt}\nopagebreak
+    }
+    { 
+    \end{itemize}
+	\vskip 2em 
+    }
+
+%equation environment
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+%conventions:
+\def\res{\mathop{\rm Res}}
+\def\sgn{{\rm sgn}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\B}{\mathcal{B}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\bb}[1]{\mathbb{#1}}
+\def\mat#1{{\rm Mat}(#1\times #1,\mathbb{R})}
+\def\GL{{\rm GL}(n,\mathbb{R}) }
+\def\GL{{\rm SL}(n,\mathbb{R}) }
+\def\GL{{\rm O}(n,\mathbb{R}) }
+\def\GL{{\rm SO}(n,\mathbb{R}) }
+\def\GL{{\rm Sp}(n,\mathbb{R}) }
+\def\a{\alpha}
+\def\b{\beta}
+\def\e{\epsilon}
+\def\sg{\sigma}
+\def\lam{\lambda}
+\def\ta{\theta}
+\def\p{\varphi}
+\def\ct{\cos{\theta}}
+\def\cp{\cos{\varphi}}
+\def\ca{\cos{\alpha}}
+\def\st{\sin{\theta}}
+\def\sp{\sin{\varphi}}
+\def\sa{\sin{\alpha}}
+\def\bF{{\bf F}}
+\def\bv {{\bf v}}
+\def\bx {{\bf x}}
+\def\by {{\bf y}}
+\def\bz {{\bf z}}
+\def\br{{\bf r}}
+\def\ba{{\bf a}}
+\def\bp{{\bf p}}
+\def\w{\omega}
+\def\bw{{\boldsymbol \omega}}
+\def\lam{\lambda}
+\def\nx{\hat{n}_x}
+\def\ny{\hat{n}_y}
+\def\nz{\hat{n}_z}
+\newcommand{\mm}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\bm}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+%dimensions:
+\def\m{\,\rm m}
+\def\s{\,\rm s}
+\def\N{\,\rm N}
+\def\J{\,\rm J}
+\def\P{\,\rm P}
+\def\kg{\,\rm kg}
+\def\W{\,\rm W}
+
+%%?????
+\begin{document}
+\begin{vv286}{13}%??13??
+
+\begin{vv286_ms}{1}%???
+\item[(1)]%???
+    Again we follow the slides and use the separation of variable $u(x,t)=X(x)T(t)$ to get:
+    \eq
+    {
+      X\frac{d^2T}{d t^2}=
+      -c^2\frac{d^4 X}{d x^4}T
+      \implies
+      \frac{-1}{c^2 T}\frac{d^2 T}{d t^2}
+      =\frac{d^4 X}{d x^4}\frac{1}{x}=k
+    }
+     \end{vv286_ms}%?????
+ 
+\end{vv286}%????
+\end{document}

@@ -1,0 +1,438 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{amsmath} 
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{cases}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{gauss}
+
+\def\dotp#1#2{\langle#1,#2\rangle}
+\def\ss#1#2{\sum_{#1=1}^{#2}}
+\def\lam{\lambda}
+\def\vec#1{\{#1_1,#1_2\ldots#1_n\}}
+\def\es#1{{\bf Exercise #1}\\{\it Solution:}\\}
+\def\ep#1{{\bf Exercise #1}\\{\it Solution:}\\}
+
+
+\linespread{1.4}
+\geometry{a4paper,centering,scale=0.8}
+\rmfamily 
+\normalsize
+\setlength{\parindent}{0em}
+
+\begin{document} 
+\begin{flushleft}
+  Junlong Gao 5133709126\\ 
+  Prof.  Hohberger\\ 
+  VV285 Assignment 2\\
+  \today 
+\end{flushleft}
+
+{\bf Exercise 1}\\
+{\it Solution:}\\
+(i): The solution may vary from person to person since the basis is depended on the parameter we choose in solving the system of $U$. Here's one possible situation: solving the system of $U$ gives us the basis:
+\begin{align*}
+U= {\rm span}\left\{
+\begin{pmatrix}
+-3 \\
+1 \\
+2 \\
+0 \\
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+1 \\
+-1 \\
+0 \\
+-2
+\end{pmatrix}
+\right\}
+\end{align*}
+Which are independent, therefore dim $U=2$\\
+Similarly we find the basis for $V$: 
+\begin{align*}
+V= {\rm span}\left\{
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+1 \\
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+0 \\
+1 \\
+0 \\
+0
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+0 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+\right\}
+\end{align*}
+Which are independent, therefore dim $V=3$\\
+Finally combining the above two set of basis we know that for $\mathbb{R}^4$ only four basis are enough and note that the second basis of $U$ is a linear combination of the first and second basis of $V$ and the first of $U$:
+\[
+\begin{pmatrix}
+1\\
+-1\\
+0\\
+-2
+\end{pmatrix}
+=
+2
+\begin{pmatrix}
+0 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+-
+2
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+1 \\
+\end{pmatrix}
+-
+\begin{pmatrix}
+-3 \\
+1 \\
+2 \\
+0 \\
+\end{pmatrix}
+\]
+,deleting it it's easy to verify that
+\begin{align*}
+V + U= {\rm span}\left\{
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+1 \\
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+0 \\
+1 \\
+0 \\
+0
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+0 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+-3 \\
+1 \\
+2 \\
+0 \\
+\end{pmatrix}
+\right\}
+\end{align*}\\[0.5 em]
+(ii) By Gram-Schmidt procedure, we have:
+\begin{align*}
+U= &{\rm span}\left\{
+\begin{pmatrix}
+-\frac{3}{\sqrt{14}} \\
+\frac{1}{\sqrt{14}} \\
+\sqrt{\frac{2}{7}} \\
+0 \\
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+\frac{1}{\sqrt{238}} \\
+-\frac{5}{\sqrt{238}} \\
+2\sqrt{\frac{2}{119}} \\
+\sqrt{\frac{14}{17}}
+\end{pmatrix}
+\right\}
+\end{align*}
+
+\begin{align*}
+V= &{\rm span}\left\{
+\begin{pmatrix}
+\frac{1}{\sqrt{2}} \\
+0\\
+0\\
+\frac{1}{\sqrt{2}}
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+0 \\
+1 \\
+0 \\
+0
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+0 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+\right\}\\
+U+V= &{\rm span}\left\{
+\begin{pmatrix}
+\frac{1}{\sqrt{2}} \\
+0\\
+0\\
+\frac{1}{\sqrt{2}}
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+0 \\
+1 \\
+0 \\
+0
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+0 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+\frac{1}{\sqrt{2}} \\
+0\\
+0\\
+-\frac{1}{\sqrt{2}}
+\end{pmatrix}
+\right\}
+\end{align*}
+(iii) Notice, that in the equation form, the coefficient represents the vector orthogonal to the element in the set. By reading of the coefficient we can directly get the basis:
+\begin{align*}
+&U^{\perp}= {\rm span}\left\{
+\begin{pmatrix}
+1 \\
+1 \\
+1 \\
+0 \\
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+1 \\
+3 \\
+0 \\
+-1
+\end{pmatrix}
+\right\}\\
+&V^{\perp}= {\rm span}\left\{
+\begin{pmatrix}
+1 \\
+0\\
+0\\
+-1
+\end{pmatrix}
+\right\}\\
+&(U+V)^{\perp}=\{0\}
+\end{align*}
+\\[1em]
+{\bf Exercise 2}\\
+{\it Proof:}\\
+(i) Notice that $|\overline{x_n}y_n|=|x_n||y_n|\leq|x_n|^2+|y_n|^2$ and by comparison test the series convergent absolutely.\\[0.5 em]
+(ii) (self-positivity) $ \dotp xx=\sum_{n=0}^{\infty}{|x_n|}^2\geq0$ and $\dotp xx=0\iff x_n=0$ for all $n$\\
+(conjugate symmetric) $ \dotp xy=\sum_{n=0}^{\infty}{\overline{x_n}y_n}=\sum_{n=0}^{\infty}{\overline{x_n\overline{y_n}}}=\overline{\sum_{n=0}^{\infty}{\overline{y_n}x_n}}=\overline{\dotp yx}$\\
+(linearity) $\dotp x{ay+bw}=\sum_{n=0}^{\infty}\overline{x_n}(ay_n+bw_n)=a\sum_{n=0}^{\infty}\overline{x_n}y_n+b\sum_{n=0}^{\infty}\overline{x_n}w_n=a\dotp xy+b\dotp xw$ where $a,b\in\mathbb{F}$
+\\[1em]
+{\bf Exercise 3}\\
+{\it Proof:}\\
+(i) Consider $\forall b\in V$ with $b=\ss i n {\lam}_ib_i$ basis expansion.\\
+Then for an $n$-tuple $\vec \mu$ if:
+\begin{align*}
+&\ss j n \mu_jb_j^{*}(b)=0\\
+\end{align*}
+We may pick $b=b_i$ then the above reduce to $\mu_i=0$ for all $i$'s. Thereby the $b_1^*,\ldots,b_n^*$ are linearly independent in $V^*$.\\[0.5 em]
+(ii) First notice that $\ss i n \mu_ib_i^*\in V^*$, span$\vec {b^*}\subseteq V^*$. On the other hand, for an $ \forall b^*\in V^*$ we set $\mu_i=b^*(b_i)$, then for $ \forall b=\sum_{i=1}^n\lam_ib_i \in V$
+\begin{align*}
+b^*(b)=\sum_{i=1}^{n}\lam_ib^*(b_i)
+&=\sum_{i=1}^{n}\lam_i\mu_i
+=\sum_{i=1}^{n}\lam_i\sum_{j=1}^n\mu_jb_j^*(b_i)\\
+&=\sum_{j=1}^n\sum_{i=1}^n\lam_i\mu_jb_j^*(b_i)=\sum_{j=1}^n\mu_jb_j^*\left(\sum_{i=1}^n\lam_ib_i\right)\\
+&=\sum_{j=1}^n\mu_jb_j^*(b)=\left(\sum_{j=1}^n\mu_jb_j^*\right)(b)
+\end{align*}
+which means $b^*\in$ span$\vec {b^*}$, i.e. $V^*\subseteq$~span~$\vec {b^*}$. Combing the two gives us span$\vec {b^*}=V^*$. By the definition we see that since $\mathcal{B}^*$ is an independent set, it's a basis for $V^*$.\\[0.5 em]
+(iii) Since they have the same dimension, they are isomorphic.\\[0.5 em]
+(iv) The functional of $\mathbb{R}^2$ takes the form:
+\[
+\begin{pmatrix}
+a&b
+\end{pmatrix}
+\qquad a,b\in\mathbb{R}
+\]
+and by satisfying the question we find that 
+\begin{align*}
+\mathcal{B}_1^*&=\left\{\begin{pmatrix}1&0\end{pmatrix},\begin{pmatrix}0&1\end{pmatrix}\right\}\\
+\mathcal{B}_2^*&=\left\{\begin{pmatrix}2&-1\end{pmatrix},\begin{pmatrix}-1&1\end{pmatrix}\right\}
+\end{align*}\\[1 em]
+{\bf Exercise 4}\\
+{\it Proof:}~\\
+(i) By Exercise 3 (i), (ii) we only have to show:
+\[
+\pi^k(x^j)=\begin{cases} 1 &\mbox{if } k= j \\ 
+0 & \mbox{if } k \neq j. \end{cases} 
+\]
+which is true since
+\[
+\pi^k(x^j)=\left.\frac{1}{k!}\frac{ d^{k}}{ dx^k}x^j \right|_{x=0} 
+\].\\[0.5em]
+(ii) Note the map
+\[
+\int_{-1}^{1}x^k dx=\frac{1}{k+1}\left(1-(-1)^{k+1}\right)
+\]
+since 
+\[
+\pi^k:b_kx^k\mapsto b_k, b_k\in\mathbb{R}
+\]
+Given any $p\in\mathcal{P}_n$ we see that
+\[
+\int_{-1}^{1}p(x) dx=\sum_{k=0}^{n}\frac{1}{k+1}\left(1-(-1)^{k+1}\right)\pi^k(p)
+\]
+Therefore we have, symbolically, 
+\[
+\alpha=\int_{-1}^{1}=\sum_{k=0}^{n}\frac{1}{k+1}\left(1-(-1)^{k+1}\right)\pi^k
+\in\mathcal{P}^*_n
+\]\\[0.5 em]
+(iii) Note by  (ii)
+\[
+\lam_k=\frac{1}{k+1}\left(1-(-1)^{k+1}\right)
+\]\\[1 em]
+{\bf Exercise 5}\\
+{\it Proof:}\\
+(i) 
+\begin{align*}
+&{\|x+y\|}^2=\dotp {x+y}{x+y}=\dotp{x}{x}+2\dotp{x}{y}+\dotp{y}{y}\\
+&{\|x-y\|}^2=\dotp {x-y}{x-y}=\dotp{x}{x}-2\dotp{x}{y}+\dotp{y}{y}
+\end{align*}
+Subtracting the second from the first we get the desired 
+\[
+\dotp{x}{y}_{\mathbb{R}}=\frac{1}{4}({\|x+y\|}^2-{\|x-y\|}^2)
+\]\\[0.5 em]
+(ii)\begin{align*}
+&{\|x+y\|}^2=\dotp {x+y}{x+y}=\dotp{x}{x}+\dotp{x}{y}+\overline{\dotp{x}{y}}+\dotp{y}{y}\\
+&{\|x-y\|}^2=\dotp {x-y}{x-y}=\dotp{x}{x}-\dotp{x}{y}-\overline{\dotp{x}{y}}+\dotp{y}{y}\\
+&{\|x+iy\|}^2=\dotp {x+y}{x+y}=\dotp{x}{x}+i\dotp{x}{y}+i\overline{\dotp{x}{y}}+\dotp{y}{y}\\
+&{\|x-iy\|}^2=\dotp {x-y}{x-y}=\dotp{x}{x}-i\dotp{x}{y}-i\overline{\dotp{x}{y}}+\dotp{y}{y}\\
+\end{align*}
+Since
+\begin{align*}
+&\dotp{x}{y}+\overline{\dotp{x}{y}}=2\Re\dotp{x}{y}\\
+&i\dotp{x}{y}+i\overline{\dotp{x}{y}}=-2\Im\dotp{x}{y}
+\end{align*}
+We may plug in the above equations into
+\[
+\dotp{x}{y}_{\mathbb{C}}=\Re\dotp{x}{y}+i\Im\dotp{x}{y}
+\]
+to get
+\[
+\dotp{x}{y}_{\mathbb{C}}=\frac{1}{4}({\|x+y\|}^2-{\|x-y\|}^2)+\frac{i}{4}({\|x-iy\|}^2-{\|x+iy\|}^2)
+\]\\[0.5 em]
+(iii) Consider 
+\begin{align*}
+{\|x+y\|}^2=\dotp{x}{x}+2\Re\dotp{x}{y}+\dotp{y}{y}\\
+{\|x-y\|}^2=\dotp{x}{x}-2\Re\dotp{x}{y}+\dotp{y}{y}\\
+{\|x\|}^2=\dotp{x}{x};\qquad{\|y\|}^2=\dotp{y}{y}
+\end{align*}
+to obtain 
+\[
+{\|x+y\|}^2+{\|x-y\|}^2=2({\|x\|}^2+{\|y\|}^2)
+\]
+for one simple example to consider:
+\[
+x=(5,2);\quad y=(5,3)
+\]
+and we have 
+\[
+{\|x+y\|}_{\infty}^2+{\|x-y\|}_{\infty}^2=100+1=101\neq2(25+25)=2({\|x\|}_{\infty}^2+{\|y\|}_{\infty}^2)
+\]
+thus $\|\cdot\|_{\infty}$ is not induced by any inner product.\\[1 em]
+\es6
+(i)  (self-positivity) $\dotp{f}{f}=\int_{-1}^1f^2\ge0$. If $\int_{-1}^1f^2=0$ then $f=0$ everywhere in $[-1,1]$ since for $f$ is continuous, then $f^2$ is continuous, a non-vanishing point $f^2(x_0)=c>0$ implies that $\exists\delta>0$, $\forall x'\in N_{\delta}(x)$ such that $|f^2(x')-c|<c/2$ which results that $\int_{-1}^1f^2\ge\delta c/2>0$\\
+(conjugate symmetric) For real-valued inner product $\dotp{f}{g}=\int_{-1}^1fg=\int_{-1}^1gf=\dotp{g}{f}$\\
+(linearity) $\dotp{f}{ag+bh}=\int_{-1}^1f(ag+bh)=a\int_{-1}^1fg+b\int_{-1}^1fh=a\dotp{f}{g}+b\dotp{f}{h}$ for all $f,g,h\in C[-1,1]$ and $a,b\in\mathbb{R}$\\[0.5 em]
+(ii) Using the fact that $\dotp{x^j}{x^k}=0$ whenever $k+j$ is odd, we proceed as Gram-Schmidt Orthonormalization:
+\begin{align*}
+&p_0=\frac{1}{\sqrt{2}}\\
+&p_1=\sqrt{\frac{3}{2}}x\\
+&p_2=\sqrt{\frac{45}{8}}(x^2-\frac{1}{3})\\
+&p_3=\sqrt{\frac{175}{8}}(x^3-\frac{3}{5}x)\\
+&p_4=\frac{3}{\sqrt{128}}(35x^4-30x^2+3)
+\end{align*}
+(iii) Using projection onto the unit vectors, noting that $f$ itself is even function:
+\begin{align*}
+&\dotp{f}{p_0}=2\int_{0}^{1}\frac{1}{\sqrt2}(1-x)\,dx=\frac{\sqrt{2}}{2}\\
+&\dotp{f}{p_1}=0\\
+&\dotp{f}{p_2}=2\sqrt{\frac{45}{8}}\int_{0}^{1}(x^2-\frac{1}{3})(1-x)\,dx=-\sqrt{\frac{5}{32}}\\
+&\dotp{f}{p_3}=0\\
+&\dotp{f}{p_4}=2\sqrt{\frac{9}{128}}\int_{0}^{1}(35x^4-30x^2+3)(1-x)\,dx=\frac{\sqrt2}{16}\\
+\end{align*}
+And one may write down $g(x)$ explicitly that 
+\[
+g(x)=\frac{105}{128}x^{4}-\frac{105}{64}x^{2}+\frac{113}{128}
+\]
+See the plot in the attachment (a).
+(iv)
+\begin{align*}
+\dotp{\cos{n\pi x}}{\sin{n\pi x}}=
+&\int_{-1}^{1}\cos{m\pi x}\sin{n\pi x}\, dx=\left.-\frac{1}{\pi}\cos m\pi x \cos n\pi x\right |_{-1}^1-\frac{m}{n}\int_{-1}^{1}\cos{n\pi x}\sin{m\pi x}\, dx\\
+&=\frac{1}{n\pi}{(-1)}^{m+n+1}-\frac{m}{n}\left(\frac{1}{m\pi}{(-1)}^{m+n+1}-\frac{n}{m}\int_{-1}^{1}\cos{m\pi x}\sin{n\pi x}\, dx\right)
+\end{align*}
+Which simplifies into
+\[
+0=(n-m)\dotp{\cos{n\pi x}}{\sin{n\pi x}}
+\]
+Now, if $n\neq m$ the above equations gives $\dotp{\cos{n\pi x}}{\sin{n\pi x}}=0$, and when $n=m$ this reduces to
+\[
+\int_{-1}^{1}\cos{n\pi x}\sin{n\pi x}\, dx=\frac{1}{2}\int_{-1}^{1}\sin{2n\pi x}\, dx=0
+\]
+since it's and odd function.\\
+And for $\dotp{\cos{n\pi x}}{\cos{m\pi x}}$ and $\dotp{\sin{n\pi x}}{\sin{m\pi x}}$
+\begin{align*}
+\int_{-1}^{1}\cos{m\pi x}\cos{n\pi x}\, dx=-\frac{1}{n\pi}\sin{n\pi x}\cos{m\pi x}+\frac{m}{n}\int_{-1}^{1}\sin{m\pi x}\sin{n\pi x}\, dx\\
+\int_{-1}^{1}\sin{m\pi x}\sin{n\pi x}\, dx=-\frac{1}{n\pi}\cos{n\pi x}\sin{m\pi x}+\frac{m}{n}\int_{-1}^{1}\cos{m\pi x}\cos{n\pi x}\, dx
+\end{align*}
+Reduces to
+\begin{align*}
+\dotp{\cos{n\pi x}}{\cos{m\pi x}}=\frac{m^2}{n^2}\dotp{\cos{n\pi x}}{\cos{m\pi x}}\\
+\dotp{\sin{n\pi x}}{\sin{m\pi x}}=\frac{n^2}{m^2}\dotp{\sin{n\pi x}}{\sin{m\pi x}}
+\end{align*}
+Therefore both of them is $0$ whenever $m\neq n$\\
+Finally notice that 
+\begin{align*}
+{\|\sin{n\pi x}\|}^2&=\int_{-1}^1\sin^2{n\pi x}\,dx=1\\
+{\|\cos{n\pi x}\|}^2&=\int_{-1}^11-\sin^2{n\pi x}\,dx=1\\
+{\|1\|}^2&=2
+\end{align*}
+And the only thing to norm is 
+\[
+\hat{1}=\frac{1}{{\|1\|}}=\frac{1}{\sqrt2}
+\]\\[0.5 em]
+(v) Again, since $f$ is even, we only have to consider
+\[
+\dotp{f}{\cos n\pi x}=2\int_{-1}^1(1-x)\cos{n\pi x}\,dx=\frac{2}{n^2{\pi}^2}(1-{(-1)}^n)
+\]
+and
+\[
+\dotp{f}{\frac{1}{\sqrt2}}=\int_{-1}^1(1-x)\frac{1}{\sqrt2}\,dx=\frac{\sqrt2}{2}
+\]
+Thus we have
+\[
+g(x)=\frac{\sqrt2}{2}\frac{1}{\sqrt{2}}+\sum_{n=1}^{10}\frac{2}{n^2{\pi}^2}(1-{(-1)}^n)\cos {n\pi x}=\frac{1}{2}+\sum_{n=1}^{5}\frac{4}{{(2n-1)}^2{\pi}^2}\cos {(2n-1)\pi x}
+\]
+See the plot in the attachment (b).
+
+\end{document}

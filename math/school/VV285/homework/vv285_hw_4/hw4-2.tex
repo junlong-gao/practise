@@ -1,0 +1,501 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{amsmath} 
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{cases}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{gauss}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
+\usepackage{tkz-graph}
+\usetikzlibrary{arrows}
+% set arrows as stealth fighter jets
+\tikzset{>=stealth}
+\usepackage{bbold}
+
+
+\def\dotp#1#2{\langle#1,#2\rangle}
+\def\ss#1#2{\sum_{#1=1}^{#2}}
+\def\lam{\lambda}
+\def\vec#1#2{\{#1_1,#1_2\ldots#1_{#2}\}}
+\def\es#1#2{{\bf Exercise #1}\\~{\it Solution:}\\~#2\\[1em]}
+\def\ep#1#2{{\bf Exercise #1}\\~{\it Proof:}\\~#2\\[1em]}
+\def\inn#1#2{(#1): #2\\[0.5em]}
+\def\ff#1#2{\frac{#1}{#2}}
+\def\cgu#1{\overline{#1}}
+\def\ran#1{{\rm ran}\,#1}
+\def\ker#1{{\rm ker}\,#1}
+\def\tr#1{{\rm tr}\left(#1\right)}
+\def\dotr#1#2{\dotp{#1}{#2}_{\rm tr}}
+\def\lr#1#2#3{\left#1#3\right#2}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\mm}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\def\sg{\sigma}
+\def\ct{\cos{\theta}}
+\def\st{\sin{\theta}}
+\def\sq#1{\sqrt{#1}}
+\newcommand{\B}{\mathcal{B}}
+
+\linespread{1.4}
+\geometry{a4paper,centering,scale=0.8}
+\rmfamily 
+\normalsize
+\setlength{\parindent}{0em}
+
+\begin{document} 
+\begin{flushleft}
+  Junlong Gao 5133709126\\ 
+  Prof.  Hohberger\\ 
+  VV285 Assignment 4\\
+  \today 
+\end{flushleft}
+
+\es{1}{
+	\inn{i}{
+	Notice the (2) in question implies that
+	\eq{
+	&u_1=z_{11}i_1+z_{12}i_2\\
+	&u_2=z_{21}i_1+z_{22}i_2
+	}
+	Setting $i_1=0$ gives that
+	\[
+	\ff{u_1}{i_2}=z_{12}
+	\]
+	Setting $i_2=0$ gives that
+	\[
+	\ff{u_2}{i_1}=z_{21}
+	\]
+	}
+	\inn{ii}{
+	By relation that 
+	\eq{
+	u_1=A_{11}u_2+A_{12}i_2\\
+	i_1=A_{21}u_2+A_{22}i_2
+	}
+	We may solve for the transformation:
+	\[
+	\mm{z_{11}&z_{12}\\z_{21}&z_{22}}=\mm{\ff{A_{11}}{A_{21}}&A_{12}-\ff{A_{11}A_{22}}{A_{21}}\\\ff{1}{A_{21}}&-\ff{A_{22}}{A_{21}}}
+	\]
+	Thus $\det A=1$ implies that 
+	\[
+	z_{12}=A_{12}-\ff{A_{11}A_{22}}{A_{21}}=\ff{A_{12}A_{21}-A_{11}A_{22}}{A_{21}}=\ff{-1}{A_{21}}=-z_{21}	
+	\] 
+	On the other hand, provided that $z_{12}=-z_{21}$ we have
+	\eq{
+	A_{12}-\ff{A_{11}A_{22}}{A_{21}}=-\ff{1}{A_{21}}\iff A_{12}A_{21}-A_{11}A_{22}=1 \iff \det A=1
+	}
+	\inn{iii}{
+	By Kirchhoff's laws we have currents and voltage equations:
+	\eq{
+	i_1=i_3+\frac{u_1}{R_1}\\
+	i_2=i_3-\frac{u_2}{R_2}\\
+	i_3R_3+u_2=u_1\\
+	}
+	By eliminating the $i_3$ we have:
+	\eq{
+	i_1=\frac{u_1-u_2}{R_3}+\frac{u_1}{R_1}\\
+	i_2=\frac{u_1-u_2}{R_3}-\frac{u_2}{R_2}\\
+	}
+	Solving $u_1$, $i_1$ in terms of $u_2$ and $i_2$ gives 
+	\eq{
+	&u_1=\frac{R_2+R_3}{R_2}u_2+R_3i_2\\
+	&i_1=\frac{R_1+R_2+R_3}{R_1R_2}u_2+\frac{R_1+R_3}{R_1}i_2
+	}
+	That is , the matrix $A$.
+	}
+	\inn{iv}{
+	Set $R_1=R_2=R$, we read off the entries of A:
+	\[
+	\ff{R_3R^2}{2R+R_3}=\ff{Z\sinh g}{\ff{1}{Z}\sinh g}\Longrightarrow Z=R\sq{\ff{R_3}{2R+R_3}}\quad(Z>0)
+	\]
+	Then by the first entry of $A$:
+	\[
+	\frac{R+R_3}{R}=\cosh g=\frac{e^g+e^{-g}}{2}
+	\]
+	Gives $g=\ln\left(1+\frac{R_3}{R}+\sqrt{\left(1+\frac{R_3}{R}\right)^2-1}\right)$ since $g\ge0$.
+	}
+	\inn{v}{
+	Notice that (6) is equivalent to
+	\eq{
+	&A\mm{u_2\\i_2}-\lam\mm{1&0\\0&1}\mm{u_2\\i_2}=0\\
+	&\iff \left(A-\mm{\lam&0\\0&\lam}\right)\mm{u_2\\i_2}=0
+	}
+	for non-trivial $\mm{u_2\\i_2}$.\\[0.7 em]
+	Thus, by the fundamental theorem of linear equation, we see that this happens if and only if the matrix
+	\[
+	A-\mm{\lam&0\\0&\lam}
+	\]
+	has a non-trivial kernel, that is, NOT invertible, which is equivalent to
+	\[
+	\det\left(A-\mm{\lam&0\\0&\lam}\right)=0.
+	\]
+	}
+	\inn{vi}{
+	\eq{
+	\det\left(A-\mm{\lam&0\\0&\lam}\right)=(\cosh g-\lambda)^2-\sinh^2 g=0
+	}
+	Use the identity 
+	\[
+	\cosh^2g-\sinh^2g=1
+	\]
+	We have 
+	\[
+	\lam^2-2\lam\cosh g+1=0
+	\]
+	giving us a pair of conjugate solutions:
+	\[
+	\lam_1=\cosh g+\sinh g;\quad\lam_2=\cosh g-\sinh g
+	\]
+	}
+	\inn{vii}{
+	By (6) we have
+	\eq{
+	&\cosh g \frac{u_2}{i_2}+Z\sinh g =\lambda \frac{u_2}{i_2}\\
+	&\frac{u_2}{i_2}\frac{1}{Z}\sinh g+\cosh g=\lambda
+	}
+	which gives the same solution (as it should be), and if we plug in $\lambda_1$ or $\lambda_2$ above:
+	\[
+	\frac{u_1}{i_1}=\frac{u_2}{i_2}=\frac{Z\sinh g}{\lambda-\cosh g}=\pm Z
+	\]
+	}
+	Let's take the positive solution and plug in the numbers:
+	\[
+	\frac{u_1}{i_1}=Z=R\sq{\ff{R_3}{2R+R_3}}=\sqrt{\frac{20}{21}}
+	\]
+	\inn{viii}{
+	Using the identity that:
+	\[
+	\cosh^2g+\sinh^2g=\cosh2g;\qquad2\sinh g\cosh g=\sinh2g
+	\]
+	By induction we arrive at:
+	\[
+	A^n=\mm{\cosh ng&Z\sinh ng\\ \ff{1}{Z}\sinh ng&\cosh ng}
+	\]
+	and the explicit form of the quotient of voltage and current:
+	\[
+	\ff{u_1}{i_1}=\ff{u_2+Zi_2\tanh ng}{\ff{1}{Z}u_2\tanh ng +i_2}
+	\]
+	and since
+	\[
+	\tanh ng=\ff{1-e^{-2ng}}{1+e^{-2ng}}\to 1\quad \hbox{\rm as}\, n\to \infty
+	\]
+	The quotient goes to:
+	\[
+	\lim_{n\to\infty}\ff{u_1(n)}{i_1(n)}=Z \ff{\ff{1}{Z}u_2+i_2}{\ff{1}{Z}u_2 +i_2}=Z
+	\]
+	}
+	}
+}
+\es{2}{
+Expanding by row we have:
+\[
+\det A=\frac{1}{43200},\qquad\det B=24
+\]
+}
+\es{3}{
+	\eq{
+	&\det\begin{pmatrix}
+	2&0&0&0&0&1\\
+	1&2&0&0&0&1\\
+	3&1&2&0&0&1\\
+	0&3&1&2&0&1\\
+	-5&0&3&1&2&1\\
+	1&1&1&1&1&1
+	\end{pmatrix}
+	=
+	32\det\begin{pmatrix}
+	1    &0    &0   &0   &0&1\\
+	1/2 &1    &0   &0   &0&1\\
+	3/2 &1/2 &1   &0   &0&1\\
+	0    &3/2    &1/2&1   &0&1\\
+	-5/2&0    &3/2   &1/2&1&1\\
+	1/2 &1/2 &1/2   &1/2&1/2&1
+	\end{pmatrix}\\
+	&
+	=16\det\begin{pmatrix}
+	1    &0    &0   &0   &0&1\\
+	1/2 &1    &0   &0   &0&1\\
+	3/2 &1/2 &1   &0   &0&1\\
+	0    &3/2    &1/2&1   &0&1\\
+	-5/2&0    &3/2   &1/2&1&1\\
+	1 &1 &1   &1 &1&2
+	\end{pmatrix}\\
+	&=16\det\begin{pmatrix}
+	1    &0    &0   &0   &0&0\\
+	1/2 &1    &0   &0   &0&0\\
+	3/2 &1/2 &1   &0   &0&0\\
+	0    &3/2    &1/2&1   &0&0\\
+	-5/2&0    &3/2   &1/2&1&0\\
+	1 &1 &1   &1 &1&-59/16
+	\end{pmatrix}\\
+	&=16\times\ff{-59}{16}=-59
+	}
+The last line follows that by expansion only the terms on diagonal survive.
+}
+\ep{4}{
+(i)$\Longrightarrow$(ii):
+Notice, that
+\eq{
+0&=f(a_1,\ldots,a_{j-1},a_j+a_k,a_{j+1},\ldots,a_k+a_j,a_{k+1},\ldots,a_p)\\
+&\quad=f(a_1,\ldots,a_{j-1},a_j,a_{j+1},\ldots,a_k,a_{k+1},\ldots,a_p)\\
+&\qquad+f(a_1,\ldots,a_{j-1},a_j,a_{j+1},\ldots,a_j,a_{k+1},\ldots,a_p)\\
+&\qquad+f(a_1,\ldots,a_{j-1},a_k,a_{j+1},\ldots,a_k,a_{k+1},\ldots,a_p)\\
+&\qquad+f(a_1,\ldots,a_{j-1},a_k,a_{j+1},\ldots,a_j,a_{k+1},\ldots,a_p)\\
+&\qquad=f(a_1,\ldots,a_{j-1},a_j,a_{j+1},\ldots,a_k,a_{k+1},\ldots,a_p)\\
+&\quad\qquad+f(a_1,\ldots,a_{j-1},a_k,a_{j+1},\ldots,a_j,a_{k+1},\ldots,a_p)
+}
+Thus 
+\eq{
+f(a_1,\ldots,a_{j-1},a_j,a_{j+1},\ldots,a_k,a_{k+1},\ldots,a_p)=-f(a_1,\ldots,a_{j-1},a_k,a_{j+1},\ldots,a_j,a_{k+1},\ldots,a_p)
+}
+(ii)$\Longrightarrow$(iii):
+Without the loss of generality, say $a_1=\sum_{i\neq1}^{n}\lam_ia_i$
+Then 
+\[
+f(a_1,\ldots,a_p)=\lam_2f(a_2,\ldots,a_p)+\lam_3f(a_3,\ldots,a_p)+\cdots+\lam_nf(a_n,\cdots,a_p)
+\]
+And each term in the right has the form by (ii)
+\[
+f(a_i,\cdots,a_i,\cdots,a_p)=-f(a_i,\cdots,a_i,\cdots,a_p)\Longrightarrow f(a_i,\cdots,a_i,\cdots,a_p)=0
+\]
+Thereby $f(a_1,\ldots,a_p)=0$\\
+(iii)$\Longrightarrow$(i): If $a_i=a_j$ for some $i\neq j$, then the collection $\{a_1,\cdots,a_n\}$ is linear dependent, thus $f(a_1,\ldots,a_p)=0$\\
+This completes the proof.
+}
+\ep{5}{
+\def\mat{Mat$(n\times n,\mathbb{R})$}
+\def\GL{GL$(n,\mathbb{R})$ }
+\def\SL{SL$(n,\mathbb{R})$ }
+\def\O{O$(n,\mathbb{R})$}
+\def\SO{SO$(n,\mathbb{R})$}
+\def\Sp{Sp$(n,\mathbb{R})$ }
+\def\1{\mathbb{1}}
+Consider $\forall A,B,C\in$ \GL, we have:\\
+a) ${\left(AB\right)}^{-1}=B^{-1}A^{-1}$ is invertible, thus it's closed under multiplication and inverse ( since the inverse of a matrix is invertible), and\\
+b) $(AB)C=A(BC)$ guaranteed by the association law of matrix multiplication.
+Thereby \GL forms a group.\\
+In order to verify a subgroup, one only have to show that it's closed under multiplication and inverse since the association law is guaranteed by the whole set:\\
+i): Consider $\forall A,B\in$ \SL, we have:\\
+ a) $\det{AB}=\det{A}\det{B}=1$, thus $AB\in$ \SL.\\
+ b) Since $A\in $\SL$\subset$\GL, we note that $A^{-1}$ exists and $\det{A^{-1}}=\det{A}=1$, thus $A^{-1}\in$ \SL.\\
+[0.5em]
+A small lemma:
+\[
+(A^{-1})^{T}=(A^T)^{-1}
+\]
+follows by the fact that
+\[
+(A^{-1})^{T}A^T=(AA^{-1})^T=I^T=I
+\]
+\\[0.5 em]
+ii): Consider $\forall A,B\in$ \O, we have:\\
+ a) ${(AB)}^{T}=B^TA^T=B^{-1}A^{-1}={(AB)}^{-1}$ (by the above lemma), thus $AB\in$ \O.\\
+ b) Since $A\in $\O$\subset$\GL, we note that $A^{-1}$ exists, and ${(A^{-1})}^{T}={(A^{T})}^{-1}={(A^{-1})}^{-1}$, thus $A^{-1}\in$ \O.\\
+[0.5em] iii): Consider $\forall A,B\in$ \SO, we have:\\
+ a) $\det{AB}=\det{A}\det{B}=1$, and ${(AB)}^{T}=B^TA^T=B^{-1}A^{-1}={(AB)}^{-1}$, thus $AB\in$ \SO.\\
+ b) Since $A\in $\SO$\subset$\GL, we note that $A^{-1}$ exists, and $\det{A^{-1}}=\det{A}=1$, and ${(A^{-1})}^{T}={(A^{T})}^{-1}={(A^{-1})}^{-1}$ thus $A^{-1}\in$ \SO.\\
+[0.5em] iv): Consider $\forall A,B\in$ \Sp, we have:\\
+ a) ${(AB)}^T=B^{T}A^{T}=$
+ \eq{
+ &\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}B^{-1}\begin{pmatrix}0&-\1\\ \1&0\end{pmatrix}\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}A^{-1}\begin{pmatrix}0&-\1\\ \1&0\end{pmatrix}
+ \\
+ =&\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}{(AB)}^{-1}\begin{pmatrix}0&-\1\\\1&0\end{pmatrix}
+ }
+ thus $AB\in$ \Sp.\\ 
+ b) Since $A\in $\Sp$\subset$\GL, we note that $A^{-1}$ exists and 
+ \[
+ {\left(A^{-1}\right)}^{T}={\left(A^{T}\right)}^{-1}={\begin{pmatrix}0&-\1\\\1&0\end{pmatrix}}^{-1}\left(A^{-1}\right)^{-1}{\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}}^{-1}=\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}{\left(A^{-1}\right)}^{-1}\begin{pmatrix}0&-\1\\\1&0\end{pmatrix}
+ \]
+thus $A^{-1}\in$ \Sp.\\[0.5 em]
+ \inn{i}{
+ 	Given $\forall a,b\in\mathbb{R}^2$, the spanned parallelogram is 
+	$P=\begin{pmatrix}a&b\end{pmatrix}$
+	with the area $|\det P\,|$.\\
+	Then the transformed parallelogram is $AP=\begin{pmatrix}Aa&Ab\end{pmatrix}$
+	with the area $|\det AP\,|=|\det A\,||\det P\,|=|\det P\,|$.
+ }
+ \inn{ii}{
+ 	A similar argument can be made that given $\forall a,b,c\in\mathbb{R}^3$, the spanned parallepiped is
+	$P=\begin{pmatrix}a&b&c\end{pmatrix}$
+	with the volume $|\det P\,|$.\\
+	Then the transformed parallelogram is $AP=\begin{pmatrix}Aa&Ab&Ac\end{pmatrix}$
+	with the volume $|\det AP\,|=|\det A\,||\det P\,|=|\det P\,|$.
+ }
+ \inn{iii}{
+ 	Notice that $AA^{T}=AA^{-1}=\mathbb{I}$ implies that the columns of $A$ is an orthonormal system (see exercise 6). Now, we have that:
+ 	\[
+ 	\|Ax\|=\dotp{Ax}{Ax}=\dotp{A^TAx}{x}=\dotp{A^{-1}Ax}{x}=\dotp{x}{x}=\|x\|
+ 	\]
+ 	Therefore:
+	\[
+	\cos\alpha\,(Ax,Ay)=\frac{\dotp{Ax}{Ay}}{\|Ax\|\|Ay\|}=\frac{\dotp{A^TAx}{y}}{\|x\|\|y\|}=\frac{\dotp{x}{y}}{{\|x\|\|y\|}}=\cos\alpha\,(x,y)
+	\]
+ }
+ }
+ \ep{6}{
+ 	\inn{i}{
+	(a)$\iff$(b): Let $A_j$ denote the $j$th column of the matrix $A\in$ \O, 
+	then the fact that $A^{-1}=A^{T}$ leads to:
+	\eq{
+	&A^{T}A=A^{-1}A=I\\
+	&\iff A_jA_i=\delta_{ij}\\
+	}
+	by the definition of matrix multiplication.\\
+	The last line is equivalent to that the column vectors of A are an orthonormal basis of $\mathbb{R}^n$
+	(a)$\iff$(c):
+	 Let $A_i$ denote the $i$th row of the matrix $A\in$ \O, 
+	then the fact that $A^{-1}=A^{T}$ leads to:
+	\eq{
+	&AA^{T}=AA^{-1}=I\\
+	&\iff A_jA_i=\delta_{ij}\\
+	}
+	by the definition of matrix multiplication.\\
+	The last line is equivalent to that the row vectors of A are an orthonormal basis of $\mathbb{R}^n$\\
+	This completes the proof.
+	}
+	\inn{ii}{
+	By (i) it's suffice to verify the columns are an orthonormal basis of $\mathbb{R}^n$. 
+	Let $A_j$ denote the $j$th column of the matrix, it takes on the form that 
+	\[
+	A_j=\mm{
+	\ff{1}{\sq{n}}\\
+	0\\
+	\vdots\\
+	-\ff{j-1}{\sq{j(j-1)}}\\
+	\ff{1}{\sq{(j+1)j}}\\
+	\vdots\\
+	\ff{1}{\sq{n(n-1)}}
+	}
+	\]
+	The second none zero entry appears at the $j$th row, unless when $j=1$ it takes on the form in question.
+	}
+	Then we have, without the loss of generality, $i<j$:
+	\eq{
+	\dotp{A_i}{A_j}&=\ff{1}{n}+0-\ff{j-1}{j(j-1)}+\ff{1}{j(j+1)}	+\cdots+\ff{1}{n(n-1)}\\
+			      &\quad=\ff{1}{n}-\ff{1}{j}+\ff{1}{j}-\ff{1}{j+1}	+\cdots+\ff{1}{n-1}-\ff{1}{n}=0
+	}
+	And
+	\eq{
+	\dotp{A_j}{A_j}&=\ff{1}{n}+0+\ff{(j-1)^2}{j(j-1)}+\ff{1}{j(j+1)}	+\cdots+\ff{1}{n(n-1)}\\
+			      &\quad=\ff{1}{n}+1-\ff{1}{j}+\ff{1}{j}-\ff{1}{j+1}	+\cdots+\ff{1}{n-1}-\ff{1}{n}=1
+	}
+	Therefore
+	\[
+	\dotp{A_i}{A_j}=\delta_{ij}
+	\]
+	showing that the the columns of $A$ are an orthonormal basis of $\mathbb{R}^n$. \\
+	This completes the proof.
+ }
+\es{7}{
+	a): \eq{
+	&\qquad\quad \left.\begin{gmatrix}
+			   0 & 1 & -4 \\
+			   1 &2 & -1 \\
+			   1 & 1 & 2
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 1 \\
+	 1 \\
+	 1
+	\rowops
+	\swap 01
+	\end{gmatrix}
+	 &&\sim\quad
+	\left.\begin{gmatrix}
+			   1& 1 & 2 \\
+			   1 &2 & -1 \\
+			   0 & 1 & -4
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 1 \\
+	 1 \\
+	 1
+	\rowops
+	\add[\cdot (-1)]01
+	\end{gmatrix} \\[0.5em]
+	&\qquad\quad \left.\begin{gmatrix}
+			   1& 1 & 2 \\
+			   0 &1 & -3 \\
+			   0 & 1 & -4
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 1 \\
+	 0 \\
+	 1
+	\rowops
+	\add[\cdot (-1)]12
+	\end{gmatrix}
+	 &&\sim\quad
+	\left.\begin{gmatrix}
+			   1& 1 & 2 \\
+			   0 &1 & -3 \\
+			   0 & 0 & -1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 1 \\
+	 0 \\
+	 1
+	\rowops
+	\mult2{-1}
+	\end{gmatrix} \\[0.5 em]
+	&\qquad\quad \left.\begin{gmatrix}
+			   1& 1 & 2 \\
+			   0 &1 & -3 \\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 1 \\
+	 0 \\
+	 -1
+	\rowops
+	\add[\cdot 3]21
+	\add[\cdot (-2)]20
+	\end{gmatrix}
+	 &&\sim\quad
+	\left.\begin{gmatrix}
+			   1& 1 & 0 \\
+			   0 &1 & 0 \\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 3 \\
+	 -3 \\
+	 -1
+	\rowops
+	\add[\cdot (-1)]10
+	\end{gmatrix} \\[0.5 em]
+	&\qquad\quad \left.\begin{gmatrix}
+			   1& 0 & 0 \\
+			   0 &1 & 0\\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 6 \\
+	 -3 \\
+	 -1
+	\rowops
+	\end{gmatrix}
+	}
+	We may read off the solution $x_1=6$, $x_2=-3$, $x_3=-1$.\\
+	b): By Cramer's rule we have:
+	\eq{
+	&x_1=\ff{1}{\det A}\det{\mm{1&1&-4\\1&2&-2\\1&1&2}}=6\\
+	&x_2=\ff{1}{\det A}\det{\mm{0&1&-4\\1&1&-2\\1&1&2}}=-3\\
+	&x_3=\ff{1}{\det A}\det{\mm{0&1&1\\1&2&1\\1&1&1}}=-1\\
+	}
+	c) Finally, by the transformation in a), the elementary matrix is
+	\[
+	A^{-1}=S=\mm{5&-6&7\\-3&4&-4\\-1&1&-1}
+	\]
+	Acting upon $b$ gives us
+	\[
+	x=Sb=\mm{6\\-3\\-1}
+	\]
+}
+\end{document} 

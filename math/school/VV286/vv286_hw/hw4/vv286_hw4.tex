@@ -1,0 +1,161 @@
+\input mla
+\begin{document}
+\titlehm{4}
+
+
+\begin{vv286_ms}{1}
+\item[(i)]
+	We look at the resulting function:
+	\eq
+	{
+	H\phi=\left( -\ff{d^2}{dx^2}+x^2 \right)e^{-x^2/2}p(x)=e^{-x^2/2}\left(
+	-p''+2xp'+p \right)\in V
+	}
+	provided
+	\eq
+	{
+	\phi=e^{-x^2/2}p(x)\in V
+	}
+	thus it's well-defined.
+\item[(ii)]
+	We consider $f,g\in V$:
+	\eq{
+	\dotp{Hf}{g}&=\int_{-\infty}^{+\infty}\left( -\ff{d^2}{dx^2}+x^2
+	\right)f\,g\\
+	&=\int_{-\infty}^{+\infty} x^2fg-\int_{-\infty}^{+\infty}\left(\ff{d^2}{dx^2}f\right)g\\
+	&=\int_{-\infty}^{+\infty}
+	x^2fg-f'g\Big|_{-\infty}^{+\infty}+\int f'g'\\
+	&=\int_{-\infty}^{+\infty} x^2fg+\int_{-\infty}^{+\infty} f'g'\quad\text{since $f'g=e^{-x^2}p(x)$}\\
+	&=\dotp{f}{Hg}
+	}
+	where we used the integration by parts and the
+	decay:$e^{-x^2}<{n!}/{x^{2n}}$ for sufficiently large
+	$n$ thus term $f'g\Big|_{-\infty}^{+\infty}=e^{-x^2}p(x)$ vanishes, where $p$ is only a polynomial in $x$ of finite order.\\
+	This shows that $H$ is self-adjoint (symmetry).
+\item[(iii)]
+	By direct calculation:
+	\eq{
+	HAf&=\left( -\ff{d^2}{dx^2}+x^2 \right)\left(
+	-\ff{d}{dx}f+fx
+	\right)\\
+	&=\phi'''-(x+2)\phi'-x\phi''+\phi x^3
+	}
+	and
+	\eq{
+	AHf=\phi'''-2x\phi-\phi'x^2-x\phi''+x^3\phi
+	}
+	thus combining the two:
+	\eq{
+	\left[ H,\,A \right]=-2f'+2xf=2Af
+	}
+	This completes the proof.
+\item[(iv)]
+	By (iii), we see that:
+	\eq
+	{
+	HAf=2Af+AHf=2Af+A\lam f=(2+\lam)(Af)
+	}
+	provided that $f$ is an eigenfunction $Hf=\lam f$.
+\item[(v)]
+	\eq
+	{
+	H_0=1,\quad H_1=2x,\quad H_2=4x^2-2
+	}
+	see attachment for the graphs.
+\item[(vi)]
+	Again, direct calculations:
+	\eq
+	{
+	H\left( e^{-x^2/2}\right)=\left( -\ff{d^2}{dx^2}+x^2
+	\right)e^{-x^2/2}=e^{-x^2/2}\left( 1-x^2
+	\right)+x^2e^{-x^2/2}=e^{-x^2/2}
+	}
+	and
+	\eq
+	{
+	\ff{d}{dx}fe^{-x^2/2}=e^{-x^2/2}\left( (-x)f+f'
+	\right)\implies Af=e^{x^2/2}\left( -\ff{d}{dx}
+	\right)\left( e^{-x^2/2}f \right)
+	}
+	Then it follows by induction that:
+	\eq
+	{
+	H\left(\psi_0\right)=e^{-x^2/2}H_0=e^{-x^2/2}=\psi_0
+	}
+	and from (iv) it's suffice to show that 
+	\eq
+	{
+	\psi_{n+1}=A\psi_n
+	}
+	which is true by:
+	\eq
+	{
+	A\psi_{n}&=\e^{x^2/2}\left( -\ff{d}{dx} \right)\left[ e^{-x^2}H_n \right]\\
+	&=e^{x^2/2}\left( -\ff{x}{dx} \right)\left[ (-1)^n\ff{d^n}{dx^n}\left( e^{-x^2} \right)
+	\right]\\
+	&=e^{-x^2/2}H_{n+1}\\
+	&=\psi_{n+1}
+	}
+	then it follows from induction hypnosis and (iv):
+	\eq
+	{
+	H\psi_{n+1}=HA\psi_n=\left( \lam_{n}+2 \right)A\psi_n=\lam_{n+1}\psi_{n+1}
+	}
+	which completes the proof.
+\item[(vii)]
+	By now we define  $D=\ff{d}{dx}$ operator and the convention $D^n=\left( \ff{d^n}{dx^n}
+	\right)$:
+	\eq
+	{
+	H_{n+1}&=(-1)^{n+1}{e^{x^2}}D^{n+1}\left( e^{-x^2} \right)\\
+	&=(-1)^{n+1}e^{x^2}D\left( D^ne^{-x^2} \right)\\
+	&=(-1)^{n+1}e^{x^2}D\left( H_n(-1)^ne^{-x^2} \right)\\
+	&=-e^{x^2}\left( H_ne^{-x^2}(-2x)+e^{-x^2}H_n \right)\\
+	&=2xH_n-DH_n\numberthis{2}
+	}
+	Now we consider the induction:
+	\eq
+	{
+	H_1'=2=2\times1\,H_0,\quad H_2'=8x=2\times2\,H_1
+	}
+	and
+	\eq{
+	H_{n+1}'&=D(2x-D)H_n\\
+	&=D\left(2xH_n\right)-D^2H_n\\
+	&=\left( H_n+2nxH_{n-1} \right)-2n(2n-2)H_{n-2}\quad&\text{ by induction hypnosis}\\
+	&=2H_n+2n\left( 2xH_{n-1}-(2n-2)H_{n-2} \right)\\
+	&=2H_n+2n(2x-D)H_{n-1}\quad&\text{ by induction hypnosis}\\
+	&=2H_n+2nH_n\hbox{\eqref{2}}\\
+	&=\left( 2+2n \right)H_n
+	}
+	and this completes the proof.
+\item[(viii)]
+	Notice that $\dotp{\psi_n}{\psi_n}=\int_{\R}e^{-x^2}H^2_n$, now we consider
+	\eq
+	{
+	H_{n-1}H_{n+1}&=\left( 2xH_n-2nH_{n-1}\right)H_{n-1}\byeq{2}\\
+	H_nH_n&=\left( 2xH_{n-1}-2(n-1)H_{n-2} \right)H_n\byeq{2}\\
+	}
+	multiply both sides by $e^{-x^2}$ and integrate over $\R$:
+	\eq
+	{
+	\dotp{\psi_{n-1}}{\psi_{n+1}}&=\int2e^{-x^2}xH_nH_{n-1}-2n\dotp{\psi_{n-1}}{\psi_{n-1}}=0\quad&\text{By (ii)
+	the orthogonality}\\
+	\dotp{\psi_n}{\psi_n}&=\int2e^{-x^2}xH_nH_{n-1}-2(n-1)\dotp{\psi_n}{\psi_{n-2}}\quad&\text{By (ii)
+	the orthogonality}
+	}
+	comparing the above two and notice $\dotp{\psi_n}{\psi_{n-2}}=0$ we obtain:
+	\eq
+	{
+	\dotp{\psi_n}{\psi_n}=2n\dotp{\psi_{n-1}}{\psi_{n-1}}
+	}
+	keep unfolding we get
+	\eq
+	{
+	\dotp{\psi_n}{\psi_n}=2^nn!\dotp{\psi_0}{\psi_0}=2^nn!\sq{\pi}
+	}
+	as desired.
+\end{vv286_ms}
+
+\end{document}
+	

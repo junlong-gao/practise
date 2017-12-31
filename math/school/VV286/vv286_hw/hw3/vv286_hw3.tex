@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage{mlahw}
+\begin{document}
+\titlehm{3}
+\begin{vv286_ms}{1}
+\item[(a)]
+	\[
+	y=\ff{3}{2}-c\ff{1}{x^2},
+	\quad
+	c\in\R
+	\]
+\item[(b)]
+	\[
+	y=\ff{4x+5}{1+8cx+10c}-\ff{3}{2},
+	\quad
+	c\in\R
+	\quad
+	\text{or}
+	\quad
+	y=-\ff{3}{2}
+	\]
+\item[(c)]
+	\[
+	y=-\ff{-\cos2x}{2x}e^{-x}+\ff{c}{x}e^{-x},
+	\quad
+	c\in\R
+	\]
+\item[(d)]
+	\[
+	-xy^2+e^y\left( y^2-2y+2 \right)=\rm c
+	\quad
+	c\in\R
+	\]
+\item[(e)]
+	\[
+	y\sin x=\ff{\sin x}{\cos x}+c,
+	\quad
+	c\in\R
+	\]
+\item[(f)]
+	\[
+	y=\ff{x+1}{x-1}(x+c),
+	\quad
+	c\in\R
+	\]
+\item[(g)]
+	\[
+	y+\ff{1}{2}\sin2(x+y)=x+c,
+	\quad
+	c\in\R
+	\]
+\item[(h)]
+	\[
+	\ff{x^2}{2}e^t+xe^{2t}=\rm c
+	\quad
+	c\in\R
+	\]
+\item[(i)]
+	\[
+	x+y=c(x-y)^2
+	\quad
+	c\in\R
+	\quad
+	\text{or}
+	\quad
+	y=x
+	\]
+\item[(j)]
+	\[
+	y=-\ln(ce^{-x}-e^{5-x}x),
+	\quad
+	c\in\R
+	\]
+\item[(k)]
+	\[
+	y+\sq{y^2+x^2}=cx^2
+	\quad
+	c\in\R
+	\]	
+\item[(l)]
+	\[
+	(y-1)e^y+e^{-x}+\ff{1}{3}e^{-3}=c,
+	\quad
+	c\in\R
+	\]
+\item[(m)]
+	\[
+	y=\ff{ce^x-x^2}{1+x}-3,
+	\quad
+	c\in\R
+	\]
+\item[(n)]
+	\[
+	\sq{x^2+y^2}e^{\arctan y/x}=c,
+	\quad
+	c\in\R
+	\]
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{2}
+\item[(i)]
+	Let the incoming light interest the $x$-axis at point
+	$D$, the tangent line interest the $x$-axis at point
+	$E$, then by geometry we see that $\angle OPD=2\ta$,
+	and by parallel line theorem we see that $\phi=\angle
+	OPD=2\ta$.\\
+	Also, $\tan\ta=\tan\angle OPD={x}/{y}$, and we look
+	at the right triangle $\triangle PED$ we see that
+	${dy}/{dx}=$\rm the slope of the
+	line$=\tan(\pi/2-\ta)$.
+\item[(ii)]
+	It's just the inverse function theorem:
+	\eq{
+	\ff{dx}{dy}=\ff{1}{\ff{dy}{dx}}
+	=\ff{1}{\tan{\pi/2-\ta}}=\tan\ta
+	}
+\item[(iii)]
+	We use the identity in (i) and (ii):
+	\eq
+	{
+	\ff{x}{y}=\tan2\ta=\ff{2\tan\ta}{1-\tan^2\ta},
+	\quad
+	\tan\ta=\ff{dx}{dy}
+	}
+	we rearrange:
+	\eq
+	{
+	xx'^2+2yx'=x
+	}
+	where the prime is understood as taking derivative
+	with respect to $y$, as desired.
+\item[(iv)]
+	By setting $w=x^2$ we obtain:
+	\eq
+	{
+	\ff{w'^2}{4}+yw'=w
+	}
+	and set $w'=p$ we solve for:
+	\eq
+	{
+	y=-\ff{p}{2},\quad w=-\ff{p^2}{4}
+	}
+	which yields no real solution.\\
+	Yet the envelope solution gives:
+	\eq
+	{
+	w=cy+\ff{c^2}{4},\quad c\in\R
+	}
+	substitute $x$ back we obtain:
+	\eq
+	{
+	x^2=cy+\ff{c^2}{4},\quad c\in\R
+	}
+\item[(v)]
+	Indeed, we use {\it paraboloid } mirror and {\it
+	parabola} curve to focus the parallel light to a
+	single point.
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{3}
+\item[(i)]
+	\eq
+	{
+	&y_0=0,\,y_1=\ff{x^3}{3},\quad y_2=\ff{x^3}{3}+\ff{x^7}{63}\\
+	&y_3=\ff{x^{15}}{59535}+2\ff{x^{11}}{2079}+\ff{x^7}{67}+\ff{x^3}{3}\\
+	&y_4=\ff{x^{31}}{109876902975}+\ff{4x^{27}}{3341878155}+\ff{662x^{23}}{10438212015}
+	\\&\quad\quad+\ff{82x^{19}}{37328445}+\ff{13x^{15}}{218295}+\ff{2x^{11}}{2079}+\ff{x^7}{63}+\ff{x^3}{3}
+	}
+\item[(ii)]
+	See attachments.
+\end{vv286_ms}
+
+
+\end{document}
+
+

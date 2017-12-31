@@ -1,0 +1,247 @@
+\input mla
+\begin{document}
+\begin{vv286}{11}
+  \begin{vv286_ms}{1}
+  \item[(i)]
+    We proceed as noting that:
+    \begin{align*}
+      &p_0=1, &   &     &  &     &  &p_k=0\quad (k\ge1)\\
+      &q_0=-v^2, & &q_1=0,& &q_2=1,& &q_k=0\quad (k\ge3)
+    \end{align*}
+    and we have:
+    \begin{align*}
+      F(r)=r(r-1)+r-v^2\implies r_1=v\quad r_2=-v
+    \end{align*}
+    \begin{align*}
+      -a_1F(r+1)&=(q_1+(r+0)p_1)a_0=0\\
+      -a_mF(r+m)&=a_{m-2}\quad m\ge2\\ 
+    \end{align*}
+    since $F(v+1)$ doesn't vanish, we know $a_1=0$ and $a_0$ can
+    be chosen at will.\\
+    Setting $a_0=2^{-v}\Gamma^{-1}(1+v)$ we have:
+    \begin{align*}
+      a_{2n}&=\ff{(-1)^n}{(2n+2v)(2n+2v-2)\cdots(2+2v)\, 2n(2n-2)\cdots
+      2}a_0\\
+      &=2^{-2n}\frac{1}{n!\Gamma(1+v+n)}
+    \end{align*}
+    Thus one desired solution is:
+    \begin{align*}
+      J_v(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{n!\Gamma(1+n+v)}\left(
+      \frac{x}{2} \right)^{2n+v}
+      \numberthis{1}
+    \end{align*}
+  \item[(ii)]
+    Notice that if
+    \begin{align*}
+      -v+m=v+n\iff 2v=m-n, \quad m, n\in\mathbb{N}
+    \end{align*}
+  Therefore we will get another independent solution if we
+  proceed as above whenever $2v\notin\mathbb{N} $. If $0<v<1$, the
+  factors are all positive and we invoke again gamma function as
+  above be setting $a_0=2^{v}\Gamma^{-1}(1-v)$:
+  \begin{align*}
+      J_v(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{n!\Gamma(1+n-v)}\left(
+      \frac{x}{2} \right)^{2n-v}
+      \numberthis{2}
+    \end{align*}
+    Finally since the relation $\Gamma(z)=\Gamma(z+1)/z$ allow us to
+    have an analytic continuation to define $\Gamma(1-v)$,
+    $v\notin\N$, the solution remains the same form.
+  \item[(iii)]
+    Since $1/\Gamma(1+k-n)=0$ for $k=0,1\ldots n-1$, we rewrite
+    \eqref{2} as:
+    \begin{align*}
+      J_{-n}(x)&=\sum_{k=0}^{\infty}\frac{(-1)^{k+n}}{(n+k)!\Gamma(1+k+n-n)}\left(
+      \frac{x}{2} \right)^{2(n+k)-n}\\
+      &=(-1)^{-n}\sum_{k=0}^{\infty}\frac{(-1)^{k}}{k!(k+1)(k+2)\cdots(k+n)k!}\left(
+      \frac{x}{2} \right)^{2k+n}\\
+      &=(-1)^{-n}\sum_{k=0}^{\infty}\frac{(-1)^{k}}{k!\Gamma(1+k+n)}\left(
+      \frac{x}{2} \right)^{2k+n}\\
+      &=(-1)^nJ_n(x)
+    \end{align*}
+    It's instructive to write out the explicit formula for
+    integer order:
+    \begin{align*}
+      J_n(z)=\left( \frac{z}{2} \right)^2\left[
+      \frac{1}{0!n!}-\frac{1}{1!(n+1)!}\left(
+      \frac{z}{2} \right)^2+\frac{1}{2!(n+2)!}\left(
+      \frac{z}{2}
+      \right)^2\cdots \right]
+    \end{align*}
+  \item[(iv)]
+    We formally manipulate the it by consider the
+    substation: $y_2(x)=u(x)J_v(x)$, plugging it into the
+    original differential equation we have:
+    \begin{align*}
+      u''(xJ)+u'(2J'x+J)=0
+    \end{align*}
+    This formally gives
+    \begin{align*}
+     \ln u'=-(2\ln J+\ln x)\implies u'=\frac{1}{J^2x}\implies
+      u=\int\frac{dx}{J^2x}
+    \end{align*}
+    and the second solution is therefore:
+    \begin{align*}
+      y_2(x)=J_v(x)\int\frac{dx}{J^2_v(x)\cdot x}
+    \end{align*}
+  \end{vv286_ms}
+  \begin{vv286_ms}{2}
+  \item[]
+    We use the result from exercise 1, the series method yields two independent solution:
+    \begin{align*}
+      J_{3/2}^{(1)}(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{n!\Gamma(1+n+3/2)}\left( \frac{x}{2} \right)^{2n+v}\end{align*}
+We use property:
+\eq
+{
+\Gamma(x+1)=x\Gamma(x)
+}
+to get:
+\eq
+{
+  \Gamma(n+1+\frac{3}{2})=\left( n+\frac{3}{2}
+ \right)\left( n+\frac{1}{2}
+ \right)\cdots\left( \frac{1}{2} \right)\Gamma\left( \frac{1}{2} \right)=\frac{(2n+3)!!}{2^{n+2}}
+}
+and we have:
+\eq
+{
+  \frac{(-1)^n}{n!\Gamma(1+n+v)}\left( \frac{x}{2} \right)^{2n+v}&=\frac{(-1)^n2^{n+2}}{n!(2n+3)!!}\frac{x^{2n+3}}{2^{2n}}x^{-3/2}2^{-3/2}\Gamma(\frac{1}{2})
+  \\
+  &=C_1\left((-1)^n \frac{2n+3-1}{(2n+3)!}x^{2n+3}
+ \right)x^{-2/3}
+ \\
+ &=C_1\left(  \frac{(-1)^n}{(2n+2)!}x^{2n+2}x-\frac{(-1)^{n+1}}{(2n+3)!}x^{2(n+1)+1}\right)
+ }
+ this eventually leads to:
+ \eq
+ {
+   J_{3/2}^{(1)}(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{n!\Gamma(1+n+3/2)}\left( \frac{x}{2} \right)^{2n+3/2}=\left( x^{-3/2}\sin x-x^{-1/2}\cos x  \right)C_1
+ }
+ A similar method will give us the closed form of the second independent solution:
+     \begin{align*} 
+       J_{3/2}^{(2)}(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{n!\Gamma(1+n-3/2)}\left( \frac{x}{2} \right)^{2n-3/2}=\left(x^{-3/2}\cos  +x^{-1/2}\sin x
+  \right)C_2
+\end{align*}
+  \end{vv286_ms}
+  \begin{vv286_ms}{3}
+  \item[(i)]
+    We note that:
+    \eq
+    {
+      \frac{du}{dt}=\frac{du}{dx}\frac{dx}{dt}=\left[ -\frac{1}{2}x^{-3/2}+y'x^{-1/2} \right]\frac{dx}{dt}
+    }
+    and
+    \eq
+    {
+      \frac{d^2u}{dt^2}=\left[ -\frac{1}{2}\frac{d}{dx}\left( x^{-2}y \right)+\left( \frac{d}{dx}y'x^{-1} \right) \right]\frac{dx}{dt}
+    }
+    by chain rule. Next we see:
+    \eq
+    {
+      \frac{dx}{dt}=\frac{1}{\frac{dt}{dx}}=x^{-1/2}
+    }
+    therefore, we simplify:
+    \eq
+    {
+      t^2\frac{du}{dt}&=\frac{4}{9}x^{-1/2}y-\frac{2}{3}y'x^{1/2}+\frac{4}{9}y''x^{3/2}\\
+      &=-\frac{2}{3}y'x^{1/2}+\frac{4}{9}x^{3/2}\left( y''+x^{-2}y \right)\\
+      &=-\frac{2}{3}y'x^{1/2}+\frac{4}{9}x^{-1/2}y-\frac{4}{9}x^{5/2}y
+    }
+    where we used $y''=-xy$.\\
+    Also:
+    \eq
+    {
+      t\frac{du}{dt}=-\frac{1}{3}x^{-1/2}y+\frac{2}{3}y'x^{1/2}
+    }
+    then:
+    \eq
+    {
+      t^2u''+tu' =x^{-1/2}y\left( \frac{1}{9}-\frac{4}{9}x^3 \right)=u(\frac{1}{9}-t^2)
+    }
+    This amounts to
+    \begin{align*}
+      t^2u''+tu'+(t^2-\frac{1}{9})u=0
+    \end{align*}
+  \item[(ii)]
+  Again this follows from the Bessel function theory that:
+  \eq
+  {
+  u^{(1)}=c_1J_{1/3}\quad u^{(2)}=c_2J_{-1/3}
+  }
+  since
+  \eq
+  {
+  u(t)=x^{-1/2}y(x)
+  }
+  we have:
+    \begin{align*}
+      y(x)=c_1\sqrt{x}J_{1/3}(\frac{2}{3}x^{3/2})+c_2\sqrt{x}J_{-1/3}(\frac{2}{3}x^{3/2})
+    \end{align*}
+  \end{vv286_ms}
+  \begin{vv286_mp}{4}
+  \item[(i)]
+    Integrate by parts:
+    \begin{align*}
+      I(m, n)&=\int_{0}^{\pi}\cos ^{2m}\ta \sin ^{2n}\ta\, d\ta\\
+      &=\cos ^{2m-1}\ta \sin ^{2n+1}\ta \Big|_{0}^{\pi}
+      \\
+      &\quad\quad+(2m-1)\int_0^{\pi}\cos ^{2m-2} \sin ^{2n+2}\ta\, d\ta 
+      -2n\int_0^{\pi}\cos ^{2m}\ta \sin ^{2n}\ta\, d\ta
+      \\
+      \implies&I(m, n)=\frac{2m-1}{2n+1}I(m-1,
+      n+1)=\frac{(2m-1)(2m-3)\cdots1}{(2n+1)(2n+3)\cdots(2n+2m-1)}I(0,
+      m+n)
+    \end{align*}
+    and the $I(0, m+n)$ is the Wallis product:
+    \begin{align*}
+      I(0, m+n)=\frac{(2n+2m-1)!!}{(2n+2m)!!}\pi
+    \end{align*}
+    finally, the formal manipulation:
+    \begin{align*}
+      &\frac{(2m-1)(2m-3)\cdots1}{(2n+1)(2n+3)\cdots(2n+2m-1)}
+      \frac{(2n+2m-1)!!}{(2n+2m)!!}\\
+      \quad&=\frac{(2m-1)!!(2n-1)!!}{(m+n)2^{n+m}}\\
+      \quad&=\frac{(2m)!}{2^{2m}m!}\frac{(2n)!}{2^{2n}n!}\frac{\pi}{(n+m)!}
+    \end{align*}
+  \item[(ii)]
+    The expansion has the radius of convergence of infinity,
+    thus by interchanging the order:
+    \begin{align*}
+      J_n(x)&=\frac{(2x)^n
+      n!}{\pi(2n)!}\int_0^{\pi}\cos (x\cos\ta)\sin ^{2n}\ta\, d\ta\\
+      &=\frac{(2x)^n
+      n!}{\pi(2n)!}\int_0^{\pi}\sum_{k=0}^{\infty}\frac{(-1)^k}{(2k)!}x^{2k}\cos ^{2k}\ta
+      \sin ^{2n}\ta\, d\ta\\
+      &=\sum_{k=0}^{\infty}\frac{(-1)^k}{(2k)!}\frac{(2x)^n
+      n!}{\pi(2n)!}\frac{(2k)!}{2^{2k}k!}\frac{(2n)!}{2^{2n}n!}\frac{\pi}{(n+k)!}x^{2k}\\
+      &=\sum_{k=0}^{\infty}\frac{(-1)^k}{k!(k+n)
+      !}\left( \frac{x}{2} \right)^{2k+n}
+    \end{align*}
+    as desired.
+  \item[(iii)]
+    Notice that:
+    \begin{align*}
+      \int_0^{\pi}\sin (xcos\ta)\sin ^{2n}\ta\,
+      d\ta&=\int_{-\pi}^0\sin (xcos(\ta+\pi))\sin ^{2n}(\ta+\pi)\,
+      d\ta\\
+      &=-\int_{-\pi}^{0}\sin (xcos\ta)\sin ^{2n}\ta\, d\ta
+      \quad\text{Set $\ta\to-\ta$}\\
+      &=\int_{\pi}^{0}\sin (xcos\ta)\sin ^{2n}\ta\, d\ta
+    \end{align*}
+    Thus it's zero. And we add this zero term:
+    \begin{align*}
+      \cos (x\cos \ta)+i\sin (x\cos \ta)=e^{i(x\cos \ta)}
+    \end{align*}
+    to obtain the result.
+  \item[(iv)]
+    \begin{align*}
+      J_n(x)&=\frac{(2x)^n
+      n!}{\pi(2n)!}\int_0^{\pi}\cos (x\cos \ta)\sin ^{2n}\ta\, d\ta\\
+      &=\frac{(2x)^n
+      n!}{\pi(2n)!}\int_{1}^{-1}e^{ix\xi}(1-\xi^2)^n\frac{1}{(-\sin \ta)}\, d\xi\\
+      &=\frac{(2x)^n
+      n!}{\pi(2n)!}\int_{-1}^{1}e^{ix\xi}(1-\xi^2)^{n-1/2}\,d\xi
+    \end{align*}
+  \end{vv286_mp}    
+\end{vv286}
+\end{document}

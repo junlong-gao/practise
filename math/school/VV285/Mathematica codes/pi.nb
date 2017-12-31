@@ -1,0 +1,444 @@
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[         0,          0]
+NotebookDataLength[     14661,        443]
+NotebookOptionsPosition[     13307,        396]
+NotebookOutlinePosition[     13666,        412]
+CellTagsIndexPosition[     13623,        409]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"q", "=", "20"}], ";", 
+  RowBox[{"p", "=", "6"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"x", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     SqrtBox["2"], ",", 
+     RowBox[{"2", "\[Times]", 
+      RowBox[{"10", "^", "p"}]}]}], "]"}]}], ";", 
+  RowBox[{"y", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RadicalBox["2", "4"], ",", 
+     RowBox[{"2", "\[Times]", 
+      RowBox[{"10", "^", "p"}]}]}], "]"}]}], ";", 
+  RowBox[{"z", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{
+      SqrtBox["2"], "+", "2"}], ",", 
+     RowBox[{"2", "\[Times]", 
+      RowBox[{"10", "^", "p"}]}]}], "]"}]}], ";", 
+  RowBox[{"d", "=", "2"}], ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6088132183891363`*^9, 3.60881321852424*^9}, {
+   3.6088132600200653`*^9, 3.6088132601078157`*^9}, {3.6088133728292217`*^9, 
+   3.6088133794571466`*^9}, {3.608813429266768*^9, 3.608813430096266*^9}, {
+   3.608813578962018*^9, 3.608813579846877*^9}, {3.608813933185783*^9, 
+   3.6088139449825773`*^9}, {3.608814066785705*^9, 3.608814251004087*^9}, {
+   3.608814433961191*^9, 3.608814507930859*^9}, {3.6088145466386127`*^9, 
+   3.608814752034418*^9}, {3.608814850187902*^9, 3.608814869311459*^9}, {
+   3.608814967554294*^9, 3.608814971710313*^9}, {3.6088150046118193`*^9, 
+   3.608815058915142*^9}, {3.608815102781577*^9, 3.6088151325204697`*^9}, {
+   3.608815341470128*^9, 3.608815364241062*^9}, {3.608815586200411*^9, 
+   3.608815599761722*^9}, 3.60881648154731*^9, {3.608816863174008*^9, 
+   3.608816866902686*^9}, {3.608817143797134*^9, 3.6088171439151573`*^9}, {
+   3.608817187922278*^9, 3.608817192497383*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"For", "[", 
+  RowBox[{
+   RowBox[{"i", "=", "0"}], ",", 
+   RowBox[{"i", "<", "q"}], ",", 
+   RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x", "=", 
+     RowBox[{
+      FractionBox["1", "2"], 
+      RowBox[{"(", 
+       RowBox[{
+        SqrtBox["x"], "+", 
+        FractionBox["1", 
+         SqrtBox["x"]]}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"z", "=", 
+     RowBox[{"z", "\[Times]", 
+      FractionBox[
+       RowBox[{"x", "+", "1"}], 
+       RowBox[{"y", "+", "1"}]]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "i", ",", "\"\<th iteration\>\"", " ", ",", 
+      "\"\< The zero digits of y: \>\"", ",", 
+      RowBox[{"Floor", "[", 
+       RowBox[{"-", 
+        RowBox[{"Log10", "[", 
+         RowBox[{"N", "[", 
+          RowBox[{
+           RowBox[{"y", "-", "1"}], ",", 
+           RowBox[{"2", "*", 
+            RowBox[{"10", "^", "p"}]}]}], "]"}], "]"}]}], "]"}], ",", 
+      "\"\< and the precision: \>\"", " ", ",", 
+      RowBox[{"Floor", "[", 
+       RowBox[{"-", 
+        RowBox[{"Log10", "[", 
+         RowBox[{"N", "[", 
+          RowBox[{
+           RowBox[{"z", "-", "\[Pi]"}], ",", 
+           RowBox[{"2", "*", 
+            RowBox[{"10", "^", "p"}]}]}], "]"}], "]"}]}], "]"}]}], "]"}], ";",
+     "\[IndentingNewLine]", 
+    RowBox[{"d", "=", 
+     RowBox[{"d", "*", "2"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"y", "=", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"y", 
+        SqrtBox["x"]}], "+", 
+       FractionBox["1", 
+        SqrtBox["x"]]}], 
+      RowBox[{"y", "+", "1"}]]}], ";"}]}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.608816255867423*^9, 3.6088163426573677`*^9}, {
+   3.6088169259355516`*^9, 3.6088171051428823`*^9}, 3.6088171553154097`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "0", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "0", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "2"}],
+  SequenceForm[
+  0, "th iteration", " The zero digits of y: ", 0, " and the precision: ", 2],
+  
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817213392293*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "8"}],
+  SequenceForm[
+  1, "th iteration", " The zero digits of y: ", 3, " and the precision: ", 8],
+  
+  Editable->False]], "Print",
+ CellChangeTimes->{3.60881723219846*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "8", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "18"}],
+  SequenceForm[
+  2, "th iteration", " The zero digits of y: ", 8, " and the precision: ", 18],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6088172508058043`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "18", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "40"}],
+  SequenceForm[
+  3, "th iteration", " The zero digits of y: ", 18, " and the precision: ", 
+   40],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817268898415*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "40", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "83"}],
+  SequenceForm[
+  4, "th iteration", " The zero digits of y: ", 40, " and the precision: ", 
+   83],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817287408415*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "5", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "83", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "170"}],
+  SequenceForm[
+  5, "th iteration", " The zero digits of y: ", 83, " and the precision: ", 
+   170],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817305856965*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "6", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "170", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "344"}],
+  SequenceForm[
+  6, "th iteration", " The zero digits of y: ", 170, " and the precision: ", 
+   344],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817323806486*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "345", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "693"}],
+  SequenceForm[
+  7, "th iteration", " The zero digits of y: ", 345, " and the precision: ", 
+   693],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.60881734211252*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "8", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "694", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "1392"}],
+  SequenceForm[
+  8, "th iteration", " The zero digits of y: ", 694, " and the precision: ", 
+   1392],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817360291903*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "9", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "1392", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "2789"}],
+  SequenceForm[
+  9, "th iteration", " The zero digits of y: ", 1392, " and the precision: ", 
+   2789],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817378555831*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "10", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "2789", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "5582"}],
+  SequenceForm[
+  10, "th iteration", " The zero digits of y: ", 2789, " and the precision: ",
+    5582],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817396864972*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "11", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "5583", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "11171"}],
+  SequenceForm[
+  11, "th iteration", " The zero digits of y: ", 5583, " and the precision: ",
+    11171],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817414830577*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "12", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "11171", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "22347"}],
+  SequenceForm[
+  12, "th iteration", " The zero digits of y: ", 11171, 
+   " and the precision: ", 22347],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817433014179*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "13", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "22348", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "44701"}],
+  SequenceForm[
+  13, "th iteration", " The zero digits of y: ", 22348, 
+   " and the precision: ", 44701],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817450896978*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "14", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "44701", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "89409"}],
+  SequenceForm[
+  14, "th iteration", " The zero digits of y: ", 44701, 
+   " and the precision: ", 89409],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817468891807*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "15", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "89409", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "178824"}],
+  SequenceForm[
+  15, "th iteration", " The zero digits of y: ", 89409, 
+   " and the precision: ", 178824],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817486130941*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "16", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "178824", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "357655"}],
+  SequenceForm[
+  16, "th iteration", " The zero digits of y: ", 178824, 
+   " and the precision: ", 357655],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817501258141*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "17", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "357655", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "715318"}],
+  SequenceForm[
+  17, "th iteration", " The zero digits of y: ", 357655, 
+   " and the precision: ", 715318],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817513816217*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "18", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "715318", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "1430644"}],
+  SequenceForm[
+  18, "th iteration", " The zero digits of y: ", 715318, 
+   " and the precision: ", 1430644],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6088175212178173`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "19", "\[InvisibleSpace]", "\<\"th iteration\"\>", 
+   "\[InvisibleSpace]", "\<\" The zero digits of y: \"\>", 
+   "\[InvisibleSpace]", "1430644", 
+   "\[InvisibleSpace]", "\<\" and the precision: \"\>", "\[InvisibleSpace]", 
+   "Indeterminate"}],
+  SequenceForm[
+  19, "th iteration", " The zero digits of y: ", 1430644, 
+   " and the precision: ", Indeterminate],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.608817523518682*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6088164679746523`*^9, 3.608816469641716*^9}}]
+},
+WindowSize->{908, 877},
+WindowMargins->{{-1817, Automatic}, {Automatic, 30}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[400, 13, 1654, 37, 77, "Input"],
+Cell[CellGroupData[{
+Cell[2079, 54, 1841, 54, 281, "Input"],
+Cell[CellGroupData[{
+Cell[3945, 112, 445, 12, 22, "Print"],
+Cell[4393, 126, 444, 12, 22, "Print"],
+Cell[4840, 140, 446, 11, 22, "Print"],
+Cell[5289, 153, 450, 12, 22, "Print"],
+Cell[5742, 167, 450, 12, 22, "Print"],
+Cell[6195, 181, 452, 12, 22, "Print"],
+Cell[6650, 195, 454, 12, 22, "Print"],
+Cell[7107, 209, 453, 12, 22, "Print"],
+Cell[7563, 223, 456, 12, 22, "Print"],
+Cell[8022, 237, 458, 12, 22, "Print"],
+Cell[8483, 251, 460, 12, 22, "Print"],
+Cell[8946, 265, 462, 12, 22, "Print"],
+Cell[9411, 279, 464, 12, 22, "Print"],
+Cell[9878, 293, 464, 12, 22, "Print"],
+Cell[10345, 307, 464, 12, 22, "Print"],
+Cell[10812, 321, 466, 12, 22, "Print"],
+Cell[11281, 335, 468, 12, 22, "Print"],
+Cell[11752, 349, 468, 12, 22, "Print"],
+Cell[12223, 363, 472, 12, 22, "Print"],
+Cell[12698, 377, 484, 12, 22, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[13209, 393, 94, 1, 28, InheritFromParent]
+}
+]
+*)
+

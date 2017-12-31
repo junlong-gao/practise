@@ -1,0 +1,902 @@
+\documentclass{report}
+\usepackage[sf,bf,it,raggedleft]{titlesec}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsmath}
+%\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+%\usepackage{gauss}
+%\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{multirow}
+%\usepackage{apacite}
+%\usepackage{cite}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+
+
+\usepackage{listings,xcolor}
+
+
+\def\dotp#1#2{\langle#1,#2\rangle}
+\def\ss#1#2{\sum_{#1=1}^{#2}}
+\def\lam{\lambda}
+\def\vec#1#2{\{#1_1,#1_2\ldots#1_{#2}\}}
+
+\def\es#1#2{{\bf Exercise #1}\\{\it Solution:}\begin{itemize}
+ \setlength{\itemsep}{2pt}
+ \setlength{\parskip}{0pt}
+ \setlength{\parsep}{0pt}
+ #2
+ \end{itemize}\vskip 1 em}
+ 
+\def\sgn{{\rm sgn}}
+\def\mat#1{{\rm Mat}(#1\times #1,\mathbb{R})}
+\def\GL{{\rm GL}(n,\mathbb{R}) }
+\def\SL{SL$(n,\mathbb{R})$ }
+\def\O{O$(n,\mathbb{R})$}
+\def\SO{SO$(n,\mathbb{R})$}
+\def\Sp{Sp$(n,\mathbb{R})$ }
+
+\def\ff#1#2{\frac{#1}{#2}}
+\def\cgu#1{\overline{#1}}
+\def\ran#1{{\rm ran}\,#1}
+\def\ker#1{{\rm ker}\,#1}
+\def\tr#1{{\rm tr}\left(#1\right)}
+\def\dotr#1#2{\dotp{#1}{#2}_{\rm tr}}
+\def\lr#1#2#3{\left#1#3\right#2}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\mm}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\def\sg{\sigma}
+\def\ct{\cos{\theta}}
+\def\st{\sin{\theta}}
+\def\sq#1{\sqrt{#1}}
+\newcommand{\B}{\mathcal{B}}
+
+
+\lstset{language=Mathematica}
+\lstset{basicstyle={\sffamily\footnotesize},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt,
+  breaklines=true,
+  captionpos={t},
+  frame={lines},
+  rulecolor=\color{black},
+  framerule=0.5pt,
+  columns=flexible,
+  tabsize=2
+}
+
+\geometry{a4paper,centering,scale=0.8}
+
+\title{The Remarkable Algorithm for Computing Pi}
+\author{Gao Junlong}
+\date{December 28, 2013}
+
+
+\bibliographystyle{plain}
+
+\begin{document}
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\centering % Center everything on the page
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\begin{center}
+\includegraphics[width=6 cm]{Title.jpg}
+\end{center}
+\begin{center}
+$\quad$
+\\[0cm]
+\end{center}
+\HRule \\[0.4cm]
+{ \large \bf  UM-JI JOINT INSTITUTE}\\[0.4cm]
+ {HONOR MATHEMATICS\\
+ Functions of Multiple Variables\\
+ (VV 285)}\\% Title of your document
+\HRule \\[2cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\begin{center}
+\Large \bf Term Project\\[0.8cm]
+\large \bf Project 3\\[0.8cm]
+\large \bf A Remarkable Algorithm for Computing Pi \\
+[5cm]
+\end{center}
+\begin{minipage}{0.8\textwidth}
+\begin{flushleft} 
+Name: $\quad$Gao Junlong\\
+\end{flushleft}
+\end{minipage}\\[0.8cm]
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+ % Date, change the \today to a set date if you want to be precise
+\begin{minipage}{0.8\textwidth}
+\begin{flushleft} 
+Date: $\qquad$December~28, 2013\\
+\end{flushleft}
+\end{minipage}
+\vfill % Fill the rest of the page with whitespace
+\end{center}
+
+
+
+
+\begin{abstract}
+This report introduces a remarkable algorithm for computing $\pi$ with extremely fast convergence rate by using only simple algebraical iteration procedure. The report first introduce an improvement on classical computation method using series, then heads on into the introduction of two elliptic integrals and Arithmetic-Geometric Mean procedure. After the ingredients are ready, the report presents the algorithm for $\pi$ with the proof for its correctness and convergence rate. The last part of the report contributes to the implementation of the algorithm on Mathematica\texttrademark.
+\end{abstract}
+\tableofcontents
+\eject
+%
+
+\chapter{Prologue}
+\setcounter{section}{0}
+\newtheorem{T}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{Co}{Corollary}[section]
+\theoremstyle{definition}
+\newtheorem{D}{Definition}[section]
+\newtheorem{algorithm}{Algorithm}[section]
+{\flushright
+	{\sffamily\slshape
+		O dear Ophelia!\\ 
+		I am ill at these numbers,\\ 
+		I have no art to reckon my groans.\smallskip\\
+		{\sffamily\upshape --- HAMLET (Act II, Scene 2, Line 120)}
+	}	
+\vskip 1.5in 
+}
+\section{Improvement on Leibniz series\hfill}
+One of the milestone of computing $\pi$ is the Leibniz series:
+\[
+\frac{\pi}{4}=\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}
+\]
+along with other identities, which provides a ``theoretical" way of computing $\pi$ but with very disappointing rate of convergence\cite{Borwein:1987aa}. A significant improvement is the {\it Machin's formula}:
+\begin{T}
+\[
+\frac{\pi}{4}=4\arctan\left(\frac{1}{5}\right)-\arctan\left(\frac{1}{239}\right)
+\]
+\end{T}
+\begin{proof}%\cite{Borwein:1987aa}
+In fact, one can show by  trigonometric identity that
+\[
+\tan2\theta=\frac{2\tan\theta}{1-\tan^2\theta}
+\]
+If we set $\theta=\arctan(1/5)$, by repeatedly using the above identity:
+\[
+\tan2\theta=\frac{2/5}{1-1/25}=\frac{5}{12};\qquad\tan4\theta=\frac{10/12}{1-25/144}=\frac{120}{119}
+\]
+And use another identity:
+\[
+\tan(4\theta-\frac{\pi}{4})=\frac{\tan4\theta-1}{\tan4\theta+1}=\frac{1}{239}
+\]
+Taking arctan on both sides we obtain:
+\[
+4\theta-\frac{\pi}{4}=\arctan\left(\frac{1}{239}\right)
+\]
+rearrange the equation and plug in$\theta=\arctan(1/5)$ we get the desired result.
+\end{proof}
+This formula, which is a significant improvement to the Leibniz's series, enabled Machin to calculate $\pi$ to the 100 digits in 1706, due to the fast convergence rate because of the well-picked $1/239$ \cite{Borwein:1987aa}. \medskip
+
+However, this modification,together with others,  although  greatly improved the computation at that time, was unmatched to the algorithm we will discuss in the following chapters. Loosely speaking, one iteration in the algorithm will double the precision after the decimal point\cite{Borwein:1987aa}. Amazingly, this remarkable algorithm is closely related to another seemly less related topic in the mathematical world,  something that has already achieved its glory in number theory.
+\eject
+
+
+
+
+\chapter{Fundamental Limit Theorem and Elliptic Integrals}
+{\flushright
+	{\sffamily\slshape
+		$\ldots$ Hoc itaque\\
+		 modo media nostra arithmetico-grometrica\\
+		  ad quantitates integrales\\
+		 revocata sunt, solutionemque particularem huiusce\\
+		  aequationis differentio-differentialis subministrant.\\
+		  \vskip 0.1 in
+		  [ $\ldots$ In this way\\
+		   our arithmetic-grometric quantities are integrals.\\
+		   they are, a particular solution of \\
+		   this given differential equation. ]\\
+		   \vskip 0.1 in
+		{\sffamily\upshape --- C. F.~GAUSS,~{\it Werke},~Vol.~3,~{\it Analysis}, pp.370,~1866.\cite{Wernicke:1904aa}}
+	}	
+\vskip 1.5in 
+}
+\section{The AGM Process\hfill}
+%
+Given two real number $a_0\ge b_0>0$, the following procedure:
+$$
+a_{n+1}=\frac{a_n+b_n}{2},\qquad b_{n+1}=\sqrt{a_nb_n}
+$$
+is called AGM process, and it can be shown that
+$$
+b_{n+1}\leq b_n\leq a_n\leq a_{n+1}
+$$
+and since $\sqrt{a_nb_n}>b_n$
+$$
+0\leq a_{n+1}-b_{n+1}=\frac{a_n+b_n}{2}-\sqrt{a_nb_n}\leq\frac{a_n+b_n}{2}-b_n\leq\frac{a_n-b_n}{2}
+$$
+we see that $a_n$ and $b_n$ goes to the same limit, which we call the {\it arithmetic-geometric mean} $M(a_0,b_0)$ \cite{Borwein:1987aa}.
+\eject
+\begin{D} For real $a\ge b>0$, $a_n$ and $b_n$ are obtained by the previous AGM procedure, then their {\it arithmetic-geometric mean} $M(a,b)$ is defined to be:
+$$
+M(a,b)=\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n
+$$
+\end{D}
+Furthermore, the $M(a,b)$ enjoys the following property from definition:
+\begin{align}
+\lambda M(a,b)=M(\lambda a,\lambda b);\\
+M(a,b)=M\left(\frac{a+b}{2},\sqrt{ab}\right)
+\end{align}
+Thus, we might as well set $a=1$ without losing generality \cite{Borwein:1987aa}\cite{Wernicke:1904aa}:
+\begin{align}
+M(1,k)=M\left(\frac{1+k}{2},\sqrt{k}\right)=\frac{1+k}{2}M\left(1,\frac{2\sqrt{k}}{1+k}\right)
+\label{eq:function relation}
+\end{align}
+Thus actually the AGM process defines a function over real positive numbers by transforming given $k$ into the limit of the process. Since the limit is unique, for each $k>0$, $M(1,k)$ is well-defined, and satisfy the above (\ref{eq:function relation}).
+\bigskip
+
+Unfortunately the relation (\ref{eq:function relation}) only gives limited information on the behavior of $M(1,k)$, we need a more analytical expression for $M(1,k)$, and here's the following theorem, which is central to the research of the field:
+\begin{T}{\rm(Fundamental Limit Formula)\cite{Borwein:1987aa}\cite{Wernicke:1904aa}}
+For real positive numbers $a,b$
+\begin{align}
+M(a,b)=\frac{1}{T(a,b)}
+\end{align}
+where
+\begin{align}
+T(a,b)=\frac{2}{\pi}\int_0^{\pi/2}\frac{d\theta}{\sqrt{a^2\cos^2\theta+b^2\sin^2\theta}}
+\end{align}
+\end{T}
+\begin{proof}\cite{Borwein:1987aa}
+ We start from $T(a,b)$ with $a,b>0$, and set $t:=b\tan\theta$:
+\begin{align*}
+T(a,b)&=\frac{2}{\pi}\int_0^{\pi/2}\frac{1}{\sqrt{(a^2-b^2)\frac{1}{1+t^2/b^2}+b^2}}\frac{dt}{1+t^2/b^2}\frac{1}{b} \\
+&=\frac{2}{\pi}\int_0^{+\infty}\frac{dt}{\sqrt{(a^2+t^2)(b^2+t^2)}}\\
+&=\frac{1}{\pi}\int_{-\infty}^{+\infty}\frac{dt}{\sqrt{(a^2+t^2)(b^2+t^2)}}
+\end{align*}
+Since the integrant is even function.
+Now use tricky substitution $u:=\frac{1}{2}(t-ab/t)$, which is one-on-one for $t$ to $u$ on each of $(0,+\infty)$, $(-\infty,0)$:
+\begin{align*}
+t&=u\pm\sqrt{u^2+ab}\\
+\frac{dt}{du}&=1\pm\frac{u}{\sqrt{u^2+ab}}=\frac{t}{\sqrt{u^2+ab}}
+\end{align*}
+Plug in we have:
+\begin{align*}
+T(a,b)&=\frac{1}{\pi}\left(\int_{0}^{+\infty}+\int_{-\infty}^{0}\right)\frac{dt}{\sqrt{a^2b^2+t^2(a^2+b^2)+t^4}}\\
+&=\frac{1}{\pi}\left(\int_{-\infty}^{+\infty}+\int_{-\infty}^{+\infty}\right)\frac{1}{\sqrt{a^2b^2+t^2(a^2+b^2)+t^4}}\frac{t}{\sqrt{u^2+ab}}du\\
+&=\frac{2}{\pi}\int_{-\infty}^{+\infty}\frac{du}{\sqrt{\left(t-ab/t\right)^2+2ab+a^2+b^2}\sqrt{u^2+ab}}\\
+&=\frac{2}{\pi}\int_{-\infty}^{+\infty}\frac{du}{\sqrt{4u^2+4\left(\frac{a+b}{2}\right)^2}\sqrt{u^2+(\sqrt{ab})^2}}\\
+&=\frac{1}{\pi}\int_{-\infty}^{+\infty}\frac{du}{\sqrt{u^2+\left(\frac{a+b}{2}\right)^2}\sqrt{u^2+(\sqrt{ab})^2}}
+\end{align*}
+This shows that 
+\[
+T(a,b)=T\left(\frac{a+b}{2},\sqrt{ab}\right)
+\]
+Now, this process can keep iterating to get $M(a,b)$ from $a,b$ , also noticing that $T(x,x)=\frac{1}{x}$ since it act as an arctan, we have:
+\[
+T(a,b)=T(M(a,b),M(a,b))=\frac{1}{M(a,b)}.
+\]
+\end{proof}
+
+\section{Elliptic Integral of Two Kinds\hfill}
+
+Interestingly, the integral of the previous section is of special importance in the field of mathematics: it is one of so-called ``Elliptic Integral''.
+Here, by formality, we introduce two kinds of complete elliptic integral:
+\begin{D}
+
+First kind\cite{Borwein:1987aa}:
+$$
+K(k):=\int_0^{\pi\over 2}\frac{d\theta}{\sqrt{1-k^2\sin^2\theta}}
+=\int_0^{1}\frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}
+$$
+with the change of variable $t=\sin\theta$.\\
+And second kind\cite{Borwein:1987aa}:
+$$
+E(k):=\int_0^{\pi\over 2}\sqrt{1-k^2\sin^2\theta}\,d\theta
+=\int_0^{1}\frac{\sqrt{1-k^2t^2}}{\sqrt{1-t^2}}\,dt
+$$
+with the change of variable $t=\sin\theta$.
+\end{D}
+\noindent It's worth to note that $E(0)=K(0)=\frac{\pi}{2}$. \medskip
+
+And we define complement and  complementary integral\cite{Borwein:1987aa}:
+\begin{D}
+The complement of number $k$ is:
+$$
+k':=\sqrt{1-k^2}\qquad |k|\leq 0
+$$
+The complementary integrals:
+$$
+K'(k):=K(\sqrt{1-k^2})=K(k');\qquad E'(k):=E(\sqrt{1-k^2})=E(k').
+$$
+\end{D}
+It's worth to note that $E(0)=K(0)=\frac{\pi}{2}$\bigskip
+
+From previous section, we immediately spot that $T(a,b)=\ff{2}{\pi}K'(b/a)$.
+Now, by a small corollary,  we can write $M(1,k)$ as\cite{Borwein:1987aa}:
+\begin{Co}\label{co:central}
+\[
+M(1,k)=\frac{\pi}{2K'(k)}
+\]
+\end{Co}
+%
+\bigskip
+
+In order to investigate further the relation between AGM and elliptic integrals, we now show that the two integrals have well-behaved analytical property by proving the following power series expansion:
+\begin{T}{\rm\cite{Borwein:1987aa}}
+The elliptic integral of two kinds in the previous definition have the following power series expansion:
+\begin{align}
+K(k)&=\frac{\pi}{2}\sum_{j=0}^{\infty}\left[\frac{(2j-1)!!}{(2j)!!}\right]^2k^{2j}\,; \qquad |k|<1.\\
+ E(k)&=\frac{\pi}{2}-\frac{\pi}{2}\sum_{i=1}^{\infty}\left[\frac{(2j-1)!!}{(2j)!!}\right]^2\frac{k^{2j}}{2j-1}.\,
+ \qquad |k|<1.
+\end{align}
+\end{T}
+\begin{proof}
+Within the radius of convergence, we can expand the root and integral term by term:
+\begin{align*}
+K(k)&=\int_0^{\pi\over 2}(1-k^2\sin^2\theta)^{-1/2}d\theta\\
+&=\int_0^{\pi\over 2}\sum_{j=0}^{\infty}{-1/2\choose j}(-1)^jk^{2j}\sin^{2j}\theta\,d\theta\\
+&=\sum_{j=0}^{\infty}{-1/2\choose j}(-1)^jk^{2j}\int_0^{\pi\over 2}\sin^{2j}\theta\,d\theta\\
+&=\sum_{j=0}^{\infty}\frac{(2j-1)!!}{(2j)!!}k^{2j}\frac{(2j-1)!!}{(2j)!!}\frac{\pi}{2}\,d\theta\\
+&=\frac{\pi}{2}\sum_{j=0}^{\infty}\left[\frac{(2j-1)!!}{(2j)!!}\right]^2k^{2j}\,; \qquad |k|<1.\\
+\end{align*}
+The last but two line uses the Wallis product and the fact that
+\begin{align*}
+{-1/2\choose j}&=\frac{-1/2(-1/2-1)\cdots(-1/2-j+1)}{j!}\\
+&\quad=(-1)^j \frac{1\cdot(1+2)\cdot(1+4)\cdots(1+2j-2)}{2^jj!}=(-1)^j\frac{(2j-1)!!}{(2j)!!}
+\end{align*}
+As for $E(k)$, the trick is similar:
+\begin{align*}
+E(k)&=\int_0^{\pi\over 2}\sqrt{1-k^2\sin^2\theta}\,d\theta\\
+&=\int_0^{\pi\over 2}\Big[1+\sum_{j=1}^{\infty}{1/2\choose j}(-1)^jk^{2j}\sin^{2j}\theta\Big]\,d\theta\\
+&=\frac{\pi}{2}+ \sum_{j=1}^{\infty}{1/2\choose j}(-1)^jk^{2j}\int_0^{\pi\over 2}\sin^{2j}\theta\,d\theta\\
+&=\frac{\pi}{2}+\sum_{j=1}^{\infty}\frac{(2j-3)!!}{(2j)!!}k^{2j}(-1)^{2j-1}\frac{(2j-1)!!}{(2j)!!}\frac{\pi}{2}\\
+&=\frac{\pi}{2}-\frac{\pi}{2}\sum_{j=1}^{\infty}\left[\frac{(2j-1)!!}{(2j)!!}\right]^2\frac{k^{2j}}{2j-1}
+\end{align*}
+Since one can verify that:
+\begin{align*}
+{1/2\choose j}&=\frac{1/2(1/2-1)\cdots(1/2-j+1)}{j!}\\
+&\quad=(-1)^{j-1} \frac{1\cdot(2-1)\cdot(4-1)\cdots(2j-1-2)}{2^jj!}=(-1)^{j-1}\frac{(2j-3)!!}{(2j)!!}
+\end{align*}
+\end{proof}
+Finally, we arrive at the important identity of the derivatives of the integrals:
+\begin{T}\label{thm:der} {\rm\cite{Borwein:1987aa}}The derivative relation:
+\begin{align}
+\frac{dE}{dk}&=\frac{E(k)-K(k)}{k}\\
+\frac{dK}{dk}&=\frac{E(k)-(k')^2K(k)}{k(k')^2}\label{eq:derivative relation}
+\end{align}
+\end{T}
+\begin{proof}
+The first one comes directly from the definition\cite{Borwein:1987aa}:
+\begin{align*}
+\frac{dE}{dk}&=\int_0^{\pi/2}\frac{\partial }{\partial k}\sqrt{1-k^2\sin^2\theta}\,d\theta\\
+&=\int_0^{\pi/2}\frac{-k\sin^2\theta}{\sqrt{1-k^2\sin^2\theta}}\,d\theta\\
+&=\int_0^{\pi/2}\frac{1}{k}\,\frac{1-k^2\sin^2\theta-1}{\sqrt{1-k^2\sin^2\theta}}\,d\theta\\
+&=\frac{1}{k}\int_0^{\pi/2}\sqrt{1-k^2\sin^2\theta}-\frac{1}{k}\int_0^{\pi/2}\frac{1}{\sqrt{1-k^2\sin^2\theta}}\\
+&=\frac{E(k)-K(k)}{k}
+\end{align*}
+The second one comes from the power expansion\cite{Borwein:1987aa}\cite{Wernicke:1904aa}. The first term 1 clearly agrees, for the rest of the terms, comparing $k^{2j}$ on each side of (\ref{eq:derivative relation}), we have to show that:
+\begin{align*}
+-\sum\left[\frac{(2j-1)!!}{(2j)!!}\right]^2\frac{k^{2j}}{2j-1}
+-(1-k^2)\sum\left[\frac{(2j-1)!!}{(2j)!!}\right]^2k^{2j}=(1-k^2)\sum\frac{(2j-1)!!}{(2j)!!}\frac{(2j-1)!!}{(2j-2)!!}k^{2j}
+\end{align*}
+Namely we have to show:
+\begin{align*}
+-\left[\frac{(2j-1)!!}{(2j)!!}\right]^2\frac{1}{2j-1}
+-\left[\frac{(2j-1)!!}{(2j)!!}\right]^2+\left[\frac{(2j-3)!!}{(2j-2)!!}\right]^2=\frac{(2j-1)!!}{(2j)!!}\frac{(2j-1)!!}{(2j-2)!!}-\frac{(2j-3)!!}{(2j-2)!!}\frac{(2j-3)!!}{(2j-4)!!}
+\end{align*}
+But the left hand side:
+\begin{align*}
+&-\left[\frac{(2j-1)!!}{(2j)!!}\right]^2\frac{1}{2j-1}
+-\left[\frac{(2j-1)!!}{(2j)!!}\right]^2+\left[\frac{(2j-3)!!}{(2j-2)!!}\right]^2\\
+&\quad=\left[\frac{(2j-1)!!}{(2j)!!}\right]^2\left(-1-\frac{1}{2j-1}+\frac{(2j)^2}{(2j-1)^2}\right)\\
+&\quad=\left[\frac{(2j-1)!!}{(2j)!!}\right]^2\frac{2j}{(2j-1)^2}\\
+\end{align*}
+And the right hand side
+\begin{align*}
+&\frac{(2j-1)!!}{(2j)!!}\frac{(2j-1)!!}{(2j-2)!!}-\frac{(2j-3)!!}{(2j-2)!!}\frac{(2j-3)!!}{(2j-4)!!}\\
+&\quad=\left[\frac{(2j-1)!!}{(2j)!!}\right]^2\left(2i-\frac{2i}{2i-1}\frac{2i(2i-2)}{2i-1}\right)\\
+&\quad=\left[\frac{(2j-1)!!}{(2j)!!}\right]^2 \frac{2i}{(2i-1)^2}\\
+\end{align*}
+which shows r.h.s$=$l.f.s, thus completes the proof.
+\end{proof}
+\section{Remarks\hfill}
+The study of elliptic integral arises naturally when people first try to evaluate the arc length of a given ellipse with semi axes $a$ and $b$\cite{Borwein:1987aa}:\\
+\[
+\begin{dcases}
+y=b\cos\theta\\
+x=a\sin\theta
+	\end{dcases},\qquad\theta\in[0,2\pi)
+\]
+The length is given by\cite{Borwein:1987aa}:
+\[
+A=4\int\sqrt{dx^2+dy^2}=4\int_0^{\pi/2}\sqrt{a^2\cos^2\theta+b^2\sin^2\theta}\,d\theta=4aE'\left(\frac{b}{a}\right)
+\]
+$K(k)$ and $E(k)$ are ``complete" in the sense that the integral is from $0$ to $\pi/2$. Also, for $K(k)$, it has the following physical interpretation\cite{Borwein:1987aa}. If $p$ is the period of a pendulum with amplitude $\alpha$ and length $L$, then one can show by establishing differential equations from Newton's law that:
+\[
+p=4\sqrt{\frac{L}{g}}K\left(\sin\left(\frac{\alpha}{2}\right)\right)
+\]
+where $g$ is the gravitational constant. In most text books the widely used formula $p=2\pi\sqrt{\frac{L}{g}}$ is actually the result of the approximation for $K(\sin(\alpha/2))\to\pi/2$ when $\alpha\to0$ for small amplitude angles.
+
+Generally speaking, the elliptic integrals arise so often in practice, may mathematicians devoted much of their life in the study of them. It was Legendre, who spent much of his life, found that any general elliptic integral of the form 
+\[
+\int^uR(x,y)\,dx
+\]
+where $R$ is a rational function of $x$ and $y$ and where $y^2$ is a quartic polynomial in $x$,  
+can be reduced algebraically to a linear combination of the first, second, and third kind\cite{Abel:1992aa}\cite{Borwein:1987aa}. Incomplete elliptic integral of third kind are of the form\cite{Borwein:1987aa}
+\[
+\int_0^u\frac{du}{(1-\eta x^2)\sqrt{(1-x^2)(1-k^2x^2)}}
+\]
+This discovery is no doubt a triumph, but the deeper properties of elliptic functions haven't been unrevealed until the 1820s, when the young Abel discovered that the inverses of elliptic integrals are doubly periodic functions, which is remarkable similar to the trigonometric functions.  His ingenious achievement is to relate the difficulty of evaluating elliptic integrals to the difficulty of evaluating:
+\[
+\int_0^x\frac{1}{\sqrt{1-u^2}}\,du
+\]
+whereas its inverse function $\sin x$ is easy to analyze\cite{Abel:1992aa}. Instead of attacking to problem directly, Abel came up a beautiful way of considering the inverse of elliptic integrals. This insightful transition literally opened a whole new field of analysis, which was first introduced to the world by his milestone paper ``Recherches sur les fonctions elliptiques". The tragedy happened that this young genius eventually died of poverty and disease at merely age 25 and didn't made it to see his work being recognized. However, his discovery, along with his name, shines as a bright star in the hall of mathematics for hundreds of years to come.\bigskip
+
+\vfill
+{\flushright
+	{\sffamily\slshape
+		$\ldots$ C'est la fonction inverse de la premi\`ere esp\`ece\\
+		 Sous cette forme, les fonctions elliptiques offrent des propri\'et\'es tr\`es
+		 remarquables\\
+		 et sont beaucoup plus faciles \`a traiter.\\
+		  C'est surtout la fonction qui m\'erite une attention particuli\`ere. \\
+		  \vskip 0.2 in
+		  [$\ldots$ This is the inverse function of the first kind. \\
+		  In this form, elliptic functions offer very remarkable properties\\
+		   and are much easier to treat.\\
+		    This is especially the function that deserves special attention.]
+		  
+		\medskip
+		{\sffamily\upshape --- N.H. ABEL,~{\it ``Recherches sur les fonctions elliptiques"}\cite{Abel:1992aa},~Berlin,~1829.}
+	}	
+
+}
+
+\eject
+
+
+
+\chapter{The Algorithm for Pi}
+\section{The Central Theorem\hfill}
+Now we develop the central relation which is the heart of the algorithm:
+\begin{T}\label{thm:central}{\rm\cite{Borwein:1987aa}}
+\begin{align}
+2\sqrt2\,\frac{M^3(1,1/\sqrt2)}{\dot M(1,1/\sqrt 2)}=\pi
+\end{align}
+where $\dot M$ stands for the derivative of $M(1,k)$ with respect to $k$
+\end{T} 
+This section is going to prove this theorem using the tools in the previous chapter step by step.
+\bigskip\\
+As preparation, we restate the following facts: we define {\it gamma} and {\it beta} functions by
+\begin{D}{\rm\cite{Borwein:1987aa}}
+\[
+\Gamma(x):=\int_0^{\infty}e^{-t}t^{x-1}\,dt,\qquad {\rm re}(x)>0
+\]
+\[
+\beta(x,y):=\int_0^1t^{x-1}(1-t)^{y-1}\,dt,\qquad {\rm re}(x),{\rm re}(y)>0
+\]
+\end{D}
+Then we have the following theorems (see proof in the appendix):
+\begin{T}{ Euler's reflection formula}{\rm\cite{Borwein:1987aa}\cite{Rudin:1976aa}}\label{thm:euler}
+\[\Gamma(x)\Gamma(1-x)=\frac{\pi}{\sin\pi x}\]
+\end{T}
+\begin{T}{\rm\cite{Borwein:1987aa}\cite{Rudin:1976aa}}\label{thm:beta}
+\[\beta(x,y):=\frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\]
+\end{T}\bigskip
+
+We first evaluate $K(1/\sqrt2)$ and $E(1/\sqrt2)$.\smallskip
+
+\begin{lemma}\label{thm:lemma 1}
+\[
+K(1/\sqrt2)=\frac{\Gamma^2(\frac{1}{4})}{4\sqrt{\pi}}
+\]
+and
+\[
+E(1/\sqrt2)=\frac{4\Gamma^2(\frac{3}{4})+\Gamma^2(\frac{1}{4})}{8\sqrt{\pi}}
+\]
+\end{lemma}
+\begin{proof}\cite{Borwein:1987aa}
+The tricks are mainly algebra:
+\begin{align*}
+K(1/\sqrt2)&=\int_0^1\frac{dt}{\sqrt{(1-t^2)(1-\frac{1}{2}t^2)}}\\
+&=\sqrt2\int_0^1\frac{dt}{\sqrt{(1-t^2)(2-t^2)}}\\
+\end{align*}
+Now, substitute $x^2:=t^2/(2-t^2)$ we have:
+\begin{align*}
+t^2=\frac{2x^2}{1+x^2};\qquad dt=\frac{\sqrt2}{(1+x^2)\sqrt{1+x^2}}dx
+\end{align*}
+Plug it into the integrand:
+\begin{align*}
+K(1/\sqrt2)&=\sqrt2\int_0^1\frac{1}{\sqrt{(1-\frac{2x^2}{1+x^2})(2-\frac{2x^2}{1+x^2})}}\frac{\sqrt2}{(1+x^2)\sqrt{1+x^2}}dx\\
+&\quad=\sqrt2\int_0^1\frac{dx}{\sqrt{1-x^4}}
+\end{align*}
+This can be deduced to $\beta(1/4,1/2)$ by change of variable: $u=x^4$:
+\begin{align*}
+K(1/\sqrt2)&=\frac{\sqrt2}{4}\int_0^1u^{1/4-1}(1-u)^{1/2-1}\,du=\frac{\sqrt2}{4}\beta(1/4,1/2)\\
+&\quad=\frac{\sqrt2}{4}\frac{\Gamma(1/4)\Gamma(1/2)}{\Gamma{(3/4)}}
+\end{align*}
+by theorem \ref{thm:beta}. Now, by theorem \ref{thm:euler}, 
+\[
+\Gamma(1/2)=\sqrt\pi;\qquad\Gamma(3/4)=\frac{\sqrt2\pi}{\Gamma(1/4)}
+\]
+We obtain that 
+\[
+K(1/\sqrt2)=\frac{\Gamma^2(\frac{1}{4})}{4\sqrt{\pi}}
+\]
+Second, similarly, we start by
+\[
+E(1/\sqrt2)=\int_0^1\frac{\sqrt{1-\frac{1}{2}t^2}}{\sqrt{1-t^2}}\,dt=\frac{1}{\sqrt2}\int_0^1\frac{\sqrt{2-t^2}}{\sqrt{1-t^2}}\,dt
+\]
+By setting $u:=\sqrt{1-t^2}$ we obtain:
+\begin{align*}
+E(1/\sqrt2)=\frac{1}{\sqrt{2}}\int_1^0\frac{\sqrt{1+u^2}}{u}\frac{-u}{\sqrt{1-u^2}}\,du=\frac{1}{\sqrt{2}}\int_0^1\frac{u^2}{\sqrt{1-u^4}}\,du+\frac{1}{\sqrt{2}}\int_0^1\frac{1}{\sqrt{1-u^4}}\,du
+\end{align*}
+The second term above we have already resolved, now consider the first term by setting $t=u^4$:
+\[
+\int_0^1\frac{u^2}{\sqrt{1-u^4}}\,du=\int_0^1t^{1/2}(1-t)^{-1/2}\frac{1}{4}t^{-3/4}\,dt=\frac{1}{4}\beta(3/4,1/2)=\frac{1}{4}\frac{\Gamma(3/4)\Gamma(1/2)}{\Gamma{(5/4)}}
+\]
+Now, since we have 
+\[
+\Gamma(5/4)=\frac{1}{4}\Gamma(1/4)
+\]
+We may put every thing together:
+\begin{align*}
+E(1/\sqrt2)&=\frac{1}{4\sqrt2}\frac{\Gamma(1/4)\Gamma(1/2)}{\Gamma{(3/4)}}+
+\frac{1}{4\sqrt2}\frac{\Gamma(3/4)\Gamma(1/2)}{4\Gamma{(1/4)}}\\
+&\quad=\frac{\sqrt\pi}{4\sqrt2}\frac{\Gamma^2(1/4)+4\Gamma^2(3/4)}{\Gamma{(1/4)}\Gamma{(3/4)}}\\
+&\quad=\frac{\Gamma^2(1/4)+4\Gamma^2(3/4)}{8\sqrt\pi}
+\end{align*}
+\end{proof}
+
+Recall theorem \ref{thm:der} , we may proceed to the next lemma:
+\begin{lemma}\label{thm:lemma 2}{\rm\cite{Borwein:1987aa}}
+\[
+\dot K(1/\sqrt2)K(1/\sqrt2)=\frac{\pi}{\sqrt2}
+\]
+\begin{proof}%{\rm\cite{Borwein:1987aa}}
+By theorem \ref{thm:der}, we have:
+\begin{align*}
+\dot K(1/\sqrt2)&=\frac{E(1/\sqrt2)-(1/2)K(1/\sqrt2)}{1/\sqrt2 \cdot1/2}\\
+&=2\sqrt2 \left(\frac{\Gamma^2(1/4)+4\Gamma^2(3/4)}{8\sqrt\pi}-\frac{\Gamma^2(1/4)}{8\sqrt{\pi}}\right)\\
+&=\sqrt2 \frac{\Gamma^2(3/4)}{\sqrt\pi}
+\end{align*}
+since we have $K(1/\sqrt2)$ by lemma \ref{thm:lemma 1}, and then
+\[
+\dot K(1/\sqrt2)K(1/\sqrt2)=\sqrt2 \frac{\Gamma^2(3/4)}{\sqrt\pi}\frac{\Gamma^2(1/4)}{4\sqrt{\pi}}=\sqrt2 \frac{2\pi^2}{4\pi}=\frac{\pi}{\sqrt2}
+\]
+\end{proof}
+\end{lemma}
+\bigskip
+Now we are ready for the punchline: by fundamental limit theorem and corollary \ref{co:central}, we have
+\[
+M(1,k)=\frac{\pi}{2K(k')}=\frac{\pi}{2K(\sqrt{1-k^2})}
+\]
+Thus by taking derivative with respect to $k$ we have \cite{Borwein:1987aa}:
+\begin{align*}
+\dot M(1,k)&=\frac{\pi}{2}\frac{-\dot K(k)}{K^2(k')}\frac{-k}{\sqrt{1-k^2}}=\frac{\pi}{2}\frac{k}{k'}\frac{\dot K(k)}{K^2(k')}\\
+&\quad=\frac{\pi}{2}\frac{k}{k'}\frac{\dot K(k)}{\frac{\pi^2}{4M^2(k')}}\\
+&=\frac{k}{k'}\frac{2\dot K(k)M^2(k')}{\pi}
+\end{align*}
+
+\noindent Also, by lemma \ref{thm:lemma 2} and corollary \ref{co:central}, we have:
+\[
+\dot K(1/\sqrt2)=\frac{\pi}{\sqrt2K(1/\sqrt2)}=\frac{\pi}{\sqrt2\frac{\pi}{2M((1/\sqrt2)')}}=\sqrt2{M(1/\sqrt2)}
+\]
+since $1/\sqrt2=\sqrt{1-(1/\sqrt2)^2}=(1/\sqrt2)'$\\
+Set $k=1/\sqrt2$ and plug $\dot K(1/\sqrt2)$ into the derived $\dot M(1,k)$ we have:
+\[
+\pi=2\sqrt2\frac{1/\sqrt2}{1/\sqrt2}\frac{M^3(1,1/\sqrt2)}{\dot M(1,1/\sqrt2)}=2\sqrt2\frac{M^3(1,1/\sqrt2)}{\dot M(1,1/\sqrt2)}
+\]
+which proves the theorem 
+\ref{thm:central} in the beginning of the section.
+\bigskip
+
+This is central to our algorithm design since it suggests a way of how to compute $\pi$ from AGM procedure. $M(1,1/\sqrt2)$ itself can be computed rapidly\cite{Borwein:1987aa}, also the derivative of it $\dot M(1,1/\sqrt2)$ also can be computed since we only have to interchange the order of taking derivative with respect of $k$ and take the limit of the procedure by constructing:
+\begin{align}
+\dot a_{n+1}=\frac{d}{dk}\frac{a_n+b_n}{2}=\frac{\dot a_{n}+\dot b_{n}}{2};\qquad \dot b_{n+1}=\frac{d}{dk}\sqrt{a_nb_n}=\frac{\dot a_{n}\sqrt{b_n/a_n}+\dot b_{n}\sqrt{a_n/b_n}}{2}\label{eq:recur}
+\end{align}
+$a_{n+1}$ and $b_{n+1}$ are defined as the normal AGM procedure. Then, if we set $a_0=1$, $b_0=1/\sqrt2$, $\dot a_0=0$, $\dot b_0=1$,  we actually have obtained  an algorithm that can lead us to $\pi$, but the story doesn't end here. Full glory shall be revealed in the next section.
+
+\section{The Correctness and Convergence Rate of the Algorithm\hfill}
+Finally, with all the ingredients ready, we can now state the following remarkable algorithm for computing $\pi$ and prove its effectiveness.
+
+From last section, we know that we can use AGM procedure to compute $M(1,1/\sqrt2)$ and $\dot M(1,1/\sqrt2)$ independently and plug them into the theorem \ref{thm:central} to obtain $\pi$. However, we can do so much better by observing that{\rm\cite{Borwein:1987aa}}
+\begin{align}
+\frac{b^2_{n+1}a_{n+1}}{\dot a_{n+1}}\to\frac{M^3(1,1/\sqrt2)}{\dot M(1,1/\sqrt2)}=\ff{\pi}{2\sq2}\qquad{\rm as }\,\, n\to\infty\label{eq:central}
+\end{align}
+Thus if we are smart enough to define{\rm\cite{Borwein:1987aa}}
+\[
+x_n:=a_n/b_n;\qquad y_n:=\dot b_n/\dot a_n;\qquad \pi_n=2\sqrt2\frac{b^2_{n+1}a_{n+1}}{\dot a_{n+1}}
+\]
+we will see that:
+\begin{align*}
+\frac{\pi_n}{\pi_{n-1}}&=\frac{(b_{n+1}/b_n)^2(a_{n+1}/a_n)}{\dot a_{n+1}/\dot a_n}\\
+&=\frac{a_nb_n\dot a_n \frac{a_n+b_n}{2}}{\dot b_n^2\frac{\dot a_n+\dot b_n}{2}a_n}\\
+&=\frac{\dot a_n(a_n+b_n)}{b_n(\dot a_n+\dot b_n)}\\
+&=\frac{1+x_n}{1+y_n}
+\end{align*}
+Now we may proceed as follows:
+\[
+\pi_n=\frac{\pi_{n}}{\pi_{n-1}}\frac{\pi_{n-1}}{\pi_{n-2}}\cdots\frac{\pi_{1}}{\pi_{0}}\pi_0
+\]
+where we can figure out $\pi_0$ by initial values. Thus we can obtain the approximation of $\pi$ in the same time when we merely compute $x_n=a_n/b_n$, $y_n=\dot b_n/\dot a_n$, without figuring out the four value of $a_n$, $b_n$, $\dot a_n$, $\dot b_n$ at each iteration\cite{Borwein:1987aa}. From previous discussion and the derived recursion (\ref{eq:recur}), we know the recursion for $x_n$, $y_n$ are\cite{Borwein:1987aa}:
+\begin{align*}
+x_{n+1}&=a_{n+1}/b_{n+1}=\frac{\sqrt {a_n/b_n}+\sqrt {b_n/a_n} }{2}=\frac{\sqrt{x_n}+1/{\sqrt{x_n}}}{2}\qquad n\ge 0\\
+y_{n+1}&:=\dot b_{n+1}/\dot a_{n+1}=\frac{\dot a_{n}\sqrt{b_{n}/a_{n}}
++\dot b_{n}\sqrt{a_{n}/b_{n}}}{\dot a_{n}+\dot b_{n}}=\frac{y_n\sqrt{x_n}+1/\sqrt{x_{n}}}{y_n+1}\qquad n\ge 1
+\end{align*}
+The last line is obtained by dividing $\dot a_{n-1}$ on both denominator and numerator.\\
+Also, we know the initial values are:
+\[
+x_0=a_0/b_0=\sqrt2,\qquad \pi_0=2\sqrt2\,b_1^2a_1/\dot a_1=2+\sqrt2,\qquad
+y_1=\dot b_1/\dot a_1=\frac{0+1\cdot\sqrt{\sqrt2}}{2}\Big/\frac{0+1}{2}=2^{1/4}
+\]
+This improvement leads us to the final version of the algorithm:
+\begin{algorithm}\label{al}\cite{Borwein:1987aa}
+Let $x_0=\sqrt2$, $\pi_n=2+\sqrt2$, $y_1=2^{1/4}$. Define:
+\begin{align*}
+&{\rm(i)}\quad x_{n+1}:=\frac{1}{2}\left(\sqrt{x_n}+\frac{1}{\sqrt{x_n}}\right)\qquad &n\ge 0&\\
+&{\rm(ii)}\quad y_{n+1}:=\frac{y_n\sqrt{x_n}+1/\sqrt{x_{n}}}{y_n+1}\qquad &n\ge 1&\\
+&{\rm(iii)}\quad \pi_n:=\pi_{n-1}\frac{x_n +1}{y_n+1}\qquad &n\ge 1&
+\end{align*}
+\end{algorithm}
+The correctness is proved by previous discussion and (\ref {eq:central}), for convergence rate we have the following theorem:
+\begin{T}\label{thm:goal}{\rm\cite{Borwein:1987aa}}
+In Algorithm 3.2.1, $\pi_n$ decreases monotonically to $\pi$. And for $n\ge0$, we have:
+\begin{align}
+\frac{3}{2}(y_{n+1}-&x_{n+1})\le\pi_n-\pi\le\frac{7}{4}(y_{n+1}-x_{n+1});
+\label{eq:bound 1}\\
+&\pi_{n+1}-\pi\le\frac{1}{10}(\pi_n-\pi)^2\label{eq:bound 2};
+\end{align}
+Also, for convergence rate:
+\begin{align}
+\pi_n-\pi<10^{-2^{n+1}}.\qquad n\ge2\label{eq:bound 3}
+\end{align}
+\end{T}\bigskip
+
+For clarity, we divide the proof into several lemmas:
+\begin{lemma}\label{le:1}%{\rm\cite{Borwein:1987aa}}
+\[
+1\leq x_n\leq y_n\qquad{\rm for}\quad n=2,3\ldots
+\]
+\end{lemma}
+\begin{proof}
+Since
+\[ x_{n+1}=\frac{1}{2}(\sqrt{x_n}+1/\sqrt{x_n})>1\]
+and notice that $y_1=2^{1/4}>1$, if we have $y_n>1$, then
+\[
+y_{n+1}-x_{n+1}=\frac{(y_n-1)(x_n-1)}{2\sqrt{x_n}(y_n+1)}>0
+\]
+Thus we have
+\[
+y_{n+1}>x_{n+1}>1
+\]
+Then the lemma follows by induction.
+\end{proof}
+\begin{lemma}\label{le:2}
+\[
+\frac{x_n-1}{y_n-1}\searrow0\qquad n\ge1
+\]
+\end{lemma}
+\begin{proof}
+With lemma \ref{le:1} and a bit of algebra trick, one can show that:
+\[
+0<x_{n+1}-1=\frac{(x_n-1)^2}{2\sqrt{x_n}(1+\sqrt{x_n})^2}
+\]
+\[
+y_{n+1}-1=\frac{y_n\sqrt{x_n}+1/\sqrt{x_n}}{y_n+1}-1=\frac{(y_n-1)(x_n-1)}{(\sqrt{x_n}+1)(y_n+1)}+2\frac{x_{n+1}-1}{y_n+1}>\frac{(y_n-1)(x_n-1)}{(\sqrt{x_n}+1)(y_n+1)}>0
+\]
+Then we see that
+\[
+0<\frac{x_{n+1}-1}{y_{n+1}-1}<\frac{(x_n-1)^2}{2\sqrt{x_n}(1+\sqrt{x_n})^2}\Big/\frac{(y_n-1)(x_n-1)}{(\sqrt{x_n}+1)(y_n+1)}=\frac{1}{2}\frac{x_n-1}{y_n-1}\frac{y_n+1}{\sqrt{x_n}(1+\sqrt{x_n})}
+\]
+The multiplier goes to 1, so we have
+\[
+\frac{y_n+1}{\sqrt{x_n}(1+\sqrt{x_n})}<1+\varepsilon
+\]
+For sufficiently large $n$, choose large enough $N_{\varepsilon}>0$ such that $\varepsilon=9/10$ can be satisfied, then for all $n>N_{\varepsilon}$, we have
+\[
+0<\frac{x_{n+1}-1}{y_{n+1}-1}<\frac{19}{20}\frac{x_n-1}{y_n-1}<\left(\frac{19}{20}\right)^{n-N}\to 0
+\]
+It turns out, by pure computation, that
+\[
+\frac{y_1+1}{\sqrt{x_1}(1+\sqrt{x_1})}<0.62<1
+\]
+so we deduce that the sequence $\frac{x_n-1}{y_n-1}$ decreases to zero from the first term $n=1$.
+\end{proof}\bigskip
+
+Now we can move on to prove theorem \ref{thm:goal}. First we show that, by lemma \ref{le:1}:
+\begin{align*}
+\pi_n=\pi_{n-1}\frac{x_n+1}{y_n+1}<\pi_{n-1}
+\end{align*}
+This shows that $\pi_n$ decreases monotonically to $\pi$. \\
+Next, by noticing that
+\begin{align}
+y_{n+1}-x_{n+1}=\frac{(y_n-1)(x_n-1)}{2\sqrt{x_n}(y_n+1)}\leq\frac{(y_n-1)(x_n-1)}{4}\label {eq:bound 6}
+\end{align}
+by lemma \ref{le:1}. Setting $t:=(x_n-1)/(y_n-1)>0$, we notice that 
+\begin{align*}
+(y_n-1)(x_n-1)&<\frac{\left((y_n-1)-(x_n-1)\right)^2}{2}
+\Longleftrightarrow t<\frac{(t-1)^2}{2}\Longleftarrow0<t<2-\sqrt3
+\end{align*}
+Which can be satisfied by lemma \ref{le:2} from a sufficiently large $n$. By checking the first term we have that:
+\[
+\frac{x_2-1}{y_2-1}<0.2012<2-\sqrt3
+\]
+thus for $n\ge2$, plugging it into (\ref {eq:bound 6}) we have\cite{Borwein:1987aa}
+\begin{align}
+y_{n+1}-x_{n+1}<\frac{1}{8}(y_n-x_n)^2
+\label {eq:bound 4}
+\end{align}
+for sufficiently large $n$.\\
+Then, we can show that\cite{Borwein:1987aa}
+\begin{align}
+\pi_{n}-\pi_{n+1}=\frac{\pi_n(y_{n+1}-x_{n+1})}{y_{n+1}+1}\leq\frac{\pi_n}{2}(y_{n+1}-x_{n+1}) \label{eq:bound 5}
+\end{align}
+By repeating the inequality, recalling that $\pi_n$ decreases, we have:
+\begin{align*}
+\pi_{n+1}-\pi_{n+2}&\leq\frac{\pi_n}{2}(y_{n+2}-x_{n+2});\\
+\pi_{n+2}-\pi_{n+3}&\leq\frac{\pi_n}{2}(y_{n+3}-x_{n+3});\\
+\pi_{n+3}-\pi_{n+4}&\leq\frac{\pi_n}{2}(y_{n+4}-x_{n+4});\\
+&\ldots
+\end{align*}
+thus by (\ref{eq:bound 4}), we compare it by geometric progression and a little bit tackling\cite{Borwein:1987aa}:
+\begin{align*}
+\pi_n-\pi &\leq \frac{\pi_n}{2}\sum_{k=1}^{\infty}(y_{n+k}-x_{n+k})<\frac{\pi_n}{2}\sum_{k=1}^{\infty}\frac{(y_{n+1}-x_{n+1})^{2^{(k-1)}-1}}{8^{0+1+2+4+\cdots+2^{k-2}}}(y_{n+1}-x_{n+1})\\
+&\quad<\frac{\pi_n}{2}\sum_{k=1}^{\infty}(\frac{y_{n+1}-x_{n+1}}{8})^{k-1}(y_{n+1}-x_{n+1})=\frac{\pi_n}{2}\frac{y_{n+1}-x_{n+1}}{1-\frac{1}{8}(y_{n+1}-x_{n+1})}
+\end{align*}
+Then we immediately obtain the right part of (\ref {eq:bound 1}) by seeing that{\rm\cite{Borwein:1987aa}}
+\[
+\frac{\pi_n}{2}\frac{y_{n+1}-x_{n+1}}{1-\frac{1}{8}(y_{n+1}-x_{n+1})}\leq\frac{\pi_0}{2}(y_{n+1}-x_{n+1})<=\frac{2+\sqrt2}{4}(y_{n+1}-x_{n+1})=\frac{7}{4}(y_{n+1}-x_{n+1})
+\]
+Also, by (\ref {eq:bound 5}), we can obtain another inequality:
+\begin{align*}
+\pi_{n}-\pi_{n+1}&\ge\frac{\pi(y_{n+1}-x_{n+1})}{y_{n+1}+1};\\
+\end{align*}
+Then we have
+\[
+\pi_{n}-\pi\ge\frac{\pi(y_{n+1}-x_{n+1})}{y_{n+1}+1}+(\pi_{n+1}-\pi_{n+2})+(\pi_{n+2}-\pi_{n+3})\cdots>\frac{\pi(y_{n+1}-x_{n+1})}{y_{n+1}+1}
+\]
+This leads us to the left part of (\ref{eq:bound 1})  by seeing that\cite{Borwein:1987aa}
+\[
+\pi_{n}-\pi\ge\frac{\pi(y_{n+1}-x_{n+1})}{y_{n+1}+1}>\frac{\pi}{2.1}(y_{n+1}-x_{n+1})>\frac{3}{2}(y_{n+1}-x_{n+1})
+\]
+The estimate of (\ref{eq:bound 1}) are enough to deduce (\ref{eq:bound 2}) by repeatedly unfolding  (\ref{eq:bound 1})\cite{Borwein:1987aa}
+\[
+\pi_{n+1}-\pi\le\frac{7}{4}(y_{n+2}-x_{n+2})\leq\frac{7}{32}(y_{n+1}-x_{n+1})^2\leq\frac{7}{32}\cdot\frac{4}{9}(\pi_n-\pi)^2\leq\frac{1}{10}(\pi_n-\pi)^2\qquad n\ge2
+\]
+And it's easy to check by hand that it works for $n=0$ and $n=1$.\\
+Finally we deduce (\ref{eq:bound 3}) from (\ref{eq:bound 2}) by repeatedly unfolding (\ref{eq:bound 2}){\rm\cite{Borwein:1987aa}}. 
+\begin{align*}
+\pi_{n}-\pi<\frac{1}{10}(\pi_{n-1}-\pi)^2<&10^{-(1+2)}(\pi_{n-2}-\pi)^4<10^{-(1+2+\cdots+2^{n-1})}(\pi_{0}-\pi)^{2n}\\
+&\quad<10^{-2^{n}+1}(2+\sqrt2-\pi)^{2^n}<10^{-2^{n}}10^{-2^n}
+=10^{-2^{n+1}}
+\end{align*}
+\qed
+
+
+\section{Remarks\hfill}
+ The quest of computing $\pi$ had become a famous temptation in the mathematics world ever since the short treatise {\it Measurement of a Circle} by the unsurpassed Archimedes of Syracuse\cite{Dunham:1990aa}. Hundreds of thousands of mathematicians throughout the history, if not more, stepped upon this great journey of evaluating this ``little'' constant. From inscribed and circumscribed polygons to series expansion, these great minds have conquered countless problems arised along the road. In fact, new problems and new areas of research came up once and a while when people pushed the boundary of the known digits of $\pi$. 
+
+Of course, it is never a simple quest. Many of them spent almost the rest of their life in computing the digits and/or finding new and more effective methods (see prologue). By now, after the discovery  and implementation of algorithm \ref{al}, which requires merely a few hundred arithmetic operations, people can produce more than 45 million digits on a computer in the 1990s. This is a great advance in this quest, considering it took a Dutch mathematician his lifetime to merely struggle through 35 decimal places of $\pi$ early in the seventeenth century\cite{Knuth:1997aa}. In fact, the number of digits has been no longer a problem. It was mathematicians who developed these theories and design these programmes based upon them. This quest of computing $\pi$, after all, is a story of human, not a mechanical, triumph\cite{Dunham:1990aa}.
+
+\eject
+
+
+
+
+
+
+\chapter{Epilogue: Implementation of the Algorithm}
+{\flushright
+	{\sffamily\slshape
+		I am ashamed to tell you\\ 
+		to how many figures I carried these calculations,\\ 
+		having no other business at the time.\smallskip\\
+		{\sffamily\upshape --- ISAAC NEWTON (1666)}
+	}	
+
+}
+
+
+\vskip 1in
+The implementation of the algorithm has two difficulty: First is the difficulty of implementation of high precision arithmetic, second is the limitation of the number of digits a computer can handle. The first can be tackled by using a programming language which already has a built-in high precision arithmetic algorithm, like using Mathematica\texttrademark. The second difficulty is more tedious: since in each iteration only finite many digits are accurate, in order to obtain the precision of $N$ digits, how many digits should be stored during each iteration? Notice that it's possible the round about error can be carried over to the next iteration.
+
+However, these problems are taken care of automatically due to the built-in precision control in Mathematica\texttrademark. Since the report is not focused on numerical algorithms, we omit this part and give the implementation and results below:
+
+\begin{lstlisting}[language=Mathematica,caption={Code}]
+q = 20; p = 6;
+x = N[Sqrt[2], 2*10^p]; y = N[Power[2, (4)^-1], 2*10^p]; z =N[Sqrt[2] + 2, 2*10^p]; d = 2;
+For[i = 0, i < q, i++,
+	x = 1/2 (Sqrt[x] + 1/Sqrt[x]);
+	z = z*(x + 1)/(y + 1);
+	Print[i, "th iteration" , " The zero digits of y: ", 
+	Floor[-Log10[N[y - 1, 2*10^p]]], " and the precision: " , 
+	Floor[-Log10[N[z - \[Pi], 2*10^p]]]];
+	d = d*2;
+	y = (y Sqrt[x] + 1/Sqrt[x])/(y + 1);
+]\end{lstlisting}
+ 
+\begin{lstlisting}[language=Mathematica,caption={Output}]
+
+0th iteration The zero digits of y: 0 and the precision: 2
+
+1th iteration The zero digits of y: 3 and the precision: 8
+
+2th iteration The zero digits of y: 8 and the precision: 18
+
+3th iteration The zero digits of y: 18 and the precision: 40
+
+4th iteration The zero digits of y: 40 and the precision: 83
+
+5th iteration The zero digits of y: 83 and the precision: 170
+
+6th iteration The zero digits of y: 170 and the precision: 344
+
+7th iteration The zero digits of y: 345 and the precision: 693
+
+8th iteration The zero digits of y: 694 and the precision: 1392
+
+9th iteration The zero digits of y: 1392 and the precision: 2789
+
+10th iteration The zero digits of y: 2789 and the precision: 5582
+
+11th iteration The zero digits of y: 5583 and the precision: 11171
+
+12th iteration The zero digits of y: 11171 and the precision: 22347
+
+13th iteration The zero digits of y: 22348 and the precision: 44701
+
+14th iteration The zero digits of y: 44701 and the precision: 89409
+
+15th iteration The zero digits of y: 89409 and the precision: 178824
+
+16th iteration The zero digits of y: 178824 and the precision: 357655
+
+17th iteration The zero digits of y: 357655 and the precision: 715318
+
+18th iteration The zero digits of y: 715318 and the precision: 1430644
+
+19th iteration The zero digits of y: 1430644 and the precision: Indeterminate
+\end{lstlisting}
+\vfill 
+{\flushright
+	{\sffamily\slshape
+		Here is your book, the one your thousands of letters have asked us\\
+		to publish. It has taken us years to do, checking and rechecking countless\\
+		 recipes to bring you only the best, only the interesting, only the perfect\\ 
+		 Now, we can say, without a shadow of a doubt, that every single one of them,\\
+		 if you follow the directions to the letter, will work for you exactly as well\\
+		 as it did for us, even if you have never cooked before.\smallskip\\
+		{\sffamily\upshape --- MaCall's Cook book (1963)}
+	}	
+
+}
+
+\bibliography{Untitled}
+\nocite{*}
+\end{document}

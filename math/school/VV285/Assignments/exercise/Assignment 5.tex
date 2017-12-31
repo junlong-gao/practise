@@ -1,0 +1,248 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{gauss}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{multirow}
+%一般要用到的package就以上这些,其实我也不知道它们分别有什么用..
+\newtheorem{ex}{Exercise}
+\title{Assignment 5}
+\author{Sun Chen\\ ID:5123709223}
+\begin{document}
+\maketitle
+
+\section*{Exercise 1.}
+\subsection*{i)}
+For example, we let
+\begin{align*}
+f(x)=
+\left\lbrace  \begin{gmatrix}
+		   \frac{1}{2},~&x=0\\
+		   x ,~&x\not=0~and~x\not=1\\
+		   \frac{1}{2},~&x=1
+\end{gmatrix}\right.\\
+\end{align*}
+Let closed set A=$[0,1]\subset \mathbb{R}$, then $f(A)=ran~f=(0,1)$, which is not a closed set.
+
+\subsection*{ii)}
+For example, we let
+\begin{align*}
+f(x)=sinx
+\end{align*}
+Let open set B=$(-2\pi,2\pi)\subset \mathbb{R}$, then $f(B)=ran~f=[-1,1]$, which is not a open set.
+
+\subsection*{iii)}
+$f^{-1}(K)$ does NOT have to be compact.
+Following is a counter-example.\\
+Let m = n = 1, then $f\in C(\mathbb{R}^n,\mathbb{R}^m)=C(\mathbb{R},\mathbb{R})$.
+\begin{align*}
+f(x)=
+\left\lbrace  \begin{gmatrix}
+		   \frac{1}{x},~&x\not=0\\
+		   0 ,~&x=0
+\end{gmatrix}\right.\\
+\end{align*}
+Then 
+\begin{align*}
+f^{-1}(x)=
+\left\lbrace  \begin{gmatrix}
+		   \frac{1}{x},~&x\not=0\\
+		   0 ,~&x=0
+\end{gmatrix}\right.\\
+\end{align*}
+Let K = [0,1], then K is compact because it is closed and bounded in a finite-dimensional vector space.\\
+But $f^{-1}(K)=\lbrace0\rbrace\cup[1,\infty)$ is not compact because it is not bounded in a finite-dimensional vector space.
+
+\section*{Exercise 2.}
+\subsection*{i)}
+$A_1$ is neither open or closed. $A_2$ is neither open or closed. $A_3$ is open.
+\subsection*{ii)}
+The closure of $A_1$ is $\lbrace(x,y):x\geq0,0\leq y\leq 1/x\rbrace$.\\
+The closure of $A_2$ is $\lbrace(x,y):1\leq x\leq2,0\leq y\leq 1/x\rbrace$.\\
+The closure of $A_3$ is $\lbrace(x,y):1\leq x\leq2,\mid y\mid\leq 1/x\rbrace$.
+\subsection*{iii)}
+The set of interior points is
+\begin{align*}
+intA_1=\lbrace(x,y):x>0,0<y<1/x\rbrace
+\end{align*}
+The set of external points is
+\begin{align*}
+extA_1=\lbrace(x,y):x<0\rbrace\cup\lbrace(x,y):x\geq0,y<0\rbrace\cup\lbrace(x,y):x>0,y>1/x\rbrace
+\end{align*}
+The set of boundary points is
+\begin{align*}
+\partial A_1=\lbrace(x,y):x=0,y\geq0\rbrace\cup\lbrace(x,y):x>0,y=0\rbrace\cup\lbrace(x,y):x>0,y=1/x\rbrace
+\end{align*}
+The set of interior points is
+\begin{align*}
+intA_2=\lbrace(x,y):1<x<2,0<y<1/x\rbrace
+\end{align*}
+The set of external points is
+\begin{align*}
+extA_2=\lbrace(x,y):x<1\rbrace\cup\lbrace(x,y):x>2\rbrace\cup\lbrace(x,y):1<x<2,y<0\rbrace\cup\lbrace(x,y):1<x<2,y>1/x\rbrace
+\end{align*}
+The set of boundary points is
+\begin{align*}
+\partial A_2=\lbrace(x,y):1\leq x\leq2,y=0\rbrace\cup\lbrace(x,y):x=1,0<y<1\rbrace\cup\\
+\lbrace(x,y):x=2,0<y<\frac{1}{2}\rbrace\cup\lbrace(x,y):1\leq x\leq2,y=1/x\rbrace
+\end{align*}
+The set of interior points is
+\begin{align*}
+intA_3=\lbrace(x,y):1<x<2,0<\mid y\mid<1/x\rbrace
+\end{align*}
+The set of external points is
+\begin{align*}
+extA_3=\lbrace(x,y):x<1\rbrace\cup\lbrace(x,y):x>2\rbrace\cup\lbrace(x,y):1<x<2,\mid y\mid>1/x\rbrace
+\end{align*}
+The set of boundary points is
+\begin{align*}
+\partial A_3=\lbrace(x,y):x=1,-1<y<1\rbrace\cup\lbrace(x,y):x=2,-\frac{1}{2}<y<\frac{1}{2}\rbrace\cup\\
+\lbrace(x,y):1\leq x\leq2,y=0\rbrace\cup\lbrace(x,y):1\leq x\leq2,\mid y\mid=1/x\rbrace
+\end{align*}
+\subsection*{iv)}
+The boundary points of $A_1$ that are part of the set is
+\begin{align*}
+\lbrace(x,y):x>0,y=0\rbrace\cup\lbrace(x,y):x>0,y=1/x\rbrace
+\end{align*}
+The boundary points of $A_2$ that are part of the set is
+\begin{align*}
+\lbrace(x,y):x=1,0<y<1\rbrace\cup\lbrace(x,y):x=2,0<y<\frac{1}{2}\rbrace
+\end{align*}
+The boundary points of $A_2$ that are part of the set is $\emptyset$.
+
+\section*{Exercise 3.}
+\subsection*{i)}
+$(\Rightarrow)$ We will show by contradiction.\\ Suppose that $x \in \overline{M}$, $d(x,M)=\lambda>0$. Then we cannot find an open ball for all $y\in M$ such that
+\begin{align*}
+B_\varepsilon(y):=\lbrace x\in \mathbb{R}^n:\Vert x-y\Vert<\frac{\lambda}{2}\rbrace
+\end{align*}
+Because $x$ is neither an interior point nor a boundary point of $\overline{M}$, so $x$ is an exterior point of $\overline{M}$ and $x\not\in \overline{M}$.\\
+So, 
+\begin{align*}
+d(x,M)=0
+\end{align*}
+$(\Leftarrow)$ $d(x,M)=$ inf $\Vert x-y\Vert=0$. If $x\in M$, then $x\in \overline{M}$.\\
+If $x\not\in M$, $x\in \mathbb{R}^n \setminus M $. Then for all $\varepsilon>0$ there exists a $y$ such that
+\begin{align*}
+\Vert x-y\Vert<\varepsilon
+\end{align*}
+So for every $\varepsilon>0$, $B_\varepsilon(x)\cap M\not= \varnothing$ and $B_\varepsilon(x)\cap (\mathbb{R}^n \setminus M)\not= \varnothing$.\\
+So $x$ is a boundary point of M and $x\in \overline{M}$.
+
+\subsection*{ii)}
+From iii), $\exists x_0\in \overline{M}$ such that
+\begin{align*}
+\mathrm{inf}\Vert x-y\Vert = \Vert x-x_0\Vert
+\end{align*}
+Since $x_0$ is fixed, for any $x\in\mathbb{R}^n$
+\begin{align*}
+\Vert x-x_0\Vert=\mathrm{inf}\Vert x-y\Vert
+\end{align*}
+For some $\delta>0$ and $a\in \mathbb{R}^n$, we let
+\begin{align*}
+\Vert x-a\Vert<\delta
+\end{align*}
+Then,
+\begin{align*}
+\Vert \mathrm{inf}\Vert x-y\Vert-\mathrm{inf}\Vert a-y\Vert\Vert&=\Vert \Vert x-x_1\Vert-\Vert a-x_2\Vert\Vert \\&\leq\Vert (x-a)-(x_1-x_2)\Vert\\ &\leq\Vert(x-a)\Vert+\Vert(x_1-x_2)\Vert\\ &<\delta +\Vert(x_1-x_2)\Vert:=\varepsilon
+\end{align*}
+Hence, the function is continuous.
+
+\subsection*{iii)}
+We set a closed ball such that
+\begin{align*}
+B_\varepsilon(a):=\lbrace x\in \mathbb{R}^n:\Vert x-a\Vert\leq \varepsilon\rbrace
+\end{align*}
+We set the ball $B \cap M \not= \varnothing$.\\
+We know that $B \cap M$ is closed (because all boundary points are contained), so $\Vert x-y\Vert\leq \varepsilon$, $y\in B \cap M $.\\
+So the set $P:=\lbrace p:p=x-y,y\in B \cap M\rbrace$ is closed and bounded, and compact.\\
+Then, we set a sequence 
+\begin{align*}
+p_n=x-y_n, \Vert p_n\Vert=\Vert x-y_n\Vert
+\end{align*}
+,and there exists some subsequence such that $x$ $\Vert x-y_n^{'}\Vert\rightarrow d(x,M)$ when $n\rightarrow \infty$.\\
+Since $P$ is compact, the limit of $x-y_n^{'}$ is contained in $P$.\\
+Set the limit to be $x-y$. So, $\exists y\in M$ such that 
+\begin{align*}
+d(x,M)=\Vert x-y\Vert
+\end{align*}
+
+\subsection*{iv)}
+From iii), $\forall x\in K$, there exists some corresponding $y_n\in M $ such that
+\begin{align*}
+d(x,M)=\Vert x-y_n\Vert<\infty
+\end{align*}
+Since $K$ is compact, $\forall x_n\in K $, there exists a convergent subsequence $x_n^{'}$ converge to some $x\in K$.\\
+Since the map is continuous,
+\begin{align*}
+x_n^{'}\rightarrow x^{'} \Rightarrow \Vert x_n^{'}-y_n^{'}\Vert\rightarrow \Vert x{'}-y{'}\Vert
+\end{align*}
+So, $\Vert x-y\Vert$ is compact.\\
+Then we set a sequence $\Vert x_n-y_n\Vert$ that converges to $\mathrm{inf}\Vert x-y\Vert$ when $n\rightarrow \infty$, and such limit exists, i.e., there exists some $x_0,y_0$ such that
+\begin{align*}
+\Vert x_0-y_0\Vert = \mathrm{inf}\Vert x-y\Vert
+\end{align*} 
+When $K$ is not compact, we let
+\begin{align*}
+K:=\lbrace (x,y)\in \mathbb{R}^2:x>0,y=1/x\rbrace\\ 
+M:=\lbrace (x,y)\in \mathbb{R}^2:x>0,y=0\rbrace
+\end{align*}
+So $d(K,M)=0$ but we cannot find that $x_0,y_0$ because the limit reaches when $x\rightarrow\infty$.
+
+
+
+
+\section*{Exercise 4.}
+\subsection*{i)}
+The second inequality holds.\\
+Proof:\\
+We take the norm in $\mathbb{R}$ to be $\mid \cdot\mid$.\\
+According to 2.2.27. Corollary of The Mean Value Theorem,
+\begin{align*}
+\parallel f\parallel_1=\int^1_0\mid f(x)\mid dx=\mid \int^1_0 f(x)dx\mid\leq\mid1-0\mid\mathop{sup}_{x\in[0,1]}\mid f(x)\mid=\mathop{sup}_{x\in[0,1]}\mid f(x)\mid=\parallel f\parallel_\infty
+\end{align*}
+So, $\parallel f\parallel_1\leq C\parallel f\parallel_\infty$, where C = 1.
+\subsection*{ii)}
+Let $f^n(x)=x^n$, where $n\in \mathbb{R}$.\\
+Then
+\begin{align*}
+\|f_n\|_1=\int^1_0\mid f_n(x)\mid dx=\int^1_0\mid x^n\mid dx=\mid \int^1_0 x^n dx\mid=\frac{1}{n+1}x^{n+1}\mid^1_0=\frac{1}{n+1}
+\end{align*}
+As $n\rightarrow \infty$, $\|f_n\|_1\rightarrow0$.\\
+But
+\begin{align*}
+\|f_n\|_{\infty}=\mathop{sup}_{x\in[0,1]}\mid f_n(x)\mid=\mathop{sup}_{x\in[0,1]}\mid x^n\mid=1
+\end{align*}
+As $n\rightarrow \infty$, $\|f_n\|_{\infty}\not\rightarrow0$
+
+\section*{Exercise 5.}
+Because $\overline{B_1(0)}=\lbrace(a_n)\in l^1:\displaystyle{\sum_0^\infty \mid a_n\mid\leq1}\rbrace$, it is bounded as every element is bounded.\\
+Next, we want to prove $\overline{B_1(0)}$ is closed by proving $l^1\backslash\overline{B_1(0)}$ is open.\\
+\begin{align*}
+l^1\backslash\overline{B_1(0)}=\lbrace(a_n)\in l^1:\displaystyle{\sum_0^\infty \mid a_n\mid>1}\rbrace
+\end{align*}
+For some set $(a_n)\in l^1\backslash\overline{B_1(0)}$ that $\|(a_n)\|_1$ = C $>$ 1.\\
+Then 
+\begin{align*}
+B_{\varepsilon}((a_n)):=\lbrace(x_n)\in l^1:\Vert (x_n)-(a_n)\Vert <\frac{C-1}{2}
+\end{align*}
+And $\displaystyle{\sum^\infty_{n=0}}\vert x_n\vert>\frac{C+1}{2}>1$, so $l^1\backslash\overline{B_1(0)}$ is open. And $\overline{B_1(0)}$ is closed.\\
+Let $e_n=(0,0,\cdots,0,1,0,\cdots)$, where 1 is in the nth position.\\
+Then
+\begin{align*}
+\| e_n\|=\displaystyle{\sum_0^\infty} \mid a_n\mid=1
+\end{align*}
+So $e_n\in\overline{B_1(0)}$.\\
+Since $a_{n+1}-a_n=(0,0,\cdots,0,-1,1,\cdots)\not\rightarrow0$ as $n\rightarrow\infty$. \\
+So ($e_n$) does not have a convergent subsequence.\\
+Hence $\overline{B_1(0)}$ is not compact.
+
+
+
+
+\end{document}

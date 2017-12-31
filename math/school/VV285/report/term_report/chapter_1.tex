@@ -1,0 +1,159 @@
+%comment after completion \documentclass{article}
+%comment after completion \input heading
+%comment after completion \begin{document}
+\chapter{Simple Imperfect}
+{\flushright
+	{\sffamily\slshape
+	It now remains that \\
+	we find the amount of time of descent through the channel. \\
+	This we shall obtain from the marvelous property of the pendulum, \\
+	which is that it makes all its vibrations, large or small, in equal times. \\
+	}
+	\vskip 0.1in
+{\sffamily\upshape --- \textsc{Galileo Galilei}. {\it Letter to Giovanni Battista Baliani } (1639)}
+\vskip 2in 
+}
+
+\setcounter{section}{0}
+\section{Down the Rabbit Hole\hfill}
+\lettrine[lines=2]{$\mathscr{T}\,$}\lowercase{h}e difficulty of solving 
+\eqref{pendulum equation} lies in the fact that it invokes the analytical 
+expression of a very special class of functions called the ``elliptic functions". 
+Nevertheless, the relation \eqref{pendulum equation} actually gives us much about
+the behavior of $\ta(t)$ if we use the following transformation:
+\eq{
+\dd{}{t}\dot{\ta}=\dd{\dot{\ta}}{\ta}\dd{\ta}{t}=\dd{\dot{\ta}}{\ta}
+\dot{\ta}=\ff{1}{2}\dd{}{\ta}(\dot{\ta})^2
+}
+then \eqref{pendulum equation} turns into a separable first order
+differential equation in $(\dot\ta)^2$
+\etag{dq}
+{
+\dd{}{\ta}(\dot\ta)^2=-\ff{2g}{l}\st
+}
+and the general solution to it is
+\eq{
+\dot{\ta}^2=\ff{2g}{l}\ct+C
+}
+the initial condition $\dot\ta(0)=0$, $\ta(0)=\ta_0 $ gives rise to
+\etag{3}{
+\dot\ta=\sq{\ff{2g}{l}(\ct-\ct_0)}
+}
+
+Now, since this physical phenomenon indicates that mapping $t\mapsto \ta$ is 
+bijective in a single period and differentiable, we may use the inverse function 
+theorem\cite{rudin1964principles}:
+\eq{
+t'(\ta)=\ff{1}{\dd{\ta(t)}{t}}=\ff{1}{\dot\ta}=\sq{\ff{l}{2g}}
+\ff{1}{\sq{\ct-\ct_0}}
+}
+and we integrate it for a quarter of a period (from zero displacement to 
+the full displacement $\ta_0$) to find the total period:
+\etag{period}{
+T=4\int_0^{\ta_0}\,dt=4\sq{\ff{l}{2g}}\int_0^{\ta_0}\ff{d\ta}{\sq{\ct-\ct_0}}
+}
+
+Now further evaluation of the integral seems to be a hopeless task. This
+can be shown by taking the substitution:\cite{awrejcewicz2012classical}
+\eq
+{
+&\sp=\ff{\st/2}{\st_0/2}\\
+&\cp\,d\p=\ff{1}{2}\ff{\ct/2}{\st_0/2}\,d\ta
+}
+when $\ta$ travels from $0$ to $\ta_0$, the above relation indicates $\p$ travels from $0$ to $\pi/2$, and \eqref{period} becomes:
+\eq
+{
+T&=2\sq{\ff{l}{g}}\int_0^{\ta_0}\ff{d\ta}{\st_0/2\sq{1-\left(\ff{\st/2}{\st_0/2}\right)^2}}\\
+&=2\sq{\ff{l}{g}}\int_0^{\pi/2}\ff{2\cp\st_0/2}{\ct/2}\ff{1}{\st_0/2}
+\ff{d\p}{\sq{1-\sin^2\varphi}}\\
+&=4\sq{\ff{l}{g}}\int_0^{\pi/2}\ff{d\p}{\sq{1-\sin^2\ta/2}}\\
+&=4\sq{\ff{l}{g}}\int_0^{\pi/2}\ff{d\p}{\sq{1-\sin^2(\ta_0/2)\,\sin^2\p}}
+\numberthis{elliptic}
+}
+
+This is a complete elliptic integral of the first kind\cite{borwein1987pi}. Invoke the relation from the
+Assignment 1 of Vv186:
+\etag{AGM}{
+\int_0^{\pi/2}\ff{d\ta}{\sq{{a^2\cos^2\ta+b^2\sin^2\ta}}}=\ff{\pi}{2M(a,b)}
+} 
+where $M(a,b)$ is the limit of the AGM process\cite{borwein1987pi}:
+\eq{
+a_{n+1}=\ff{a_n+b_n}{2}&\quad b_{n+1}=\sq{a_n\,b_n}\quad a_0=a,\quad b_0=b\\
+&M(a,b):=\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n
+} 
+Noticing that $M$ is homogenous in its componets: $M(a,b)=aM(1,b/a)$, we may
+use \eqref{AGM} to rewrite \eqref{elliptic} as:
+\etag{AGM period}
+{
+T=2\pi\sq{\ff{l}{g}}\ff{1}{M\left(1,\sq{1-\sin^2\ta_0}\right)}
+}
+
+On the other hand, the relation \eqref{elliptic} can be tackled by series expansion\cite{awrejcewicz2012classical}:
+\etag{series}
+{
+f(x)=(1-x)^{-\ff{1}{2}}=1-\ff{1}{2}x+o(x)
+}
+for $|x|<1$, then the first order approximation by setting $x= \sin^2(\ta_0/2)\,\sin^2\p$:
+\eq{
+T&=4\sq{\ff{l}{g}}\left(\int_0^{\pi/2}\ff{d\p}{\sq{1-\sin^2(\ta_0/2)\,\sin^2\p}}\right)\\
+&\approxeq4\sq{\ff{l}{g}}\left(\int_0^{\pi/2}d\p-\ff{1}{2}\sin^2\ff{\ta_0}{2}\int_0^{\pi/2}\sin^2\p d\p\right)\\
+&=2\pi\sq{\ff{l}{g}}\left(1-\ff{1}{4}\sin^2\ff{\ta_0}{2}\right)\\
+&\approxeq2\pi\sq{\ff{l}{g}}\left(1-\ff{\ta_0^2}{16}\right)
+\numberthis{apperiod}
+}
+where in the last line we use the approximation $\sin x\approxeq x$ for $x$ near $0$.
+\section{Remarks\hfill}
+\lettrine[lines=2]{$\mathcal{I}\,$}\lowercase{n}cidentally, the integral in \eqref{elliptic} is called the ``Elliptic Integral" of the {\it first kind}, which is closely related to the {\it second kind}  since it naturally arises  in the integral of calculating the curve length of 
+an ellipse\cite{borwein1987pi}:
+\eq{
+\begin{dcases}
+y=b\cos\theta\\
+x=a\sin\theta
+	\end{dcases},\qquad\theta\in[0,2\pi)
+}
+The length is given by:
+\eq{
+A=4\int\sqrt{dx^2+dy^2}=4\int_0^{\pi/2}\sqrt{a^2\cos^2\theta+b^2\sin^2\theta}\,d\theta=4aE\left(\sq{1-\left(\frac{b}{a}\right)^2}\right)
+}
+where we summarize the two kinds of (complete) elliptic integral and their transformed version under appropriate substitution\cite{borwein1987pi}:
+
+\eq
+{
+K(k):&=\int_0^{\pi/2}\frac{d\theta}{\sqrt{1-k^2\sin^2\theta}}=\int_0^{1}\frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}}\\
+E(k):&=\int_0^{\pi/2}\sqrt{1-k^2\sin^2\theta}\,d\theta=\int_0^{1}\frac{\sqrt{1-k^2t^2}}{\sqrt{1-t^2}}\,dt
+}
+
+These integrals (along with the third type which we shall not introduce here) has
+bothered mathematicians for decades in calculations and apart from the 
+breakthrough in manipulating and transforming the elliptic integral by Legendre,
+no significant insight was made until the young mathematician N.H. Abel. In
+the 1820s, when history shall mark this day, Abel came up with a beautiful idea of considering the inverse of elliptic integrals with respect to the upper limit, which is no longer necessarily fixed for a full period. Indeed, the difficulty of evaluating the incomplete elliptic integral resembles so much the difficulty of evaluating the integral:
+\eq
+{
+f(u)=\int_0^u \ff{dx}{\sq{1-x^2}}
+}
+while the inverse of $f(u)$ is simply the sine function with nice analytical properties.
+
+The striking fact is that under Abel's insight, the elliptic functions, no longer integrals since the upper limit is changing, are {\it doubly periodic functions}\cite{stein2003complex} 
+defined on the complex plane (with certain ``poles"). This insight literally opened a whole new field of analysis through his milestone paper ``Recherches sur les fonctions elliptiques." The tragic part of the story is that this young genius eventually died of poverty and disease at merely the age of 25, and never saw his grand finale when the masterpiece got recognized by the world. It was said that on 8 April 1829, two days after his death, the appointment as
+a professor at the University of Berlin, finally arrived. It was just too late.    
+\vfill
+{\flushright
+	{\sffamily\slshape
+		$\ldots$ C'est la fonction inverse de la premi\`ere esp\`ece\\
+		 Sous cette forme, les fonctions elliptiques offrent des propri\'et\'es tr\`es
+		 remarquables\\
+		 et sont beaucoup plus faciles \`a traiter.\\
+		  C'est surtout la fonction qui m\'erite une attention particuli\`ere. \\
+		  \vskip 0.2 in
+		  [$\ldots$ This is the inverse function of the first kind. \\
+		  In this form, elliptic functions offer very remarkable properties\\
+		   and are much easier to treat.\\
+		    This is especially the function that deserves special attention.]
+		  
+		\medskip
+		{\sffamily\upshape --- \textsc{Neils. H. Abel}.~{\it ``Recherches sur les fonctions elliptiques"},~Berlin,~1829.}
+}\eject	
+
+}
+%\end{document}

@@ -1,0 +1,396 @@
+\input mla
+%\usepackage{nath}
+\begin{document}
+\titlehm{9}
+\begin{vv286_ms}{1}
+\item[(i)]
+ See the sketched counter in Figure \ref{c:1}.
+ 
+% \begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=0.6\textwidth]{1.jpg}
+%
+%\caption{Counter for the $f(z)=\sq{z}/(z^2+a^2)$}
+%\label{default}
+%\end{center}
+%\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}
+% Configurable parameters
+\def\gap{0.2}
+\def\bigradius{3}
+\def\littleradius{0.5}
+
+% Axes
+\draw [help lines,->] (-1.25*\bigradius, 0) -- (1.25*\bigradius,0);
+\draw [help lines,->] (0, -1.25*\bigradius) -- (0, 1.25*\bigradius);
+% Red path
+\draw[line width=1pt,   decoration={ markings,
+  mark=at position 0.2455 with {\arrow[line width=1.2pt]{>}},
+  mark=at position 0.765 with {\arrow[line width=1.2pt]{>}},
+  mark=at position 0.87 with {\arrow[line width=1.2pt]{>}},
+  mark=at position 0.97 with {\arrow[line width=1.2pt]{>}}},
+  postaction={decorate}]
+  let
+     \n1 = {asin(\gap/2/\bigradius)},
+     \n2 = {asin(\gap/2/\littleradius)}
+  in (\n1:\bigradius) arc (\n1:360-\n1:\bigradius)
+  -- (-\n2:\littleradius) arc (-\n2:-360+\n2:\littleradius)
+  -- cycle;
+
+% The labels
+\node at (3.6,-0.2){Re};
+\node at (-0.24,3.53) {Im};
+\node at (-0.8,0.5) {$C_{\varepsilon}$};
+\node at (-1.8,3) {$C_{R}$};
+\node at (1.9,0.4) {$\Gamma_1$};
+\node at (1.9,-0.4) {$\Gamma_2$};
+
+
+\end{tikzpicture}
+\caption{Counter for the $f(z)=\sq{z}/(z^2+a^2)$}
+\label{c:1}
+\end{center}
+\end{figure}
+
+  Consider the function $f(z)={\sq{z}}/{(z^2+a^2)}$ (by choosing the branch cut of $\{0\}\cup\R^+$) and the path of integration along the greater
+  circle $C_R$, rotating through the negative axis, then making a small circle turn $C_{\varepsilon}$ around the origin, in the graph the angle $\p$ is understood to be sufficiently small such that as $\p\to0$ the two line will finally parallel with the real axis, then:
+  \eq
+  {
+  \int_{\Gamma_1}+\int_{\Gamma_2}+\int_{C_R}+\int_{C_{\epsilon}}=2\pi i(\res{f}{ia}+\res{f}{-ia})
+  }
+   Then the residues at $z=\pm ia$ (careful at our branch choice):
+  \eq
+  {
+  &\res{f}{ia}=\ff{\sq{a}e^{\pi/4i}}{2ai}\\
+  &\res{f}{-ia}=-\ff{\sq{a}e^{3\pi/4i}}{2ai}\\
+  &\implies \res{f}{ia}+\res{f}{-ia}=\ff{\sq{2}}{2i\sq{a}}
+  }
+  On the greater and smaller circle we have estimate:
+  \eq
+  {
+  \left|\int_{C_R}\right|\le 2\pi R \ff{\sq{R}}{R^2}\to 0\\
+  \left|\int_{C_{\e}}\right|\le 2\pi \e \ff{\sq{\e}}{a^2}\to 0
+  }
+  the two straight line we have parameterization:
+  \eq
+  {
+  z&=te^{i\p},\quad t:0\to\infty\\
+  z&=te^{2\pi i-i\p}\quad t:\infty\to0
+  }
+  due to our branch, then the integral becomes:
+  \eq
+  {
+  \int_{\Gamma_1}+\int_{\Gamma_2}&=\int_{0}^{\infty}\ff{\sq{t}e^{i\phi/2}}{t^2e^{2i\phi}+1}e^{i\phi}\,dt+\int_{\infty}^{0}\ff{\sq{t}e^{\pi i-i\phi/2}}{t^2e^{4\pi i-2i\phi}+1}e^{2\pi i-i\phi}\, dt\\
+  &\to \int_{0}^{\infty}\ff{\sq{t}}{t^2+1}\dt
+  +\int_{0}^{\infty}\ff{\sq{t}}{t^2+1}\dt\quad\text{as $\phi\to0$}
+  \\&=2\int_{0}^{\infty}\ff{\sq{t}}{t^2+1}\dt
+  }
+   the desired result is:
+\begin{align*}
+    \int_0^{\infty}\frac{\sq x}{x^2+a^2}\, dx=\frac{\pi}{\sq a}\frac{\sq 2}{2}
+  \end{align*}
+  
+ \item[(ii)]
+ We first consider $a>0$, then the sketched counter:
+ \begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}[scale=2]
+% The axes
+\draw[help lines,->] (-3,0) -- (3,0) coordinate (xaxis);
+\draw[help lines,->] (0,-1) -- (0,3) coordinate (yaxis);
+
+% The path
+\path[draw,line width=0.8pt,postaction=decorate] (0.3,0) node[below] {$\varepsilon$} -- (2,0) node[below] {$r$} arc (0:180:2) -- (-0.3,0) arc (180:0:0.3);
+
+% The labels
+\node[below] at (xaxis) {Re};
+\node[left] at (yaxis) {Im};
+\node[below left] {$O$};
+\node at (0.2,0.6) {$C_{\varepsilon}$};
+\node at (1.5,1.8) {$C_{r}$};
+\end{tikzpicture}
+\caption{Counter for the $f(z)={\ln z}/(z^2+a^2)$}
+\label{c:2}
+\end{center}
+\end{figure}
+
+   Consider the function $f(z)=\ff{ \ln  z}{z^2+a^2}$ (by choosing the branch cut of $\{0\}\cup i\R^-$)
+   and the path of integration along the punctuated semi-circle centered at the origin with the
+   greater arc $C_R$ and the smaller arc at the origin $C_{\varepsilon}$.\\
+   By our branch, the logarithm on the negative axis are properly defined by parameterization:
+   \begin{align*}
+     \ln (-x)=\ln  e^{i\pi}t=i\pi+\ln (t)
+     \quad\text{for $t:0^+\to+\infty$}
+   \end{align*}
+   and the corresponding integral on the negative axis is:
+  \begin{align*}
+    I^-=\int_{\Gamma^-}\frac{\ln x}{x^2+a^2}\, dx=\int_{+\infty}^{0}\frac{\ln (te^{i\pi})}{x^2+a^2}e^{i\pi}\, dx=
+    I^{+}+\int_{0}^{+\infty}\frac{\pi i}{x^2+a^2}\, dx=I^++\frac{\pi^2i}{2a}
+  \end{align*}
+  also it's easy to check that the integral along the greater and smaller semi-circle vanishes due to the decay of $1/R^2$ at infinity and $\e\ln \e\to 0$ as $\e\to0$. We
+  therefore have:
+  \begin{align*}
+    I^++I^-=2I^++\frac{\pi^2i}{2a}=\res{f}{ia}=\frac{\pi \ln a}{a}+\frac{\pi^2i}{2a}
+  \end{align*}
+  comparing the real part, thus the desired result is:
+  \[
+  \int_{0}^{+\infty}\frac{\ln x}{x^2+a^2}\, dx=\frac{\pi \ln a}{2a}
+  \]
+  
+  If $a<0$, the corresponding counter will be chosen at the negative half plane and the desired result is
+  \[
+  \int_{0}^{+\infty}\frac{\ln x}{x^2+a^2}\, dx=\frac{\pi \ln (-a)}{2(-a)}
+  \] 
+  
+  If $a=0$ the improper integral does not converge near $0^+$ and the integral diverges.\\
+  In conclusion we have:
+  \eq
+  {
+  \int_{0}^{+\infty}\frac{\ln x}{x^2+a^2}\, dx=\frac{\pi \ln |a|}{2|a|} \quad\text{when $a\neq0$,} \quad\text{and it diverges when $a=0$} 
+  }
+\end{vv286_ms}
+
+\begin{vv286_ms}{2}
+\item[]
+First we notice:
+\eq
+{
+y''+y'=f(x)\implies y=\ff{1}{1-(-D)^2}f(x)
+}
+and
+\eq
+{
+\ff{1}{1-(-D)^2}=\sum_{k=0}(-1)^kD^{2k}
+}
+symbolically. 
+\item[(i)]
+We calculate:
+\eq
+{
+D^0(3x+5x^4)&=3x+5x^4\\
+D^2(3x+5x^4)&=60x\\
+D^4(3x+5x^4)&=120x\\
+D^{2k}(3x+5x^4)&=0,\quad k\ge3
+}
+Therefore:
+  \[
+  y=3x-60x^2+5x^4+120
+  \]
+  Plugging back indeed this is a solution. The operator method worked.
+ \item[(ii)]
+ Note:
+ \eq
+ {
+ D^{2k}e^{\mu x}=\mu^{2k}e^{\mu x}
+ }
+ Therefore:
+ 
+   \[
+   y=\sum_{k=0}(-1)^k\mu^{2k}e^{\mu x}=\e^{\mu x}\frac{1}{1+\mu^2}
+   \]
+   Plugging back indeed this is a solution(formally on some domain). The operator method worked.
+\end{vv286_ms}
+
+\begin{vv286_ms}{3}
+\item[(i)]
+Notice:
+\eq
+{
+\sinh(bt)=\ff{e^{bt}-e^{-bt}}{2}=i\sin{(bt/i)}
+}
+Therefore:
+  \[
+  L[\sinh(bt)](p)=\frac{b}{p^2-b^2}\quad p>|b|
+  \]
+ \item[(ii)]
+ This follows from the table:
+   \[
+   L[\cos(bt)](p)=\frac{p}{p^2+b^2}\quad p>|b|
+   \]
+  \item[(iii)]
+   This follows from the table:
+   \eq
+   {
+   L[tf(t)](p)=-\ff{d}{dp}L[f(t)](p)
+   }
+   therefore:
+    \begin{align*}
+      L[t\sin(at)](p)=\frac{2pa}{(p^2+a^2)^2}\quad p>0
+    \end{align*}
+  \item[(iv)]
+     This follows from the table:
+   \eq
+   {
+   L[tf(t)](p)=-\ff{d}{dp}L[f(t)](p)
+   }
+   therefore:
+    \begin{align*}
+      L[t^2\sinh(bt)](p)=2b\left( \frac{1}{(p^2-b^2)^2}-\frac{4p^2}{(p^2-b^2)^3} \right)
+      \quad p>|b|
+    \end{align*}
+   \item[(v)]
+   By definition:
+   \eq
+   {
+   L[\sq{t}](p)=\int_{0}^{\infty}t^{3/2-1}e^{-pt}\dt=\ff{1}{p\sq{p}}\int_{0}^{\infty}(tp)^{3/2-1}e^{-pt}\,dpt
+   }
+     Therefore:
+     \begin{align*}
+       L[\sq{t}](p)=p^{-3/2}\Gamma(3/2)=p^{-3/2}\ff{1}{\Gamma(1/2)}=\ff{\sq{\pi}}{2}p^{-3/2}
+       \quad p>0
+     \end{align*}
+    \item[(vi)]
+     By definition:
+   \eq
+   {
+   L[1/\sq{t}](p)=\int_{0}^{\infty}t^{1/2-1}e^{-pt}\dt=\ff{\sq{p}}{p}\int_{0}^{\infty}(tp)^{1/2-1}e^{-pt}\,dpt
+   }
+   Therefore:
+      \begin{align*}
+	L[1/\sq{t}](p)=\ff{\Gamma(1/2)}{\sq{p}}=\sq{\frac{\pi}{p}}
+	\quad p>0
+      \end{align*}
+\end{vv286_ms}
+
+\begin{vv286_mp}{4}
+\item[(i)]
+  Let $y$ to be any solution and construct $Y(x)=y(-x)$ for
+  $Y(0)=y(0)=1$, $Y'(0)=y'(0)=0$, and we
+  have $Y'(x)=-y'(-x)$, $Y''(x)=y''(-x)$, and we can show that:
+  \begin{align*}
+    xY''+Y'+xY=-\left((-x)y''(-x)+y'(-x)+(-x)y(-x)\right)=0
+  \end{align*}
+  thus by uniqueness we must have $y(x)=Y(x)=y(-x)$
+ \item[(ii)]
+   Indeed, this can be shown by setting $z=a+bi$, where $a, b\in\R$, and
+   solve for
+   \begin{align*}
+     z^2+1=a^2-b^2+1+2abi\in\R
+   \end{align*}
+   and this gives $a=0$ and $b\in[-1, \, 1]$ or $b=0$ and $a\in\R$.
+   Combining the two gives $\Gamma$ in question.
+ \item[(iii)]
+ Consider the sketched in Figure \ref{bone}:
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}[scale=2]
+% The axes
+\draw[help lines,->] (-3,0) -- (3,0) coordinate (xaxis);
+\draw[help lines,->] (0,-3) -- (0,3) coordinate (yaxis);
+
+% The path
+\path[draw,line width=0.8pt,postaction=decorate] 
+(0.1,0.2)node[below] {$\varepsilon$}  -- (1,0.2)node[ right] {$1+i\varepsilon$}
+(1,0.2)  -- (1,3)
+arc (90:162:4) -- (-2.8,0.2)node[left] {$-R+i\varepsilon$}
+(-2.8,0.2)  -- (-0.1,0.2)
+(-0.1,0.2)  -- (-0.1,0.8)
+(-0.1,0.8) arc (240:-60:0.2) -- (0.1,0.8)
+(0.1,0.8)-- (0.1,0.2)
+;
+
+\path[draw,line width=0.8pt,postaction=decorate] 
+(0.1,-0.2)node[above] {$\varepsilon$}  -- (1,-0.2)node[right] {$1-i\varepsilon$}
+(1,-0.2)  -- (1,-3)
+arc (270:200:4) -- (-2.8,-0.2)node[left] {$-R-i\varepsilon$}
+(-2.8,-0.2)  -- (-0.1,-0.2)
+(-0.1,-0.2)  -- (-0.1,-0.8)
+(-0.1,-0.8) arc (-240:+60:0.2) -- (0.1,-0.8)
+(0.1,-0.8)-- (0.1,-0.2)
+;
+
+% The labels
+\node[below] at (xaxis) {Re};
+\node[left] at (yaxis) {Im};
+\node[below left] {$O$};
+\node at (0.05,1) {$i$};
+\node at (0.05,-1) {$-i$};
+\end{tikzpicture}
+\caption{Counter for the $f(z)$ contracting to dogbone as $\e\to0$}
+\label{bone}
+\end{center}
+\end{figure}
+
+   Since $i$ and $-i$ are the only two branch points, we choose the branch
+   cut :$\{z\in\C:\, \Re z=0, \, -1\le\Im z\le1\}$, and let the path of
+   integration follows from the vertical line $\Re z=1$ and rotating to the
+   left of a great quarter, when touching the negative axis then going back
+   to the imaginary axis, then follows along the axis to the point
+   $i$, rotating a smaller circle back to the origin and joining to the
+   point infinitesimally close to the point $1$, a symmetry path is chosen
+   for then lower half plane.\\
+   It's easy to see that the integral for the great quarter and the small
+   circle around $i$ vanish, and the path following along the real line
+   cancels each other for the upper half and the lower half, and what
+   remains is the pair of the paths from the branch points $i$ to
+   $-i$. 
+   We identify the square root:
+   \eq
+   {
+   \sq{z^2+1}=e^{\ff{1}{2}\ln(z^2+1)}
+   }
+   and the branch chosen as $(0,2\pi i]$.\\
+   For the left half plane, we see that by $z=ite^{2\pi^-i}$:
+   \begin{align*}
+     \int_{-i}^{i}\frac{e^{xz}}{\sq{z^2+1}}\, dz=
+     \int_{-1}^{1}\frac{e^{xti}}{e^{i\pi}\sq{1-t^2}}\, idt
+     =-\int_{-1}^{1}\frac{e^{xti}}{\sq{1-t^2}}\, idt
+   \end{align*}
+   due to our branch.\\
+   And the for the right half plane, we see by $z=ite^{0^+i}$:
+   \begin{align*}
+     \int_{i}^{-i}\frac{e^{xz}}{\sq{z^2+1}}\, dz
+     =-\int_{-1}^{1}\frac{e^{xti}}{\sq{1-t^2}}\, idt
+   \end{align*}
+   Therefore we conclude that since the two whole closed integrals have no
+   residues, the total sum must vanish:
+   \begin{align*}
+     \int_{1-i\infty}^{1+i\infty}\frac{e^{xz}}{\sq{z^2+1}}-2\int_{-1}^{1}\frac{e^{xti}}{\sq{1-t^2}}i\,
+     dt=0\numberthis{1}
+   \end{align*}
+   and we set the substitution: $t=\sin \ta$, the second term yields:
+   \begin{align*}
+     2i\int_{-\pi/2}^{\pi/2}\cos (x\sin \ta)+i\sin (x\sin \ta)\,
+   d\ta=2i\int_{0}^{\pi}\cos (x\sin \ta)\, d\ta
+   \end{align*}
+   where we used the symmetry of $\sin  x$ on $[0, \pi]$ and it's odd on
+   $[-\pi/2, \pi/2]$. Subsititude it into \eqref{1} and divide it by
+   $2\pi i$ gives us $J_0(x)$. This completes the proof.
+ \end{vv286_mp}
+
+ \begin{vv286_ms}{5}
+ \item[(i)]
+   \begin{align*}
+     y=-\frac{1}{6}e^t+\frac{1}{2}e^{2t}-\frac{1}{2}e^{3t}+\frac{1}{6}e^{4t}
+   \end{align*}
+  \item[(ii)]
+    \begin{align*}
+      y=\frac{1}{4}t\sin t-\frac{1}{4}t^2\cos t+\cos t+2\sin t
+    \end{align*}
+     \item[(iii)]
+    \begin{align*}
+      y=1+e^{-t}+\ff{2}{\sq{3}}e^{-1/2t}\left(\ff{\sq{3}}{2}\cos\ff{\sq{3}}{2}t-\ff{7}{2}\sin\ff{\sq{3}}{2}t\right)
+    \end{align*}
+   \item[(iv)]
+     \begin{align*}
+       y=&\ff{2}{\sq3}e^{-1/2t}\sin(\ff{\sq3}{2}t+\ff{\pi}{3})+\\
+       &H(t-\pi)\left(1+\ff{2}{\sq{3}}e^{-1/2(t-\pi)}\sin(\ff{\sq3}{2}(t-\pi)-\ff{2\pi}{3})\right)+\\
+       &H(t-2\pi)\left(1+\ff{2}{\sq{3}}e^{-1/2(t-2\pi)}\sin(\ff{\sq3}{2}(t-2\pi)-\ff{2\pi}{3})\right)
+     \end{align*}
+   \item[(v)]
+     \begin{align*}
+       &\text{for $0\le t<\pi$:}\quad&y=\cos t+\ff{1}{2}\sin t-\ff{t}{2}\cos t\\
+       &\text{for $\pi\le t$:}\quad&y=\left(\ff{t}{2}-\ff{\pi}{2}\right)\sin t-\left(\ff{\pi}{2}-1\right)\cos t
+     \end{align*}
+    \item[(vi)]
+      \begin{align*}
+	&\text{for $0\le t<\pi/2$:}\quad&y=3\cos t-\sin t+\ff{1}{2}t\sin t\\
+       &\text{for $\pi/2\le t$:}\quad&y=(\ff{\pi}{4}-1)\sin t+\ff{5}{2}\cos t
+         \end{align*}
+ \end{vv286_ms}
+
+\end{document}

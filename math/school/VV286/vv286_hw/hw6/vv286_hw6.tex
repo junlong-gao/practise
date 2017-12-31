@@ -1,0 +1,240 @@
+\input mla
+\begin{document}
+\titlehm{5}
+
+
+\begin{vv286_ms}{1}
+\item[]
+	We first solve the homogenous equation:
+	\eq
+	{
+	\dot{x}=\mm{2&0&1\\
+				0&2&0\\
+				0&0&3}
+				x
+	}
+	to obtain a fundamental system:
+	\eq
+	{
+	x=e^{At}\quad A=\mm{2&0&1\\
+				0&2&0\\
+				0&0&3}
+	}
+	by finding the Jordan normal form of $A$.
+	Then using the method of variation of parameters:
+	\eq
+	{
+	x(t)=e^{A(t-t_0)}x_0+\int_{t_0}^{t}e^{(t-s)A}b(s)\,ds
+	}
+	The solution:
+	\eq
+	{
+	x(t)=\mm{e^{2(t-t_0)}&0&e^{3(t-t_0)}-e^{2(t-t_0)}\\
+	0&e^{2(t-t_0)}&0\\
+	0&0&e^{3(t-t_0)}}
+	\mm{x_1(t_0)\\x_2(t_0)\\x_3(t_0)}+
+	\mm{e^{3t-t_0}\\0\\e^{3t-t_0}-e^{2t}}
+	}
+\end{vv286_ms}
+\begin{vv286_ms}{2}
+\item[]
+	Consider the system:
+	\eq
+	{
+	{\bf y}(t)=\mm{y(t)\\y'(t)\\y''(t)}
+	}
+	hence the equation is equivalent to:
+	\eq
+	{
+	{\bf y'}(t)=\mm{y'(t)\\y''(t)\\y'''(t)}=\mm{0&1&0\\
+												0&0&1\\
+												0&-1&0}\mm{y(t)\\y'(t)\\y''(t)}
+												+\mm{0\\0\\ \sec t\tan t}
+	}
+	with the initial value:
+	\eq
+	{
+	{\bf y}(0)=\mm{0
+	\\0\\0}
+	}
+	We first solve the homogenous equation:
+	\eq
+	{
+	\dot{y}=\mm{0&1&0\\
+				0&0&1\\
+				0&-1&0}
+				y
+	}
+	to obtain a fundamental system:
+	\eq
+	{
+	x=e^{At}\quad A=\mm{0&1&0\\
+				0&0&1\\
+				0&-1&0}
+	}
+	by finding the Jordan normal form of $A$.
+	Then using the method of variation of parameters:
+	\eq
+	{
+	y(t)=e^{A(t-t_0)}y_0+\int_{t_0}^{t}e^{(t-s)A}b(s)\,ds
+	}
+	The solution:
+	\eq
+	{
+	y(t)=\ff{1}{\cos  t}+\cos  t\ln\cos t+\sin t(t-\tan t)-1
+	}
+\end{vv286_ms}
+\begin{vv286_mp}{3}
+\item[]
+	We set $\det\left( A-\lam I \right)=0$ to get $\lam=-b/2a$ with algebraical multiplicity
+	$2$. Now if $b=0$ it's trivial that 
+	\eq
+	{
+	\mm{0&1\\0&0}
+	}
+	is not diagonalisable since $\lam=0$ there is no non-trivial solution.\\
+	if $b\neq 0$, then we have 
+	\eq
+	{
+	V_{\lam}={\rm span}\mm{-\ff{2a}{b}\\1}
+	}
+	with geometric multiplicity $1<2$. Thus either case it's not  diagonalizable. 
+\end{vv286_mp}
+\begin{vv286_ms}{4}
+\item[(i)]
+	We consider the infinitesimal increment:
+	\eq
+	{
+	\Delta Q_1=\ff{3}{2}\Delta t-3\Delta t\ff{Q_1}{V_1}+1.5\ff{Q_2}{V_2}\\
+	\Delta Q_2=3\Delta t+3\Delta t\ff{Q_1}{V_1}-4\Delta t\ff{Q_2}{V_2}
+	}
+	Notice the volume stays the same $V_1=30$, $V_2=20$.\\
+	Dividing both side by $\Delta t$ and let the increment of time approaching $0$ we get the
+	desired differential equations:
+	\eq
+	{
+	Q_1'(t)&=\ff{3}{2}-\ff{1}{10}Q_1+\ff{3}{40}Q_2\\
+	Q_2'(t)&=3+\ff{1}{10}Q_1-\ff{1}{5}Q_2
+	}
+\item[(ii)]
+	We have the linear system:
+	\eq
+	{
+	\mm{Q'_1(t)\\Q'_2(t)}
+	=
+	\mm{-1/10&3/40\\
+		1/10&-1/5}
+		\mm{Q_1(t)\\Q_2(t)}
+		+
+		\mm{3/2\\3}
+	}
+	We first solve the homogenous equation:
+	\eq
+	{
+	\dot{Q}(t)=\mm{-1/10&3/40\\
+				1/10&-1/5}
+				Q(t)
+	}
+	to obtain a fundamental system:
+	\eq
+	{
+	Q(t)=e^{At}\quad A=\mm{-1/10&3/40\\
+					1/10&-1/5}
+	}
+	by finding the Jordan normal form of $A$.
+	Then using the method of variation of parameters:
+	\eq
+	{
+	Q(t)=e^{A(t-t_0)}Q(0)+\int_{t_0}^{t}e^{(t-s)A}b(s)\,ds
+	}
+	and the initial:
+	\eq
+	{
+	Q(0)=\mm{25\\15}
+	}
+	Solutions:
+	\eq
+	{
+	\mm{Q_1(t)\\Q_2(t)}=\mm{\ff{29}{8}e^{-t/4}-\ff{165}{8}e^{-t/20}+42\\
+	-\ff{55}{4}e^{-t/20}-\ff{29}{4}e^{-t/4}+36}
+	}
+\end{vv286_ms}
+\begin{vv286_ms}{5}
+\item[(i)]
+	The general solution:
+	\eq
+	{
+	y=c_1\left( t+\ff{2}{t+1}+c_2 \right)(t+1)\quad c_1,\,c_2\in\R
+	}
+\item[(ii)]
+	The general solution:
+	\eq
+	{
+	y=\ff{1}{\sq{t}}(c_1\sin t+c_2\cos t)\quad c_1,\,c_2\in\R
+	}
+\end{vv286_ms}
+\begin{vv286_mp}{6}
+\item[]
+	Plugging the numbers and ignore the buoyant force (positive direction along gravity)
+	\eq
+	{
+	\ddot{u}+2\dot{u}+u=0
+	}
+	where we set $u=x+\ff{mg}{k}$ and $x$ is measured from the displacement of the spring.
+	Then the solution is:
+	\eq
+	{
+	u=\left( -\ff{1}{4}+\ff{5}{4}t \right)e^{-t}
+	}
+	notice that $u(1/5)=0$ (equilibrium), $u\to0$ as $t\to\infty$ and $\dot{u}<0$ for sufficiently large $t$.
+\end{vv286_mp}
+\begin{vv286_ms}{7}
+\item[]
+	The driven force can be decomposed into 
+	\eq
+	{
+		F(t)=\cos^3\w t=\ff{1}{4}\cos3\w s+\ff{3}{4}\cos\w s
+	}
+	and
+	\eq
+	{
+		\w_0=\sq{k/m}=4
+	}
+	by superposition principle, we see that resonance occur at
+	\eq
+	{
+		\w=\w_0,\quad 3\w=\w_0
+	}  
+	Thus the frequencies are $4$ and $4/3$.
+\end{vv286_ms}
+\begin{vv286_ms}{8}
+\item[]
+	We solve the particular solution:
+	\eq
+	{
+	y&=\ff{150\sq{2}}{\a}e^{-2/3t}\sin \ff{\sq2}{3}\a t\\
+	y'&=\ff{150\sq{2}}{\a}e^{-2/3t}\left( -\ff{2}{3}\sin \ff{\sq2}{3}\a t+\ff{\sq2}{3}\cos \ff{\sq2}{3}\a t\right)
+	}
+	and set the quantity $y^2(1)+y'^2(1)<0.01$ yields $\a>6$ (round off to integers).
+\end{vv286_ms}
+\begin{vv286_ms}{9}
+\item[]
+	We have the second order ODE:
+	\eq
+	{
+	m\ddot{x}+c\dot{x}+x=3\cos t
+	}
+	and solve the system, plugging the numbers:$m=4$, $k=1$,$\gamma=c$, $\w=1/2$ and $F_0=3$, we
+	have $R=3/\sq{9+c^2}\leq0.5$, $\iff c_{\rm mim}=3\sq3$.
+\end{vv286_ms}
+
+
+
+
+
+
+
+
+
+
+\end{document}

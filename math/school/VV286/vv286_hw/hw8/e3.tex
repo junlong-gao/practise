@@ -1,0 +1,25 @@
+%% AMS-LaTeX Created by Wolfram Mathematica 9.0 : www.wolfram.com
+
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+\begin{document}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{f1}=\text{ParametricPlot3D}\left[\left\{r*\text{Cos}[t],r*\text{Sin}[t] ,\frac{2}{\pi }\times \left(\text{ArcTan}\left[\frac{1+r}{1-r}\times
+\frac{1}{\text{Tan}[t/2]}\right]-\text{Pi}/2-\text{ArcTan}\left[\frac{1+r}{1-r}\times \text{Tan}[t/2]\right]\right)\right\},\{r,0,1\},\{t,-\text{Pi},0\}\right];}\\
+\pmb{\text{f2}=\text{ParametricPlot3D}\left[\left\{r*\text{Cos}[t],r*\text{Sin}[t] ,\frac{2}{\pi }\times \left(\text{ArcTan}\left[\frac{1+r}{1-r}\times
+\frac{1}{\text{Tan}[t/2]}\right]+\text{Pi}/2-\text{ArcTan}\left[\frac{1+r}{1-r}\times \text{Tan}[t/2]\right]\right)\right\},\{r,0,1\},\{t,0,\text{Pi}\}\right];}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{Show}[\text{f1},\text{f2},\text{PlotRange}\to \text{All},\text{Boxed}\to \text{False},\text{ImageSize}\to \text{Large}]}\)
+\end{doublespace}
+
+\includegraphics{e3_gr1.eps}
+
+\end{document}

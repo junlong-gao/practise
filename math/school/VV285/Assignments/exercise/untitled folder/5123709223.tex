@@ -1,0 +1,636 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{gauss}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{multirow}
+%一般要用到的package就以上这些,其实我也不知道它们分别有什么用..
+\newtheorem{ex}{Exercise}
+\title{Assignment 1}
+\author{Sun Chen\\ ID:5123709223}
+\begin{document}
+\maketitle
+
+\section*{Exercise 1.}
+\subsection*{a)}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   4 & 2 & -2 \\
+		   -3 & 1 & 0 \\
+		   1 & 4 & 2
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ -2 \\
+ 6 \\
+ -9
+\rowops
+\swap02
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 4 & 2 \\
+		   -3 & 1 & 0 \\
+		   4 & 2 & -2
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ -9 \\
+ 6 \\
+ -2
+\rowops
+\add[\cdot3]01
+\add[\cdot(-4)]02
+\end{gmatrix} \\[1Em]
+&\quad\sim\quad
+\left.\begin{gmatrix}
+		   1 & 4 & 2 \\
+		   0 & 13 & 6 \\
+		   0 & -14 & -10
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ -9 \\
+ -21 \\
+ 34
+\rowops
+\mult1{:13}
+\mult2{:14}
+\add12
+\end{gmatrix}
+& & \sim\quad
+\left.\begin{gmatrix}
+		   1 & 4 & 2 \\
+		   0 & 1 & \frac{6}{13} \\
+		   0 & 0 & -\frac{23}{91}
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ -9 \\
+ -\frac{21}{13} \\
+ \frac{74}{91}
+ \rowops
+\mult2{:-\frac{23}{91}}
+\end{gmatrix}\\[1Em]
+&\quad\sim\quad \left.\begin{gmatrix}
+		   1 & 4 & 2 \\
+		   0 & 1 & \frac{6}{13} \\
+		   0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ -9 \\
+ -\frac{21}{13} \\
+ -\frac{74}{23}
+\rowops
+\add[\cdot-\frac{6}{13}]21
+\add[\cdot(-2)]20
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 4 & 0 \\
+		   0 & 1 & 0 \\
+		   0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ -\frac{59}{23} \\
+ -\frac{3}{23} \\
+ -\frac{74}{23}
+\rowops
+\add[\cdot(-4)]10
+\end{gmatrix} \\[1Em]
+&\quad\sim\quad \left.\begin{gmatrix}
+		   1 & 0 & 0 \\
+		   0 & 1 & 0 \\
+		   0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ -\frac{47}{23} \\
+ -\frac{3}{23} \\
+ -\frac{74}{23}
+\end{gmatrix}
+\end{align*}
+\subsection*{b)}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   1 & -3 & -5 \\
+		   2 & -2 & 1 \\
+		   -3 & 5 & -6
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 26 \\
+ 12 \\
+ 2
+\rowops
+\add[\cdot(-2)]01
+\add[\cdot3]02
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & -3 & -5 \\
+		   0 & 4 & 11 \\
+		   0 & -4 & -21
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 26 \\
+ -40 \\
+ 80
+\rowops
+\mult1{:4}
+\mult2{:4}
+\add12
+\end{gmatrix} \\[1Em]
+&\quad\sim\quad
+\left.\begin{gmatrix}
+		   1 & -3 & -5 \\
+		   0 & 1 & \frac{11}{4} \\
+		   0 & 0 & -\frac{5}{2}
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 26 \\
+ -10 \\
+ 10
+\rowops
+\mult2{:-\frac{5}{2}}
+\end{gmatrix}
+& & \sim\quad
+\left.\begin{gmatrix}
+		   1 & -3 & -5 \\
+		   0 & 1 & \frac{11}{4} \\
+		   0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 26 \\
+ -10 \\
+ -4
+\rowops
+\add[\cdot(-\frac{11}{4})]21
+\add[\cdot5]20
+\end{gmatrix}\\[1Em]
+&\quad\sim\quad \left.\begin{gmatrix}
+		   1 & -3 & 0 \\
+		   0 & 1 & 0 \\
+		   0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 6 \\
+ 1 \\
+ -4
+\rowops
+\add[\cdot3]10
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 0 & 0 \\
+		   0 & 1 & 0 \\
+		   0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 9 \\
+ 1 \\
+ -4
+\end{gmatrix} \\[1Em]
+\end{align*}
+\subsection*{c)}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   3 & 1 & -2 \\
+		   24 & 10 & -13 \\
+		   -6 & -4 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 3 \\
+ 25 \\
+ -7
+\rowops
+\mult0{:3}
+\mult1{:24}
+\mult2{:6}
+\add[\cdot(-1)]01
+\add02
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & \frac{1}{3} & -\frac{2}{3} \\
+		   0 & \frac{1}{12} & \frac{1}{8} \\
+		   0 & -\frac{1}{3} & -\frac{1}{2}
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 1 \\
+ \frac{1}{24} \\
+ -\frac{1}{6}
+\rowops
+\mult1{:\frac{1}{12}}
+\mult2{:\frac{1}{3}}
+\add12
+\end{gmatrix} \\[1Em]
+&\quad\sim\quad
+\left.\begin{gmatrix}
+		   1 & \frac{1}{3} & -\frac{2}{3} \\
+		   0 & 1 & \frac{3}{2} \\
+		   0 & 0 & 0
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 1 \\
+ \frac{1}{2} \\
+ 0
+\end{gmatrix}\\[1Em]
+\end{align*}
+Writing this system out explicitly,
+~~~~~$x_1=\frac{7x_3-1}{6},~~~~x_2=\frac{1-3x_3}{2}$\\
+where $x_3\in R$ is arbitrary. It is often convenient to introduce a parameter:\\
+$~~~~~~~~~~~~x_1=\frac{7\alpha-1}{6},~~~~~~~~~~~x_2=\frac{1-3\alpha}{2},~~~~~~~~~~~x_3=\alpha,~~~~~~~~~\alpha\in R$
+\subsection*{d)}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   1 & 2 & 1 & 1 \\
+		   2 & 1 & 1 & 2 \\
+		   1 & 2 & 1 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0 \\
+ 0
+\rowops
+\add[\cdot(-2)]01
+\add[\cdot(-1)]02
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 2 & 1 & 1 \\
+		   0 & -3 & -1 & 0 \\
+		   0 & 0 & 0 & 0
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0 \\
+ 0
+\end{gmatrix} \\[1Em]
+\end{align*}
+Writing this system out explicitly,
+~~~~~$x_1+2x_2+x_3+x_4=0,~~~~-3x_2-x_3=0$\\
+It is often convenient to introduce a parameter:\\
+$~~~~~~~~~~~~x_1=\alpha,~~~~~~~~~~~x_2=\beta,~~~~~~~~~~~x_3=-3\beta,~~~~~~~~~x_4=\beta-\alpha~~~~~~~~~\alpha\in R$
+
+\section*{Exercise 2.}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   1 & 1 & 1 & 1 \\
+		   1 & -1 & -1 & -1 \\
+		   1 & 1 & -1 & -1 \\
+           3 & 1 & 1 & -1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha \\
+ \alpha-4 \\
+ \alpha+1 \\
+ 0
+\rowops
+\add[\cdot(-1)]01
+\add[\cdot(-1)]02
+\add[\cdot(-3)]03
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 1 & 1 & 1 \\
+		   0 & -2 & -2 & -2 \\
+		   0 & 0 & -2 & -2 \\
+           0 & -2 & -2 & -4
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha \\
+ -4 \\
+ 1 \\
+ -3\alpha
+\rowops
+\mult1{:-2}
+\mult2{:-2}
+\mult3{:-2}
+\add[\cdot(-1)]13
+\end{gmatrix} \\[1Em]
+&\quad\sim\quad
+\left.\begin{gmatrix}
+		   1 & 1 & 1 & 1 \\
+		   0 & 1 & 1 & 1 \\
+		   0 & 0 & 1 & 1 \\
+           0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha \\
+ 2 \\
+ -\frac{1}{2} \\
+ \frac{3}{2}\alpha-2
+\rowops
+\add[\cdot(-1)]32
+\add[\cdot(-1)]31
+\add[\cdot(-1)]30
+\end{gmatrix}
+& & \sim\quad
+\left.\begin{gmatrix}
+		   1 & 1 & 1 & 0 \\
+		   0 & 1 & 1 & 0 \\
+		   0 & 0 & 1 & 0 \\
+           0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 2-\frac{1}{2}\alpha \\
+ 4-\frac{3}{2}\alpha \\
+ \frac{3}{2}-\frac{3}{2}\alpha \\
+ \frac{3}{2}\alpha-2
+\rowops
+\add[\cdot(-1)]21
+\add[\cdot(-1)]20
+\end{gmatrix}\\[1Em]
+&\quad\sim\quad \left.\begin{gmatrix}
+		   1 & 1 & 0 & 0 \\
+		   0 & 1 & 0 & 0 \\
+		   0 & 0 & 1 & 0 \\
+           0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha+\frac{1}{2} \\
+ \frac{5}{2} \\
+ \frac{3}{2}-\frac{3}{2}\alpha \\
+ \frac{3}{2}\alpha-2
+\rowops
+\add[\cdot(-1)]10
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 0 & 0 & 0 \\
+		   0 & 1 & 0 & 0 \\
+		   0 & 0 & 1 & 0 \\
+           0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha-2 \\
+ \frac{5}{2} \\
+ \frac{3}{2}-\frac{3}{2}\alpha \\
+ \frac{3}{2}\alpha-2
+\end{gmatrix} \\[1Em]
+\end{align*}
+\section*{Exercise 3.}
+According to Kirchhoff’s laws:
+\begin{equation*}
+\begin{cases}
+I_1=I_2+I_4\\
+I_3+I_4=I_5\\
+V_1-3I_1R-I_2R+V_2=0\\
+V_2+2I_4R+V_3-I_3R-I_2R=0\\
+V_3-I_3R-I_5R=0
+\end{cases}
+\begin{cases}
+I_1-I_2-I_4=0\\
+I_3+I_4-I_5=0\\
+990I_1+330I_2=600\\
+330I_2+330I_3-660I_4=500\\
+330I_3+330I_5=200
+\end{cases}
+\end{equation*}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   1 & -1 & 0 & -1 & 0 \\
+		   0 & 0 & 1 & 1 & -1 \\
+		   1 & \frac{1}{3} & 0 & 0 & 0 \\
+           0 & 1 & 1 & -2 & 0 \\
+           0 & 0 & 1 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0 \\
+ \frac{20}{33} \\
+ \frac{50}{33} \\
+ \frac{20}{33}
+\rowops
+\swap12
+\swap34
+\swap24
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & -1 & 0 & -1 & 0 \\
+		   1 & \frac{1}{3} & 0 & 0 & 0 \\
+           0 & 1 & 1 & -2 & 0 \\
+           0 & 0 & 1 & 0 & 1 \\
+           0 & 0 & 1 & 1 & -1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ \frac{20}{33} \\
+ \frac{50}{33}\\
+ \frac{20}{33}\\
+0
+\end{gmatrix} \\[1Em]
+&\quad\sim\quad
+\left.\begin{gmatrix}
+		   1 & -1 & 0 & -1 & 0 \\
+		   0 & 1 & 0 & \frac{3}{4} & 0 \\
+           0 & 0 & 1 & -\frac{11}{4} & 0 \\
+           0 & 0 & 0 & 1 & \frac{4}{11} \\
+           0 & 0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ \frac{5}{11} \\
+ \frac{35}{33}\\
+ -\frac{20}{121}\\
+\frac{80}{429}
+\end{gmatrix}
+& & \sim\quad
+\left.\begin{gmatrix}
+		   1 & 0 & 0 & 0 & 0 \\
+		   0 & 1 & 0 & 0 & 0 \\
+           0 & 0 & 1 & 0 & 0 \\
+           0 & 0 & 0 & 1 & 0 \\
+           0 & 0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \frac{170}{429} \\
+ \frac{90}{143} \\
+ \frac{60}{143}\\
+ -\frac{100}{429}\\
+\frac{80}{429}
+\end{gmatrix}\\[1Em]
+\end{align*}
+
+\section*{Exercise 4.}
+\subsection*{i)}
+\begin{equation*}
+   \begin{cases}
+m_1-m_2-m_3+m_4=0\\
+0m_1+0m_20+m_3+0m_4=0\\
+m_1+m_2+m_3+m_4=0\\
+0m_1+0m_20+m_3+0m_4=0
+   \end{cases}
+\end{equation*}
+Use the fourth equation, and we get $m_1+m_2+m_3+m_4=0$,\\
+ which is contradictory to $m_i>0(i=1,2,3,4)$\\
+So the solution does not exist.\\
+Because the fourth equation is not satisfied, $2_nd$ order balancing is not possible.\\
+\subsection*{ii)}
+\begin{equation*}
+   \begin{cases}
+\frac{\sqrt3}{2}(m_2+m_5)-\frac{\sqrt3}{2}(m_3+m_4)=0\\
+(m_1+m_6)-\frac{1}{2}(m_2+m_5)-\frac{1}{2}(m_3+m_4)=0\\
+\frac{\sqrt3}{2}(m_2z_2+m_5z_5)-\frac{\sqrt3}{2}(m_3z_3+m_4z_4)=0\\
+(m_1z_1+m_6z_6)-\frac{1}{2}(m_2z_2+m_5z_5)-\frac{1}{2}(m_3z_3+m_4z_4)=0
+   \end{cases}
+\end{equation*}
+\begin{equation*}
+   \begin{cases}
+m_1+m_6=m_2+m_5=m_3+m_4\\
+m_1z_1+m_6z_6=m_2z_2+m_5z_5=m_3z_3+m_4z_4
+   \end{cases}
+\end{equation*}
+Because there are 6 unknowns and 4 equations, the equation set has a non-trivial solution.\\
+Let $m_1=m_2=m_3=m_4=m_5=m_6>0$, we can get $z_1+z_6=z_2+z_5=z_3+z_4$\\
+We can take $z_i\not=z_j~whenever~i\not=j$ to make sure $m_i>0$\\
+So $2_nd$ order balancing is possible.
+\subsection*{iii)}
+Let $a_i=\sin\alpha_i,~b_i=\cos\alpha_i$\\
+Using the equation 1, 2, 5, 6 and we can get:
+\begin{equation*}
+   \begin{cases}
+a_1+a_2+a_3+a_4=0\\
+3a_1+a_2-a_3-3a_4=0\\
+b_1+b_2+b_3+b_4=0\\
+3b_1+b_2-b_3-3b_4=0
+   \end{cases}
+\end{equation*}
+Use the equation 8 and we get $3(2b_1^2-1)+(2b_2^2-1)-(2b_3^2-1)-3(2b_4^2-1)=0$\\
+So $3(b_1-b_4)(b_1+b_4)=(b_3-b_2)(b_3+b_2)$\\
+Because $3(b_1-b_4)=b_3-b_2$,\\
+If $b_1-b_4=b_3-b_2=0$, then $b_1=b_4=-b_2=-b_3$\\
+Take this to the equation 3, and we get $a_1b_1=0$\\
+Because $a_1,b_1$ are equal in representation, we take $a_1=0$, then $b_1^2=1$\\
+But according to the equation 4, we get $a_1^2+a_2^2+a_3^3+a_4^2=2$ Contradictory!\\
+So $b_1-b_4=b_3-b_2\not=0$, then $3(b_1+b_4)=b_2+b_3$\\
+Because $b_1+b_2+b_3+b_4=0,~3b_1+b_2-b_3-3b_4=0$\\
+We can get 
+\begin{equation*}
+   \begin{cases}
+b_1=-b_4,~b_3=-b_2\\
+b_2=-3b_1,a_2=-3a_1
+   \end{cases}
+\end{equation*}
+So $a_2^2+b_2^2\not=a_1^2+b_1^2$, contradictory!
+Hence $2_nd$ order balancing is not possible.
+
+\section*{Exercise 5.}
+\begin{equation*}
+   \begin{cases}
+   \lambda_1+3x\lambda_2&=0\\
+   \lambda_1(x+2)+2x\lambda_2&=0
+   \end{cases}
+ ~~~\Longrightarrow ~~~~\lambda_1=\lambda_2=0~~~~~~~~~~~
+ \lambda_1,\lambda_2~are~the~only~pair~of~solution~of~the~equation~set:
+\end{equation*}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   1 & 3x \\
+		   x+2 & 2x
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 3x \\
+		   0 & -3x^2-4x
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0
+\end{gmatrix} \\[1Em]
+\end{align*}
+$So~~~~~-3x^2-4x\not=0,$~~~~~~~~~~~~~~$so~~~x\not=0~~~and~~~x\not=-\frac{4}{3}$
+
+\section*{Exercise 6.}
+\subsection*{i)}
+This statement is wrong.\\
+Let's take $n=3. So~(a_1,a_2),(a_1,a_3),(a_2,a_3)$ are linearly independent.\\
+We take $a_1 = (1,0), a_2 = (0,1), a_3 = (1,1),$ ~and~they~are~independent~to~each~other.\\
+ Actually, $(a_1,a_2,a_3)$ are not independent because $a_1+a_2-a_3=0$.
+\subsection*{ii)}
+This statement is true.\\
+Assume we negative the conclusion and get there exists $i=1,2,...,n$ for all $\lambda_j$ such that $a_i\not=\sum_{j\not=i}\lambda_ja_j$\\
+There exists $i=1,2,...,n$ that $\sum_{j\not=i}\lambda_ja_j-a_i\not=0$\\
+Let $\lambda_i = -1$, and multiply $\alpha (\alpha\not=0)$ to both sides, we get:\\
+$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\sum_{j\not=i}\alpha\lambda_ja_j-\alpha a_i\not=0$\\
+Let $\alpha_j=\alpha\lambda_j~for~ j\not=i, ~and ~\alpha_i=-\alpha$, ~then there exists $ \alpha_i\not=0 \Longrightarrow \sum\alpha_ja_j\not=0$\\
+This is equivalent to $\sum\alpha_ja_j=0\Longrightarrow \alpha_i=0 $ for all i=1,2,...,n\\
+So $(a_1,a_2,...,a_n)$ are linearly dependent. Contradictory!\\
+So the assumption is wrong and the statement is proved.
+
+\section*{Exercise 7.}
+\subsection*{i)}
+We first need to prove if $x,y\in U$, then $x+y\in U$\\
+$x+y=(x_1+y_1,x_2+y_2,x_3+y_3,x_4+y_4)$ with $f_1(x)=f_2(x)=f_3(x)=f_1(y)+f_2(y)=f_3(y)=0$
+$f_1(x+y)=f_1(x)+f_1(y)=0,~f_2(x+y)=f_2(x)+f_2(y),~f_3(x+y)=f_3(x)+f_3(y)$\\
+So $x+y\in U$\\
+Because the addition is associative and commutative for $x,y \in R^4$, so it will also have these properties for $x,y \in U$.\\
+The unit element is $e=(0,0,0,0)\in U$, and the inverse element to x is $-x=(-x_1,-x_2,-x_3,-x_4)\in U$(because $-f_1(x)=-f_2(x)=-f_3(x)=0$). In a similar manner, we can check that scalar multiplication is a map $R*U\rightarrow U$ and satisfies all conditions to ensure that $(L,+,\dot)$ is a vector space.\\
+Since $U\in R^4$, U is a subspace of $R^4$.
+\subsection*{ii)}
+\begin{equation*}
+\begin{cases}
+f_1(x)=x_1+2x_2+x_3-x_4=0\\
+f_2(x)=3x_1+5x_2-x_3-6x_4=0\\
+f_3(x)=-2x_1-x_2+10x_3+11x_4=0
+\end{cases}
+\end{equation*}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   1 & 2 & 1 & -1 \\
+		   3 & 5 & -1 & -6 \\
+           -2 & -1 & 10 & 11
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0 \\
+ 0
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 2 & 1 & -1 \\
+		   0 & 1 & 4 & 3 \\
+           0 & 0 & 0 & 0
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0 \\
+ 0
+\end{gmatrix} \\[1Em]
+\end{align*}
+$(x_1,x_2,x_3,x_4)$ is the solutions of the equation set:
+\begin{equation*}
+\begin{cases}
+x_1+2x_2+x_3-x_4=0\\
+x_2+4x_3+3x_4=0
+\end{cases}
+\end{equation*}
+Let $x_3=x_4=1$, we can get $x_1=14,~x_2=-7$.\\
+So a basis of U is $(14,-7,1,1)$, and $(0,-7,1,1)$.
+
+\section*{Exercise 8.}
+\subsection*{1)}
+$\langle a,a\rangle=2a_1^2+a_1a_2+a_2a_1+2a_2^2=2(a_1+\frac{a_2}{2})^2+\frac{3}{2}a_2^2\ge0$\\
+If $a=0$, then $a_1=a_2=0\Longrightarrow\langle a,a\rangle=0$\\
+If $\langle a,a\rangle=0$, then $(a_1+\frac{a_2}{2})^2=a_2^2=0\Longrightarrow a_1=a_2=0\Longrightarrow a=0$\\
+$\langle a,b+c\rangle=0=2a_1(b_1+c_1)+a_1(b_2+c_2)+a_2(b_1+c_1)+2a_2(b_2+c_2)=(2a_1b_1+a_1b_2+a_2b_1+2a_2b_2)+(2a_1c_1+a_1c_2+a_2c_1+2a_2c_2)=\langle a,b\rangle+\langle a,c\rangle$\\
+$\langle a,\lambda b\rangle=2\lambda a_1b_1+\lambda a_1b_2+\lambda a_2b_1 +2\lambda a_2b_2=\lambda\langle a,b\rangle$\\
+$\langle a,b\rangle=2a_1b_1+a_1b_2+a_2b_1 +2a_2b_2=\overline{2a_1b_1+a_1b_2+a_2b_1 +2a_2b_2}=\overline{\langle b,a\rangle}$\\
+So it is inner products.
+\subsection*{2)}
+$\langle a,a\rangle=a_1^2+a_1a_2+a_2a_1+a_2^2=(a_1+a_2)^2\ge0$\\
+If $\langle a,a\rangle=0$, then $(a_1+a_2)^2=0\Longrightarrow a_1=-a_2\not\Longrightarrow a=0(for~ example~a_1=1,a_2=-1)$\\
+So it is NOT inner products.
+\subsection*{3)}
+$\langle a,a\rangle=a_1^3+a_2^3\not\Longrightarrow a_1^3+a_2^3\ge0(for~example~a_1=-1,a_2=-1)$\\
+So it is NOT inner products.
+\subsection*{4)}
+$\langle a,a\rangle=a_1^2-a_2^2\not\Longrightarrow a_1^2-a_2^2\ge0(for~example~a_1=0,a_2=1)$\\
+So it is NOT inner products.
+
+\end{document}

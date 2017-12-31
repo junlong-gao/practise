@@ -1,0 +1,759 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{amsmath} 
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{cases}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{gauss}
+
+\def\dotp#1#2{\langle#1,#2\rangle}
+\def\ss#1#2{\sum_{#1=1}^{#2}}
+\def\lam{\lambda}
+\def\vec#1{\{#1_1,#1_2\ldots#1_n\}}
+\def\es#1#2{{\bf Exercise #1}\\~{\it Solution:}\\~#2\\[1em]}
+\def\ep#1#2{{\bf Exercise #1}\\~{\it Solution:}\\~#2\\[1em]}
+\def\inn#1#2{(#1): #2\\[0.5em]}
+\def\ff#1#2{\frac{#1}{#2}}
+
+
+\def\sedb{$2^{\rm nd}$ }
+
+\linespread{1.4}
+\geometry{a4paper,centering,scale=0.8}
+\rmfamily 
+\normalsize
+\setlength{\parindent}{0em}
+
+\begin{document} 
+\begin{flushleft}
+  Junlong Gao 5133709126\\ 
+  Prof.  Hohberger\\ 
+  VV285 Assignment 1\\
+  \today 
+\end{flushleft}
+
+\es{1}{
+\inn{a}{
+	\begin{align*}
+	&\qquad\quad \left.\begin{gmatrix}
+			   4 & 2 & -2 \\
+			   -3 &1 & 0 \\
+			   1 & 4 & 2
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 -2 \\
+	 6 \\
+	 -9
+	\rowops
+	\swap 02
+	\end{gmatrix}
+	 &&\sim\quad
+	\left.\begin{gmatrix}
+			   1 & 4 & 2 \\
+			   -3 &1 & 0 \\
+			   4 & 2 & -2
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 -9 \\
+	 6 \\
+	 -2
+	\rowops
+	\add[\cdot 3]01
+	\add[\cdot (-4)]02
+	\end{gmatrix} \\[1Em]
+	&\quad\sim\quad
+	\left.\begin{gmatrix}
+			   1 & 4 & 2 \\
+			   0 &13 & 6 \\
+			   0 & -14 & -10
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 9 \\
+	 -21 \\
+	 -38
+	\rowops
+	\add[\cdot (\ff{14}{13})]12
+	\mult1{:13}
+	\end{gmatrix}
+	 && \sim\quad
+	\left.\begin{gmatrix}
+			   1 & 4 & 2 \\
+			   0 &1 & \frac{6}{13} \\
+			   0 & 0 & -\frac{48}{13}
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 -9 \\
+	 -\frac{21}{13} \\
+	 \frac{148}{13}
+	\rowops
+	\mult2{:(\frac{48}{13})}
+	\end{gmatrix} \\[1Em]
+	&\quad\sim\quad
+	\left.\begin{gmatrix}
+			   1 & 4 & 2 \\
+			   0 &1 & \frac{6}{13} \\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 -9 \\
+	 -\frac{21}{13} \\
+	 -\frac{74}{23}
+	\rowops
+	\add[\cdot (-\frac{6}{13})]21
+	\add[\cdot (-2)]20
+	\end{gmatrix}
+	&&\quad\sim\quad
+	\left.\begin{gmatrix}
+			   1 & 4 & 0 \\
+			   0 &1 & 0 \\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 -\frac{59}{23} \\
+	 -\frac{3}{23} \\
+	 -\frac{74}{23}
+	\rowops
+	\add[\cdot (-4)]10
+	\end{gmatrix}\\[1Em]
+	&\quad\sim\quad
+	\left.\begin{gmatrix}
+			   1 & 0 & 0 \\
+			   0 &1 & 0 \\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 -\frac{47}{23} \\
+	 -\frac{3}{23} \\
+	 -\frac{74}{23}
+	\end{gmatrix}
+	\end{align*}
+	And read of the solution in the last reduced system: $x_1= -\frac{47}{23}, 
+	x_2= -\frac{3}{23}, x_3= -\frac{74}{23}$
+	}
+\inn{b}{
+	\begin{align*}
+	&\qquad\quad \left.\begin{gmatrix}
+			   1 & -3 & -5 \\
+			   2 &-2 & 1 \\
+			   -3 & 5 & -6
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 26 \\
+	 12 \\
+	 2
+	\rowops
+	\add[\cdot (-2)]01
+	\add[\cdot 3]02
+	\end{gmatrix}
+	 &&\sim\quad
+	\left.\begin{gmatrix}
+			   1 & -3 & -5 \\
+			   0 &4 & 11 \\
+			   0 & -4 & -21
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 26 \\
+	-40 \\
+	 80
+	\rowops
+	\add[\cdot 1]12
+	\end{gmatrix} \\[1Em]
+	&\quad\sim\quad
+	\left.\begin{gmatrix}
+			   1 & -3 & -5 \\
+			   0 &4 & 11 \\
+			   0 & 0 & -10
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 26 \\
+	-40 \\
+	 40
+	\rowops
+	\mult2{(-10)}
+	\end{gmatrix}
+	 && \sim\quad
+	\left.\begin{gmatrix}
+			  1 & -3 & -5 \\
+			   0 &4 & 11 \\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 26 \\
+	-40 \\
+	-4
+	\rowops
+	\add[\cdot (-11)]21
+	\add[\cdot 5]20
+	\end{gmatrix} \\[1Em]
+	&\quad\sim\quad
+	\left.\begin{gmatrix}
+			   1 & -3 & 0 \\
+			   0 &4 & 0 \\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	6 \\
+	4 \\
+	-4
+	\rowops
+	\mult1{4}
+	\add[\cdot 3]10
+	\end{gmatrix}
+	&&\sim\quad
+	\left.\begin{gmatrix}
+			   1 & 0 & 0 \\
+			   0 &1 & 0 \\
+			   0 & 0 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	9\\
+	1\\
+	-4
+	\end{gmatrix}
+	\end{align*}
+	And read of the solution in the last reduced system: $x_1= 9, 
+	x_2= 1, x_3= -4$
+	}
+\inn{c}{
+	\begin{align*}
+	&\qquad\quad \left.\begin{gmatrix}
+			   3 & 1 & -2 \\
+			   24 &10 & -13 \\
+			   -6 & -4 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 3 \\
+	 25 \\
+	 -7
+	\rowops
+	\mult0{3}
+	\add[\cdot (-24)]01
+	\add[\cdot 6]02
+	\end{gmatrix}
+	 &&\sim\quad \left.\begin{gmatrix}
+			   1 & \frac{1}{3} & -\frac{2}{3} \\
+			   0 &2 & 3 \\
+			   0 & -2 & -3
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 1 \\
+	 1 \\
+	 -1
+	\rowops
+	\add[\cdot 1]12
+	\end{gmatrix}\\[1em]
+	&\quad\sim\quad \left.\begin{gmatrix}
+			   1 & \frac{1}{3} & -\frac{2}{3} \\
+			   0 &2 & 3 \\
+			   0 & 0 & 0
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 1 \\
+	 1 \\
+	 0
+	\rowops
+	\end{gmatrix}
+	 \end{align*}
+	This is a singular form and we introduce a parameter $z=t$ and get the general solution: 
+	$x_1=\frac{5}{6}+\frac{7}{6}t, x_2=\frac{1}{2}-\frac{3}{2}t, x_3=t, t\in\mathbb{R}$
+	}
+\inn{d}{
+	\begin{align*}
+	&\qquad\quad \left.\begin{gmatrix}
+			   1 & 2 & 1 & 1 \\
+			   2 & 1 & 1 & 2 \\
+			   1 & 2 & 1 & 1
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 0 \\
+	 0 \\
+	 0
+	\rowops
+	\add[\cdot(-2)]01
+	\add[\cdot(-1)]02
+	\end{gmatrix}
+	& &\sim\quad
+	\left.\begin{gmatrix}
+			   1 & 2 & 1 & 1 \\
+			   0 & -3 & -1 & 0 \\
+			   0 & 0 & 0 & 0
+	\end{gmatrix}\right|\
+	\begin{gmatrix}
+	 0 \\
+	 0 \\
+	 0
+	\end{gmatrix} \\[1Em]
+	\end{align*}
+	This is a singular form and we introduce a parameter $x_3=\alpha,x_4=\beta$ and get the general solution: 
+	$x_1=-\frac{\alpha}{3}-\beta, x_2=-\frac{\alpha}{3}, x_3=\alpha,x_4=\beta.\quad \alpha,\beta\in\mathbb{R}$\\
+	}
+}
+\es{2}{
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   1 & 1 & 1 & 1 \\
+		   1 & -1 & -1 & -1 \\
+		   1 & 1 & -1 & -1 \\
+           3 & 1 & 1 & -1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha \\
+ \alpha-4 \\
+ \alpha+1 \\
+ 0
+\rowops
+\add[\cdot(-1)]01
+\add[\cdot(-1)]02
+\add[\cdot(-3)]03
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 1 & 1 & 1 \\
+		   0 & -2 & -2 & -2 \\
+		   0 & 0 & -2 & -2 \\
+           0 & -2 & -2 & -4
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha \\
+ -4 \\
+ 1 \\
+ -3\alpha
+\rowops
+\mult1{:-2}
+\mult2{:-2}
+\mult3{:-2}
+\add[\cdot(-1)]13
+\end{gmatrix} \\[1Em]
+&\quad\sim\quad
+\left.\begin{gmatrix}
+		   1 & 1 & 1 & 1 \\
+		   0 & 1 & 1 & 1 \\
+		   0 & 0 & 1 & 1 \\
+           0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha \\
+ 2 \\
+ -\frac{1}{2} \\
+ \frac{3}{2}\alpha-2
+\rowops
+\add[\cdot(-1)]32
+\add[\cdot(-1)]31
+\add[\cdot(-1)]30
+\end{gmatrix}
+& & \sim\quad
+\left.\begin{gmatrix}
+		   1 & 1 & 1 & 0 \\
+		   0 & 1 & 1 & 0 \\
+		   0 & 0 & 1 & 0 \\
+           0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 2-\frac{1}{2}\alpha \\
+ 4-\frac{3}{2}\alpha \\
+ \frac{3}{2}-\frac{3}{2}\alpha \\
+ \frac{3}{2}\alpha-2
+\rowops
+\add[\cdot(-1)]21
+\add[\cdot(-1)]20
+\end{gmatrix}\\[1Em]
+&\quad\sim\quad \left.\begin{gmatrix}
+		   1 & 1 & 0 & 0 \\
+		   0 & 1 & 0 & 0 \\
+		   0 & 0 & 1 & 0 \\
+          	   0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha+\frac{1}{2} \\
+ \frac{5}{2} \\
+ \frac{3}{2}-\frac{3}{2}\alpha \\
+ \frac{3}{2}\alpha-2
+\rowops
+\add[\cdot(-1)]10
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 0 & 0 & 0 \\
+		   0 & 1 & 0 & 0 \\
+		   0 & 0 & 1 & 0 \\
+           0 & 0 & 0 & 1
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ \alpha-2 \\
+ \frac{5}{2} \\
+ \frac{3}{2}-\frac{3}{2}\alpha \\
+ \frac{3}{2}\alpha-2
+\end{gmatrix} \\
+\end{align*}
+Thus given $\alpha\in\mathbb{R}$, the system has the corresponding solution:
+\begin{equation*}
+x_1= \alpha-2,\quad x_2=\frac{5}{2},\quad x_3=\frac{3}{2}-\frac{3}{2}\alpha,\quad x_4=\frac{3}{2}\alpha-2
+\end{equation*}
+}
+\es{3}{
+According to Kirchhoffs laws applied to each node:
+\begin{equation*}
+\begin{cases}
+I_1=I_2+I_4\\
+I_3+I_4=I_5\\
+V_1-3I_1R-I_2R+V_2=0\\
+V_2+2I_4R+V_3-I_3R-I_2R=0\\
+V_3-I_3R-I_5R=0
+\end{cases}
+\end{equation*}
+Plug in the numbers and write it into a linear system:
+\begin{equation*}
+\begin{bmatrix}
+		   1 & -1 & 0 & -1 & 0 \\
+		   0 & 0 & 1 & 1 & -1 \\
+		   1 & \frac{1}{3} & 0 & 0 & 0 \\
+           0 & 1 & 1 & -2 & 0 \\
+           0 & 0 & 1 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+I_1 \\
+I_2 \\
+I_3 \\
+I_4 \\
+I_5
+\end{bmatrix}
+=
+\begin{bmatrix}
+ 0 \\
+ 0 \\
+ \frac{20}{33} \\
+ \frac{50}{33} \\
+ \frac{20}{33}
+\end{bmatrix}
+\end{equation*}
+Giving the result:
+\begin{equation*}
+\begin{bmatrix}
+I_1 \\
+I_2 \\
+I_3 \\
+I_4 \\
+I_5
+\end{bmatrix}
+=
+\begin{bmatrix}
+ \frac{170}{429} \\
+ \frac{90}{143} \\
+ \frac{60}{143}\\
+ -\frac{100}{429}\\
+\frac{80}{429}
+\end{bmatrix}
+({\rm A})
+\end{equation*}
+}
+\es{4}{
+(1) Plugging in all the angle we get
+\begin{equation*}
+   \begin{cases}
+m_1-m_2-m_3+m_4=0\\
+z_1m_1-z_2m_2-z_3m_3+z_4m_4=0\\
+m_1+m_2+m_3+m_4=0\\
+z_1m_1+z_2m_2+z_3m_3+z_4m_4=0
+   \end{cases}
+\end{equation*}
+And consider the matrix
+\[
+\left.\begin{gmatrix}
+1&-1&-1&1\\
+z_1&-z_2&-z_3&z_4\\
+1&1&1&1\\
+z_1&z_2&z_3&z_4
+\end{gmatrix}\right|
+\begin{gmatrix}
+0\\
+0\\
+0\\
+0
+\end{gmatrix}
+\quad\sim\quad
+\left.\begin{gmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&1&0\\
+0&0&0&1
+\end{gmatrix}\right|
+\begin{gmatrix}
+0\\
+0\\
+0\\
+0
+\end{gmatrix}
+\]
+Therefore only trivial solution is possible, and the \sedb is impossible.\\[0.5 em]
+(ii) Plugging all the angles, note that eight equations reduce to only four different equations:
+\[
+\left.\begin{gmatrix}
+0&\frac{\sqrt3}{2}&-\frac{\sqrt3}{2}&-\frac{\sqrt3}{2}&\frac{\sqrt3}{2}&0\\
+0&\frac{\sqrt3}{2}z_2&-\frac{\sqrt3}{2}z_3&-\frac{\sqrt3}{2}z_4&\frac{\sqrt3}{2}z_5&0\\
+1&-\frac{1}{2}&-\frac{1}{2}&-\frac{1}{2}&-\frac{1}{2}&1\\
+z_1&-\frac{1}{2}z_2&-\frac{1}{2}z_3&-\frac{1}{2}z_4&-\frac{1}{2}z_5&z_6
+\end{gmatrix}\right|
+\begin{gmatrix}
+0\\
+0\\
+0\\
+0
+\end{gmatrix}
+\]
+By the fundamental lemma, we know that this has a non-trivial solution since the number of unknowns is larger than the number of equations. By arranging $z_i$'s we can obtain a positive solution and it's possible to have a \sedb balance solution.\\
+In fact, if we write out the solution explicitly:
+\begin{align*}
+&m_1=\ff{z_5-z_2}{z_1-z_2}m_5+\ff{z_2-z_6}{z_1-z_2}m_6,\quad m_2=\ff{z_5-z_1}{z_1-z_2}m_5+\ff{z_1-z_6}{z_1-z_2}m_6\\
+&m_3=\ff{z_5-z_2}{z_1-z_2}\ff{z_1-z_4}{z_3-z_4}m_5+\ff{z_1-z_6}{z_1-z_2}\ff{z_2-z_4}{z_3-z_4}m_6,\quad m_4=\ff{z_2-z_5}{z_1-z_2}\ff{z_1-z_3}{z_3-z_4}m_5+\ff{z_2-z_5}{z_3-z_4}\ff{z_1-z_6}{z_1-z_2}m_6
+\end{align*}
+with $m_5,m_6>0$, then one can verify that as long as $z_6<z_4<z_3<z_2<z_1<z_5$, the $m_i$'s can be achieved positively.
+\\[0.5 em]
+(iii)
+Consider the skeleton
+\[
+\left.\begin{gmatrix}
+1&1&1&1\\
+3&1&-1&-3
+\end{gmatrix}\right|
+\begin{gmatrix}
+0\\
+0
+\end{gmatrix}
+\]
+has the solution of the form:
+$$
+x_1=p+2q\quad x_2=-2p-3q\quad x_3=p\quad x_4=q\qquad p,q\in\mathbb{R}
+\eqno{(*)}$$
+which all the trigonometric functions have to satisfy, in particular:
+\[
+\begin{bmatrix}
+\cos\alpha_1\\
+\cos\alpha_2\\
+\cos\alpha_3\\
+\cos\alpha_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+p+2q\\
+-2p-3q\\
+p\\
+q
+\end{bmatrix}
+\quad
+\begin{bmatrix}
+\cos2\alpha_1\\
+\cos2\alpha_2\\
+\cos2\alpha_3\\
+\cos2\alpha_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+2{(p+2q)}^2-1\\
+2{(-2p-3q)}^2-1\\
+2p^2-1\\
+2q^2-1
+\end{bmatrix}
+\]
+and we are lead to
+\begin{align*}
+&2{(p+2q)}^2-1=2p^2-1+2(2q^2-1)\\
+&2{(-2p-3q)}^2-1=(-2)(2p^2-1)-3(2q^2-1)
+\end{align*}
+The solution is
+\[
+\begin{bmatrix}
+\cos\alpha_1\\
+\cos\alpha_2\\
+\cos\alpha_3\\
+\cos\alpha_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\ff{\sqrt2}{2}\\
+\ff{\sqrt2}{2}\\
+\ff{\sqrt2}{2}\\
+-\ff{\sqrt2}{2}
+\end{bmatrix}
+\quad{\rm or}\quad
+\begin{bmatrix}
+\ff{\sqrt2}{2}\\
+-\ff{\sqrt2}{2}\\
+-\ff{\sqrt2}{2}\\
+\ff{\sqrt2}{2}
+\end{bmatrix}
+\quad{\rm or}\quad
+\begin{bmatrix}
+\ff{\sqrt10}{10}\\
+-\ff{3\sqrt10}{10}\\
+\ff{3\sqrt10}{10}\\
+-\ff{\sqrt10}{10}
+\end{bmatrix}
+\quad{\rm or}\quad
+\begin{bmatrix}
+-\ff{\sqrt10}{10}\\
+\ff{3\sqrt10}{10}\\
+-\ff{3\sqrt10}{10}\\
+\ff{\sqrt10}{10}
+\end{bmatrix}
+\]
+And we obtain from $\cos^2{\alpha}+\sin^2{\alpha}=1$ and $(*)$:
+\[
+\begin{bmatrix}
+\sin\alpha_1\\
+\sin\alpha_2\\
+\sin\alpha_3\\
+\sin\alpha_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+\ff{\sqrt2}{2}\\
+-\ff{\sqrt2}{2}\\
+-\ff{\sqrt2}{2}\\
+\ff{\sqrt2}{2}
+\end{bmatrix}
+\quad{\rm or}\quad
+\begin{bmatrix}
+-\ff{\sqrt2}{2}\\
+\ff{\sqrt2}{2}\\
+\ff{\sqrt2}{2}\\
+-\ff{\sqrt2}{2}
+\end{bmatrix}
+\]
+For the first or the second solution of $\cos\alpha$.\\
+Now by the fact that $\sin{2\alpha}=2\sin{\alpha}\cos{\alpha}$ we know that the solution of the form
+\[
+\begin{bmatrix}
+\sin2\alpha_1\\
+\sin2\alpha_2\\
+\sin2\alpha_3\\
+\sin2\alpha_4
+\end{bmatrix}
+\]
+has the same sign for $i=1,2,3,4$, and is impossible to satisfy $(*)$,
+thereby there's no solution to the angles and a \sedb balance is impossible.\\
+}
+{\bf Exercise 5}\\
+{\it Solutions}:
+We set
+\[
+\begin{vmatrix}
+1 & 3x \\ 
+x+2 & 2x\\ 
+\end{vmatrix}
+\neq0
+\]
+Which yields $x\neq 0$ and $x\neq -\frac{4}{3}$.\\
+[1em]
+{\bf Exercise 6.}\\
+{\it Proof}\\
+(i) False\\
+Take $a_1 = (1,0), a_2 = (0,1), a_3 = (1,1)$, which are mutually linearly independent, whereas $\{a_1,a_2,a_3\}$ is not independent since $a_1+a_2-a_3=0$.\\[0.5 em]
+(ii) False\\
+Consider system:
+\begin{align*}
+a_1=
+\begin{bmatrix}
+1\\
+0\\
+0
+\end{bmatrix}
+\quad
+a_2=
+\begin{bmatrix}
+0\\
+1\\
+0
+\end{bmatrix}
+\quad
+a_3=
+\begin{bmatrix}
+0\\
+0\\
+1
+\end{bmatrix}
+\quad
+a_4=
+\begin{bmatrix}
+1\\
+0\\
+1
+\end{bmatrix}
+\quad
+\end{align*}
+Then it's evident that $a_2$ can't be represented by the linear combinations of other vectors.\\
+[1em]
+{\bf Exercise 7.}\\
+(i)
+If $x,y\in U$, then
+$x+y=(x_1+y_1,x_2+y_2,x_3+y_3,x_4+y_4)$ with $f_1(x)=f_2(x)=f_3(x)=f_1(y)+f_2(y)=f_3(y)=0$
+$f_1(x+y)=f_1(x)+f_1(y)=0,~f_2(x+y)=f_2(x)+f_2(y),~f_3(x+y)=f_3(x)+f_3(y)$\\
+That is, $x+y\in U$\\
+Because the addition is associative and commutative for $x,y \in R^4$, so it will also have these properties for $x,y \in U$.\\
+The unit element is $e=(0,0,0,0)\in U$, and the inverse element to x is $-x=(-x_1,-x_2,-x_3,-x_4)\in U$ since $-f_1(x)=-f_2(x)=-f_3(x)=0$. Similarly , we can check that scalar multiplication is a map $R\times U\rightarrow U$ and satisfies all conditions to ensure that $(L,+,\cdot)$ is a vector space.\\
+Since $U\in R^4$, $U$ is a subspace of $R^4$.\\[0.5 em]
+(ii)
+\begin{equation*}
+\begin{cases}
+f_1(x)=x_1+2x_2+x_3-x_4=0\\
+f_2(x)=3x_1+5x_2-x_3-6x_4=0\\
+f_3(x)=-2x_1-x_2+10x_3+11x_4=0
+\end{cases}
+\end{equation*}
+\begin{align*}
+&\qquad\quad \left.\begin{gmatrix}
+		   1 & 2 & 1 & -1 \\
+		   3 & 5 & -1 & -6 \\
+           -2 & -1 & 10 & 11
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0 \\
+ 0
+\end{gmatrix}
+& &\sim\quad
+\left.\begin{gmatrix}
+		   1 & 2 & 1 & -1 \\
+		   0 & 1 & 4 & 3 \\
+           0 & 0 & 0 & 0
+\end{gmatrix}\right|\
+\begin{gmatrix}
+ 0 \\
+ 0 \\
+ 0
+\end{gmatrix}
+\end{align*}
+$(x_1,x_2,x_3,x_4)$ is the solutions of the equation set:
+\begin{equation*}
+\begin{cases}
+x_1+2x_2+x_3-x_4=0\\
+x_2+4x_3+3x_4=0
+\end{cases}
+\end{equation*}
+Let $x_3=x_4=1$ or $x_3=-1$, $x_4=1$.\\
+Then we get basis for $U$ is $(14,-7,1,1)$, and $(0,-1,1,-1)$.
+\\[1em]
+{\bf Exercise 8.}\\
+(1)
+$\langle a,a\rangle=2a_1^2+a_1a_2+a_2a_1+2a_2^2=2(a_1+\frac{a_2}{2})^2+\frac{3}{2}a_2^2\ge0$\\
+(Self-positivity)
+If $a=0$, then $a_1=a_2=0\Longrightarrow\langle a,a\rangle=0$\\
+If $\langle a,a\rangle=0$, then $(a_1+\frac{a_2}{2})^2=a_2^2=0\Longrightarrow a_1=a_2=0\Longrightarrow a=0$\\
+(Linearity in the second component) $\langle a,b+c\rangle=0=2a_1(b_1+c_1)+a_1(b_2+c_2)+a_2(b_1+c_1)+2a_2(b_2+c_2)=(2a_1b_1+a_1b_2+a_2b_1+2a_2b_2)+(2a_1c_1+a_1c_2+a_2c_1+2a_2c_2)=\langle a,b\rangle+\langle a,c\rangle$\\
+$\langle a,\lambda b\rangle=2\lambda a_1b_1+\lambda a_1b_2+\lambda a_2b_1 +2\lambda a_2b_2=\lambda\langle a,b\rangle$\\
+(Conjugate Symmetry)$\langle a,b\rangle=2a_1b_1+a_1b_2+a_2b_1 +2a_2b_2=\overline{2a_1b_1+a_1b_2+a_2b_1 +2a_2b_2}=\overline{\langle b,a\rangle}$\\
+So it defines a inner product.\\[0.5 em]
+(2)
+$\langle a,a\rangle=a_1^2+a_1a_2+a_2a_1+a_2^2=(a_1+a_2)^2\ge0$\\
+If $\langle a,a\rangle=0$, then $(a_1+a_2)^2=0\Longrightarrow a_1=-a_2\not\Longrightarrow a=0$ $($for example $a_1=1,a_2=-1)$\\
+So it does NOT define a inner products.\\[0.5 em]
+(3)
+$ \langle a,a\rangle=a_1^3+a_2^3\not\Longrightarrow a_1^3+a_2^3\ge0$ (for~example~$a_1=-1$,$a_2=-1$)\\
+So it does NOT define a inner products.\\[0.5 em]
+(4)
+$\langle a,a\rangle=a_1^2-a_2^2\not\Longrightarrow a_1^2-a_2^2\ge0$ (for~example~$a_1=0$,$a_2=1$)\\
+So it does NOT define a inner products.
+
+\end{document}

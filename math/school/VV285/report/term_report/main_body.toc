@@ -1,0 +1,13 @@
+\contentsline {chapter}{\numberline {1}Prologue}{2}
+\contentsline {section}{\numberline {1.1}Pendulum Revisited\hfill }{2}
+\contentsline {chapter}{\numberline {2}Simple Imperfect}{4}
+\contentsline {section}{\numberline {2.1}Down the Rabbit Hole\hfill }{4}
+\contentsline {section}{\numberline {2.2}Remarks\hfill }{6}
+\contentsline {chapter}{\numberline {3}Tautochrone Problem}{8}
+\contentsline {section}{\numberline {3.1}The Relic from Harmonic Motion\hfill }{8}
+\contentsline {section}{\numberline {3.2}How Does the Cycloid Come into Play \hfill }{11}
+\contentsline {section}{\numberline {3.3}Winding Cycloid \hfill }{12}
+\contentsline {section}{\numberline {3.4}Remarks\hfill }{14}
+\contentsline {chapter}{\numberline {4}Epilogue}{16}
+\contentsline {section}{\numberline {4.1}The Brachistochrone\hfill }{16}
+\contentsline {chapter}{Bibliography}{18}

@@ -1,0 +1,139 @@
+\documentclass{article}
+\input mla
+\begin{document}
+\titlehm{9}
+\ms{1}{
+\item[i)]
+\eq{
+E(p)=-\grad V(p)=\ff{Q}{4\pi\epsilon_0}\ff{x}{\|x\|^3}
+}
+\item[ii)]
+\eq{
+E(p)=-\grad V(p)=\ff{1}{4\pi\epsilon_0}\ff{3\dotp{d}{x-y}(x-y)-\|x-y\|^2d}{\|x-y\|^5}
+}
+}
+\ms{2}{
+\item[i)]
+\eq{
+&V(0,0,z_0)=\ff{1}{4\pi\epsilon_0}\int_{-L/2}^{L/2}\ff{\rho_l}{|z_0-t|}\,dt
+= \begin{cases}
+ -\ff{\rho_l}{4\pi\epsilon_0}\ln\ff{|2z_0-L|}{|2z_0+L|}
+ &\mbox{if } z_0> L/2 \\ 
+\ff{\rho_l}{4\pi\epsilon_0}\ln\ff{|2z_0-L|}{|2z_0+L|} & \mbox{if } z_0<-L/2
+\end{cases}
+\\
+&E(0,0,z_0)=-\grad V(0,0,z_0)=
+\begin{cases}
+\ff{\rho_l}{4\pi\epsilon_0}\left(\ff{1}{z_0-L/2}-\ff{1}{z_0+L/2}\right)&\mbox{if } z_0> L/2\\
+-\ff{\rho_l}{4\pi\epsilon_0}\left(\ff{1}{z_0-L/2}-\ff{1}{z_0+L/2}\right) & \mbox{if } z_0<-L/2\\
+\end{cases}
+}
+\item[ii)]
+\eq{
+&V(x_0,0,0)=\ff{\rho_l}{2\pi\epsilon_0}\ln\ff{\sq{(L/2)^2+x_0^2}+L/2}{|x_0|}\\
+&E(x_0,0,0)=\ff{\rho_l}{4\pi\epsilon_0}\left(\ff{L}{x_0\sq{(L/2)^2+x_0^2)}},0,0\right)
+}
+\item[iii)]
+\eq{
+&V(0,0,z_0)=\ff{\rho}{2\epsilon_0z_0}\ff{R}{\sq{1+R^2/z_0^2}}\\
+&E(0,0,z_0)=-\grad V(0,0,z_0)=\ff{\rho}{2\epsilon_0}\left(0,0,\ff{R}{z_0^2}\right)
+\left(1+R^2/z_0^2\right)^{-3/2}
+}
+Notice when $R/|z_0|\to0$, then term $\left(1+R^2/z_0^2\right)^{-3/2}\to 1$, thus up to a constant, the field intensity behaves as if the circle is replaced by a 
+point charge.
+\item[iv)]
+\eq{
+V(0,0,0)=\ff{\rho}{2\epsilon_0 }
+}
+\item[v)]
+\eq{
+|E(0,0)|=\ff{\rho}{2\pi\epsilon_0 b}
+}
+pointing outward from the semicircle.
+}
+\ms{3}
+{
+\item[]
+Consider parameterization:
+\eq
+{
+y=\st\quad x=\ct
+}
+\eq{
+\oint_{C^+}y^2\,dx+3xy\,dy=\ff{2}{3}
+}
+}
+\ms{4}
+{
+\item[i)]
+\eq{
+\pd{F_1}{y}=\ff{y^2-x^2}{(x^2+y^2)^2}=\pd{F_2}{x}\quad
+\rm on
+\quad
+\R^2\,\backslash\, \{0\}
+}
+\item[ii)]
+\eq{
+\oint_{S^1}F\ds=\oint_{S^1}\ff{-y}{x^2+y^2}\,dx+\ff{x}{x^2+y^2}\,dy
+=2\pi
+}
+with the parametrization:
+\eq{
+y=\st\quad x=\ct
+}
+and this concludes that the field is not conservative, thereby it's impossible to have a potential.
+\item[iii)]
+One can verify 
+\eq{
+f(x,y)=-\arctan\ff{x}{y},\quad \Omega\mapsto \R^2
+}
+satisfy the relation
+\eq{
+F(x,y)=\grad f(x,y)\quad {\rm on }\quad\Omega
+}
+}
+\ms{5}
+{
+\item[i)]
+We use the parameterization:
+\eq{
+x=t\quad y=2t\quad z=4t \quad t:\,0\to 1
+}
+Then
+\eq{
+\int_{S}L=\int_0^1 16t^2-3t\,dt=\ff{23}{6}
+}
+\item[ii)]
+We use the parameterization:
+\eq{
+&\Gamma_1:\,x=t^2\quad y=t \quad t:\,-1\to 1\\
+&\Gamma_2: x=1\quad y:-1\to 1
+}
+Then
+\eq{
+\int_{S}L=\int_{-1}^1 2t^6+t^3\,dt+\int_{-1}^{1}y^2\,dy=\ff{4}{15}
+}
+}
+\ms{6}
+{
+\item[i)]
+\eq{
+\pd{F_1}{y}=-2x\sin y=\pd{F_2}{x}\quad{\rm on}\quad\R^2
+}
+This it's satisfy the condition over a simply connected region, and it's
+a gradient field, i.e., there exists a potential $u$ such that $F=\grad u$.
+\item[ii)]
+\eq{
+u(x,y)=x^2\cos y
+}
+\item[iii)]
+\eq{
+\int_{\Gamma}F=\int_0^12e^{2t}\cos t-e^{2t}\sin t dt=e^{2t}\cos t\Big|_0^1=e^2\cos 1-1
+}
+\item[iv)]
+\eq{
+\int_{\Gamma}F=u(e,1)-u(0,0)=e^2\cos 1-1
+}
+which reproduces the result, as desired.
+}
+\end{document}

@@ -1,0 +1,286 @@
+%lead
+\input my_macros
+\mydoc
+\baselineskip 16pt plus 2pt
+\vv11 December {6}
+
+
+%
+%problem 1
+\medskip
+\pnum1
+\noindent Consider function
+$$
+F(x)=\int_a^xf(t)\,dt,\qquad x\in [a,b]
+$$
+Then we have:
+$$
+F'(x)=f(x),\qquad x\in [a,b]
+$$
+And by Mean Value Theorem(of differential calculus) we have:
+$$
+{F(b)-F(a)\over b-a}=F'(\xi)=f(\xi),\qquad\exists\,\xi\in [a,b] 
+$$
+Since
+$$
+F(b)-F(a)=\int_a^bf(t)-\int_a^af(t)=\int_a^bf(t)-0=\int_a^bf(t)
+$$
+That is:
+$$
+\int_a^bf(t)\,dt=(b-a)f(\xi),\qquad\exists\,\xi\in [a,b] 
+$$
+\bigskip
+%problem 2
+\snum2
+i)
+$$
+\int e^x\sin x\,dx={1\over 2}e^x(\sin x-\cos x)
+$$
+\medskip
+ii)
+$$
+\int \tan x\,dx=-\ln|\cos x|
+$$
+\medskip
+iii)
+$$
+\int {1\over x^2(1+x)^2}\,dx=-{1\over x}-{1\over1+x}-2\ln\left|{x\over1+x}\right|
+$$
+\medskip
+iv)
+$$
+\int e^{x^2}x(1+x^2)\,dx={x^2\over2}e^{x^2}
+$$
+\medskip
+v)
+$$
+\int \sqrt{1-x\over1+x}\,dx=\arcsin x+\sqrt{1-x^2}
+$$
+\bigskip
+%problem 3
+\snum3
+\noindent i)
+$$
+\int_0^1\ln x\,dx=x\ln x-x\Big|_0^1=-1
+$$
+\medskip
+\noindent ii)
+$$
+\int {\ln\ln x\over x}\,dx=\ln x\ln\ln x-\ln x
+$$
+\medskip
+\noindent iii)
+$$
+\int \tan^2 x\,dx=\tan x-x
+$$
+\medskip
+\noindent iv)
+$$
+\int_1^{e^{\pi/2}}\sin\ln x\,dx={x\over 2}(\sin\ln x-\cos\ln x)\Big|_1^{e^{\pi/2}}
+={1\over2}(e^{\pi/2}+1)
+$$
+\medskip
+\noindent v) First we show the convergence:
+$$
+\lim_{x\to0}{\ln\sin x\over{1\over \sqrt x}}=\lim_{x\to0}{{\cos x\over\sin x}\over-{1\over2}x^{-3/2}}=\lim_{x\to0}(-2)\sqrt x{x\over\sin x}\cos x=0
+$$
+And the improper integral
+$$\int_0^{\pi/2}{1\over\sqrt x}\,dx=2\sqrt{\pi\over 2}
+$$ 
+Converges, so by comparison test the improper integral $\int_0^1\ln\sin x\,dx$ converges.
+Furthermore, we notice that
+$$\eqalign{
+\int_0^{\pi/2}\ln\sin x\,dx&=\int_0^{\pi/2}\ln2\sin {x\over2}\cos{x\over2}\,dx\cr
+&={\pi\over2}\ln2+2\int_0^{\pi/4}\sin x\,dx-2\int_{\pi/2}^{\pi/4}\cos x\,dx\cr
+&={\pi\over2}\ln2+2\int_0^{\pi/2}\sin x\,dx
+}
+$$
+Altogether we have:
+$$
+\int_0^{\pi/2}\ln\sin x\,dx=-{\pi\over2}\ln2
+$$
+\bigskip
+%problem 4
+\snum4
+\noindent a) If $a=0$ and $b=0$, we have:
+$$
+\int {dx\over ax^2+bx+c}={x\over c}
+$$
+\noindent b) If $a=0$ and $b\not=0$, we have:
+$$
+\int {dx\over ax^2+bx+c}=\int {dx\over bx+c}={1\over b}\ln|bx+c|
+$$
+c) If $a\not=0$ and $\Delta>0$; we have:
+$$
+\int {dx\over ax^2+bx+c}={1\over a}\int {d(x+{b\over 2a})\over (x+{b\over 2a})^2+{\Delta\over 4a^2}}
+={2\over \sqrt{\Delta}}\arctan\left({2|a|\over \sqrt{\Delta}}(x+{b\over 2a})\right)
+$$
+d) If $a\not=0$ and $\Delta=0$; we have:
+$$
+\int {dx\over ax^2+bx+c}={1\over a}\int {d(x+{b\over 2a})\over (x+{b\over 2a})^2}=
+-{2\over 2ax+b}
+$$
+f) If $a\not=0$ and $\Delta<0$; we have:
+$$
+\int {dx\over ax^2+bx+c}={1\over a}\int {dx\over (x-x_1)(x-x_2)}={1\over \sqrt{-\Delta}}\ln{\left|x-x_1\over x-x_2\right|}
+$$
+where
+$$
+x_1={-b+\sqrt{-\Delta}\over2a},\qquad x_2={-b-\sqrt{-\Delta}\over2a}
+$$
+\bigskip
+%problem 5
+\snum5
+\noindent i)
+$$
+\sin x={2\sin{x\over 2}\cos{x\over2}\over\sin^2{x\over2}+\cos^2{x\over2}}={2t\over1+t^2}
+$$
+$$
+\cos x={\sin^2{x\over 2}-\cos^2{x\over 2}\over\sin^2{x\over2}+\cos^2{x\over2}}={1-t^2\over1+t^2}
+$$
+Finally
+$$
+x=2\arctan t\Longrightarrow dx={2\over1+t^2}dt
+$$
+\medskip
+\noindent ii)
+a)
+$$
+\int {1\over\sin x}\,dx=\int {1+t^2\over 2t}{2\over 1+t^2}\,dt=\ln t=\ln \left|\tan{x\over2}\right|
+$$
+b)
+$$
+\int {1\over\cos x}\,dx=\int {1+t^2\over1-t^2}{2\over 1+t^2}\,dt=
+\ln\left |{1+t\over1-t}\right|=
+\ln\left|{1+ \tan{x\over2}\over 1- \tan{x\over2}}\right|
+=\ln\left|{1\over\cos x}+\tan x\right|
+$$
+c)
+$$
+\int {dx\over\sin x+\cos x}={1\over\sqrt2}\int {d(x+{\pi\over4})\over \sin(x+{\pi\over4})}
+={1\over\sqrt2}\ln \left|\tan({x\over2}+{\pi\over8})\right|
+$$
+
+
+\bigskip
+%problem 6
+\snum6
+\noindent i) Take $x={\tan t\over a}$, we have:
+$$\eqalign{
+J(a)&=\int_0^{\arctan a}{1\over \cos^3 t}dt
+=\int_0^{\arctan a}{1\over (1-\sin^2 t)^2}\,d(\sin t)\cr
+&={1\over 2}{\sin t\over \cos^2t}+{1\over 2}\ln\left|{1+\sin t\over \cos t}\right|\Big|^{\arctan a}_0\cr
+&={a\sqrt{1+a^2}\over 2}+{1\over 2}\ln{|a+\sqrt{1+a^2}|}\cr
+}
+$$
+\medskip
+\noindent ii) Take $x=a\sin t$, we have:
+$$
+I(a)=\int {1\over \cos t}\cos t\,dt=t=\arcsin {x\over a}
+$$
+
+\bigskip
+%problem 7
+\snum7
+\noindent i) Since 
+$$
+\lim_{x\to \infty}{x^{3/2}\over\sqrt{1+x^3}}={1\over\sqrt{1+x^{-3}}}=1
+$$
+And $\int_1^{\infty}x^{-3/2}\,dx$ converges\eject
+\noindent Thus the improper integral:
+$$
+\int_0^{\infty}{dx\over\sqrt{1+x^3}}=\int_0^1{dx\over\sqrt{1+x^3}}+\int_1^{\infty}{dx\over\sqrt{1+x^3}}
+$${\bf coverges}.
+\medskip
+\noindent ii) Since
+$$
+\lim_{x\to \infty}x^{1/2}{x\over\sqrt{1+x^{3/2}}}={1\over1+x^{-3/2}}=1
+$$
+And $\int_1^{\infty}x^{-1/2}\,dx$ diverges, the improper integral:
+$$
+\int_0^{\infty}{x\over\sqrt{1+x^{3/2}}}\,dx=\int_0^1{x\over\sqrt{1+x^{3/2}}}\,dx
++\int_1^{\infty}{x\over\sqrt{1+x^{3/2}}}\,dx
+$${\bf diverges}.
+\medskip
+\noindent iii) Since
+$$
+\lim_{x\to \infty} x^{3/2}{1\over\ x \sqrt{1+x }}={1\over\sqrt {1+x^{-1}}}=1
+$$
+And $\int_1^{\infty}x^{-3/2}\,dx$ converges, $\int_0^{1}x^{-3/2}\,dx$ diverges, so the improper integral:
+$$
+\int_0^{\infty}{1\over\ x \sqrt{1+x }}\,dx=\int_0^1{1\over\ x \sqrt{1+x }}\,dx
++\int_1^{\infty}{1\over\ x \sqrt{1+x }}\,dx
+$$
+{\bf diverges}.
+\medskip
+\noindent ii) Consider function
+$$
+f(x)=x^2\cos x^3-{1\over x^2}\sin x^3,\qquad x>0
+$$
+for $x=0$ we define $f(x)=\lim_{x\to 0^+}f(x)=0$.\smallskip
+Then $\sup f(x)$ doesn't exists but
+$$
+\int_0^{\infty} f(x)\,dx={\sin x^3\over x}\Big|_0^\infty=0-0=0.
+$$
+so $\int_0^{\infty}f(x)$ converges.
+
+
+\bigskip
+%problem 8
+\pnum8
+\noindent i) We see that $a_n>0$ since $\sin x>0$ for $x\in [0,\pi/2]$ 
+\eject
+\noindent Also:
+$$
+0<a_n=\int_0^{\pi/2}\sin^nx<\int_0^{\pi/2}1\cdot\sin^{n-1}x=a_{n-1}
+$$
+So the limit of $a_n$ exists.\medskip
+\noindent ii) Integrating by parts yields:
+$$\eqalign{
+\int_0^{\pi/2}\sin^nx\,dx&=-\int_0^{\pi/2}\sin^{n-1}x\,d(\cos x)\cr
+&=-\sin^{n-1}x\cos x\Big|^{\pi/2}_0+(n-1)\int_0^{\pi/2}\sin^{n-2}\cos^2 x\,dx\cr
+&=0+(n-1)\int_0^{\pi/2}\sin^{n-2}\,dx-(n-1)\int_0^{\pi/2}\sin^{n}\,dx
+}
+$$
+Thus we have:
+$$
+\int_0^{\pi/2}\sin^n x\,dx={n-1\over n}\int_0^{\pi/2}\sin^{n-2}\,dx;
+$$
+Also we have:
+$$
+\int_0^{\pi/2}\sin^2 x\,dx={\pi\over 4},\qquad \int_0^{\pi/2}\sin x\,dx=1
+$$
+\medskip
+\noindent iii) Now, by ii) we have $a_2={\pi\over 4}$, $a_1=1$, for larger $n$ we observe that:
+$$
+a_{2n}={(2n)!\over(2^n n!)^2}{\pi\over2};\qquad a_{2n+1}={(2^n n!)^2\over (2n+1)!}
+$$
+Since they turn out nicely for $n=0$ and $n=1$, now for induction step:
+$$
+a_{2n+2}={2n+1\over 2n+2}2{(2n)!\over(2^n n!)^2}{\pi\over2}=2{(2n+2)(2n+1)\over (2n+2)^2}{(2n)!\over(2^n n!)^2}{\pi\over2}={(2n+2)!\over(2^{n+1}(n+1)!)^2}{\pi\over2}
+$$
+$$
+a_{2n+3}={2n+2\over 2n+3}{(2^n n!)^2\over (2n+1)^2}
+={(2n+2)^2\over(2n+2)( 2n+3)}{(2^n n!)^2\over (2n+1)!}
+={(2^{n+1} (n+1)!)^2\over (2n+3)!}
+$$
+Finally, since
+$$
+\lim_{n\to\infty}a_{2n}=\lim_{n\to\infty}a_{2n+1}
+$$
+ We conclude that:
+ $$
+ {\pi\over 2}{1\cdot3\cdot5\cdot7\over2\cdot4\cdot6\cdot8}\cdots=
+ {2\cdot4\cdot6\cdot8\over3\cdot5\cdot7\cdot9}\cdots
+ $$
+ Namely
+  $$
+{\pi\over 2}={2\cdot2\cdot4\cdot4\cdot6\cdot6\cdot8\cdot8
+\over1\cdot3\cdot3\cdot5\cdot5\cdot7\cdot7\cdot9}\cdots$$
+\bigskip
+\bigskip
+{\obeylines\smallskip\sl
+\hfill What we have to learn to do we learn by doing
+\smallskip\hfill\rm --- {\tt ARISTOTLE},{\sl~Ethica Nicomachea II~\/}(c. 325~B.C.)
+}
+\end

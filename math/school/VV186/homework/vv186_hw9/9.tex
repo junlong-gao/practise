@@ -1,0 +1,219 @@
+%lead
+\input my_macros
+\mydoc
+\baselineskip 16pt plus 2pt
+\vv9 November {23}
+\def\l{\lambda_i}
+%
+%problem 1
+\pnum1
+\noindent i) Since 
+$$
+\sum_{i=1}^{n}\l x_i\le\sum_{i=1}^{n}\l \max_{1\le i\le n}x_i=\max_{1\le i\le n}x_i\sum_{i=1}^{n}\l=\max_{1\le i\le n}x_i
+$$
+and
+$$
+\sum_{i=1}^{n}\l x_i\ge\sum_{i=1}^{n}\l \min_{1\le i\le n}x_i=\min_{1\le i\le n}x_i\sum_{i=1}^{n}\l=\min_{1\le i\le n}x_i
+$$
+we obtain the desired inequality.\medskip
+\noindent ii) Since
+$$
+{1\over t}\sum_{i=1}^{n-1}\l x_i\le{1\over t}\sum_{i=1}^{n-1}\l \max_{1\le i\le n}x_i=\max_{1\le i\le n}x_i{1\over t}\sum_{i=1}^{n-1}\l=\max_{1\le i\le n}x_i
+$$
+and
+$$
+{1\over t}\sum_{i=1}^{n-1}\l x_i\ge{1\over t}\sum_{i=1}^{n-1}\l \min_{1\le i\le n}x_i=\min_{1\le i\le n}x_i{1\over t}\sum_{i=1}^{n-1}\l=\max_{1\le i\le n}x_i
+$$
+we obtain the desired inequality.\medskip
+\noindent iii) For $n=1$, obviously the inequality holds. Now, suppose it holds for $n-1$, then set
+$$
+t=\sum_{i=1}^{n-1}\l x_i\Longrightarrow \qquad t+\lambda_n=1,\quad\sum_{i=1}^{n-1}{\l\over t} x_i=1
+$$
+By ii) we know that $t\sum_{i=1}^{n-1}{\l\over t} x_i\le\max_{1\le i\le n}x_i\in I$.
+thus we have
+$$
+\eqalign{
+f\left(\sum_{i=1}^{n}\l x_i\right)&=
+f\left(t\sum_{i=1}^{n-1}{\l\over t} x_i+\lambda_nx_n\right)\cr
+&\le tf\left(\sum_{i=1}^{n-1}{\l\over t} x_i\right)+\lambda_nf(x_n)\qquad{\rm (Convex)}\cr
+&\le t\sum_{i=1}^{n-1}{\l\over t}f(x_i)+\lambda_nf(x_n)\qquad {\rm (Induction)}\cr
+&=\sum_{i=1}^{n}\l f(x_i)
+}
+$$
+For concave, we just need to reverse the inequality:
+$$
+f\left(\sum_{i=1}^{n}\l x_i\right)\ge\sum_{i=1}^{n}\l f(x_i)
+$$
+\noindent iv) $(\ln x)''=-1/x^2<0$ so logarithm is a concave function, by Jensen's inequality we have 
+$$
+\ln\left(\prod_{i=1}^{n}{x_i}^{\l}\right)=\sum_{i=1}^{n}\l \ln(x_i)\le \ln\left(\sum_{i=1}^{n}\l x_i\right)
+$$
+Taking the left-hand side and right-hand side we have:
+$$
+\prod_{i=1}^{n}{x_i}^{\l}\le\sum_{i=1}^{n}\l x_i
+$$
+Since logarithm is a monotonic increasing function.
+\bigskip
+%problem 2
+\snum2
+\noindent i) Consider function
+$$
+f(x)=\cos(x^3)
+$$
+Then $\sup |f(x)|=0$, $\sup|f(x)|=\sup\,|3x^2\sin(x^3)|=+\infty$
+\medskip
+\noindent ii) Consider function
+$$
+f(x)=\cases{\ln x, &if $x\ge1$;\cr
+		{1\over2}x^2-{1\over2},  &if $|x|<1$.\cr
+		\ln (-x) &if $x\le-1$}
+		$$
+Since it's piecewise differentiable, we have
+$$
+f'(x)=\cases{{1\over x}, &if $x\ge1$;\cr
+		x ,  &if $|x|<1$ ;\cr
+		{1\over x},  &if $x\le-1$.}
+$$
+And we can see that at $x=1$, $x=-1$ the left and right derivative are equal. Also, we see that $\lim_{x\to\infty}|f'|=0$ while $\lim_{x\to\infty}|f|=\infty$.
+\bigskip
+%problem 3
+\pnum3
+\noindent i)
+By l'Hopital's rule we have:
+$$
+\lim_{x\to\infty}{e^x-e^{-x}\over e^x+e^{-x}}=\lim_{x\to\infty}{e^x+e^{-x}\over e^x-e^{-x}}
+$$
+And it's not very effective. We can simply divide the whole thing by $e^x$:
+$$
+\lim_{x\to\infty}{e^x-e^{-x}\over e^x+e^{-x}}=\lim_{x\to\infty}{1-e^{-2x}\over 1+e^{-2x}}=1
+$$
+\noindent ii)
+By l'Hopital's rule we have:
+$$
+\lim_{x\to 0}{x^2\cos{1\over x}\over \sin x}=\lim_{x\to 0}{2x\cos{1\over x}+\sin {1\over x}\over \cos x}={\lim_{x\to 0}2x\cos{1\over x}+\sin {1\over x}\over \lim_{x\to 0}\cos x}
+$$
+And limit can't be evaluated.
+Another approach:
+$$
+\lim_{x\to 0}{x^2\cos{1\over x}\over \sin x}=\lim_{x\to 0}x\cos{1\over x}{x\over \sin x}=\lim_{x\to 0}x\cos{1\over x}\lim_{x\to 0}{x\over \sin x}=0\cdot 1=0
+$$
+\noindent iii)
+$$
+{f'(x)\over g'(x)}={2\cos^2 x\over e^x(2\cos^2 x+x+\sin x\cos x)}={1\over e^x(1+x/2\!\cos^2x+\sin x/2\!\cos x)}\to 0
+$$
+Since we have $e^x\cdot x/2\!\cos^2x\to \infty$.
+But clearly 
+$$
+\lim_{x\to\infty}{f(x)\over g(x)}=\lim_{x\to\infty}e^{\sin x}
+$$
+doesn't exist.
+And it {\bf doesn't} contradict l'Hopital's rule since we first have to convert it into $0\over0$ type:
+$$
+{\displaystyle{1\over g(x)}}\over {\displaystyle{1\over f(x)}}
+$$
+and the corresponding limit is
+$$
+{{\displaystyle\left({1\over g(x)}\right)'}\over {\displaystyle\left({1\over f(x)}\right)'}}
+={g'(x)\over f'(x)}{f^2(x)\over g^2(x)}
+$$
+and it doesn't satisfy l'Hopital's rule's condition because $f'(x)=2\cos^2x$ have infinitely many zero throughout ${\rm I\!R}^+$ and it's impossible to find a $C$ such that for all $x>C$, $f'(x)\not=0$. Thus we can't use the rule for the original limit.
+\bigskip
+\snum4
+\noindent i) All seven roots:
+$$
+z_k={\root 7\of5}e^{i(\theta+{2k\pi\over 7})},\quad k=0,1,2\cdots,6\qquad {\rm where}\, \sin\theta={3\over5}, \,\cos\theta={4\over5}
+$$
+\noindent ii) Let $z=a+bi$ where $a,b\in {\rm I\!R}$, plug in the equation:
+$$
+a^2-b^2+2abi-ai+b+1=0
+$$
+This implies
+$$a^2-b^2+b+1=0;\qquad 2ab-a=0.
+$$
+Solve for:
+$$
+z_1={1+\sqrt5\over2}i,\qquad z_2={1-\sqrt5\over2}i.
+$$
+\noindent iii) Solve for $z^2$ we have:
+$$
+z^2={-1+\sqrt3i\over2}=e^{i{2\over3}\pi}\qquad or\qquad z^2={-1-\sqrt3i\over2}=e^{i{4\over3}\pi}
+$$
+Now we solve for z on the unit circle:
+$$\eqalign{
+x_1={1\over2}+{\sqrt3\over2}i;\quad x_2=-{1\over2}-{\sqrt3\over2}i;\cr
+x_3=-{1\over2}+{\sqrt3\over2}i;\quad x_4=+{1\over2}-{\sqrt3\over2}i.\cr
+}
+$$
+\noindent iv) By general method for solving linear equation we have:
+$$
+z= {7\over 3}-{4i\over3},\qquad w={1\over3}+2i
+$$
+\bigskip
+%problem 5
+\snum5
+\noindent i) $$
+s(\varphi)=l+r-\sqrt{l^2-r^2\sin^2\varphi}-r\cos\varphi
+$$
+\medskip
+\noindent ii)
+Solve for:
+$$
+s=l\Longrightarrow\quad {\cos\varphi=r\over2l}
+$$
+so 
+$$
+\varphi_c=\arccos{r\over2l}
+$$
+\medskip
+\noindent iii) A bit of calculation tells us that:
+$$
+s(0)=0;\quad s(\pi)=2r;\quad s'(0)=0;\quad s''(0)=r+{r^2\over l}.
+$$
+Thus by comparing the coefficients we have:
+$$
+S(\varphi)=r+{r^2\over4l}-r\cos\varphi-{r^2\over4l}\cos2\varphi
+$$
+\medskip
+\noindent iii)
+We have:
+$$
+v(\varphi)=\omega_0S'(\varphi)=\omega_0(r\sin\varphi+{r^2\over2l}\sin2\varphi),\quad
+a(\varphi)= \omega_0^2 S''(\varphi)=\omega_0^2(r\cos\varphi+{r^2\over l}\cos2\varphi)
+$$
+Now for $S''(x)$ it can be deduced to:
+$$
+g(t)=rt+{r^2\over l}(2t^2-1)={2r^2\over l}t^2+rt-{r^2\over l}
+$$
+should attain it maximal at $t=-l/4r<-1$ or $t=1$ or $t=-1$:
+$$
+|a_{\max}|=\omega_0^2\max( r+{r^2\over l}\,,\, {r^2\over l}+{l\over8})=\omega_0^2 (r+{r^2\over l})
+$$
+or the maximal acceleration is at $t=-1$ or $t=1$ if $l\ge4r$, we have:
+$$
+|a_{\max}|=\omega_0^2 (r+{r^2\over l})
+$$
+In conclusion, the maximal acceleration is:$$
+|a_{\max}|=\omega_0^2 (r+{r^2\over l})
+$$
+As for the maximal speed, we solve for the root of $g(t)=0$:
+$$
+t_1={-l+\sqrt{l^2+8r^2}\over4r}\in(0,1),\qquad t_2={-l-\sqrt{l^2+8r^2}\over4r}<-1
+$$
+So the maximal speed attends at $t=t_1$:
+$$
+|v_{\max}|=\omega_0r\sqrt{1-t_1^2}(1+{r\over l}t_1)
+$$
+\noindent iv) Plug in the number we have:
+$$
+s(x)=6-\sqrt{25-\sin^2\varphi}-\cos\varphi=6-\sqrt{{49\over2}-{\cos2\varphi\over2}}+\cos\varphi,\quad S(x)={21\over20}-\cos\varphi-{1\over20}\cos2\varphi
+$$
+And the difference:
+$$
+|s(\varphi)-S(\varphi)|=\left|{99\over20}+{1\over20}\cos2\varphi-\sqrt{{49\over2}+{\cos2\varphi\over2}}\,\right|
+$$
+Investigate $e(x)={1\over20}x-\sqrt{{49\over2}+{x\over 2}}<0$ where $-1\le x\le1$, we have:
+$$
+e'(x)={1\over20}-{1\over4}\left({49\over2}+{x\over2}\right)^{-1/2}\le0
+$$
+So the maximum error occurs at $\cos2\varphi=-1$ thus $\max|s(\varphi)-S(\varphi)|=4.9-\sqrt{24}=0.00102$.
+\end

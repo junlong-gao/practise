@@ -1,0 +1,601 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{gauss}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{multirow}
+\newtheorem{ex}{Exercise}
+\title{Assignment 3}
+\author{Sun Chen\\ ID:5123709223}
+\begin{document}
+\maketitle
+
+\section*{Exercise 1.}
+\subsection*{i)}
+$
+Let~x=\left(\begin{gmatrix}
+x_1\\
+\vdots\\
+x_n
+\end{gmatrix}\right),~y=
+\left(\begin{gmatrix}
+y_1\\
+\vdots\\
+y_n
+\end{gmatrix}\right),~then~Ay=
+\left(\begin{gmatrix}
+y_1a_{11}+\cdots+y_na_{1n}\\
+\vdots\\
+y_1a_{n1}+\cdots+y_na_{nn}
+\end{gmatrix}\right),~then~A^Tx=
+\left(\begin{gmatrix}
+x_1a_{11}+\cdots+x_na_{1n}\\
+\vdots\\
+x_1a_{n1}+\cdots+x_na_{nn}
+\end{gmatrix}\right)\\$
+\begin{align*}
+\langle x,Ay\rangle&=\displaystyle{\sum_{i=1}^{n}x_i(y_1a_{i1}+\cdots+y_na_{in})}\\
+&=\displaystyle{\sum_{i=1}^{n}x_i(y_1a_{i1}+\cdots+y_na_{in})}\\
+&=\displaystyle{\sum_{i=1}^{n}x_i\displaystyle{\sum_{j=1}^{n}y_ja_{ij}}}\\
+&=\displaystyle{\sum_{i=1}^{n}\displaystyle{\sum_{j=1}^{n}x_iy_ja_{ij}}}
+\end{align*}
+\begin{align*}
+\langle A^Tx,y\rangle&=\displaystyle{\sum_{i=1}^{n}y_i(x_1a_{i1}+\cdots+x_na_{in})}\\
+&=\displaystyle{\sum_{i=1}^{n}y_i(x_1a_{i1}+\cdots+x_na_{in})}\\
+&=\displaystyle{\sum_{i=1}^{n}y_i\displaystyle{\sum_{j=1}^{n}x_ja_{ij}}}\\
+&=\displaystyle{\sum_{i=1}^{n}\displaystyle{\sum_{j=1}^{n}x_iy_ja_{ij}}}
+\end{align*}
+$So,~\langle x,Ay\rangle=\langle A^Tx,y\rangle.$
+
+\subsection*{ii)}
+A=$(a_{ij})_{i=1,...,m,j=1,...,n}$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~B=$(b_{jk})_{j=1,...,n,k=1,...,l}$\\
+$A^T=(a_{ji})_{i=1,...,m,j=1,...,n}$~~~~~~~~~~~~~~~~~~~~~~~~~$B^T=(b_{kj})_{j=1,...,n,k=1,...,l}$\\
+AB=$(\displaystyle{\sum_{j=1}^{n}a_{ij}b_{jk})_{i=1,...,m,k=1,...,l}}$~~~~~~~~~~~~~~~~~
+$(AB)^T=(\displaystyle{\sum_{j=1}^{n}a_{ji}b_{kj})_{i=1,...,m,k=1,...,l}}$\\
+$B^TA^T=(\displaystyle{\sum_{j=1}^{n}b_{kj}a_{ji})_{i=1,...,m,k=1,...,l}}$\\
+So $(AB)^T=B^TA^T$
+
+\subsection*{iii)}
+\begin{align*}
+&\qquad\quad \left(\begin{gmatrix}
+		   1 & 0 & 1 \\
+		   0 & 1 & 0 \\
+		   1 & 0 & 1
+\end{gmatrix}\right)\
+\end{align*}
+\subsection*{iv)}
+Because $A\in Mat(n*n,\mathbb{R})$, $A,A^T,A^{-1}\in Mat(n*n,\mathbb{R})$
+\begin{align*}
+A^T=A^{-1}~and~A^{-1}A=id\Rightarrow A^TA=id\\
+\left( \begin{gmatrix}
+		   a_{11} &\cdots &a_{n1} \\
+		   \vdots &\ddots &\vdots \\
+		   a_{1n} &\cdots &a_{nn}
+\end{gmatrix}\right)\
+\left( \begin{gmatrix}
+		   a_{11} &\cdots &a_{1n} \\
+		   \vdots &\ddots &\vdots \\
+		   a_{n1} &\cdots &a_{nn}
+\end{gmatrix}\right)\
+=
+\left( \begin{gmatrix}
+		   1 &\cdots &0 \\
+		   \vdots &\ddots &\vdots \\
+		   0 &\cdots &1
+\end{gmatrix}\right)\\
+\end{align*}
+$Let~v_j,~v_k~be~two~colomn~vectors~of~A,~and~\langle v_j,v_k\rangle=\displaystyle{\sum_{i=1}^{n}a_{ij}a_{ik}},~then$\\
+\begin{align*}
+\langle v_j,v_k\rangle=
+\left\lbrace  \begin{gmatrix}
+		   1,~j=k \\
+		   0,~j\not=k
+\end{gmatrix}\right.\
+\end{align*}
+So the column vectors of an orthogonal matrix are othonormal.
+
+
+
+
+\section*{Exercise 2.}
+\subsection*{a)}
+Let the matrice be
+\begin{align*}
+&\qquad\quad \left(\begin{gmatrix}
+		    a & b \\
+		    c & d 
+\end{gmatrix}\right)\
+\end{align*}
+Because $A=A^T$, b=c.
+Because $A=A^{-1}$, 
+\begin{equation*}
+\begin{cases}
+a^2+bc=1\\
+(a+d)c=0\\
+(a+d)b=0\\
+bc+d^2=1
+\end{cases}
+\end{equation*}
+$If~b=c=0,~then~a=d=-1(Because~A\not=1).$\\
+$If~a+d=0,~then~a^2+b^2=1.$\\
+So the matrice can be represented as\\
+\begin{align*}
+&\qquad\quad \left(\begin{gmatrix}
+		    -1 & 0 \\
+		    0 & -1 
+\end{gmatrix}\right)\
+\end{align*}
+or
+\begin{align*}
+&\qquad\quad \left(\begin{gmatrix}
+		    x & y \\
+		    y & -x 
+\end{gmatrix}\right)\
+\end{align*}
+(where $x^2+y^2=1$)
+\subsection*{b)}
+As shown in Exercise 1. vi), $B^T=B^{-1}\Rightarrow$ column vectors of B are othonormal.\\
+We suppose $\alpha,\beta\in[0,2\pi]$, then B=
+\begin{align*}
+\left(\begin{gmatrix}
+		    cos\alpha & cos\beta \\
+		    sin\alpha & sin\beta 
+\end{gmatrix}\right)\
+\end{align*}
+Because $cos\alpha cos\beta +sin\alpha sin\beta=0~\Longleftrightarrow~cos(\alpha -\beta) =0$\\
+So $|\alpha-\beta|=\frac{\pi}{2}+2k\pi,~where~k\in Z$\\
+To simplify the problem, we let k=0, and $|\alpha-\beta|=\frac{\pi}{2}$\\
+Because $cos\beta\not=sin\alpha$, $\alpha-\beta\not=\frac{\pi}{2}$. So $\alpha-\beta=-\frac{\pi}{2}$, and $cos\beta\not=-sin\alpha$\\
+So the metrice can be represented as 
+\begin{align*}
+&\qquad\quad \left(\begin{gmatrix}
+		    cos\alpha & -sin\alpha \\
+		    sin\alpha & cos\alpha 
+\end{gmatrix}\right)\
+\end{align*}
+
+\section*{Exercise 3.}
+\subsection*{i)}
+\begin{align*}
+Ae_j=
+\left( \begin{gmatrix}
+		   a_{11} &\cdots &a_{1n} \\
+		   \vdots &\ddots &\vdots \\
+		   a_{n1} &\cdots &a_{nn}
+\end{gmatrix}\right)\
+e_j=
+\left( \begin{gmatrix}
+		   a_{1j} \\
+		   \vdots \\
+		   a_{nj}
+\end{gmatrix}\right)\\
+\end{align*}
+\begin{align*}
+\langle e_i,Ae_j\rangle=\displaystyle{\sum_{p=1}^{n}e_{pi}a_{pj}}=a_{ij}
+\end{align*}
+So, the matrix elements $\langle e_i,Ae_j\rangle$ coincide with the components of A=($a_{ij}$).
+
+\subsection*{ii)}
+Basis $\mathcal{B}=\lbrace 1,x,x^2,\cdots,x^n\rbrace$.
+\begin{align*}
+\langle e_i,\partial e_j\rangle=
+\left\lbrace  \begin{gmatrix}
+		   \langle x^{i-1},(j-1)x^{j-2}\rangle=\int_{-1}^{1}(j-1)x^{i+j-3}dx=\frac{j-1}{i+j-2}x^{i+j-2}\mid_{-1}^1 ,&j=2,\cdots,n \\
+		   0 ,&j=1
+\end{gmatrix}\right.\\
+\end{align*}
+\begin{align*}
+a_{ij}=\langle e_i,\partial e_j\rangle=
+\left\lbrace  \begin{gmatrix}
+		   \frac{2j-2}{i+j-2} ,&i+j-2=2k+1 \\
+		   0 ,&j=1,or~i+j-2=2k
+\end{gmatrix}\right.\
+,where~k\in\mathbb{N}
+\end{align*}
+
+\subsection*{iii)}
+For $\varphi^{-1}_{\mathcal{A}}$ is an isomorphism, $\forall e_j\in V$, we can give a unique $\lambda_j$ so that $\varphi^{-1}_{\mathcal{A}}(\lambda_j)=e_j$.\\
+Then $L(\varphi^{-1}_{\mathcal{A}}(\lambda_j))=L(e_j):=v'$\\
+Because $\varphi_{\mathcal{A}}$ is an isomorphism, $v'\rightarrow \varphi^{-1}_{\mathcal{A}}(v')$ is an isomorphism, which means\\
+ $L(\varphi^{-1}_{\mathcal{A}}(\lambda_j))\rightarrow \varphi_{\mathcal{A}}(L(e_j)):=v'$ is an isomorphism.\\
+Hence L $\rightarrow \varphi_{\mathcal{A}}\circ L\circ \varphi^{-1}_{\mathcal{A}}$.
+
+
+
+\section*{Exercise 4.}
+\subsection*{i)}
+First, we prove the uniqueness:\\
+Suppose that $\exists A^* ~with~ \langle x,Ay \rangle = \langle A^{*'},y \rangle $. Then,
+\begin{align*}
+\langle A^{*'},y\rangle\-\langle A^*x,y\rangle=\langle A^{*'}x-A^*x,y\rangle=0(Because~A^{*'}x-A^*x,y\in V^\perp)
+\end{align*}
+So 
+\begin{align*}
+A^{*'}x=A^*x\Longrightarrow A^{*'}=A*
+\end{align*}
+Second, we prove the existence.\\
+We consider when x,y$\in\mathcal{B}=\lbrace e_1,\cdots,e_n\rbrace$ a basis of V.\\
+We define the matrix elements of A as $a_{ij}=\langle e_i,Ae_j\rangle$\\
+Then $a^*_{ji}:=\langle e_j,A^*e_i\rangle=\overline{a_{ij}},~so~\langle e_i,Ae_j\rangle=a_{ij}=\overline{a^*_{ji}}=\langle A^*e_i,e_j\rangle$\\
+
+
+\subsection*{ii)}
+Let $\mathbb{B}=\lbrace e_1,e_2,\cdots,e_n\rbrace$ be a standard basis of A, then
+\begin{align*}
+\langle e_i,Ae_j\rangle=a_{ij}
+\end{align*}
+\begin{align*}
+\langle e_j,Ae_i\rangle=a_{ji}=\langle Ae_i,e_j\rangle~because~Ae_i,e_j\in\mathbb{R}
+\end{align*}
+Because $a_{ij}=a^T_{ji}$, $\langle e_j,Ay\rangle_i=\langle A^Te_i,e_j\rangle$
+Thus $A^*=A^T$.
+\begin{align*}
+\overline{a^T_{ji}}=\langle e_j,\overline{A^T}e_i\rangle=\overline{\langle\overline{A^T}e_i,e_j\rangle}\\
+\overline{a_{ij}}=\overline{\langle e_i,Ae_j\rangle}=\overline{\langle A^*e_i,e_j\rangle}
+\end{align*}
+Because $\overline{a^T_{ji}}=\overline{a_{ij}}$, $A^*=\overline{A^T}$.
+
+\subsection*{iii)}
+According to ii), $A=A^*=\overline{A^T}$, so $a_{ij}=\overline{a_{ji}}$.
+\begin{align*}
+\left( \begin{gmatrix}
+		   i & 2i & 3i & \cdots & ni \\
+		   -2i & i & 2i & \cdots & (n-1)i \\
+		   -3i & -2i & i & \cdots & (n-2)i \\
+		   \vdots &  \vdots &  \vdots &\ddots &\vdots \\
+		   -ni & -(n-1)i & -(n-2)i &\cdots & i 
+\end{gmatrix}\right)\
+\end{align*}
+
+\subsection*{iv)}
+\begin{align*}
+A=
+\left( \begin{gmatrix}
+		   a_{11} &\cdots &a_{1n} \\
+		   \vdots &\ddots &\vdots \\
+		   a_{n1} &\cdots &a_{nn}
+\end{gmatrix}\right)\
+\end{align*}
+Then 
+\begin{align*}
+A^*=\overline{A^T}=
+\left( \begin{gmatrix}
+		   \overline{a_{11}} &\cdots &\overline{a_{1n}} \\
+		   \vdots &\ddots &\vdots \\
+		   \overline{a_{n1}} &\cdots &\overline{a_{nn}}
+\end{gmatrix}\right)\
+\end{align*}
+Let u=
+$
+\left( \begin{gmatrix}
+		   \mu_1 \\
+		   \mu_2 \\
+		   \vdots \\
+		   \mu_n
+\end{gmatrix}\right)\
+$
+, then $kerA^*=\lbrace u\in\mathbb{C}:A^*u=0\rbrace$.\\
+So $\overline{a_{1k}\mu_1}+\overline{a_{2k}\mu_2}+\cdots+\overline{a_{nk}\mu_n}=0\Longrightarrow 
+\overline{a_{1k}\mu_1}+\overline{a_{2k}\mu_2}+\cdots+\overline{a_{nk}\mu_n}=0$
+
+\section*{Exercise 5.}
+\subsection*{i)}
+First, let's prove P is linear:
+\begin{align*}
+P(x+y)=\displaystyle{\sum^{m}_{i=1}}\langle e_i,x+y\rangle e_i=\displaystyle{\sum^{m}_{i=1}}\langle e_i,x\rangle e_i+\displaystyle{\sum^{m}_{i=1}}\langle e_i,y\rangle e_i=Px+Py\\
+P(\lambda x)=\displaystyle{\sum^{m}_{i=1}}\langle e_i,\lambda x\rangle e_i=\lambda\displaystyle{\sum^{m}_{i=1}}\langle e_i,x\rangle e_i=\lambda Px
+\end{align*}
+Next, we will prove $P^2=P$.\\
+Let $Px=u=\displaystyle{\sum^{m}_{i=1}}\langle e_i,x\rangle e_i$.
+According to Theorem 1.3.17, $u\in U$ can be represented as
+\begin{align*}
+Px=u=\displaystyle{\sum^{m}_{i=1}}\langle e_i,u\rangle e_i=Pu=P^2x
+\end{align*}
+So $P^2=P$.
+
+\subsection*{ii)}
+For $\forall~u\in U$,
+\begin{align*}
+\langle u,x\rangle&=\langle \displaystyle{\sum^{m}_{i=1}}\langle e_i,x_u\rangle e_i,x\rangle\\
+&=\displaystyle{\sum^{m}_{i=1}}\langle e_i,x_u\rangle \langle e_i,x\rangle\\
+&=\displaystyle{\sum^{m}_{i=1}}\langle e_i,x\rangle \langle e_i,x_u\rangle\\
+&=\langle 0,x_u\rangle=0
+\end{align*}
+So, $kerP=U^\perp$.
+\begin{align*}
+\langle P^*,Y\rangle &=\langle x,Py\rangle\\
+&=\langle x,\displaystyle{\sum^{m}_{i=1}}\langle e_i,y\rangle e_i\rangle\\
+&=\displaystyle{\sum^{m}_{i=1}}\langle e_i,y\rangle \langle e_i,x\rangle\\
+&=\langle \displaystyle{\sum^{m}_{i=1}}\langle e_i,x\rangle e_i,y\rangle\\
+&=\langle Px,y\rangle
+\end{align*}
+So, $P=P^*$.
+
+\subsection*{iii)}
+We get an orthonormal A basis of U $\mathcal{B}=
+\left\lbrace \left( \begin{gmatrix}\
+			-\frac{1}{\sqrt{6}} \\
+			\frac{2}{\sqrt{6}} \\
+			\frac{1}{\sqrt{6}}
+\end{gmatrix}\right)\
+\left( \begin{gmatrix}\
+			\frac{1}{\sqrt{2}} \\
+			0 \\
+			\frac{1}{\sqrt{2}}
+\end{gmatrix}\right)\right\rbrace\\
+$
+Let x=$
+\left( \begin{gmatrix}\
+			x_1 \\
+			x_2 \\
+			x_3
+\end{gmatrix}\right)\
+$
+, then $
+Px=\langle e_1,x\rangle e_1+\langle e_2,x\rangle e_2=
+\left( \begin{gmatrix}\
+			\frac{2}{3}x_1-\frac{1}{3}x_2+\frac{1}{3}x_3 \\
+			-\frac{1}{3}x_1+\frac{2}{3}x_2+\frac{1}{3}x_3 \\
+			\frac{1}{3}x_1+\frac{1}{3}x_2+\frac{2}{3}x_3
+\end{gmatrix}\right)\\
+$
+So, P=$
+\left( \begin{gmatrix}\
+			\frac{2}{3} & -\frac{1}{3} & \frac{1}{3} \\
+			-\frac{1}{3} & \frac{2}{3} & \frac{1}{3} \\
+			\frac{1}{3} & \frac{1}{3} & \frac{2}{3}
+\end{gmatrix}\right)\
+$
+, $P^2=
+\left( \begin{gmatrix}\
+			\frac{2}{3} & -\frac{1}{3} & \frac{1}{3} \\
+			-\frac{1}{3} & \frac{2}{3} & \frac{1}{3} \\
+			\frac{1}{3} & \frac{1}{3} & \frac{2}{3}
+\end{gmatrix}\right)\
+$=P, $P^*=
+\left( \begin{gmatrix}\
+			\frac{2}{3} & -\frac{1}{3} & \frac{1}{3} \\
+			-\frac{1}{3} & \frac{2}{3} & \frac{1}{3} \\
+			\frac{1}{3} & \frac{1}{3} & \frac{2}{3}
+\end{gmatrix}\right)\
+$
+\begin{align*}
+\langle A^*x,y\rangle &=y_1(\frac{2}{3}x_1-\frac{2}{3}x_2+\frac{1}{3}x_3)+y_2(-\frac{1}{3}x_1+\frac{2}{3}x_2+\frac{1}{3}x_3)+y_3(\frac{1}{3}x_1-\frac{1}{3}x_2+\frac{2}{3}x_3)\\
+&=\langle x,Ay\rangle
+\end{align*}
+\begin{align*}
+kerP=\lbrace x\in \mathbb{R}^3:x=
+\left( \begin{gmatrix}\
+			a \\
+			a \\
+			-a
+\end{gmatrix}\right)\
+\rbrace
+\end{align*}
+\begin{align*}
+\langle u,x\rangle=a(\lambda_1+\lambda_2)+a\lambda_1-a(2\lambda_1+\lambda_2)=0
+\end{align*}
+So, $kerP=U^\perp$.
+
+\section*{Exercise 6.}
+\subsection*{i)}
+\begin{align*}
+tr(AB)&=\displaystyle\sum^{n}_{i=1}\displaystyle\sum^{n}_{k=1}a_{ki}b_{ik}\\
+&=\displaystyle\sum^{n}_{k=1}\displaystyle\sum^{n}_{i=1}b_{ik}a_{ki}\\
+&=tr(BA)
+\end{align*}
+Let 
+\begin{align*}
+A=
+\left( \begin{gmatrix}\
+			1 & 1 \\
+			0 & 1
+\end{gmatrix}\right)\
+,~B=
+\left( \begin{gmatrix}\
+			1 & 0 \\
+			1 & 1
+\end{gmatrix}\right)\
+\end{align*}
+\begin{align*}
+AB=
+\left( \begin{gmatrix}\
+			2 & 1 \\
+			1 & 1
+\end{gmatrix}\right)\
+\end{align*}
+\begin{align*}
+tr(AB)=3,~trAtrB=0.
+\end{align*}
+
+\subsection*{ii)}
+\subsubsection*{1)}
+\begin{align*}
+\langle A,A\rangle_{tr}=tr(A^*A)=\displaystyle\sum^n_{i=1,j=1}\overline{a_{ji}}a{ji}\geq 0
+\end{align*}
+\begin{align*}
+\langle A,A\rangle_{tr}=0\Longleftrightarrow a_{ij}=0\Longleftrightarrow A=0
+\end{align*}
+\subsubsection*{2)}
+\begin{align*}
+\langle A,B+C\rangle_{tr}&=tr(A^*(B+C))\\
+&=\displaystyle\sum^n_{i=1}\overline{a_{\cdot i}}(b_{\cdot i+c_{\cdot i}})\\
+&=\displaystyle\sum^n_{i=1}\overline{a_{\cdot i}}(b_{\cdot i})+\displaystyle\sum^n_{i=1}\overline{a_{\cdot i}}(c_{\cdot i})\\
+&=tr(A^*B)+tr(A^*C)\\
+&=\langle A,B\rangle_{tr}+\langle A,C\rangle_{tr}
+\end{align*}
+\subsubsection*{3)}
+\begin{align*}
+\langle A,\lambda\rangle_{tr}&=tr(A^*\lambda B)\\
+&=\displaystyle\sum^n_{i=1}\overline{a_{\cdot i}}\lambda b_{\cdot i}\\
+&=\lambda\displaystyle\sum^n_{i=1}\overline{a_{\cdot i}} b_{\cdot i}\\
+&=\lambda tr(A^*B)\\
+&=\lambda\langle A,B\rangle_{tr}
+\end{align*}
+\subsubsection*{4)}
+\begin{align*}
+\langle A,B\rangle_{tr}&=\displaystyle\sum^n_{i=1}\overline{a_{\cdot i}}b_{\cdot i}\\
+&=\overline{\displaystyle\sum^n_{i=1}\overline{b_{\cdot i}}a_{\cdot i}}\\
+&=\overline{\langle B,A\rangle_{tr}}
+\end{align*}
+So, $\langle A,B\rangle_{tr}$ defines a inner product.
+\begin{align*}
+\parallel A\parallel_{tr}=\sqrt{\langle A,A\rangle_{tr}}=\sqrt{\displaystyle\sum_{i=1,j=1}^n\overline{a_{ji}}a_{ji}}=\displaystyle\sum_{i=1,j=1}^n\mid_{ij}\mid
+\end{align*}
+
+\subsection*{iii)}
+Let A$\in Mat(2\times 2,\mathbb{C})$, then A=
+$
+\left( \begin{gmatrix}\
+			a_1+a_2i & a_3+a_4i \\
+			a_5+a_6i & a_7+a_8i
+\end{gmatrix}\right)\\
+$
+\begin{align*}
+\left\lbrace \begin{gmatrix}\
+			a_1+a_2i=\lambda_1+\lambda_2=b_1+c_1i+b_2+c_2i \\
+			a_7+a_8i=\lambda_1-\lambda_2=b_1+c_1i-b_2-c_2i
+\end{gmatrix}\right.\
+\Longrightarrow
+\left\lbrace \begin{gmatrix}\
+			a_1=b_1+b_2 \\
+			a_2=c_1+c_2 \\
+			a_7=b_1-b_2 \\
+			a_8=c_1-c_2
+\end{gmatrix}\right.\
+\end{align*}
+$For\forall A\in Mat(2\times2,\mathbb{C})$ has a linear combination of $\sigma_0,\sigma_1,\sigma_2,\sigma_3$, they form a basis of the complex vector space $Mat(2\times2,\mathbb{C})$.
+\begin{align*}
+\sigma_0^*\sigma_1=
+\left( \begin{gmatrix}\
+			0 & 1 \\
+			1 & 0
+\end{gmatrix}\right)\
+\Longrightarrow\langle\sigma_0,\sigma_1\rangle_{tr}=0\\
+\sigma_0^*\sigma_2=
+\left( \begin{gmatrix}\
+			0 & -i \\
+			i & 0
+\end{gmatrix}\right)\
+\Longrightarrow\langle\sigma_0,\sigma_2\rangle_{tr}=0\\
+\sigma_0^*\sigma_3=
+\left( \begin{gmatrix}\
+			1 & 0 \\
+			0 & -1
+\end{gmatrix}\right)\
+\Longrightarrow\langle\sigma_0,\sigma_3\rangle_{tr}=0\\
+\sigma_1^*\sigma_2=
+\left( \begin{gmatrix}\
+			i & 0 \\
+			0 & -i
+\end{gmatrix}\right)\
+\Longrightarrow\langle\sigma_1,\sigma_2\rangle_{tr}=0\\
+\sigma_1^*\sigma_3=
+\left( \begin{gmatrix}\
+			0 & -1 \\
+			1 & 0
+\end{gmatrix}\right)\
+\Longrightarrow\langle\sigma_1,\sigma_3\rangle_{tr}=0\\
+\sigma_2^*\sigma_3=
+\left( \begin{gmatrix}\
+			0 & i \\
+			i & 0
+\end{gmatrix}\right)\
+\Longrightarrow\langle\sigma_2,\sigma_3\rangle_{tr}=0
+\end{align*}
+So, $\sigma_1,\sigma_2,\sigma_3,\sigma_4$ are mutually orthogonal with respect to the scalar product $\langle\cdot,\cdot\rangle_{tr}$.
+
+
+\section*{Exercise 7.}
+We let x=
+$
+\left( \begin{gmatrix}\
+			x_1 \\
+			x_2
+\end{gmatrix}\right)\
+$
+, where 
+$
+\left\lbrace \begin{gmatrix}\
+			x_1=\rho cos\theta \\
+			x_2=\rho sin\theta
+\end{gmatrix}\right.\
+$
+($\rho>0$)\\
+Then 
+\begin{align*}
+x'=\mathcal{R}(\varphi)x=
+\left( \begin{gmatrix}\
+			\rho cos\theta cos\varphi-\rho sin\theta sin\varphi \\
+			\rho cos\theta sin\varphi-\rho sin\theta cos\varphi
+\end{gmatrix}\right)\
+=
+\left( \begin{gmatrix}\
+			\rho cos(\theta+\varphi) \\
+			\rho sin(\theta+\varphi)
+\end{gmatrix}\right)\
+\end{align*}
+Because the angle $x$ with (1,0) is $\theta$, and the angle $x'$ with (1,0) is $\theta+\varphi$, \\
+geometrically, it means rotating a vector in a counter-clockwise direction in $\mathbb{R}^2$.
+
+\section*{Exercise 8.}
+We can find a pair of perpendicular basis for the plane.
+$
+u_1=\left( \begin{gmatrix}
+		   \frac{1}{\sqrt{2}}\\
+		   0\\
+		   \frac{1}{\sqrt{2}}
+\end{gmatrix}\right)
+,~~
+u_2=\left( \begin{gmatrix}
+		   \frac{1}{\sqrt{3}}\\
+		   -\frac{1}{\sqrt{3}}\\
+		   -\frac{1}{\sqrt{3}}
+\end{gmatrix}\right)\\
+$
+Because the rotation is about the axis $u_3$, the projection of $x$ on $u_3$ is the same.
+\begin{align*}
+x_{u_3}= \left( \begin{gmatrix}
+		   \frac{1}{6}x_1 +\frac{1}{3}x_2-\frac{1}{6}x_3\\
+		   \frac{1}{3}x_1 +\frac{2}{3}x_2-\frac{1}{3}x_3 \\
+		   -\frac{1}{6}x_1 -\frac{1}{3}x_2+\frac{1}{6}x_3
+\end{gmatrix}\right)\
+\end{align*}
+Then we can get the transformed basis $u_1^{'},u_2^{'}$:
+$
+u_1^{'}=\left( \begin{gmatrix}
+		   \frac{\sqrt{2}}{2}cos\phi -\frac{\sqrt{3}}{3}sin\phi\\
+		   \frac{\sqrt{3}}{3}sin\phi\\
+		   \frac{\sqrt{2}}{2}cos\phi +\frac{\sqrt{3}}{3}sin\phi
+\end{gmatrix}\right)
+,~~
+u_2^{'}=\left( \begin{gmatrix}
+		   \frac{\sqrt{3}}{3}cos\phi +\frac{\sqrt{2}}{2}sin\phi\\
+		   -\frac{\sqrt{3}}{3}cos\phi\\
+		   -\frac{\sqrt{3}}{3}cos\phi +\frac{\sqrt{2}}{2}sin\phi
+\end{gmatrix}\right)
+$
+\begin{align*}
+x^{'}=\left( \begin{gmatrix}
+		   (\frac{5}{6}cos\phi +\frac{1}{6})x_1+(-\frac{\sqrt{6}}{6}sin\phi-\frac{1}{3}cos\phi +\frac{1}{3})x_2+(-\frac{\sqrt{6}}{3}sin\phi+\frac{1}{6}cos\phi -\frac{1}{6})x_3\\
+		   (\frac{\sqrt{6}}{6}sin\phi -\frac{1}{3}cos\phi +\frac{1}{3})x_1+(\frac{1}{3}cos\phi +\frac{2}{3})x_2+(\frac{\sqrt{6}}{6}sin\phi +\frac{1}{3}cos\phi -\frac{1}{3})x_3\\
+		   (\frac{\sqrt{6}}{3}sin\phi +\frac{1}{6}cos\phi -\frac{1}{6})x_1+(-\frac{\sqrt{6}}{6}sin\phi+\frac{1}{3}cos\phi -\frac{1}{3})x_2+(\frac{5}{6}cos\phi +\frac{1}{6})x_3
+\end{gmatrix}\right)
+\end{align*}
+\begin{align*}
+R=\left( \begin{gmatrix}
+		   (\frac{5}{6}cos\phi +\frac{1}{6})&(-\frac{\sqrt{6}}{6}sin\phi-\frac{1}{3}cos\phi +\frac{1}{3})&(-\frac{\sqrt{6}}{3}sin\phi+\frac{1}{6}cos\phi -\frac{1}{6})\\
+		   (\frac{\sqrt{6}}{6}sin\phi -\frac{1}{3}cos\phi +\frac{1}{3})&(\frac{1}{3}cos\phi +\frac{2}{3})&(\frac{\sqrt{6}}{6}sin\phi +\frac{1}{3}cos\phi -\frac{1}{3})\\
+		   (\frac{\sqrt{6}}{3}sin\phi +\frac{1}{6}cos\phi -\frac{1}{6})&(-\frac{\sqrt{6}}{6}sin\phi+\frac{1}{3}cos\phi -\frac{1}{3})&(\frac{5}{6}cos\phi +\frac{1}{6})&
+\end{gmatrix}\right)
+\end{align*}
+
+
+
+
+\end{document}

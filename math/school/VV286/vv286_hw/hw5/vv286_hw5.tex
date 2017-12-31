@@ -1,0 +1,336 @@
+\input mla
+\begin{document}
+\titlehm{5}
+
+\begin{vv286_ms}{1}
+\item[(i)]
+We set up the characteristic polynomial:
+\eq
+{
+\det(A-\lam I)=0
+}
+and solves for the eigenvalues, and eigenvectors by setting
+\eq
+{
+(A-\lam I)v=\lam
+}
+gives us the solutions:
+
+    \eq{
+    \lam_1&=-4, &V_{\lam_1}&=\hbox{span}\left\{\mm{1\\ 1}\right\}\\
+    \lam_2&=3 &V_{\lam_2}&=\hbox{span}\left\{ \mm{1\\-1} \right\}
+    }
+\item[(ii)]
+We set up the characteristic polynomial:
+\eq
+{
+\det(A-\lam I)=0
+}
+and solves for the eigenvalues, and eigenvectors by setting
+\eq
+{
+(A-\lam I)v=\lam
+}
+gives us the solutions:
+	\eq{
+	\lam_1&=0, &V_{\lam_1}&=\hbox{span}\left\{ \mm{1\\1\\1} \right\}\\
+	\lam_2&=3, &V_{\lam_2}&=\hbox{span}\left\{ \mm{1\\-2\\1} \right\}\\
+	\lam_3&=1, &V_{\lam_3}&=\hbox{span}\left\{ \mm{1\\0\\-1} \right\}
+	}
+\end{vv286_ms}
+\begin{vv286_ms}{2}
+\item[]
+	We consider the mapping and apply the Lagrange Multiplier method:
+	\eq
+	{
+	f:\,(\lam,x)\mapsto\,Q_A(x)-\lam\dotp{x}{x}
+	}
+	by requiring:
+	\eq
+	{
+	\pd{f}{x_k}=0\implies
+	(Ax)_k+x^{\rm T}A_k=2\lam x_k
+	}
+	where subscript $k$ is understood as taking the $k$th component or column.
+	since $A=A^{\rm T}$, we have:
+	\eq
+	{
+	x^{\rm T}A_k=\left( x^{\rm T}A \right)_k=\left( A^{\rm T}x \right)_k^{\rm T}=\left(
+	Ax \right)_k
+	}
+	thereby giving $\left( A x \right)_k=\lam x_k$, thus the constrained extrema is
+	taken at the eigenvalues and eigenvectors. By traveling through all possible
+	eigenvectors we get the desired extrema: $Q_A(x)=\dotp{x}{Ax}=\lam_x$ since
+	$\|x\|=1$. This completes the proof.
+\end{vv286_ms}
+\begin{vv286_ms}{3}
+\item[(i)]
+ We simply plugging in the numbers in the inertia tensor:
+ \[
+ \mm{
+ 0.0615&0&-0.009\\
+ 0&0.0705&0\\
+ -0.009&0&0.054
+ }
+ \]
+ and $\bf L$:
+ \eq
+ {
+ L=Ie_3=\mm{-0.009\\0\\0.054}
+ }
+ and the rotational energy:
+ \eq
+ {
+ T=\ff{1}{2}\dotp{\w}{I\w}=0.027
+ }
+ \item[(ii)]
+	Again, we set up the characteristic polynomial:
+\eq
+{
+\det(A-\lam I)=0
+}
+and solves for the eigenvalues, and eigenvectors by setting
+\eq
+{
+(A-\lam I)v=\lam
+}
+gives us the solutions:
+    \eq{
+    \lam_1&=0.0705, &V_{\lam_1}&=\hbox{span}\left\{\mm{0\\ 1\\0}\right\}\\
+    \lam_2&=0.048 &V_{\lam_2}&=\hbox{span}\left\{ \mm{2\\0\\3} \right\}\\
+    \lam_3&=0.0675 &V_{\lam_3}&=\hbox{span}\left\{ \mm{-3\\0\\2} \right\}
+    }
+Thus the maximum of $T$ is at $\mm{0\\ 1\\0}$ and minimal is at $\mm{2/\sqrt{13}\\0\\3/\sqrt{13}}$. \\
+From definition of nutation rotating at these axises will imply $L$ {\bf parallel} to $\w$. These axises are called the {\it principle axises}.
+\end{vv286_ms}
+\begin{vv286_ms}{4}
+\item[]
+Since we only have one single eigenvalue, using top-down method requires us to calculate
+\eq
+{
+(A+2I)^{3-1+1}
+}
+and 
+and we set
+\eq
+{
+(A+2I)^3v^{(2)}=\bf 0
+}
+similarly:
+\eq{
+v^{(1)}=(A+2I)v^{(2)}\\
+v=(A+2I)v^{(1)}
+}
+to obtain the basis:
+	\eq
+	{
+	\left( v,\,v^{(1)},\,v^{(2)} \right)=
+	\left\{
+	\mm{5\\3\\-7},\,\mm{-\ff{1}{7}\\-\ff{2}{7}\\0},\,\mm{-\ff{25}{49}\\-\ff{1}{49}\\0} \right\}
+	}
+	And we can inspect the Jordan Normal form:
+	\eq
+	{
+	J=\bm{-2&1&0\\0&-2&1\\0&0&-2}
+	}
+\end{vv286_ms}
+\begin{vv286_ms}{5}
+\item[]
+Since we only have one single eigenvalue, using top-down method requires us to calculate
+\eq
+{
+(A-3I)^{4-2+1}
+}
+and 
+and we set
+\eq
+{
+(A-3I)^3v^{(3)}=\bf 0
+}
+similarly:
+\eq{
+v^{(2)}=(A+2I)v^{(3)}\\
+v^{(1)}=(A+2I)v^{(2)}\\
+v=(A+2I)v^{(1)}
+}
+to obtain the basis:
+	\begin{align*}
+	  \left( v, \,
+	  v^{(1)},\,
+	  v^{(2)}, \,
+	  v^{(3)}, \,
+	  \right)=
+	  \left\{ \mm{1\\3\\0\\1}, \,
+	  \mm{-3\\-9\\6\\3}, \, 
+	  \mm{11\\42\\-34\\-20}, \,
+	  \mm{0\\0\\0\\1}\right\}
+	\end{align*}
+	And we can inspect the corresponding Jordan Normal form:
+	\begin{align*}
+	  J=\mm{3&0&0&0\\
+	  0&3&1&0\\
+	  0&0&3&1\\
+	  0&0&0&3}
+	\end{align*}
+\end{vv286_ms}
+\begin{vv286_mp}{6}
+\item[]
+	Notice first that:
+	\eq
+	{
+	\det (J_A)&=\det (U)\det (A) \det( U^{-1})=\prod_{i=1}^n\lam_i
+	}
+	and also
+	\eq
+	{
+	\tr{J_A}=\tr{UAU^{-1}}=\tr{UU^{-1}A}=\tr{A}=\sum_{i=1}^n\lam_i
+	}
+	this is due to the fact that $\tr{AB}=\tr{BA}$.
+	\\
+	Now consider 
+	\eq
+	{
+	e^A&=\sum\ff{A^k}{k!}=\sum\ff{\left( UJ_AU^{-1} \right)^k}{k!}\\
+	&=U^{-1}\bm{e^{\lam_1I+N_1}&&\\&\ddots&\\&&e^{\lam_kI+N_k}}U
+	\numberthis{1}
+	}
+	and for each block we see that:
+	\eq{
+	e^{\lam I+N}=e^{\lam}Ie^{N}=e^{\lam}I\left( I+N' \right)
+	}
+	where we short abbreviate that $N'$ is obtained by adding powers of $N$ and doesn't affect
+	the zero diagonal (because if we have a zero diagonal matrix $N$, no matter how many times it multiply itself, the diagonal is $0$), therefore in each block $e^{\lam}(I+N')$ is in diagonal form, so is the whole Jordan normal form,
+	thus the determinant, in \eqref{1} is
+		\eq{
+	\det(e^A)=(\det{U})e^{\sum \lam_k}(\det{U^{-1}})=\prod e^{\lam_k}=e^{\tr{A}}
+	}
+	this completes the proof.
+\end{vv286_mp}
+\begin{vv286_ms}{7}
+\item[]
+	Norm the units and by Newton's law:
+	\eq{
+	\ddot{\bx}=\ba=\bF=F\bx
+	}
+	and this is equivalent to:
+	\eq
+	{
+	\dot{\bx}=\bv,\quad \dot{\bv}=\bF
+	}
+	which is the form of linear equation in the problem.\\
+	Now the general solution by solving the homogeneous equation. First we find the Jordan normal form:
+	\eq
+	{
+	J=
+	\left(\begin{array}{cccc}
+	 -1 & 0 & 0 & 0 \\
+	 0 & 1 & 0 & 0 \\
+	 0 & 0 & -i & 0 \\
+	 0 & 0 & 0 & i \\
+	\end{array}\right),
+	\quad
+	U=\left(
+\begin{array}{cccc}
+ -1 & 1 & -i & i \\
+ -1 & 1 & i & -i \\
+ 1 & 1 & -1 & -1 \\
+ 1 & 1 & 1 & 1 \\
+\end{array}
+\right)
+	}
+	Thus the general solution is:
+	\eq
+	{
+	&e^{At}\left(\begin{array}{cc}
+ x_1(0)  \\
+ x_2(0)  \\
+ v_1(0)  \\
+ v_2(0)  \\
+\end{array}
+\right)=Ue^{Jt}U^{-1}\left(\begin{array}{cc}
+ x_1(0)  \\
+ x_2(0)  \\
+ v_1(0)  \\
+ v_2(0)  \\
+\end{array}
+\right)\\
+	=&\left(
+\begin{array}{cc}
+ \frac{e^{-t}}{4}+\frac{e^{-i t}}{4}+\frac{e^{i t}}{4}+\frac{e^t}{4} & \frac{e^{-t}}{4}-\frac{e^{-i t}}{4}+\frac{e^{i t}}{4}-\frac{e^t}{4} \\
+ \frac{e^{-t}}{4}-\frac{e^{-i t}}{4}+\frac{e^{i t}}{4}-\frac{e^t}{4} & \frac{e^{-t}}{4}+\frac{e^{-i t}}{4}+\frac{e^{i t}}{4}+\frac{e^t}{4} \\
+ -\frac{e^{-t}}{4}-\frac{1}{4} i e^{-i t}+\frac{e^{i t}}{4}+\frac{i e^t}{4} & -\frac{e^{-t}}{4}+\frac{1}{4} i e^{-i t}+\frac{e^{i t}}{4}-\frac{i e^t}{4} \\
+ -\frac{e^{-t}}{4}+\frac{1}{4} i e^{-i t}+\frac{e^{i t}}{4}-\frac{i e^t}{4} & -\frac{e^{-t}}{4}-\frac{1}{4} i e^{-i t}+\frac{e^{i t}}{4}+\frac{i e^t}{4} \\
+\end{array}
+\right.\\
+&\left.
+\begin{array}{cc}
+ -\frac{e^{-t}}{4}+\frac{1}{4} i e^{-i t}+\frac{e^{i t}}{4}-\frac{i e^t}{4} & -\frac{e^{-t}}{4}-\frac{1}{4} i e^{-i t}+\frac{e^{i t}}{4}+\frac{i e^t}{4} \\
+ -\frac{e^{-t}}{4}-\frac{1}{4} i e^{-i t}+\frac{e^{i t}}{4}+\frac{i e^t}{4} & -\frac{e^{-t}}{4}+\frac{1}{4} i e^{-i t}+\frac{e^{i t}}{4}-\frac{i e^t}{4} \\
+ \frac{e^{-t}}{4}+\frac{e^{-i t}}{4}+\frac{e^{i t}}{4}+\frac{e^t}{4} & \frac{e^{-t}}{4}-\frac{e^{-i t}}{4}+\frac{e^{i t}}{4}-\frac{e^t}{4} \\
+ \frac{e^{-t}}{4}-\frac{e^{-i t}}{4}+\frac{e^{i t}}{4}-\frac{e^t}{4} & \frac{e^{-t}}{4}+\frac{e^{-i t}}{4}+\frac{e^{i t}}{4}+\frac{e^t}{4} \\
+\end{array}
+\right)\times
+\left(\begin{array}{cc}
+ x_1(0)  \\
+ x_2(0)  \\
+ v_1(0)  \\
+ v_2(0)  \\
+\end{array}
+\right)
+	}
+\end{vv286_ms}
+\begin{vv286_ms}{8}
+\item[(i)]
+	Notice in definition $r_k$'s are fixed, and by Hook's law the force is negatively proportional
+	to the displacement from equilibrium:
+	\eq
+	{
+	F_1&=k\left( (x_2-x_1)-(r_2-r_1) \right)\\
+	F_2&=-k\left( (x_2-x_1)-(r_2-r_1)\right)+k\left( (x_3-x_2)-(r_3-r_2) \right)\\
+	F_3&=-k\left( (x_3-x_2)-(r_3-r_2) \right)
+	}
+	and the corresponding linear system is:
+	\eq
+	{
+	\mm{d_1'\\d_2'\\d_3'\\v_1'\\v_2'\\v_3'}=\left(
+\begin{array}{cccccc}
+ 0 & 0 & 0 & 1 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 1 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 1 \\
+ -1 & 1 & 0 & 0 & 0 & 0 \\
+ 1 & -2 & 1 & 0 & 0 & 0 \\
+ 0 & 1 & -1 & 0 & 0 & 0 \\
+\end{array}
+\right)\mm{d_1\\d_2\\d_3\\v_1\\v_2\\v_3}
+	}
+\item[(ii)]
+	By Mathematica$^{\rm TM}$ we have
+	\eq
+	{
+	S=\left(
+\begin{array}{cccccc}
+ 1 & 0 & -i & i & \frac{i}{\sqrt{3}} & -\frac{i}{\sqrt{3}} \\
+ 1 & 0 & 0 & 0 & -\frac{2 i}{\sqrt{3}} & \frac{2 i}{\sqrt{3}} \\
+ 1 & 0 & i & -i & \frac{i}{\sqrt{3}} & -\frac{i}{\sqrt{3}} \\
+ 0 & 1 & -1 & -1 & 1 & 1 \\
+ 0 & 1 & 0 & 0 & -2 & -2 \\
+ 0 & 1 & 1 & 1 & 1 & 1 \\
+\end{array}
+\right),
+\quad
+J_B=
+\left(
+\begin{array}{cccccc}
+ 0 & 1 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & -i & 0 & 0 & 0 \\
+ 0 & 0 & 0 & i & 0 & 0 \\
+ 0 & 0 & 0 & 0 & -i \sqrt{3} & 0 \\
+ 0 & 0 & 0 & 0 & 0 & i \sqrt{3} \\
+\end{array}
+\right)
+	}
+	where each of the column of $U$ is the eigenvectors and the normal form $J_B$ gives us the diagonal of eigenvalues.
+
+	\end{vv286_ms}
+\end{document}

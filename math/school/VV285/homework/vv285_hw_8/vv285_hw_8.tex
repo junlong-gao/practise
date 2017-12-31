@@ -1,0 +1,299 @@
+\documentclass{article}
+\input mla
+\begin{document}
+\titlehm{8}
+\ms{1}{
+\item[(i)]
+At $F_m=F_{\rm max}$ we reduce the first and the second into:
+\eq{
+&GJ\,H_0\sq{L^2-H_0^2}=F_mr_1r_0L^2\\
+&\ff{L^2-H_0^2}{r_0}-\ff{L^2}{r_1}=0
+}
+where $r_1=r(F)$ and we many solve for $F_m$ and $r_1$:
+\eq{
+&F_m=\ff{L^2-H_0^2}{r^2_0L^4}GJ\,H_0\sq{L^2-H_0^2}\\
+&r_1=\ff{L^2r_0}{L^2-H_0^2}
+}
+\item[(ii)]
+We notice that by the given equations there defines an implicit function 
+$g:\,F\mapsto(r,H,n)$,
+and the differential is given by:
+\eq
+{
+Dg\Big|_{F=0}=-\left(DG(0,\,\cdot\,)\Big|_{(H_0,n_0,r_0)}\right)^{-1}
+DG(\,\cdot\,,H_0,n_0,r_0)\Big|_{F=0}
+}
+where $G(F,H,r,n)$ is defined as in question:
+\eq{
+G:\mm{F\\H\\r\\n}
+\mapsto\mm{
+&\displaystyleGJ\left(\ff{H_0}{Lr_0}\sq{L^2-H_0^2}-\ff{H}{Lr}\sq{L^2-H^2}\right)-Fr\sq{L^2-H^2}\\
+&\displaystyleEJ\left(\ff{L^2-H_0^2}{r_0}-\ff{L^2-H^2}{r}\right)+FrLH\\
+&\displaystyle(2n\pi r)^2+H^2-L^2
+}
+}
+by setting $G(F,H,r,n)=(0,0,0)^T$ defines the $g$ around $(0,H_0,r_0,n_0)$
+and by calculation we have
+\eq{
+&r'(0)=r_0^3\left(\ff{2}{GJ}\sa-\ff{1}{EJ}\sa\ff{\cos2\alpha}{\cos^2\alpha}\right)\\
+&H'(0)=-Lr_0^2\left(\ff{\sin^2\alpha}{EJ}+\ff{\cos^2\alpha}{GJ}\right)\\
+&n'(0)=\ff{r_0L}{2\pi}\sa\ca\left(\ff{1}{EJ}-\ff{1}{GJ}\right)
+}
+}
+\mp{2}{
+\item[i)]
+We set: 
+\eq{
+F(e,\,x)=10\cdot\sum_{i=1}^{14}x^{3/2}\left(\cos\varphi_i\right)_+^{3/2}\cos\varphi_i=3000
+}
+and solve for 
+\eq{
+x=937.02\,\mu\m
+}
+and plugging it into $F_1$:
+\eq{
+F_1=937.02\N
+}
+and the loading ball are the half of the total: 7.
+\item[ii)]
+\def\cp#1{\cos\varphi_i}
+We proceed as Lagrange Multiplier:
+\eq
+{
+\ff{1}{C}D(F_1+\lam F)=0\implies&\ff{3}{2}(e+x)^{1/2}+
+\lam\ff{3}{2}\sum_i\left(e+x\cp{i}\right)_+^{1/2}\cp{i}=0\\
+&\ff{3}{2}(e+x)^{1/2}+\lam\ff{3}{2}\sum_i\left(e+x\cp{i}\right)_+^{1/2}\cos^2\varphi_i=0\\
+&\sum_i\left(e+x\cp{i}\right)^{3/2}\cos\varphi_i-3000=0
+}
+The first two implies:
+\eq{
+\sum_i\left(\ff{e}{x}+\cp{i}\right)_+^{1/2}&\cp{i}=\sum_i\left(\ff{e}{x}+\cp{i}\right)_+^{1/2}\cos^2\varphi_i\\
+&\implies \ff{e}{x}=0.75202
+}
+and substitute  it into the third equation:
+\eq{
+x^{3/2}\sum_i&\left(\ff{e}{x}+\cp{i}\right)_+^{3/2}\cos\varphi_i-3000=0\\
+&\implies x=10.88\,\mu\m\qquad e=8.182\,\mu\m
+}
+to find the balls under load, we merely need to look into the quotient:
+\eq{
+\ff{e}{x}>-\cos\ff{\pi(i-1)}{7}
+} 
+and the number calculation shows:
+\eq
+{
+-\cos\varphi_7=0.901>\ff{e}{x}
+}
+thus by symmetry ball 7,8,9 is unloaded and the other 11 balls are loaded.
+}
+\mp{3}{
+\item[i)]
+Notice that if $a>0$ and $\Delta=ac-b^2>0$
+\ed{
+Q_A(x,y)=\dotp{(x,y)}{A(x,y)}=ax^2+2bxy+cy^2=a\left(x+\ff{b}{a}y\right)^2+
+\left(\ff{ac-b^2}{a}\right)y^2>0
+}
+for all $(x,y)\in\R^2$ since both of the term is positive. \\
+On the other hand, if $a<=0$ or $\Delta=ac-b^2<=0$, the above expression will be negative 
+eventually for sufficiently large $|x|,|y|$, and $Q_A$ is not positive definite. This establishes the 
+if and only if condition.
+\item[ii)]
+Notice that $A$ is negative definite if and only if $-A$ is positive definite, and from (i) it happens
+if and only if
+\eq{
+-a>0,\quad (-a)(-c)-(-b)^2>0
+}
+which exactly corresponds to 
+\eq
+{
+a<0,\quad \Delta>0
+}
+\item[iii)]
+By (1) if $ac-b^2<0$, then the quadric inequality 
+in (1) has a pair of distinct solution $x_1/y_1,x_2/y_2$
+such that the graph passes the axis $x/y$:
+\eq{
+y^2\left(a\left(\ff{x}{y}\right)^2+2b\ff{x}{y}+c\right)
+}
+thus there exists $x_0/y_0$ such that the above expression vanishes, and has
+different signs near this point. 
+}
+\ms{4}{
+\item[i)]
+Notice that $f$ doesn't have any extrema in $\R^2/{(0,0)}$:
+\eq{
+Df=\mm{\ff{x}{\sq{x^2+y^2}}&\displaystyle\ff{y}{\sq{x^2+y^2}}}
+}
+and since it's not differentiable at $(0,0)$ we check by hand that it's a global minima.
+In conclusion, we have
+\begin{itemize}
+\item[] Local minima:
+\eq{
+(0,0)
+}
+\item[]Local maxima:
+None
+\item[]Global minima:
+\eq{
+(0,0)}
+\item[]Global maxima:
+None
+\end{itemize}
+\item[ii)]
+Setting the first differential to be $0$:
+\eq{
+Df=\mm{\sin y\sin(2x+y)&\sin x\sin(x+2y)}=\mm{0&0}
+}
+We get 
+\eq{
+(0,0),\,(0,\pi),\,(\pi,0),\,(\ff{\pi}{3},\ff{\pi}{3})
+}
+and 
+we immediately conclude that on the boundary the points are the local and global minima's since $f>0$ inside the region and
+vanishes on the boundary, and the point $({\pi}/{3},{\pi}/{3})$ is a global maxima since 
+\eq{
+{\rm Hess}f\Big|_{(\pi/3,\pi/3)}=\mm{\displaystyle-\sq3&\displaystyle-\ff{\sq3}{2}\\\displaystyle-\ff{\sq3}{2}&
+\displaystyle-\sq3}
+}
+which is negative definite, making it the only local maxima, and larger then the boundary making
+it the global maxima.\\
+In conclusion, we have
+\begin{itemize}
+\item[] Local minima:
+The boundary.
+\item[]Local maxima:
+\eq{
+({\pi}/{3},{\pi}/{3})
+}
+\item[]Global minima: 
+The boundary.
+\item[]Global maxima:
+\eq{
+({\pi}/{3},{\pi}/{3})
+}
+\end{itemize}
+\item[iii)]
+Again we look for points such that 
+\eq{
+Df=\mm{\cos x+\cos(x+y)&\displaystyle\cos y+\cos(x+y)}=\mm{0&0}
+}
+which solves for:
+\eq{
+\left(\ff{\pi}{3},\ff{\pi}{3}\right)
+}
+and the Hess$f$ is 
+\eq{
+{\rm Hess}f\Big|_{(\pi/3,\pi/3)}=\mm{\displaystyle-\sq3&\displaystyle-\ff{\sq3}{2}\\\displaystyle-\ff{\sq3}{2}&
+\displaystyle-\sq3}
+}
+which is negative definite.
+therefore it's a local maxima $f=3\sq3/2$\\
+On the boundary, we can check by hand that the local
+minima:
+\eq{
+(\ff{\pi}{2},\,\ff{\pi}{2})
+}
+and the local minima:
+\eq{
+(0,0)
+}
+which is also a global minima.\\
+In conclusion, we have
+\begin{itemize}
+\item[] Local minima:
+\eq{
+(0,0)\quad(\ff{\pi}{2},\,\ff{\pi}{2})
+}
+\item[]Local maxima:
+\eq{
+\left(\ff{\pi}{3},\ff{\pi}{3}\right)
+}
+\item[]Global minima:
+\eq{
+(0,0)
+}
+\item[]Global maxima:
+\eq{
+\left(\ff{\pi}{3},\ff{\pi}{3}\right)
+}
+\end{itemize}
+}
+\ms{5}{
+We set $DE=0$ which gives us an extrema:
+\eq{
+(\ff{2a}{3},2)
+}
+and the calculated Hess$E$:
+\eq{
+\mm{-8ae^{-2}&\displaystyle0\\
+		\displaystyle0&\displaystyle-\ff{8a^3}{27}e^{-2}}
+}
+which is negative definite, making it a local maxima.\\
+Finally check the boundaries, notice $E$ vanishes when $x=0$ or $x=a$, 
+and this shows $({2a}/{3},3)$ is the global maxima, as desired.
+}
+\ms{6}{
+By Lagrange Multipliers:
+\eq{
+&0+\lam_1-\lam_2\ff{z^2}{x^2y^3}=0\\
+&0+\lam_1-3\lam_2\ff{z^2}{y^4x}=0\\
+&1+\lam_1+\lam_2\ff{2z}{xy^3}=0\\
+&x+y+z-1=0\\
+&\ff{z^2}{xy^3}-3=0
+} 
+which solves for
+\eq{
+x=\ff{-2\pm+\sq{13}}{9},\quad y=3x,\quad z=\ff{17\pm4\sq{13}}{9}
+}
+and the desired maximum is (since $f$ must attains its maximum on the set):
+\eq{
+f_m=z_m=\ff{17+4\sq{13}}{9}
+}
+}
+\ms{7}{
+This can be tackled by:
+\eq{
+V=h\pi r^2\implies h=\ff{V}{\pi r^2}
+}
+substituting it into the surface area:
+\eq
+{
+V=h(2\pi r)+2\pi r^2=\ff{2V}{r}+2\pi r^2\ge3(V^22\pi)^{1/3}
+}
+and the equality holds only if $h=(V/\pi)^{1/3}2^{2/3}$
+}
+\ms{8}{
+\item[i)] Lagrange Multipliers:
+\eq{
+&8x-5y-8+\lam=0\\
+&6y-5x-\lam=0\\
+&x+y-4=0
+}
+gives (the only) extrema
+\eq{
+x=\ff{13}{6},\quad y=\ff{11}{6}
+}
+\item[ii)] Lagrange Multipliers:
+\eq
+{
+&8x-4+\lam=0\\
+&18y+6-3\lam=0\\
+&x-3y+3=0\\
+\implies
+&x=-\ff{2}{5},\quad y=\ff{13}{15}
+}
+\item[iii)] Lagrange Multipliers:
+\eq
+{
+&2(x-1)+2\lam_1+\lam_2=0\\
+&2(y+2)+3\lam_1+\lam_2=0\\
+&2(z-2)+2\lam_2=0\\
+&2x+3y-1=0\\
+&x+y+2z-4=0
+}
+and solves for:
+\eq{
+x=\ff{91}{53},\quad y=-\ff{43}{53},\quad z=\ff{82}{53}
+}
+}
+\end{document}

@@ -1,0 +1,463 @@
+\input mla
+\begin{document}
+\begin{vv286}{12}
+  \begin{vv286_ms}{1}
+
+    We follow the slide using the separation of variables $u=y(x)e^{i\w t}$ obtain the wave equation:
+    \eq
+    {
+      \frac{d}{dx}\left( T\frac{\partial u}{\partial x} \right)=\rho(x)
+      \implies
+      \frac{\partial}{\partial x}\left( \frac{dy}{dx}T\,e^{i\w t} \right)=(-\w)y\rho e^{i\w t}
+    }
+	Moving exponent outside since they are not taking the derivative. Also, note that:
+	\eq
+	{
+	  T(x)=g\int_{0}^{x}\rho_0 x^{\mu}\,dx=\rho_0 g\frac{x^{\mu+1}}{\mu+1}
+	}
+	we obtain:
+	\eq
+	{
+	  x^2y''+x(\mu+1) y'+\frac{\w^2(\mu+1)}{g}xy=0
+	  \numberthis{1}
+	}
+	This can be transformed into Bessel Equation with the substitution:
+	\eq
+	{
+	  x=\frac{g}{4\w^2(\mu+1)}z^2,\quad w(x)=x^{\mu/2}y(x)
+	  \numberthis{2}
+	}
+	and we calculate:
+	\eq
+	{
+	  \frac{dx}{dz}&=\frac{g}{2\w^2(\mu+1)}z\\
+	  \frac{dw}{dz}&=x^{\mu/2}\frac{g}{2\w^2(\mu+1)}z\left( \frac{\mu}{2}\frac{y}{x}+y' \right)\\
+	  \frac{d^2w}{dz^2}&=x^{\mu/2}\frac{g}{2\w^2(\mu+1)}\left( 2y''x+(2\mu+1) y'+\frac{\mu(\mu-1)}{2}\frac{y}{x} \right)
+	}
+	and verify:
+	\eq
+	{
+	  \frac{d^2w}{dz^2}+\frac{1}{z} \frac{dw}{dz}
+	  &=x^{\mu/2}\frac{g}{2\w^2(\mu+1)}\left( 
+	  2xy''+2x(\mu+1) y'+\frac{\mu^2}{2}\frac{y}{x}\right)\\
+	  &=x^{\mu/2}\frac{g}{2\w^2(\mu+1)}\left( 
+	  \frac{\mu^2}{2}\frac{y}{x}-\frac{2\w^2(\mu+1)}{g}{y}
+	  \right)\quad\text{use equation \eqref{1}}\\
+	  &=w\frac{\mu^2}{z^2}-{w}
+	}
+	and this is nothing more than the Bessel equation with order $\mu$:
+	\eq
+	{
+	z^2\frac{d^2w}{dz^2}+z \frac{dw}{dz}+\left(z^2-\mu^2  \right)w=0
+	}
+	We read off the solution:
+	\eq
+	{
+	  w&=c_1J_{\mu}(z)+c_2J_{-\mu}(z)\\
+	  \implies
+	  y&=c_1x^{-\mu/2}J_{\mu}(2\w\sq{\frac{x(\mu+1)}{g}})
+	  +c_2x^{-\mu/2}J_{-\mu}(2\w\sq{\frac{x(\mu+1)}{g}})
+	}
+	eventually we are forced with the solution of boundary condition:
+	\eq
+	{
+	y(0)&=0\implies c_2=0\quad\text{since $J_{-\mu}$ never vanish at $x=0$}\\
+	y(l)&=0\implies 2\w\sq{\frac{l(\mu+1)}{g}}=\alpha_{\mu,n} \quad n=0,1,2\ldots
+	}
+	rearrange:
+	\eq
+	{
+	  \w=\frac{1}{2\sq{\mu+1}}\sq{g/l}\alpha_{\mu,n}
+	}
+  \end{vv286_ms}    
+  \begin{vv286_ms}{2}
+  \item[(i)]
+    Again we have the separation of variables $u=Xe^{i\w t}$ in the wave equation to get:
+    \eq
+    {
+      X''+\left( \frac{\w^2}{c^2} \right)X=0
+    }
+    where $c^2=T/\rho_0$, this gives the solution:
+    \eq
+    {
+      X(x)=C\cos\left( \frac{\w}{c}+\phi \right)
+    }
+    then the boundary condition requires:
+    \eq
+    {
+      k\left( \frac{2\pi}{\w/c} \right)\frac{1}{2}=l
+      \quad
+      \implies
+      \quad
+      \w=\frac{\pi k}{l}\sqrt{\frac{T}{\rho_0}}\quad k\in \N
+    }
+  \item[(ii)]
+    This time we consider substitution:
+    \eq
+    {
+    \xi=1+kx/l
+    }
+    and
+    \eq
+    {
+      \frac{d^2X}{d\xi^2}=X''\frac{l^2}{k^2}
+    }
+    this transforms the original equation into(differentiation is understood with respect to $\xi$):
+    \eq
+    {
+      \frac{k^2}{l^2}X''+\frac{w^2\rho_0\xi}{T}X=0
+    }
+    letting:
+    \eq
+    {
+      \kappa^2=\rho_0\w^2l^2/k^2T \numberthis{1}
+     }
+     we obtain:
+     \eq
+    {
+    X''+\kappa^2\xi X=0
+    }
+    This is the Airy equation with the substitution:
+    \eq
+    {
+      y={\kappa^{2/3}}\xi
+    }
+    which gives the standard equation:
+    \eq
+    {
+    X''+y X=0
+    }
+    This has been solved in the last assignment:
+    \eq
+    {
+    X(y)=c_1\sqrt{y}J_{1/3}(\frac{2}{3}y^{3/2})+c_2\sqrt{y}J_{-1/3}(\frac{2}{3}y^{3/2})
+    }
+    since $y(x)=(1+kx/l){\kappa^{2/3}}$
+    we would require:
+    \eq
+    {
+    X(y(0))=0,\quad X(y(l))=0
+    }
+    this reduces to:
+    \eq
+    {
+      c_1J_{1/3}\left( \frac{2}{3} \kappa\right)&=-c_2J_{-1/3}\left( \frac{2}{3} \kappa\right)\\
+      c_1J_{1/3}\left( \frac{2}{3}(1+k)^{3/2} \kappa\right)&=-c_2J_{-1/3}\left(  \frac{2}{3}(1+k)^{3/2} \kappa\right)
+  }
+  eventually we set $\mu=2/3\kappa$ and this gives:
+  \eq
+  {
+   J_{1/3}\left( \mu\right)J_{-1/3}\left( (1+k)^{3/2} \mu\right)
+=J_{1/3}\left( (1+k)^{3/2}\mu\right)  
+J_{-1/3}\left(\mu\right)
+}
+where we solve for $\w$ from \eqref{1}:
+\eq
+{
+  \mu=2/3\kappa\quad\implies\quad \w^2=\frac{9\mu^2\kappa^2T}{4\rho_0l^2}
+}
+  \end{vv286_ms}
+  \begin{vv286_ms}{3}
+  \item[]
+    We notice that this is exactly the model of a free-standing column in the slide. We refer to equations (4.2.12) and (4.2.13):
+    \eq
+    {
+      l_{\rm max}=\left(\frac{9\alpha_{-1/3,1}^2 E I}{4q}  \right)^{1/3}
+    }
+    where $E$ is the Young's modulus, $I$ is the second moment of area of the cross section area of the pole, and $\alpha_{-1/3,1}$ is the first zero of the second independent solution to be Bessel Function of first kind, order $1/3$.\\
+    If we choose to use a solid pole, the $q$, load per unit length, is given by:
+    \eq
+    {
+    q=g\rho \pi r^2
+    }
+    of course hollow pole with thickness $w$ will require:
+    \eq
+    {
+    q=g\lambda 2\pi r w
+    }
+    where $\rho$ is the buck density and $\lambda$ is the surface density. Notice that $r=d/2=10$cm. It For the maximal length, of course hollow would be a better choice, and we plugging the numbers and work out the actual height:
+    \eq
+    {
+    E=200\text{GPa},
+    \quad\rho=7.85\times10^3
+    \text{kg$/$m$^3$}\implies 
+    h_{\rm max}=58.83\text{m}
+    }
+  \end{vv286_ms}
+   \begin{vv286_ms}{4}
+  \item[]
+    In exercise 3 we arrived at the formula for the maximal length of a solid free-standing, vertical column of circular cross-section :
+    \eq
+    {
+    l_{\rm max}=\left(\frac{9\alpha_{-1/3,1}^2 E \pi r^4/2
+}{4g\rho \pi r^2
+}  \right)^{1/3}    
+=
+\left(\frac{9\alpha_{-1/3,1}^2
+}{8} \frac{E r^2}{\rho g} \right)^{1/3} 
+}
+And it is a sad story that the constant:
+\eq
+{
+\frac{9\alpha_{-1/3,1}^2
+}{8}=3.918\neq 2.5
+}
+come different from the formula in the website.
+  \end{vv286_ms}
+ \begin{vv286_ms}{5}
+  \item[(i)]
+    This follows from:
+    \eq
+    {
+    \Gamma(1+n+v)=(n+v)\Gamma(n+v)
+    }
+    and:
+    \eq
+    {
+      \frac{d}{dx}\left( \frac{(-1)^n}{n!\Gamma(1+n+v)}\left(
+      \frac{x}{2} \right)^{2n+v}x^v\right)
+ 	&=\frac{(-1)^n2(n+v)}{n!\Gamma(1+n+v)2}\left(
+      \frac{x}{2} \right)^{2n+v-1}x^v
+      \\&=\frac{(-1)^n}{n!\Gamma(1+n+(v-1))}\left(
+      \frac{x}{2} \right)^{2n+(v-1)}x^v
+    }
+    Thus
+    \eq
+    {
+      \frac{d}{dx}\left( x^vJ_v(x) \right)=x^vJ_{v-1}(x)
+    }
+    similarly, 
+    \eq
+     {
+       \frac{d}{dx}\left( x^{-v}J_{-v}(x) \right)=-x^{-v}J_{v+1}(x)
+    }
+  \item[(ii)]
+    We use the result above:
+    \eq
+    {
+      xJ_v'{x}+vJ_v(x)=\frac{d}{dx}\left( x^vJ_v(x) \right)=xJ_{v-1}(x)\\
+       xJ_v'{x}-vJ_v(x)=\frac{d}{dx}\left(x^{-v}J_{-v}(x) \right)=-xJ_{v+1}(x)
+    }
+    subtracting and adding the above relation we get:
+    \eq
+    {
+      2vJ_v(x)&=xJ_{v-1}(x)+xJ_{v+1}(x)\\
+      2J_v'(x)&=J_{v-1}(x)-J_{v+1}(x)
+    }
+  \end{vv286_ms}
+
+\begin{vv286_ms}{6}
+  \item[]
+	Since we already know:
+	\eq
+	{
+	  J_{-1/2}&=\sqrt{\frac{2}{\pi x}}\cos x\\
+	J_{1/2}&=\sqrt{\frac{2}{\pi x}}\sin x
+	}
+	this gives us:
+	\eq
+	{
+	  &J_{1/2}=xJ_{3/2}+xJ_{-1/2}\\
+	  &\quad\implies
+	  J_{3/2}=\sqrt{\frac{2}{\pi }}x^{-3/2}\sin x-\sqrt{\frac{2}{\pi }}x^{-1/2}\cos x
+	}
+	\eq
+	{
+	  &-J_{-1/2}=xJ_{1/2}+xJ_{-3/2}\\
+	  &\quad\implies
+	  J_{-3/2}=-\sqrt{\frac{2}{\pi }}x^{-3/2}\cos x-\sqrt{\frac{2}{\pi }}x^{-1/2}\sin x
+	}
+	This implies that, comparing the series solution in the last assignment:
+	\eq
+	{
+	\sum_{n=0}^{\infty}\frac{(-1)^n}{n!\Gamma(1+n+3/2)}\left( \frac{x}{2} \right)^{2n+3/2}=\sqrt{\frac{2}{\pi }}x^{-3/2}\sin x-\sqrt{\frac{2}{\pi }}x^{-1/2}\cos x\\
+	\sum_{n=0}^{\infty}\frac{(-1)^n}{n!\Gamma(1+n-3/2)}\left( \frac{x}{2} \right)^{2n-3/2}=-\sqrt{\frac{2}{\pi }}x^{-3/2}\cos x-\sqrt{\frac{2}{\pi }}x^{-1/2}\sin x
+	}
+  \end{vv286_ms}
+
+
+\begin{vv286_ms}{7}
+  \def\g{\Gamma}
+  \def\p{\psi}
+\item[i)]
+  This follows from:
+  \eq
+  {
+  \g'(x+1)=x\g'(x)+\g(x)
+  }
+  and 
+  \eq{
+  \g(x+1)=x\g(x)
+  }
+  divide the left hand side and right hand side we get:
+  \eq
+  {
+    \p(x+1)=\frac{1}{x}+\p(x)
+  }
+\item[ii)]
+  The above relation can be used to:
+  \eq
+  {
+    \p(n+1)-\p(1)=\sum_{k=1}^n\p(k+1)-\p(k)=\sum_{k=1}^n\frac{1}{k}
+  }
+  and since we define $\gamma=-\g'(1)=-\p(1)\g(1)=-\p(1)$ ($\g(1)=0$)
+  \eq
+  {
+  \p(n+1)=\sum_{k=1}^n\frac{1}{k}+\p(1)=\sum_{k=1}^n\frac{1}{k}-\gamma
+  }
+\item[iii)]
+  Recall we have:
+  \eq
+  {
+    \g(n+1)=n!=\sqrt{2\pi n}\left( \frac{n}{e} \right)^n\left( 1+\frac{1}{12n}+O(\frac{1}{n^2}) \right)
+  }
+  take logarithms and differentiate on both sides (formally since we are treating $n$ as a continuous changing variable):
+  \eq
+  {
+    \p(x+1)&=\frac{d}{dx}\ln(\g(x+1))
+    \\
+    &=\ln x+\frac{1}{x}\ln(x+\frac{1}{2})-1+\frac{\frac{-1}{12n^2}}{1+\frac{1}{12n}+O\left( \frac{1}{n^2} \right)}=\ln(x)+\frac{1}{2x}+O\left( \frac{1}{x^2} \right)
+  }
+  then from (ii) we have:
+  \eq
+  {
+  \sum_{k=1}^n\frac{1}{k}-\gamma= \p(n+1)=\ln(n)+\frac{1}{2n}+O\left( \frac{1}{n^2} \right)
+  }
+  rearrange and we have completed the proof.
+  \end{vv286_ms}
+\begin{vv286_ms}{8}
+\item[i)] Since $J_v$ is a differentiable function in $v$, we have:
+  \eq
+  {
+    \frac{dJ_{-v}}{dv}=\frac{dJ_{-v}}{d(-v)}\frac{d(-v)}{dv}=-\frac{dJ_{v}}{dv}  }
+  and the l'Hospital's rule reads:
+  \eq
+  {
+    Y_0(x)&=\frac{\frac{dJ_v}{dv}\cos(\pi v)-J_v\sin(v\pi)- \frac{dJ_{-v}}{dv}}{\pi \cos v\pi}\Big|_{v=0}=\frac{2}{\pi}\frac{dJ_v}{dv}\Big|_{v=0}
+    \numberthis{3}
+  }
+\item[ii)]
+  We consider:
+  \eq
+  {
+    J_v(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{n!}\frac{x^{2n}}{2^{2n}}\frac{1}{\Gamma(1+n+v)}\left( \frac{x}{2} \right)^v
+    \numberthis{2}
+  }
+  we define:
+  \eq
+  {
+    \ln f(v)&=\ln\left( \frac{x}{2} \right)^v+\ln\frac{1}{\Gamma(1+n+v)}\\
+    \implies \frac{f'}{f}\Big|_{v=0}&=\ln(\frac{x}{2})-\psi(1+n)\\
+    \implies f'\Big|_{v=0}&=
+    \frac{1}{\Gamma(1+n)}\left( \ln(\frac{x}{2})-\psi(n+1) \right)=
+    \frac{1}{\Gamma(1+n)}\left( \ln(\frac{x}{2})+\gamma-\sum_{k=1}^n\frac{1}{k} \right)
+  }
+  Setting $v=0$ in \eqref{2} and plugging into \eqref{2} and \eqref{3} we have:
+  \eq
+  {
+    Y_0&=\frac{2}{\pi}\left( 
+    \sum_{n=0}^{\infty}
+    \frac{(-1)^n}{n!}
+    \frac{x^{2n}}{2^{2n}}
+    \frac{d}{dv}
+  	\left( 
+	\ff{1}{\Gamma(1+n+v)}
+      \left( \frac{x}{2} \right)^v
+    \right)\Big|_{v=0}    
+    \right)
+    \\
+    &=\frac{2}{\pi}\left( 
+    \sum_{n=0}^{\infty}
+    \frac{(-1)^n}{n!}
+    \frac{x^{2n}}{2^{2n}}
+\left( \ln(\frac{x}{2})+\gamma-\sum_{k=1}^n\frac{1}{k} \right)
+    \right)\\
+    &=\frac{2}{\pi}J_0\left( \ln(\frac{x}{2})+\gamma\right)
+    +
+\frac{2}{\pi}
+    \sum_{n=0}^{\infty}
+    \frac{(-1)^n}{(n!)^2}
+    \frac{x^{2n}}{2^{2n}}H_n
+  }
+  and this completes the proof.
+  \end{vv286_ms}
+
+
+\begin{vv286_ms}{9}
+\item[(i)]
+Consider the identities:
+\eq
+{
+  \cos^2n\pi x&=\frac{1+\cos2n\pi x}{2}\\
+  \sin^2n\pi x&=\frac{1-\cos2n\pi x}{2}\\
+  \cos n\pi x\sin n\pi x&=\frac{1}{2}\sin 2n\pi x\\
+  2\cos n\pi x\cos n\pi x&=\cos(nx-mx)+\cos(nx+mx)\\
+  2\sin n\pi x\sin n\pi x&=\cos(nx-mx)-\cos(nx+mx)	
+}
+And $\sin x$ $\cos x$ has integral 0 over a complete period, $\sin x=0$ when $x=k\pi$, $k\in\mathbb{N}$ \\
+Therefore, we conclude:
+\eq
+{
+  \int_{-1}^1\left(\frac{1}{\sq2}  \right)^2=1,\quad\int_{-1}^1\cos^2n\pi x=1,\quad\int_{-1}^1\sin^2n\pi x=1\\
+\int_{-1}^1\frac{1}{\sq2}\cos n\pi x=0,\quad\int_{-1}^1\frac{1}{\sq2}\sin n\pi x=0,\quad\int_{-1}^1\sin n\pi x\cos n\pi x=0\\
+\int_{-1}^1\cos n\pi x\cos m\pi x=0\quad\text{$m\neq n$}\quad\int_{-1}^1\sin n\pi x\sin m\pi x=0\quad\text{$m\neq n$}
+}
+\item[ii)]
+  This follows from the substitution rule
+  \eq
+  {
+    t=\frac{2}{b-a}\left( x-\frac{b+a}{2} \right),\quad dt=\frac{2}{b-a}dx
+  }
+  Then:
+  \eq
+  {
+    \dotp{\widetilde{e}_n}{\widetilde{e}_m}&=\frac{2}{b-1}\int_a^be_n\left( \frac{2}{b-a}\left( x-\frac{b+a}{2} \right) \right)e_m\left( \frac{2}{b-a}\left( x-\frac{b+a}{2} \right) \right)\,dx
+    \\
+    &=\int_{-1}^1e_n(t)e_m(t)\,dt
+  }
+\item[iii)]
+  We follow the result in ii):
+  Setting $a=-\pi$, $b=\pi$ gives us the orthonormal system in $L^2([-\pi,\,\pi])$:
+  
+  \eq
+  {
+    \left\{ \frac{1}{\sq{\pi}},\,\frac{1}{\sq \pi}\cos nx,\,\frac{1}{\sq \pi}\sin nx \right\}
+  }
+  and $a=0$, $b=L$ gives the orthonormal system in $L^2([0,\,L])$
+  \eq
+  {
+    \left\{ \sq{\frac{1}{L}},\,\sq{\frac{2}{L}}\cos \left( \frac{2\pi n}{L}x  \right),\,\sq{\frac{2}{L}}\sin\left( \frac{2\pi n}{L}x\right)\right\}_{n=1}^{\infty}
+  }
+  \end{vv286_ms}
+\begin{vv286_ms}{10}
+\item[(i)]
+ We note that:
+ \eq
+ {
+   \dotp{f}{\frac{1}{\sq2}}&=\frac{2}{3}\frac{1}{\sq2}\\
+   \dotp{f}{\cos n\pi x}&=\frac{4}{n^2\pi^2}(-1)^n\\
+   \dotp{f}{\sin n\pi x}&=0\quad(\text{odd function})
+ }
+ therefore the Fourier expansion reads:
+ \eq
+ {
+   f(x)=\frac{2}{3}\frac{1}{\sq2}\frac{1}{\sq2}
+   +\frac{4}{\pi^2}\sum_{n=1}^{\infty}\ff{(-1)^n}{ n^2}\cos n\pi x=\frac{1}{3}+\sum_{n=1}^{\infty}\ff{(-1)^n}{ n^2}\cos n\pi x
+ }
+ evaluating at $x=1$:
+ \eq
+ {
+ 1=f(1)=&\frac{1}{3}+\frac{4}{\pi^2}\sum_{n=1}^{\infty}\ff{(-1)^n}{ n^2}(-1)^n\\
+ \quad\implies&\sum_{n=1}^{\infty}\ff{1}{ n^2}=\frac{\pi^2}{6}\\
+ }
+  evaluating at $x=0$:
+\eq
+ {
+0=f(0)=&\frac{1}{3}+\frac{4}{\pi^2}\sum_{n=1}^{\infty}\ff{(-1)^n}{ n^2}\\
+ \quad\implies&\sum_{n=1}^{\infty}\ff{(-1)^{n+1}}{ n^2}=\frac{\pi^2}{12}\\
+ }
+
+  \end{vv286_ms}
+
+\end{vv286}
+\end{document}

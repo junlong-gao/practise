@@ -1,0 +1,274 @@
+\documentclass[12pt]{article}
+\usepackage{mlahw}
+\begin{document}
+\titlehm{8}
+\begin{vv286_mp}{1}
+\item[(i)]
+	Consider rewrite the integral in complex form:
+	\eq
+	{
+	\ff{1}{2\pi}\int_{0}^{2\pi}f(Re^{i\phi})\Re
+	\left(\ff{Re^{i\phi}+z}{Re^{i\phi}-z}\right)
+	\,d\phi
+	=
+	\ff{1}{2\pi i}\int_{C_{R}^{+}}\ff{f(\xi)}{\xi}\Re
+	\left(\ff{\xi+z}{\xi-z}\right)
+	\,d\xi
+	}
+	The real part in the integral can be written in the form:
+	\eq
+	{
+	\Re
+	\left(\ff{\xi+z}{\xi-z}\right)=\ff{1}{2}\left(\ff{\xi+z}{\xi-z}+\cgu{\left(\ff{\xi+z}{\xi-z}\right)}\right)
+	\numberthis{1}
+	}
+	and the conjugate part yields the unique analytic continuation using the fact on the boundary: $\xi\cgu{\xi}=R^{2}$
+	\eq
+	{
+	\ff{1}{\xi}\cgu{\left(\ff{\xi+z}{\xi-z}\right)}&=
+	\ff{1}{\xi}\ff{R^{2}+\cgu{z}\xi}{R^{2}-\cgu{z}\xi}\\
+	&=\ff{1}{\xi}\ff{R^{2}}{R^{2}-\cgu{z}\xi}+\ff{\cgu{z}}{R^{2}-\cgu{z}\xi}
+	}
+	the second term is holomorphic inside $D_{R}(0)$, and the integral vanishes. Thus the residue:
+	\eq
+	{
+	\res_{\xi=0}\, f(\xi)\ff{1}{\xi}\ff{R^{2}+\cgu{z}\xi}{R^{2}-\cgu{z}\xi}=f(0)
+	}
+	back to \eqref{1}, the first term has the residue:
+	\eq
+	{
+	&\res_{\xi=0}\,f(\xi)\ff{\xi+z}{\xi(\xi-z)}=-f(0)\\
+	&\res_{\xi=z}\,f(\xi)\ff{\xi+z}{\xi(\xi-z)}=2f(z)
+	}
+	plugging them into the origin integral:
+	\eq
+	{
+	\ff{1}{2\pi}\int_{0}^{2\pi}f(Re^{i\phi})\Re
+	\left(\ff{Re^{i\phi}+z}{Re^{i\phi}-z}\right)
+	\,d\phi
+	&=
+	\ff{1}{2\pi i}\int_{C_{R}^{+}}\ff{f(\xi)}{\xi}\Re
+	\left(\ff{\xi+z}{\xi-z}\right)
+	\,d\xi\\
+	&=\ff{1}{2\pi i}\,
+	2\pi i\,
+	\ff{1}{2}\left(f(0)-f(0)+2f(z)\right)\\
+	&=f(z)
+	}
+\item[(ii)]
+	By direct calculation and set $w=Re^{i\p}$ and note $z\cgu{z}=r^2$ and $w\cgu{w}=R^2$:
+	\eq
+	{
+	2\Re\ff{Re^{i\phi}+z}{Re^{i\phi}-z}&=\ff{w+z}{w-z}+
+		\ff{\cgu{w}+\cgu{z}}{\cgu{w}-\cgu{z}}\\
+		&=\ff{(w-z)(\cgu{w}+\cgu{z})+(w+z)(\cgu{w}+\cgu{z})}{w\cgu{w}-\cgu{w}z-w\cgu{z}+z\cgu{z}}\\
+		&=\ff{2R^2-2r^2}{R^2+r^2-(\cgu{w}z+w\cgu{z})}
+	}
+	eventually since $\cgu{w}z+w\cgu{z}=Rr(e^{i(\ta-\p)}+e^{-i(\ta-\p)})=2Rr\cos(\ta-\p)$ we are done.
+\end{vv286_mp}
+
+\begin{vv286_mp}{2}
+\item[(i)]
+	This follows from the previous exercise by letting
+	$R\to1$. Indeed, if $u$ are harmonic inside the disk, we
+	conclude that $f(x+iy)=u(x,y)+iv(x,y)$ is homomorphic
+	inside the disk, where $v(x,y)$ is determined by:
+	\eq
+	{
+	\pd{u}{x}=&\pd{v}{y}\\
+	\pd{u}{y}=& -\pd{v}{x}
+	}
+	then we separate the integral of $f$ into real and
+	imaginary parts, due to i) of exercise 1 and consider $z=re^{i\ta}$, $r<R<1$:
+	\eq
+	{
+	&u(z)+iv(z)=f(z)\\
+	&=
+	\ff{1}{2\pi}\int_0^{2\pi}f(Re^{i\phi})\ff{R^2-r^2}{R^2+r^2-2Rr\cos(\ta-\p)}\,d\phi\\
+	&=\frac{1}{2\pi}\int_0^{2\pi}u(Re^{i\phi})\ff{R^2-r^2}{R^2+r^2-2Rr\cos(\ta-\p)}\,d\phi
+	+i\int_0^{2\pi}v(Re^{i\phi})\ff{R^2-r^2}{R^2+r^2-2Rr\cos(\ta-\p)}\,d\phi
+	}
+	comparing the real part:
+	\eq
+	{
+	u(z)=\frac{1}{2\pi}\int_0^{2\pi}u(Re^{i\phi})\ff{R^2-r^2}{R^2+r^2-2Rr\cos(\ta-\p)}\,d\phi
+	}
+	Finally, using the fact that $u$ is continuous up to the boundary the right hand side continuously goes to the desired integral since the integration operator is a continuous operator. \\
+	This completes the proof.
+\item[(ii)]
+	It's suffice to show that function $u(x,y)$ is harmonic. Consider the function $g(z)$:
+	\[
+	g(z):=\int_{C}\ff{\zeta+z}{\zeta-z}\ff{f(\xi)}{\xi}\,d\zeta=\int_0^{2\pi}
+	\frac{e^{i\phi}+z}{e^{i\phi}-z}f(e^{i\phi})
+	\,d\phi
+	\]
+	where $C$ is the positive oriented unit circle. 
+	Then the function $g$ is holomorphic by Cauchy Integral representation.
+	
+	Therefore, we conclude that
+	\eq
+	{
+	\Re g(z)
+	&=\Re\left( \int_0^{2\pi}
+	\frac{e^{i\phi}+z}{e^{i\phi}-z}f(e^{i\phi})
+	\,d\phi\right)\\
+	&=\int_0^{2\pi}
+	\Re\left(\frac{e^{i\phi}+z}{e^{i\phi}-z}\right)f(e^{i\phi})
+	\,d\phi\\
+	&=\int_0^{2\pi}
+	P_r(\ta-\phi)f(e^{i\phi})
+	\,d\phi\quad\text{Ex1 (ii)}\\
+	&=u(x,y)
+	}
+	is harmonic due to Cauchy-Riemann equation.
+\end{vv286_mp}
+
+\begin{vv286_ms}{3}
+\item[]
+  	We use the formula in exercise 2 to conclude that the solution is:
+	\eq
+	{
+	u(r,\ta)&=\ff{1}{2\pi}\int_0^{2\pi}P_r(\ta-\phi)u(1,\p)
+	\,d\phi\\
+	&=\ff{2}{\pi}\begin{cases}
+	  \arctan\left( \frac{1+r}{1-r}\tan^{-1}\frac{\ta}{2}
+	  \right)-\ff{\pi}{2}+\arctan\left( \frac{1+r}{1-r}\tan\frac{\ta}{2}
+	  \right) & \text{if } \ta\in [-\pi,0) \\
+         \arctan\left( \frac{1+r}{1-r}\tan^{-1}\frac{\ta}{2}
+	  \right)+\ff{\pi}{2}+\arctan\left( \frac{1+r}{1-r}\tan\frac{\ta}{2}
+	  \right) & \text{if }\ta\in [0,\pi)  \end{cases}
+	}
+	Notice we chose the difference $\pi$ to both cope the branch and the correct value on the boundary and the continuity (a different continuous branch will yield a solution differing by a constant).
+\\
+See plot in the attachment
+
+\end{vv286_ms}
+
+\begin{vv286_mp}{4}
+\item[]
+  	From Cauchy's Integral theorem we have the estimation:
+	\eq
+	{
+	|c_n|&=\left|\frac{1}{n!}f^{(n)}(z_0)\right|\\
+	&=\left|\frac{1}{2\pi
+	i}\int_{C_r}\frac{f(\xi)}{(\xi-z)^{(n+1)}}\,d\xi\right|\\
+	&\le\frac{1}{2\pi}2\pi r\frac{M}{r^n}=\frac{M}{r^n}
+	}
+\end{vv286_mp}
+
+\begin{vv286_mp}{5}
+\item[(i)]
+	Setting $n=1$ in Exercise 4 gives:
+	\eq
+	{
+	|f'(z)|\le\frac{M}{r}\to0
+	}
+	as $r\to\infty$
+	thus $f'\equiv0$ on $\C$, i.e. $f$ is constant on $\C$.
+ \item[(ii)]
+   	Consider a polynomial of degree $n$: $f(z)$. Suppose it never vanish.\\
+	 Notice that
+	\eq
+	{
+	|f(z)|\le|z|^n(|a_n|+\left(
+	\frac{|a_{n-1}|}{|z|}+\cdots\frac{|a_0|}{|z|^n} \right)
+	\le C|z|^{n}
+	}
+	where $C>0$ is chosen for sufficiently large $|z|$
+	,this shows that $|1/f|$ is bounded below.\\
+	Also, we see that since $f(z)$ never vanish, we can choose a
+	closed disk $D_R$ such that when $|z|>R$,  
+	\eq
+	{
+	|f(z)|=|z^n(a_n+\left(
+	\frac{a_{n-1}}{z}+\cdots\frac{a_0}{z^n} \right)|>
+	\frac{R^na_n}{2}>0
+	}
+	since the terms in the parenthesis goes to 0. And inside
+	the closed disk the function never vanish we conclude that
+	the range $f(D_R)$ attains its minimum since it's
+	compact.\\
+	Altogether, we see that $0<|f|_{min}<|f|$
+	is bounded therefore $1/f$ is bounded, thus by Liouville's
+	Theorem it is entire therefore constant, a contradiction.
+\end{vv286_mp}
+
+\begin{vv286_mp}{6}
+\item[]
+  	This follows from the definition:
+	\eq
+	{
+	\res_{z=z_0}\frac{g(z)}{h(z)}=\lim_{z\to
+	z_0}(z-z_0)\frac{g(z)}{h(z)}=\lim_{z\to z_0}\frac{g(z)}{\frac{h(z)-h(z_0)}{z-z_0}}=\frac{g(z_0)}{h'(z_0)}
+	}
+\end{vv286_mp}
+
+\begin{vv286_ms}{7}
+ \item[(i)]
+   Let $f(z)=\frac{e^{iz}}{z^2+a^2}$,
+ 	we consider the path of integration $\Gamma$: a semi-circle
+	in the upper half plane centered at $0$ with radius
+	$R>a$, rotating counterclockwise, then by residue formula:
+	\eq
+	{
+	\int_{-R}^{+R}f(z)+\int_{C_R}f(z)=\oint f(z)=2\pi i
+	\,\res_{z=ia}f(z)=\frac{\pi}{a}e^{-a}
+	}
+	and by Jordan lemma the integral along the arc vanishes:
+	\eq
+	{
+	\int_{C_R} e^{iz}\frac{1}{z^2+a^2}\to0 \quad \hbox{as } R\to\infty
+	}
+	thus the integral along the real line gives the result
+	since
+	\eq
+	{
+	\ff{e^{iz}}{z^2+a^2}=\ff{\cos z}{z^2+a^2}+i\ff{\sin z}{z^2+a^2}
+	}
+	the second term is odd function and doesn't contribute to
+	the integration.
+\item[(ii)]
+  	Consider the same path in (i) and we get:
+	\eq
+	{
+	\int_{-\infty}^{+\infty}\frac{ze^{iz}}{z^2+a^2}=\res_{z=z_0}f(z)=i\pi
+	e^{-a}
+	}
+	and again we have:
+	\eq
+	{
+	\ff{ze^{iz}}{z^2+a^2}=\ff{z\cos z}{z^2+a^2}+i\ff{z\sin z}{z^2+a^2}
+	}
+	where the first term is odd and doesn't contribute to the
+	integration.
+\end{vv286_ms}
+
+\begin{vv286_mp}{8}
+ \item[]
+   	We consider the same path of integration with
+	$f(z)={(1+z^2)^{-(n+1)}}$, then on the great arc we
+	have the estimation:
+	\eq
+	{
+	\left|\int_{C_R}f(z)\right|\le2\pi R \sup_{z\in C_R}|f(z)|
+	\le\frac{2\pi R}{|R^2-1|^{n+1}}\to0
+	}
+	as $R\to\infty$.\\
+	Thus we have 
+	\eq
+	{
+	\int_{-\infty}^{+\infty}\frac{dz}{(1+x^2)^{n+1}}=2\pi i\, \res_{z=i}f(z)
+	}
+	where we expect an $n+1$ order of pole:
+	\eq
+	{
+\res_{z=i}f(z)&=\frac{1}{n!}\frac{d^n}{dz^n}f(z)(z-i)^{n+1}\Big|_{z=i}\\
+	&=\frac{1}{n!}(-1)^n(2n)(2n-1)\cdots(n+1)\frac{1}{(i+i)^{2n+1}}\\
+	&=\frac{(-1)^n}{n!}\frac{(2n)!}{n!}\frac{1}{2^{2n+1}i^{2n+1}}\\
+	&=\ff{(2n-1)!!}{(2n)!!}\ff{1}{2i}
+	}
+	plugging the residue and we get the desired result.
+\end{vv286_mp}
+%\input e3.tex
+\end{document}
+

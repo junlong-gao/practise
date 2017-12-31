@@ -1,0 +1,190 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{amsmath} 
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{cases}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{gauss}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
+\usepackage{tkz-graph}
+\usetikzlibrary{arrows}
+% set arrows as stealth fighter jets
+\tikzset{>=stealth}
+\usepackage{bbold}
+
+
+\def\dotp#1#2{\langle#1,#2\rangle}
+\def\ss#1#2{\sum_{#1=1}^{#2}}
+\def\lam{\lambda}
+\def\vec#1#2{\{#1_1,#1_2\ldots#1_{#2}\}}
+\def\es#1#2{{\bf Exercise #1}\\~{\it Solution:}\\~#2\\[1em]}
+\def\ep#1#2{{\bf Exercise #1}\\~{\it Proof:}\\~#2\\[1em]}
+\def\inn#1#2{(#1): #2\\[0.5em]}
+\def\ff#1#2{\frac{#1}{#2}}
+\def\cgu#1{\overline{#1}}
+\def\ran#1{{\rm ran}\,#1}
+\def\ker#1{{\rm ker}\,#1}
+\def\tr#1{{\rm tr}\left(#1\right)}
+\def\dotr#1#2{\dotp{#1}{#2}_{\rm tr}}
+\def\lr#1#2#3{\left#1#3\right#2}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\def\sg{\sigma}
+\def\ct{\cos{\theta}}
+\def\st{\sin{\theta}}
+\def\sq#1{\sqrt#1}
+\newcommand{\B}{\mathcal{B}}
+
+\linespread{1.4}
+\geometry{a4paper,centering,scale=0.8}
+\rmfamily 
+\normalsize
+\setlength{\parindent}{0em}
+
+\begin{document} 
+\begin{flushleft}
+  Junlong Gao 5133709126\\ 
+  Prof.  Hohberger\\ 
+  VV285 Assignment 4\\
+  \today 
+\end{flushleft}
+
+\es{2}{
+\[
+\det A=\frac{1}{43200},\qquad\det B=24
+\]
+}
+\es{3}{
+\eq{
+&\det\begin{pmatrix}
+2&0&0&0&0&1\\
+1&2&0&0&0&1\\
+3&1&2&0&0&1\\
+0&3&1&2&0&1\\
+-5&0&3&1&2&1\\
+1&1&1&1&1&1
+\end{pmatrix}
+=
+32\det\begin{pmatrix}
+1    &0    &0   &0   &0&1\\
+1/2 &1    &0   &0   &0&1\\
+3/2 &1/2 &1   &0   &0&1\\
+0    &3/2    &1/2&1   &0&1\\
+-5/2&0    &3/2   &1/2&1&1\\
+1/2 &1/2 &1/2   &1/2&1/2&1
+\end{pmatrix}\\
+&
+=16\det\begin{pmatrix}
+1    &0    &0   &0   &0&1\\
+1/2 &1    &0   &0   &0&1\\
+3/2 &1/2 &1   &0   &0&1\\
+0    &3/2    &1/2&1   &0&1\\
+-5/2&0    &3/2   &1/2&1&1\\
+1 &1 &1   &1 &1&2
+\end{pmatrix}\\
+&=16\det\begin{pmatrix}
+1    &0    &0   &0   &0&0\\
+1/2 &1    &0   &0   &0&0\\
+3/2 &1/2 &1   &0   &0&0\\
+0    &3/2    &1/2&1   &0&0\\
+-5/2&0    &3/2   &1/2&1&0\\
+1 &1 &1   &1 &1&-59/16
+\end{pmatrix}\\
+&=-59
+}
+\ep{4}{
+(i)$\Longrightarrow$(ii):
+Notice, that
+\eq{
+0&=f(a_1,\ldots,a_{j-1},a_j+a_k,a_{j+1},\ldots,a_k+a_j,a_{k+1},\ldots,a_p)\\
+&\quad=f(a_1,\ldots,a_{j-1},a_j,a_{j+1},\ldots,a_k,a_{k+1},\ldots,a_p)\\
+&\qquad+f(a_1,\ldots,a_{j-1},a_j,a_{j+1},\ldots,a_j,a_{k+1},\ldots,a_p)\\
+&\qquad+f(a_1,\ldots,a_{j-1},a_k,a_{j+1},\ldots,a_k,a_{k+1},\ldots,a_p)\\
+&\qquad+f(a_1,\ldots,a_{j-1},a_k,a_{j+1},\ldots,a_j,a_{k+1},\ldots,a_p)\\
+&\qquad=f(a_1,\ldots,a_{j-1},a_j,a_{j+1},\ldots,a_k,a_{k+1},\ldots,a_p)\\
+&\quad\qquad+f(a_1,\ldots,a_{j-1},a_k,a_{j+1},\ldots,a_j,a_{k+1},\ldots,a_p)
+}
+Thus 
+\eq{
+f(a_1,\ldots,a_{j-1},a_j,a_{j+1},\ldots,a_k,a_{k+1},\ldots,a_p)=-f(a_1,\ldots,a_{j-1},a_k,a_{j+1},\ldots,a_j,a_{k+1},\ldots,a_p)
+}
+}
+(ii)$\Longrightarrow$(iii):
+Without the loss of generality, say $a_1=\sum_{i\neq1}^{n}\lam_ia_i$
+Then 
+\[
+f(a_1,\ldots,a_p)=\lam_2f(a_2,\ldots,a_p)+\lam_3f(a_3,\ldots,a_p)+\cdots+\lam_nf(a_n,\cdots,a_p)
+\]
+And each term in the right has the form by (ii)
+\[
+f(a_i,\cdots,a_i,\cdots,a_p)=-f(a_i,\cdots,a_i,\cdots,a_p)\Longrightarrow f(a_i,\cdots,a_i,\cdots,a_p)=0
+\]
+Thereby $f(a_1,\ldots,a_p)=0$\\
+(iii)$\Longrightarrow$(i): If $a_i=a_j$ for some $i\neq j$, then the collection $\{a_1,\cdots,a_n\}$ is linear dependent, thus $f(a_1,\ldots,a_p)=0$\\
+This completes the proof.
+}
+\ep{5}{
+\def\mat{Mat$(n\times n,\mathbb{R})$}
+\def\GL{GL$(n,\mathbb{R})$ }
+\def\SL{SL$(n,\mathbb{R})$ }
+\def\O{O$(n,\mathbb{R})$}
+\def\SO{SO$(n,\mathbb{R})$}
+\def\Sp{Sp$(n,\mathbb{R})$ }
+\def\1{\mathbb{1}}
+Consider $\forall A,B,C\in$ \GL, we have:\\
+a) ${\left(AB\right)}^{-1}=B^{-1}A^{-1}$ is invertible, thus it's closed under multiplication and inverse, and\\
+b) $(AB)C=A(BC)$ guaranteed by the association law of matrix multiplication.
+Thereby \GL forms a group.\\
+In order to verify a subgroup, one only have to show that it's closed under multiplication and inverse since the association law is guaranteed by the whole set:\\
+i): Consider $\forall A,B\in$ \SL, we have:\\
+ a) $\det{AB}=\det{A}\det{B}=1$, thus $AB\in$ \SL.\\
+ b) $\det{A^{-1}}=\det{A}=1$, thus $A^{-1}\in$ \SL.\\
+ii): Consider $\forall A,B\in$ \O, we have:\\
+ a) ${(AB)}^{T}=B^TA^T=B^{-1}A^{-1}={(AB)}^{-1}$, thus $AB\in$ \O.\\
+ b) ${(A^{-1})}^{T}={(A^{T})}^{-1}={(A^{-1})}^{-1}$, thus $A^{-1}\in$ \O.\\
+ iii): Consider $\forall A,B\in$ \SO, we have:\\
+ a) $\det{AB}=\det{A}\det{B}=1$, and ${(AB)}^{T}=B^TA^T=B^{-1}A^{-1}={(AB)}^{-1}$, thus $AB\in$ \SO.\\
+ b) $\det{A^{-1}}=\det{A}=1$, and ${(A^{-1})}^{T}={(A^{T})}^{-1}={(A^{-1})}^{-1}$ thus $A^{-1}\in$ \SO.\\
+ iv): Consider $\forall A,B\in$ \Sp, we have:\\
+ a) ${(AB)}^T=B^{T}A^{T}=\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}B^{-1}\begin{pmatrix}0&-\1\\ \1&0\end{pmatrix}\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}A^{-1}\begin{pmatrix}0&-\1\\ \1&0\end{pmatrix}$\\
+ $=\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}{(AB)}^{-1}\begin{pmatrix}0&-\1\\\1&0\end{pmatrix}$, thus $AB\in$ \Sp.\\ 
+ b) ${\left(A^{-1}\right)}^{T}={\left(A^{T}\right)}^{-1}={\begin{pmatrix}0&-\1\\\1&0\end{pmatrix}}^{-1}\left(A^{-1}\right)^{-1}{\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}}^{-1}=\begin{pmatrix}0&\1\\ -\1&0\end{pmatrix}{\left(A^{-1}\right)}^{-1}\begin{pmatrix}0&-\1\\\1&0\end{pmatrix}$, thus $A^{-1}\in$ \Sp.\\[0.5 em]
+ \inn{i}{
+ 	Given $\forall a,b\in\mathbb{R}^2$, the spanned parallelogram is 
+	$P=\begin{pmatrix}a&b\end{pmatrix}$
+	with the area $|\det P\,|$.\\
+	Then the transformed parallelogram is $AP=\begin{pmatrix}Aa&Ab\end{pmatrix}$
+	with the area $|\det AP\,|=|\det A\,||\det P\,|=|\det P\,|$.
+ }
+ \inn{ii}{
+ 	A similar argument can be made that given $\forall a,b,c\in\mathbb{R}^3$, the spanned parallepiped is
+	$P=\begin{pmatrix}a&b&c\end{pmatrix}$
+	with the volume $|\det P\,|$.\\
+	Then the transformed parallelogram is $AP=\begin{pmatrix}Aa&Ab&Ac\end{pmatrix}$
+	with the volume $|\det AP\,|=|\det A\,||\det P\,|=|\det P\,|$.
+ }
+ \inn{iii}{
+ 	Notice that $AA^{T}=AA^{-1}=\mathbb{I}$ implies that the columns of $A$ is an orthonormal system (see exercise 6). Since $\forall x\in\mathbb{R}^n$, $Ax$ is merely a linear combination of this orthonormal system with $x_i$ as its coefficients, the norm $\|Ax\|^2=\dotp{Ax}{Ax}=\ss{i}{n}x_i^2=\|x\|^2$, therefore we have
+	\[
+	\alpha\,(Ax,Ay)=\frac{\dotp{Ax}{Ay}}{\|Ax\|\|Ay\|}=\frac{\dotp{A^TAx}{y}}{\|x\|\|y\|}=\frac{\dotp{x}{y}}{{\|x\|\|y\|}}=\alpha\,(x,y)
+	\]
+ }
+ \ep{6}{
+ 	\inn{i}{
+	(a)$\iff$(b): Let $A_j$ denote the $j$th column of the matrix $A\in$ \O, 
+	then the fact that $A^{-1}=A^{T}$ leads to:
+	\eq{
+	&A^{T}A=A^{-1}A=I\\
+	&\iff A_jA_i=\delta_{ij}\\
+	}
+	}
+ }
+ }
+
+\end{document} 

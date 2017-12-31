@@ -1,0 +1,186 @@
+\input mla
+\begin{document}
+\titlehm{2}
+\begin{vv286_ms}{1}
+\item[(i)]:
+Let $X(t)$ denote the chemical $C$ formed after time t,we plug in the numbers:
+\eq
+{
+\ff{dX}{dt}=k(60-X)(140-X)
+}
+Given IVP: $X(0)=0$ we obtain the unique solution:
+\eq
+{
+\sin\ff{150-X}{60-X}=\ln\ff{5}{2}+90kt\numberthis{1}
+}
+comparing the condition $X(5)=10$ we get:
+\[
+\ln\ff{60-X(20)}{150-X(20)}=4\ln\ff{14}{5}-3\ln\ff{5}{2}\implies X(20)=29.32\,{\rm g}
+\]
+\item[(ii)]:
+From \eqref{1} we immediately get $X\to60$ as $t\to\infty$.
+\item[(iii)]:
+A remains 0 gram, B remains 30 grams.
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{2}
+\item[]
+The solution is obtained by consider the substitution: 
+\eq
+{
+u=-\ff{1}{x}
+}
+and we are left with the ODE of the form $u'=f(u/x)$:
+\eq
+{
+\ff{du}{dt}=2\ff{u^2}{t^2}-1
+}
+and using the method of substituting $y=u/t$ gives us the original solution  satisfying IVP:
+\eq
+{
+x=\ff{2}{t}
+}
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{3}
+\item[]
+This is a separable ODE if we set
+\eq{
+u(x)=3x+2y+2
+}
+and plugging in the initial equation we have:
+\eq
+{
+u'=5-\ff{4}{u}
+}
+where we shift the IVP:
+\eq
+{
+u(-1)=-3
+}
+and the unique solution is:
+\eq
+{
+&u+\ff{4}{5}\left( \ln{|5u-4|}-\ln19 \right)=5x+2,
+\quad
+u=3x+2y+2\\
+\implies\quad &15x+10y+6=-19e^{\ff{5}{2}(x-y)}
+}
+is the desired implicit curve.
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{4}
+\item[]
+Let $u(t)$ denote the multiple of the population with
+respect to the initial population: $y(t)=y_0u(t)$
+We also let $t$ in the units of $40$ minutes thus $t=3$
+implies after 2 hours\\
+Then we have:
+\item[(a)]
+	\eq
+	{
+	u_{\gamma}(t)=5\ff{1}{1+4e^{-(\ln 2)t}}\implies
+	y(3)=y_0u(3)=3.33\times 10^8
+	}
+\item[(b)]
+	\eq
+	{
+	u_{\gamma}(t)=\ff{1}{2}\ff{1}{1-1/2e^{-(\ln 2)t}}\implies
+	y(3)=y_0u(3)=5.33\times 10^8
+	}
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{5}
+\item[(i)]
+From the separation of variables:
+\eq
+{
+\ln\left|\ff{y-1}{y-1/4}\right|=-3+C
+}
+Incorporating the absolute value into the constant $C$ and rewrite the constant into $C_0$
+	The general solution is
+	\eq
+	{
+	y=\ff{1+C_0e^{3t}}{4C_0e^{3t}+1},\,C_0\in\R
+	\quad
+	\hbox{or}
+	\quad
+	y=\ff{1}{4}
+	\quad
+	\hbox{or}
+	\quad
+	y=1
+	}
+\item[(ii)]
+	We write
+	\eq
+	{
+	y'=-\ff{1}{4}(y-1)(\ff{1}{4}-y)
+	}
+	thus the carrying capacity is $1/4$
+\item[(iii)]
+	The threshold is 
+	$1$
+\item[(iv)]
+	See attachment.
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{6}
+\item[(a)]
+	The general solution for the model:
+	\eq
+	{
+	p_1=\ff{a}{b}\ff{1}{1+\gamma^{-at}}\\
+	p_2=\ff{A}{B}\ff{1}{1+\gamma^{-At}}\\
+	}
+	We set $p_1(t^*)=q$ and $p_1(t^{**})=Q$, looking
+	for the difference $T_1=t^{**}-t^*$ by considering:
+	\eq
+	{
+	p_1(t^*)/p_1(t^{**})=q/Q
+	}
+	This will yield:
+	\eq
+	{
+	T_1=t^{**}-t^*=\ff{1}{a}\ln\ff{Q(a-bq)}{q(a-bQ)}
+	}
+\item[(b)]
+	The similar procedure follows when (a) is applied
+	to $p_2$
+	\eq
+	{
+	p_2(t^*)/p_2(t^{**})=Q/q
+	}
+	yields:
+	\eq
+	{
+	T_2=t^{**}-t^*=\ff{1}{A}\ln\ff{q(QB-A)}{Q(qB-A)}
+	}
+\item[(c)]
+	For $T_1$ it's trivial by setting $b=0$ in (a),
+	for $T_2$, we consider first order linear
+	approximation:
+	\eq
+	{
+	T_2&=\ff{1}{A}\ln\ff{Qqb-QA+QA-qA}{QqB-QA}=
+	\ff{1}{A}\ln\left( 1+\ff{QA-qA}{Q(qB-A)} \right)\\
+	&\quad=
+	\ff{1}{A}\left( \ff{QA-qA}{Q(qB-A)}+o(A^2) \right)\\
+	&\quad=
+	\ff{Q-q}{qQB}+o(A)
+	}
+	as desired. \\
+	By numerical calculations:
+	\eq
+	{
+	a=\ff{\ln\left(\ff{Q}{q}\right)}{T_1}\approx0.978=1
+	}
+\end{vv286_ms}
+
+
+\end{document}

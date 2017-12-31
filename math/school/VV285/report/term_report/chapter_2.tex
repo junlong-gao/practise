@@ -1,0 +1,352 @@
+\chapter{Tautochrone Problem}
+\setcounter{section}{0}
+{\flushright
+	{\sffamily\slshape
+		We can face our problem. \\
+		We can arrange such facts as we have \\
+		with order and method.\\
+		\vskip 0.1 in
+		{\sffamily\upshape --- \textsc{Hercule Poirot}.  \it Murder on the Orient Express \rm (1934)}
+	}	
+\vskip 2in 
+}
+
+
+\section{The Relic from Harmonic Motion\hfill}
+\lettrine[lines=2]{$\mathcal{I}$\,}\lowercase{f} we parameterize the curve through curve length, the tangential component of 
+the acceleration uniquely determines the time it travels. Now we want to 
+seek a differential relation such that the periodic solution is independent
+of the initial displacement. 
+
+However, such a differential relation has long been known to the students of physics, namely the harmonic oscillation:
+\eq{
+\ff{d^2x}{dt^2}=-kx\quad k>0\numberthis{periodical}
+}
+which yields the general solution:
+\eq{
+x=C\cos{(\sq k t+\p_0)}
+}
+where $\w=\sq k$ is the frequency of the motion:
+\eq{
+T=\ff{2\pi}{\w}
+}
+An interesting question immediately pops up: suppose we have a
+periodical motion, does the acceleration long the trajectory have to
+satisfy \eqref{periodical}? The answer is affirmative under reasonable assumption:
+in one dimensional motion if the acceleration is only determined by particle's 
+current position, there exists a unique potential function $U(x)$ such that
+\eq
+{
+\ff{d}{dx}U(x)=-ma\quad, U(0)=0\numberthis{motioneq}
+}
+Then the periodic motion can be characterized by considering the motion near
+$x=0$. As $x$ increases the $U$ increase monotonically until $U(x)$
+reaches the initial mechanical energy, say, at $x=x_1$. Then the conservation of
+mechanical energy shows that at this position the particle stops, turns around and
+goes back to the origin. If the other side $x<0$ follows a similar configuration, this ``potential well''(since the particle can never go outside, invoking the term
+From Vp160 Physics)
+corresponds to a periodic motion.\\
+The conservation law of mechanical energy shows that the time it
+requires to travel from the origin to the turning point is:
+\eq{
+	&\int_{0}^{t_1} dt=\int_{t_1}^{t_2} \ff{dx}{v}\\
+	&\quad=\int_{0}^{x_1} \sq{ \ff{m}{2E(x)}}\,dx\\
+	&\quad=\int_{0}^{x_1}\sq{ \ff{m}{2(U(x_1)-U(x))}}\,dx
+}
+We are interested in the integral of the form
+\eq
+{
+\int_0^{x_1}\sqrt{\ff{1}{U(x_1)-U(x)}}\,dx\numberthis{int}
+}
+such that the result doesn't depend on $x_1$.\\
+Now we use the transformation:
+\eq
+{
+\tau^2=\ff{U(x)}{U(x_1)},\quad \tau:0\to1\numberthis{invertible}
+}
+notice we use the fact that from $0$ to $x_1$ $U(x)$ is monodically increasing. \\
+The integral \eqref{int} becomes:
+\eq
+{
+\int_0^{1}2\sq{\ff{1}{1-\tau^2}}\ff{\sq{U(x(\tau))}}{U'(x(\tau))}\,d\tau\numberthis{principle}
+}
+since the invertibility in \eqref{invertible} implies the bijection $\tau\mapsto x$.\\
+The only term that depends on $x_1$ in \eqref{principle} is
+\eq
+{
+(\tau,x_1)\mapsto x\mapsto \ff{\sq{U(x)}}{U'(x)}\numberthis{map}
+}
+where the first map $\p$ is determined by \eqref{invertible}: 
+\eq
+{
+x=U^{-1}(\tau^2U(x_1))\numberthis{xont}
+}
+In order to eliminate the dependence on $x_1$, we set
+\eq
+{
+\pd{}{x_1}\ff{\sq{U(x)}}{U'(x)}=0
+}
+and by chain rule and inverse function theorem, we look at \eqref{map} and
+\eqref{xont}:
+\eq
+{
+0=\pd{}{x_1}\ff{\sq{U(x)}}{U'(x)}=\dd{}{x}\left(\ff{\sq{U(x)}}{U'(x)}\right)\cdot \pd{x}{x_1}=\dd{}{x}\left(\ff{\sq{U(x)}}{U'(x)}\right)
+\ff{1}{\displaystyle\dd{U}{x}}\left(\tau^2\dd{U(x_1)}{x_1}\right)
+}
+this vanishes for all $x_1$ if and only if
+\eq
+{
+\dd{}{x}\left(\ff{\sq{U(x)}}{U'(x)}\right)=0
+}
+or equivalently, $U(x)$ must satisfy the following differential equation:
+\eq
+{
+\ff{\sq{U(x)}}{U'(x)}=\rm const
+} 
+The general solution for this is:
+\eq
+{
+U(x)=cx^2
+}
+for some constant $c$ (recall $U(0)=0$ by the assumption).\\
+Back in \eqref{motioneq} we conclude that
+\eq
+{
+a=\ddot{x}=-\ff{1}{m}\ff{d}{dx}U(x)=-kx
+}
+This establishes the necessary and sufficient condition for the periodic motion in a potential field where the period doesn't depend on the initial position. 
+
+Now we make an analogy that the tautochone should be a curve where \eqref{periodical} holds along the trajectory it travels:
+\etag{5}
+{
+\ff{d^2s}{dt^2}=-ks\quad k>0
+}
+then in order to find the period of the motion, one can proceed as if the particle is moving along a straight line subjected to linear restoring force.
+
+Of course, the real trajectory should be curved in such a way that the tangential
+component of the gravity satisfies \eqref{5}, and that is what we are looking for in the next section.
+
+\section{How Does the Cycloid Come into Play \hfill}
+\lettrine[lines=2]{$\mathcal{W}$\,}\lowercase{e} want to formulate the trajectory so that \eqref{5} holds in terms of $x$ and $y$
+axes in parameterized form. From Newtonian dynamics the acceleration in
+the tangential component is due to projection of the gravitational force:
+\eq
+{
+\ff{d^2s}{dt^2}=-g\st
+} 
+where we identify the acceleration is in the decreasing direction of the angle
+$\ta$ from the vertical position. 
+Combine it with \eqref{5} we have:
+\eq{
+s=\ff{g}{k}\st
+}
+we will be more interested in the time derivative to get the component along $x$ and $y$ axes:
+\eq{
+\ff{ds}{dt}=\ff{g}{k}\ct \,\dot{\ta}\numberthis{6}
+}
+If we set up our coordinate system in such a way that $y$ axis is along the 
+equilibrium position pointing upwards then we have, by decomposing the
+line velocity $ds/dt$ into two components\cite{laubenbacher2007mathematical}:
+\eq{
+\ff{dx}{dt}=\ff{ds}{dt}\ct\quad\ff{dy}{dt}=\ff{ds}{dt}\st\numberthis{7}
+} 
+with the initial condition 
+\eq{
+x\Big|_{\ta=0}=0,\quad y\Big|_{\ta=0}=-\ff{g}{2k}
+}
+Now we put the two equations from \eqref{7} into \eqref{6} to obtain:
+\eq
+{
+\ff{dx}{dt}=\ff{g}{k}\cos^2\ta\ff{d\ta}{dt}\quad \ff{dy}{dt}=-\ff{g}{k}\st\ct\ff{d\ta}{dt}
+}
+then the integration over parametrical form gives us:
+\eq
+{
+\ff{dx}{d\ta}=\ff{g}{k}\cos^2\ta,\quad\ff{dy}{d\ta}=\ff{g}{k}\st\ct
+}
+integrate with respect to $\ta$:
+\eq
+{
+x(\ta)-x(0)=\ff{g}{4k}\left(2\ta+\sin2\ta\right),\quad
+y(\ta)-y(0)=\ff{g}{4k}\left(1-\cos2\ta\right)
+}
+after a bit tackling from initial condition, this is a cycloid with parameter $\ta$:
+\eq
+{
+x(\ta)=\ff{g}{4k}\left(2\ta+\sin2\ta\right),\quad
+y(\ta)=-\ff{g}{4k}\left(1+\cos2\ta\right)
+}
+
+\section{Winding Cycloid \hfill}
+\lettrine[lines=2]{$\mathcal{P}$\,}\lowercase{r}ovided that the isochrone curve is actually a cycloid curve, we need special
+metal plates to twist the thread along the swing in such a way that the 
+real trajectory formed by the massive pendulum is a cycloid, if we want
+to use a fixed length thread. 
+
+This new problem is solved through the surprising relation between the 
+{\it involute}\cite{mccleary2012geometry} of the cycloid and the cycloid itself: if we fix a thread on one cusp of
+a cycloid and start winding the thread to the curve in such a way that
+at each spot the thread is tangential to the curve where it osculates with the curve, then
+the end of the thread forms the involute of the curve. In the case
+of a cycloid, the involute is again a cycloid. This amazing property allows us
+to curve the metal plate into a cycloid shape. Once the thread starts
+swinging and winding to it, the massive pendulum at the free end will produce again a
+cycloid, as desired.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+	title={The Tautochone realized through metal plate},
+	unit vector ratio*=1 1 1,
+    width=11cm,
+    legend entries={$r(\ta)$,$I(\ta)$},
+        legend pos=north east,]
+    
+    \addplot[variable=\t, 
+	domain=-0:pi,
+	sample=100,
+	smooth] 
+	({t-sin(deg(t))}, {-1+cos(deg(t))});
+    \addplot[variable=\t, 
+	domain=-0:pi,
+	sample=100,
+	smooth,
+	dashed] 
+	({t+sin(deg(t))}, {-3-cos(deg(t))});
+	    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Now let's see mathematically how it comes to this.
+Suppose we have a cycloid starting its parameterization from the origin
+\eq
+{
+r(\ta)=k(\ta-\st,\,-1+\ct)\numberthis{plate}
+}
+and a thread with the length $4k$, we want to find the trajectory of the free end:
+\eq
+{
+I(\ta)=r(\ta)+(4k-l(\ta))T_r(\ta)\numberthis{9}
+}
+where $T_r(\ta)$ is the unit tangent vector at the point $r(\ta)$. $l(\ta)$ is 
+the length from starting point (origin) to point $r(\ta)$.
+
+From definition in Vv285, the unit tangent vector is:
+\eq{
+T_r(\ta)=\ff{r'(\ta)}{\|r'(\ta)\|}=\ff{1}{\sq{2-2\ct}}(1-\ct,-\st)
+}
+and the length follows:
+\eq
+{
+l(\ta)=\int_0^{\ta}\|r'\|=4k\left(1-\cos\ff{\ta}{2}\right)
+}
+back to \eqref{9} we have:
+\eq
+{
+I(\ta)&=r(\ta)+4k\cos\ff{\ta}{2}\ff{1}{\sq{2-2\ct}}\left(1-\ct,\,-\st\right)\\
+&\quad=r(\ta)+4k\left(\sq{\ff{1+\ct}{2}}\ff{1-\ct}{\sq{2-2\ct}},\,\ff{\cos\ff{\ta}{2}\st}{\sq{4\sin^2\ff{\ta}{2}}}\right)\\
+&\quad=r(\ta)+2k\left(\st,\,-1-\ct\right)\\
+&\quad=k(\ta+\st,-3-\ct)\\
+&\quad=k(\p-\st-\pi,\,-(1-\ct)-2)\numberthis {10}
+}
+where in the last line we use the transformation $\p=\ta+\pi$. Now \eqref{10}
+is exactly the curve of the plate in \eqref{plate}, yet shifted by $(-\pi k,-2k)$. In other words, given the length of $4k$ units and the metal plate parametrized with
+coefficient $k$, the thread pendulum will swing along a cycloid with
+the exact trajectory as a cycloid so that the period of the motion is the same no matter
+what the initial position is.
+\vskip 1in
+{\flushright
+	{\sffamily\slshape
+	In a Cycloid with a vertical axis, \\
+		and with the vertex seen to be the lowest point,\\
+		 the times of descent for some body, \\
+		 on leaving any point on the cycloid from rest until\\
+		  it reaches the lowest point at the vertex,\\
+		  are equal to each other;
+		 \vskip 0.1 in
+		{\hfill\sffamily\upshape --- 
+\textsc{Christiaan Huygens}. p57, PROPOSITION XXV,  \it Horologium oscillatorium \rm (1673)}
+	}	
+}
+\vskip 2in
+\section{Remarks\hfill}
+\lettrine[lines=2]{$\mathcal{T}$\,}\lowercase{h}e involute we obtained through the winding process can be generalized to a
+much wider range of curves which have reasonably good behavior with curve
+length parametrization\cite{mccleary2012geometry}:
+\vskip 0.1 in
+Let $\a$ be a smooth $C^2$-curve (where we adopt the notation in vv285)
+, a curve $\b$ such that $\b$ lies along the tangent line to $\a$ and $\b'(s)\perp\a'(s)$ is called an {\it involute} of $\a$, and $\a$ is called an evolute of $\b$.
+\vskip0.1 in
+Evidently, the Huygens' idea of winding the cycloid is essentially finding the 
+involute of a cycloid, and the amazing property we proved before can be
+now rephrased as follows:
+\begin{center}
+``{\it The cycloid has a congruent cycloid as its evolute.}"\cite{mccleary2012geometry}
+\end{center}
+From the definition it seems that one can only find the involute of a given
+curve, rather than the evolute of it. But there's much more to this\cite{mccleary2012geometry}:
+\vskip 0.1 in
+Let $\a$ to be a smooth $C^2$-curve and we denote its centers of curvature circles $C_\a(s)$ (which is again a curve, not necessarily parameterized by curve length). Then $C_\a(s)$ is an evolute of $\a$.
+\vskip0.1 in
+Indeed, from this point we conclude that to prove this statement it's sufficient
+to show that the points of $C_\a(s)$ lies on the tangent line of $\a$ and 
+the tangents are orthogonal. We first recall the properties of $C_{\a}(s)$:
+\eq
+{
+&\kappa(s)=\ff{1}{\|\a(s)-C_\a(s)\|},\\
+&(\a(s)-C_\a(s))\cdot\a''(s)=-1\quad \hbox{and}\quad (\a(s)-C_\a(s))\perp \a'(s)
+}
+The first one follows from the definition of curvature and the second uses
+the fact that curve length parameterization  implies no tangential acceleration, thus $\a''$ must be pointing to the center of curvature with the proper magnitude and perpendicular to the tangential direction.
+
+Now we begin by invoking the relation in assignment 7 of VV285:
+\eq
+{
+\ff{dN}{ds}=-k(s)T(s)\numberthis{13}
+}
+On the other hand, we already know that $(\a(s)-C_\a(s))$ is in the normal
+direction, we may write:
+\eq
+{
+(\a(s)-C_\a(s))\cdot\a''(s)=m(s)N(s)\cdot\kappa(s)N(s)
+}
+the left hand side is simply $-1$ , and $N(s)\cdot N(s)=1$, we conclude that:
+\eq
+{
+C_\a(s)=\a(s)+\ff{1}{\kappa(s)}N(s)\numberthis{12}
+} 
+differentiate it with respect to $s$:
+\eq
+{
+C'_\a(s)=\a(s)-\ff{\kappa'}{(\kappa(s))^2}N(s)+\ff{1}{\kappa(s)}\ff{dN}{ds}=-\ff{\kappa'}{(\kappa(s))^2}N(s)\numberthis{relation}
+}
+by using \eqref{13} since curve length parameterization implies unit speed: $\a(s)=T(s)$.
+
+From \eqref{relation} we see that $\a'(s)\perp C'_\a(s)$ and to show that
+the points of $\a(s)$ is on the tangent line of $C_{\a}(s)$ we use plug \eqref{relation} into \eqref{12}:
+\eq
+{
+\a(s)=C_{\a}(s)+\ff{\kappa(s)}{\kappa'(s)}C'_{\a}(s)
+}
+This completes the proof.
+
+In order to construct his tautochrone, Huygens gave a practical definition of 
+the involute in his book {\it Horologium oscillatorium} and provided various 
+examples of finding involutes of different curves. Lacking differential tools, this genius used a complete 
+classical Euclid approach to demonstrate his ideas. But what he did, had
+made the very first step of what is now called differential geometry, long before
+Newton's ideas on curves and derivatives.
+\vfill
+{\flushright
+	{\sffamily\slshape
+	If in one part of the cavity,\\
+	 a thread or flexible line is understood to be wound around one of the curved lines;\\
+	  and by keeping one end of that thread fixed to the curve,\\
+	   with the other end drawn away thus so that the part which is free is always kept extended ;\\
+	    then another curve is seen to be described by the free end of this thread. \\
+	    Moreover this curve can be said to be described by evolution.
+		 \vskip 0.1 in
+		{\hfill\sffamily\upshape --- 
+\textsc{Christiaan Huygens}. p61, DEFINITIONS III,  \it Horologium oscillatorium \rm (1673)}
+	}	
+}

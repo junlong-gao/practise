@@ -1,0 +1,252 @@
+%Always Save as....!
+\documentclass[12pt]{article}
+\usepackage{geometry}%1 inch margin
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+\geometry{a4paper,centering,scale=0.8}
+\rmfamily
+\normalsize
+\setlength{\parindent}{0em}
+
+\begin{document}
+\begin{flushleft}
+Junlong Gao 5133709126\\
+Prof. Hohberger\\
+VV186\\
+September 20, 2013\\%date
+\end{flushleft}
+\indent
+
+\begin{center}
+Homework 1
+\end{center}
+
+\textbf{Exercise 1}\par
+\textit{Solution:}\\
+\begin{center}
+\begin{tabular}{cccc}
+\hline
+Greek letter & English name &Greek letter &English name \\
+\hline
+$\alpha$, $A$ &alpha & $\nu$, $N$ &nu\\
+$\beta$, $B$ &beta &$\xi$, $\Xi$ &xi\\
+$\gamma$, $\Gamma$ &gamma &$o$, $O$ &omicron\\
+$\delta$, $\Delta$&detla &$\pi$ $\Pi$ &pi\\
+$\epsilon$, $E$ &epsilon &$\rho$, $P$ &rho\\
+$\zeta$, $Z$ &zeta &$\sigma$, $\Sigma$ &sigma\\
+$\eta$, $H$ &eta &$\tau$, $T$ &tau\\
+$\theta$, $\Theta$ &theta &$\upsilon$, $Y$ &upsilon\\
+$\iota$, $I$ &iota &$\phi$, $\Phi$ &phi\\
+$\kappa$, $K$ &kappa &$\chi$, $X$ &chi\\
+$\lambda$, $\Lambda$ &lambda &$\psi$, $\Psi$ &psi\\
+$\mu$, $M$ &mu &$\omega$, $\Omega$ &omega\\
+\hline
+\end{tabular}
+\end{center}
+\par
+
+
+\textbf{Exercise 2}\par
+\textit{Proof:}\\
+i) We simply fill out the truth table:
+\begin{center}
+\begin{tabular}{*{4}{p{2em}}cc}
+\hline
+$a$ &$b$ &$\lnot a$ &$\lnot b$ &$\lnot (a\land b)$ &$\lnot a\lor\lnot b$\\
+\hline
+$\text{F}$ &$\text{F}$ &$\text{T}$ &$\text{T}$ &$\text{T}$ &$\text{T}$\\
+$\text{F}$ &$\text{T}$ &$\text{T}$ &$\text{F}$ &$\text{T}$ &$\text{T}$\\
+$\text{T}$ &$\text{F}$ &$\text{F}$ &$\text{T}$ &$\text{T}$ &$\text{T}$\\
+$\text{T}$ &$\text{T}$ &$\text{F}$ &$\text{F}$ &$\text{F}$ &$\text{F}$\\
+\hline
+\end{tabular}
+\par
+\begin{tabular}{*{4}{p{2em}}cc}
+$a$ &$b$ &$\lnot a$ &$\lnot b$ &$\lnot (a\lor b)$ &$\lnot a\land\lnot b$\\
+\hline
+$\text{F}$ &$\text{F}$ &$\text{T}$ &$\text{T}$ &$\text{T}$ &$\text{T}$\\
+$\text{F}$ &$\text{T}$ &$\text{T}$ &$\text{F}$ &$\text{F}$ &$\text{F}$\\
+$\text{T}$ &$\text{F}$ &$\text{F}$ &$\text{T}$ &$\text{F}$ &$\text{F}$\\
+$\text{T}$ &$\text{T}$ &$\text{F}$ &$\text{F}$ &$\text{F}$ &$\text{F}$\\
+\hline
+\end{tabular}
+\end{center}
+\qed
+\par
+ii) Let $a=$`` $x \in A$ '' and $b=$`` $x \in B$ '', then we have:
+\begin{align*}
+x\in(A\cap B)^c
+		&\iff \lnot (a\land b)\\
+		&\iff  \lnot a\lor\lnot b		\tag{By i}\\
+		&\iff x\in A^c \cup B^c\\
+\end{align*}
+Analogy:
+\begin{align*}
+x\in(A\cup B)^c
+		&\iff \lnot (a\lor b)\\
+		&\iff  \lnot a\land\lnot b		\tag{By i}\\
+		&\iff x\in A^c \cap B^c\\
+\end{align*}
+\qed
+\par
+
+\textbf{Exercise 3}\par
+\textit{Proof:}\\
+
+Apply the result of exercise 2 to $T$:
+\[
+T^c=(O_1\cap O_2)^c\cap (O_1^c\cap O_2^c)^c=
+(O_1^c\cup O_2^c)\cap(O_1\cup O_2)
+\]
+Now we observe that $x\in(O_1^c\cap O_2)$  $\iff$ $x$ is not in $O_1$ and $x$ is in $O_2$, which means $x$ is in $(O_1^c\cup O_2^c)$ and $x$ is in $(O_1\cup O_2)$, that is, in $T^c$, which completes the proof.\\
+\qed
+\par
+
+\textbf{Exercise 4}\par
+\textit{Proof:}\\
+ i) \textit{Induction:}\\First verify when $n=1$:
+\[
+\sum_{j=1}^{1}j^3=1=\left(\sum_{j=1}^{1}j\right)^2
+\]
+Suppose the equation holds for $n-1$, then
+\begin{align*}
+\sum_{j=1}^{n}j^3&=\sum_{j=1}^{n-1}j^3+n^3
+=\left(\sum_{j=1}^{n-1}j \right)^2+n^3\\
+&=\left(\sum_{j=1}^{n-1}j\right)^2 +n^2+2n\sum_{j=1}^{n-1}j\\
+&=\left(\sum_{j=1}^{n-1}j+n\right)^2\\
+&=\left(\sum_{j=1}^{n}j\right)^2
+\end{align*}
+\qed
+\par
+ii) \textit{Induction:}\\First verify when $n=0$:
+\[
+(1+x)^0=1\ge1+0
+\]
+Suppose inequality holds for $n-1$, then
+\begin{alignat*}{6}
+(1+x)^n&=(1+x)^{n-1}+x(1+x)^{n-1}\\
+            &\ge (1+(n-1)x)+x(1+(n-1)x)\\
+            &= 1+nx+(n-1)x^2\ge1+nx
+\end{alignat*}
+This implies $(1+x)^n>nx$, which completes the proof.
+\qed
+\par
+\textbf{Exercise 5}\par
+\textit{Solution:}\\
+In first statement, the existed element 0 is fixed to satisfy all possible $a$, whereas in the second statement, the existed element 0 doesn't have to be fixed -- for every possible $a$ you can always find a corresponding 0 to satisfy the equation. So actually the first statement is actually much more stronger than the second statement.
+
+
+\textbf{Exercise 6}\par
+\textit{Proof:} \\
+i) Suppose there are two numbers 0,$0'\in\mathbb{Q}$
+Then $a=a+0=a+0'$\\
+Adding the inverse element on both side to get:
+\begin{alignat*}{6}
+&\quad &(-a)+a+0&=a+0'+(-a)\\
+&\Longrightarrow\quad &0+0&=0+0'\\
+&\Longrightarrow &0&=0'\\
+\end{alignat*}
+\qed
+\par
+ii) Suppose for some $a\in\mathbb{Q}$ there exist $(-a)$, $(-a)'\in\mathbb{Q}$ such that $0=a+(-a)=a+(-a)'$. 
+Adding the inverse element on both side yields:
+$0+(-a)=0+(-a)'$, namely$(-a)=(-a)'$
+\qed
+\par
+
+\textbf{Exercise 7}\par
+\textit{Proof:} \\
+Suppose that there exist $p,q\in\mathbb{N}(p\neq 0)$ such that there's no common divisor for them and $p/q=\sqrt{7}$\\
+Squaring on both side, we obtain:
+\[
+p^2=7q^2
+\]
+Thus $p^2$ is a multiple of $7$. Now, using counterposition, we assume that $p$ is not a multiple of 7, we have $p=7k+m$ for some $k\in \mathbb{N}$ and $m\in\{1,2,3,4,5,6\}$, squaring it, we have $p^2=(7k+m)^2=49k^2+14km+m^2=7(7k^2+2km)+m$, where $m^2\in\{1,4,9,16,25,36\}$, that's evident that none of the choice of $m^2$ can allow $p^2$ to be divided by $7$, thus $p$ must be a multiple of $7$.\\Plug in $p=7k$ for some $k\in \mathbb{N}$:
+\[
+7k^2=q^2
+\]
+So $q$ also has divisor 7, contradicts the assumption that $p$ and $q$ are relatively prime.
+\qed
+
+\textbf{Exercise 8}\par
+\textit{Proof: } \\
+Since $(m+2n)^2-2(m+n)^2=2n^2-m^2>0$ provided that $m^2/n^2<2$, the first given inequality holds, moreover:
+\begin{alignat*}{6}
+&\quad&\frac{(m+2n)^2}{(m+n)^2}-2&<2-\frac{m^2}{n^2}\\
+&\Longleftarrow\quad &\frac{2n^2-m^2}{(m+n)^2}&<\frac{2n^2-m^2}{n^2}\\
+&\Longleftarrow &\frac{1}{(m+n)^2}&<\frac{1}{n^2}
+\end{alignat*}
+And the last two line is self-evident, since $n,m>0$ and $m^2/n^2<2$
+\qed
+\par
+ii) $(m+2n)^2-2(m+n)^2=2n^2-m^2<0$ if $m^2/n^2>2$, thus$(m+2n)^2/(m+n)^2>2$\\
+
+Also, 
+\begin{alignat*}{6}
+&\quad &\frac{(m+2n)^2}{(m+n)^2}-2&>2-\frac{m^2}{n^2}\\
+&\Longleftarrow \quad&\frac{2n^2-m^2}{(m+n)^2}&>\frac{2n^2-m^2}{n^2} \\
+&\Longleftarrow &\frac{1}{(m+n)^2}&<\frac{1}{n^2}
+\end{alignat*}
+In the last line the sign reversed is because $2n^2-m^2<0$.
+\qed
+\par
+iii) Since each transformation of i), ii) bring the square of the original ratio closer to 2, yet with sign reversed, we can first apply transformation i), and then ii), to obtain the desired construction of $m'/n'$:\\
+Given $m^2/n^2<2$, set $m_1=m+2n$, $n_1=m+n$, then $m'=m_1+2n_1$, $n'=m_1+n_1$, namely $m'/n'=3m+4n/2m+3n$\\
+(One can also verify it in algebra: $m'/n'-m/n=(4n^2-2m^2)/n(2m+3n)>0, 2- m'^2/n'^2=2n^2-m^2/(2m+3n)^2>0$)
+\qed
+\par
+iv) Same as iii): given $m^2/n^2>2$, first transformation ii) then i) gives us  $m'/n'=3m+4n/2m+3n$, with the property $2<(m'/n')^2<(m/n)^2$, 
+Thus,  min$U_2$ can't exist in $\mathbb{Q}$
+\qed
+\par
+v) Since there's no max$U_1$, any number whose square is less than 2 can't be an upper bound of $U_1$, so all upper bound of $U_1$ forms $U_2$.(And it's been proved that no rational number's square is 2 in PT test)\\
+Since sup$U_1$=min$U_2$, sup$U_1$ doesn't exist according to iv).\\
+Similarly, since  inf$U_2$=max$U_1$, inf$U_2$ doesn't exist according to iii).
+\qed
+\par
+
+\textbf{Exercise 9}\par
+\textit{Solution: } \\
+i) maximum= $3/2$;
+no minimum;
+supremum=$3/2$;
+infimum=$1$;\\
+ii) maximum= $5/4$;
+no minimum;
+supremum=$5/4$;
+infimum=$-1$.
+ \par
+ 
+ \textbf{Exercise 10}\par
+\textit{Proof: }\\
+i) $\frac{a}{b}-\frac{a+c}{b+d}=\frac{ad-bc}{b(b+d)}>0$, $\frac{c}{d}-\frac{a+c}{b+d}=\frac{ad-bc}{d(b+d)}>0$ since $a/b <c/d, b>0, d>0$ implies $ad-bc>0$.\\
+ii) Since $a^2-2ab+b^2=(a-b)^2\ge 0$, adding $4ab$ to both sides to obtain $(a+b)^2\ge4ab$, namely $\frac{a+b}{2}\ge\sqrt{ab}$ provided that $a>0$ and $b>0$.\\
+iii) According to ii), $\frac{a}{b}+\frac{b}{a}\ge2\sqrt{\frac{a}{b}\frac{b}{a}}=2$
+\qed
+\par
+\textbf{Exercise 11}\par
+\textit{Solution: }\\
+i)\begin{alignat*}{6}
+&\quad &|x+2|    &\leq|x-1|\\
+&\iff      \quad&(x+2)^2&\leq(x-1)^2\\
+&\iff      &6x        &\leq-3\\
+&\iff      &x          &\leq -\frac{1}{2}
+\end{alignat*}\\
+ii)\begin{alignat*}{6}
+&     &   &|2-|x+1||\leq1\\
+&\iff \quad&-1&\leq|x+1|-2\leq     1\\
+&\iff &1 &\leq|x+1|\leq        3\\
+&\iff &1 &\leq x+1\leq         3\text{ or } -3\leq x+1\leq-1\\
+&\iff &0 &\leq x\leq             2\text{ or} -4\leq x\leq-2
+\end{alignat*}
+\par
+\textbf{Exercise 12}\par
+\textit{Proof: }\\
+Suppose $y^2<x$, then choose $0<\epsilon$ $<$ min($1$,$\frac{x-y^2}{2(y+1)}$), we have 
+$(y+\epsilon)^2-y^2= \epsilon(2y+\epsilon)<2\epsilon(y+\epsilon)<2\epsilon(y+1)<x-y^2$, namely $(y+\epsilon)^2<x$, thus $(y+\epsilon)$ is also a  lower bound but greater than the greatest lower bound $y$, which gives us a contradiction.
+\\This completes the second half of the proof.
+\qed
+\end{document}

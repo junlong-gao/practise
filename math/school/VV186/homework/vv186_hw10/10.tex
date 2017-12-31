@@ -1,0 +1,137 @@
+%lead
+\input my_macros
+\mydoc
+\baselineskip 16pt plus 2pt
+\vv10 November {30}
+%
+%problem 1
+\pnum1
+\noindent i) Let the ratio to be $q$, for $0\le k\le n$, we have:
+$$
+a_k={a_k\over a_{k-1}}{a_{k-1}\over a_{k-2}}\cdots{a_1\over a_0}\cdot a_0=a_0\cdot q^{k}
+\eqno(*)
+$$
+Now, since $a_0=a$, $a_n=b$, we have:
+$$
+{b\over a}=q^n,\qquad a=a_0
+$$
+Then we may write
+$$
+c={b\over a}=q^n\Longrightarrow a_i=a_0\cdot q^i=a\cdot c^{i/n},\qquad i=0,\cdots, n
+$$
+\medskip
+\noindent ii) Consider the upper bound of the difference:
+$$\eqalign{
+\sup_{x\in [a,b]}|f_n(x)-f_(x)|&
+=\sup_{x\in [a,b]}|a^p\cdot c^{pi/n}-x^p|=\sup_{1\le i\le n}|a_i^p-a_{i-1}^p|\cr
+&=\sup_{1\le i\le n}(a\cdot c^{i-1/n})^p|c^{p/n}-1|\cr
+&=a\cdot c^{n-1/n}
+|c^{p/n}-1|\to 0 \quad \hbox{ as $n\to \infty$}\cr}
+$$
+Thus $f_n$ converges to $f$ uniformly.
+\medskip
+\noindent iii) Since
+$$
+(1-c)\sum_{k=0}^nc^k=\sum_{k=0}^nc^k-\sum_{k=0}^nc^{k+1}=1-c^{k+1}
+$$
+Thus
+$$
+\sum_{k=0}^nc^k={1-c^{n+1}\over1-c}
+$$
+\medskip
+\noindent iv) Set $d=c^{p+1}$
+$$\eqalignno{
+I(f_n)&=\sum_{1\le i\le n}(a_i-a_{i-1})f(a_i)=\sum_{1\le i\le n}a^{p+1}\cdot c^{-1/n}\cdot c^{(p+1){i\over n}}(c^{1/n}-1)\cr
+&=a^{p+1}(c^{1/n}-1)\cdot c^{-1/n}\sum_{1\le i\le n} d\,^{i/ n}=a^{p+1}(c^{1/n}-1)\cdot c^{p/n}{d\over d^{1/n}-1}\cr
+&=(b^{p+1}-a^{p+1})c^{p/n}{c^{1/n}-1\over c\,^{p+1/n}-1}.&(**)
+}
+$$
+Now, as $n\to\infty$, we have:
+$$
+\lim_{x\to 0}c^{px}{c^{x}-1\over c\,^{(p+1)x}-1}=\lim_{x\to 0}c^{px}{\ln c \cdot c^x\over(p+1)\ln c \cdot c^{(p+1)x}}={1\over p+1}
+$$
+Plugging it into (**) we have:
+$$
+I(f_n)\to{b^{p+1}-a^{p+1}\over p+1}\qquad \hbox{as $n\to\infty$}
+$$
+\bigskip
+
+
+
+
+%problem 2
+\pnum2
+Consider $\forall$ $f\in $ PC$([a,b])$, on each continuous interval $[a_{i-1},a_i]$ where $f$ is continuous that 
+$$f(a_i)=\lim_{x\to a_i^-}f(x),\quad f(a_{i-1})=\lim_{x\to a_{i-1}^+}f(x);\qquad i=1,2\cdots,n
+$$
+And treat them as {\bf independent} functions defined on disjoint intervals. Each of them is regulated on $[a_{i-1},a_i]$ since they are {\bf continuous} on them. Then, connect all step functions which each uniformly converges to the corresponding  pieces of continuous functions together with arbitrary numbers defined  at each $a_i$ since they don't matter for step functions, so now we have a new step function for the whole function $f$. 
+\smallskip
+Now, $\forall \varepsilon>0$ given and fixed, we can find corresponding $N_i>0$ such that for all $n>N_i$ and $x$ on each corresponding interval $[a_{i-1},a_i]$ that $|\phi_n(x)-f(x)|<\varepsilon$. Simply pick $N=\max_{i=1,2\cdots n}N_i$, we can guarantee $n>N$ implies $|\phi_n(x)-f(x)|<\varepsilon$ for all $x\in [a,b]$, therefore, $f$ is regulated on $[a,b]$. Since this works for arbitrary $f\in $ PC$([a,b])$, we conclude that PC$([a,b])\subset$ Reg$([a,b])$.
+
+\bigskip
+%problem 3
+\pnum3
+\noindent i)
+For any given $ \varepsilon>0$, we can find $N_1$ such that for all $n>N_1$:
+$$
+\|f-f_n\|_{\infty}< \varepsilon/2
+$$
+Also for each of $f_n$, we can find some step functions $\varphi$ such that
+$$
+\|\varphi-f_n\|_{\infty}< \varepsilon/2
+$$
+Since $(f_n)$ are regulated.\smallskip
+Combining the two we conclude that we can find some step functions $\varphi$ such that
+$$
+\|f-\varphi\|_{\infty}\le\|f-f_n\|_{\infty}+\|\varphi-f_n\|_{\infty}< \varepsilon/2+\varepsilon/2=\varepsilon
+$$
+\medskip
+\noindent ii)
+Since $f_n\to f$ uniformly, for any $\varepsilon>0$ we can find $N>0$ such that for all $n>N$ we have:
+$$
+\left|\int_a^bf_n-\int_a^bf\right|=\left|\int_a^b (f_n-f)\right|\le(b-a)\|f_n-f\|_{\infty}<(b-a)\cdot {\varepsilon\over b-a}=\varepsilon
+$$
+This shows $\int_a^bf_n\to\int_a^bf$ as $n\to\infty$ thus the proof is done.
+\bigskip
+
+
+
+%problem 4
+\snum4
+ Since $x^4\sin^2(1/x)\ge 0=f(0)$, 0 is a local minimum point. Furthermore, consider
+$$
+f'(0)=\lim_{x\to0}{x^4\sin^2(1/x)-f(0)\over x-0}=\lim_{x\to0}x^3\sin^2(1/x)=0
+$$
+and
+$$
+f''(0)=\lim_{x\to0}{f'(x)-f'(0)\over x-0}=\lim_{x\to0}{4x^3\sin^2(1/x)-2x^2\sin(1/x)\cos(1/x)\over x}=0-0=0
+$$
+Since $|\sin(1/x)|$, $|\cos(1/x)|$ are bounded by 1
+\bigskip
+
+
+
+
+
+%problem 5
+\pnum5
+\noindent i) Since $f'$ is continuous at $a$ and $f'(a)>0$, then $f'>0$ for some interval containing $a$.  And by Lagrange Intermediate Value Theorem $f$ is increasing on this interval containing $a$.
+\medskip
+\noindent ii) Consider
+$$
+f'(0)=\lim_{x\to0}{\alpha x+x^2\sin(1/x)-0\over x-0}=\alpha>0
+$$
+Now, for $x\not=0$
+$$
+f'(x)=\alpha+2x\sin(1/x)-\cos(1/x)
+$$
+Now, consider sequence $x_n=(\pi+2k\pi)^{-1}$ and $y_n=(2k\pi)^{-1}$ $(k>1)$, both of them goes to 0,  so any interval containing 0 will contain infinitely many $x_n$ $y_n$. Also, since $\alpha\in(0,1)$, we may find sufficiently large $n$ such that 
+$$
+f'(x_n)=\alpha+1>0
+$$
+And 
+$$
+f'(y_n)=\alpha-1<0
+$$
+By that we have shown that any interval containing 0 would have $x$, $y$ such that $f'(x)>0$ and $f'(y)<0$.
+\end

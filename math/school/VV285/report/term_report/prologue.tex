@@ -1,0 +1,68 @@
+\chapter{Prologue}
+\setcounter{section}{0}
+{\flushright
+	{\sffamily\slshape
+		"The time has come," the Walrus said,\\
+		"To talk of many things"
+		\vskip 0.1 in
+		{from \it Through the Looking-Glass and What Alice Found There \rm (1872)}
+	}	
+\vskip 2in 
+}
+\section{Pendulum Revisited\hfill}
+\lettrine[lines=2]{$\mathscr{T}$\,}\lowercase{i}me keeping has long been dominated by the means of a pendulum. A typical pendulum clock features a massive pendulum on one end of the rod, while the other end is fixed to some pivot. The beautiful mathematical property is that the periodical motion of the swing is almost isochrone, that is, as long as the amplitude is small, the period is invariant for different initial positions. It was through experimental fact that this property got first discovered by the young talented Italian Galileo Galilei at around 1602. We shall investigate this phenomenon through a more mathematical approach.
+
+A {\it mathematical pendulum} is an ideal model of a physical pendulum 
+where a particle of mass $m$ is connected by a massless thread or rod 
+of length $l$ with one end fixed to a point so that it can rotate in a plane 
+with uniform parallel gravitational force. \cite{awrejcewicz2012classical}
+
+A {\it physical pendulum}, in contrast, takes into account of the moment of inertia of the thread or rod even if the resistance due to the pivot or air is
+negligible. Also, note that the physical pendulum is affected by the Coriolis force
+and cannot simply rotate in a fixed plane on earth.
+
+Now, if we restrict ourselves to the ideal model of a mathematical pendulum,
+the energy of the system is given by adding the kinetic energy and the 
+gravitational potential energy:
+\eq{
+E=K+U=\ff{1}{2}mv^2+mgh
+}
+Denote the displacement of angle by $\ta$, we have relation
+\eq
+{
+v=l\dot{\ta}, \qquad h=l-l\ct
+}
+we obtain
+\etag{1}{
+E(\ta,\dot{\ta})=\ff{1}{2}ml^2\dot{\ta}^2+mgl(1-\ct)
+}
+where we take the zero potential plane $h=0$ at the pivot and $g$ indicates the
+constant gravity field.
+
+The energy $E$ is invariant under time since the mechanical energy is
+conserved in a constant field, we take derivative with respect to time in \eqref{1}:
+\eq{
+0=\dd{}{t}E=\ff{1}{2}ml^2\dd{}{t}\dot{\ta}^2+\dot{\ta}mgl\st
+}
+giving us the {\it pendulum equation}:\cite{awrejcewicz2012classical}
+\etag{pendulum equation}{
+\ff{d^2}{dt^2}\ta(t)+\ff{g}{l}\st(t)=0
+}
+The above differential equation determines the motion of a pendulum in terms of 
+its angle $\ta$.  Unfortunately this is a non-linear equation and is unlikely to
+ have an explicit solution. Yet this can be well approximated by a linear equation as long as the amplitude $\ta$ is small by using $\ta/\st\to 1$ as $\ta\to 0$:
+ \ed{
+ \ff{d^2\ta}{dt^2}=-\ff{g}{l}\ta
+ }
+ The general solution to this is 
+ \eq{
+ \ta(t)=A\cos(\w t+\p),\quad \w=\sq{\ff{g}{l}}\implies T=2\pi\sq{\ff{l}{g}}
+ }
+ which gives us a surprisingly simple description of the motion that the period is proportional to the square root of the pendulum arm.  However, for a precise 
+ instrument like a clock,an approximation like this is overly optimistic. As one
+ shall see in the next chapter, the real period is at least first order quadratic to the 
+ initial angle $\ta_0$, and such a simple-looking timekeeping device suddenly presents all the wonders, from the elliptic integral to the charmingly mysterious cycloid curve, and this shall be our topic in the following chapters.
+ 
+ 
+
+

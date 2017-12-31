@@ -1,0 +1,398 @@
+\input mla
+\begin{document}
+\begin{vv286}{13}
+\begin{vv286_ms}{1}
+  Done.
+\end{vv286_ms}
+
+\begin{vv286_ms}{2}
+    Again we follow the slides and use the separation of variable $u(x,t)=X(x)T(t)$ to get:
+    \eq
+    {
+      X\frac{d^2T}{d t^2}=
+      -c^2\frac{d^4 X}{d x^4}T
+      \implies
+      \frac{-1}{c^2 T}\frac{d^2 T}{d t^2}
+      =\frac{d^4 X}{d x^4}\frac{1}{x}=k
+    }
+    since the both side is independent and must be constant.
+    \\
+    Suppose $k>0$, then we have the equation:
+    \eq
+    {
+      \frac{d^4X}{dx^4}=kX
+    }
+    since $k>0$, this gives the solution:
+    \eq
+    {
+      X(x)=c_1e^px+c_2e^{-px}+c_3\cos px+c_4 \sin px
+      \quad
+      p=k^{1/4}
+    }
+    the initial condition requires:
+    \eq
+    {
+    X(0)=0,\quad
+    X(l)=0,\quad
+    X''(0)=0,\quad
+    X''(l)=0
+    \quad
+    \text{or}
+    \quad
+    T(t)\equiv0
+    }
+    the last one yields the trivial solution $u=0$, otherwise
+    we obtain a system of linear equations, which solves:
+    \eq
+    {
+    c_1=c_2=c_3=0, \quad
+    c_4=0\quad
+    \text{or}
+    \quad
+    p=\frac{n\pi}{l}\quad n=1,2,\ldots
+    }
+    If $c_4=0$ again we back to the trivial solution, otherwise we have:
+    \eq
+    {
+      X(x)=c_n\sin\frac{n\pi x}{l}
+    }
+    this implies $k=p^4$ can only take on specific values, and we can solve for $T$:
+    \eq
+    {
+    T''(t)=-c^2kT
+    \implies
+    T=A_n\cos \frac{cn^2\pi^2}{l^2}t+B_n\sin \frac{cn^2\pi^2}{l^2}t
+    }
+    thus the full separated solution is obtained:
+    \eq
+    {
+      u_n(x,t)=\left(
+      D_n\cos \frac{cn^2\pi^2}{l^2}t
+      +E_n\sin \frac{cn^2\pi^2}{l^2}t
+      \right)\sin\frac{n\pi x}{l}
+    }
+    where $D_n$ and $E_n$ are to be determined. Then the superposition yields:
+    \eq
+    {
+      u(x,t)=\sum_{n=1}^{\infty}\left(
+      D_n\cos \frac{cn^2\pi^2}{l^2}t
+      +E_n\sin \frac{cn^2\pi^2}{l^2}t
+      \right)\sin\frac{n\pi x}{l}
+    }
+    is a solution.
+    \\
+    Now we look at the boundary conditions:
+    \eq
+    {
+    u(x,0)=x(l-x)\implies
+    \sum_{n=1}^{\infty}
+      D_n\sin\frac{n\pi x}{l}=x(l-x)
+    }
+    By the orthogonal Fourier series (we expand the initial $u(x,0)$ odd to origin) we know:
+    \eq
+    {
+      D_n\frac{l}{2}=\int_0^{l}x(l-x)
+      \sin\left( \frac{n\pi x}{l}\right)\,dx 
+      \implies D_n=\frac{4l^2}{n^3\pi^3}(1-(-1)^n)
+    }
+    similarly we have another boundary condition yields:
+    \eq
+    {
+    F_n=0
+    }
+    therefore the complete solution is:
+    \eq
+    {
+      u(x,t)=\sum_{n=1}^{\infty}
+      \frac{4l^2}{n^3\pi^3}(1-(-1)^n)
+      \cos\left( \frac{cn^2\pi^2}{l^2}t \right)
+      \sin\left( \frac{n\pi x}{l} \right)
+    }
+    When $k=0$ we easily find that the only possible situation is the trivial solution $u=0$.
+    \\
+    When $k=-\lam^2<0$, we note the $T(t)$ has the solution:
+    \eq
+    {
+      T(t)=c_1e^{-\lam c t}+c_2e^{\lam c t}
+    }
+    Now the boundary condition $u(x,0)=0$ requires:
+    \eq
+    {
+    X(x)(c_2+c_1)=x(l-x)
+    }
+  then we have $X=x(l-x)/C$, and this contradicts the boundary condition $u_{xx}(0,t)=u_{xx}(l,t)=0$.
+  \\
+  In conclusion, the solution is:
+   \eq
+    {
+      u(x,t)=\sum_{n=1}^{\infty}
+      \frac{4l^2}{n^3\pi^3}(1-(-1)^n)
+      \cos\left( \frac{cn^2\pi^2}{l^2}t \right)
+      \sin\left( \frac{n\pi x}{l} \right)
+    }
+  \end{vv286_ms}
+  \begin{vv286_ms}{3}
+    By the separation of variable we obtain, with boundary $u(0,t)=u(L,t)=0$:
+    \eq
+    {
+      X(x)=A_n\sin\left( \frac{n\pi x}{L} \right)
+    }
+    and we obtain the equation for $T$:
+    \eq
+    {
+    T(t)=e^{-\mu/2}\left( B_n\cos\w_n t+D_n\sin \w_n t \right)
+    \quad
+    \w_n=\frac{1}{2}\sq{\frac{4n^2\pi^2c^2}{L}-\mu^2}
+    }
+    before superposition, we notice $u_x(x,0)=\sin(\pi x/L)$ implies only $n=1$ exists,
+    and the complete solution:
+    \eq
+    {
+      u(x,t)=e^{-\mu t/2}\left( C_1\cos\w_1t+F_1\sin\w_1t \right)
+      \sin\left( \frac{n\pi x}{L} \right)
+    }
+    the constants are given by:
+    \eq
+    {
+      u(x,0)=\sin\left( \frac{\pi x}{L} \right)\implies C_1=1\\
+      u_t(x,0)=0\implies F_1=\frac{\mu}{2\w_1}
+    }
+    The final solution is:
+    \eq
+    {
+    u(x,t)=e^{-\mu/2t}\left( \cos\w_1t+\frac{\mu}{2\w_1}\sin\w_1t \right)
+      \sin\left( \frac{n\pi x}{L} \right)
+   \quad
+      \w_1=\frac{1}{2}\sq{\frac{4\pi^2c^2}{L}-\mu^2} 
+    }
+  \end{vv286_ms}
+  \begin{vv286_ms}{4}
+    Again separation of variable $u=XY$ gives:
+    \eq
+    {
+      \frac{1}{X}X''=\frac{1}{Y}\left( Y-Y'' \right)=k
+    }
+    and the only non-trivial solution is obtained through:
+    \eq
+    {
+    X=B_n\sin nx\quad
+    Y=C_n\left( e^{\sq{1+n^2}y}-e^{-\sq{1+n^2}y} \right)
+    }
+    and the superposition gives:
+    \eq
+    {
+      u(x,y)=\sum_{n=1}^{\infty}D_n\sin nx\left( e^{\sq{1+n^2}y}-e^{-\sq{1+n^2}y} \right)
+    }
+    where $D_n$ are constants such that:
+    \eq
+    {
+    \sum_{n=1}^{\infty}D_n\sin nx\left( e^{\sq{1+n^2}a}-e^{-\sq{1+n^2}a}\right)=1
+    }
+    by orthogonal Fourier integral (we expand the initial $u(x,0)$ odd to origin) we immediately have:
+    \eq
+    {
+      D_n=\frac{2\int_0^{\pi}\sin nx\,dx
+      /2\int_0^{\pi}\sin^2 n\pi\,dx}{ e^{\sq{1+n^2}a}-e^{-\sq{1+n^2}a}}=
+      \frac{1-(-1)^n}{n\pi}\frac{1}{{ e^{\sq{1+n^2}a}-e^{-\sq{1+n^2}a}}}
+    }
+    plugging back to the solution:
+    \eq
+    {
+      u(x,y)=\sum_{n=1}^{\infty}\frac{1-(-1)^n}{n\pi}\ff{ e^{\sq{1+n^2}y}-e^{-\sq{1+n^2}y}}
+      { e^{\sq{1+n^2}a}-e^{-\sq{1+n^2}a}}\sin nx
+    }
+  \end{vv286_ms}
+  \begin{vv286_ms}{5}
+  \def\tt{(\w t+Bx)}
+  By separation of variable $u=TX$, notice that the initial condition requires the $T=U_0\cos\w t$. Then, this essential requires:
+  \eq
+  {
+  T''+(\a+\b)T'+\a\b T=\lam T\implies T=U_0\cos\w t
+  }
+  This essentially requires $\a\b<0$, but by condition $\a,\,\b>0$, this yields contradiction.
+  
+  
+    To obtain the constants, simply plug in the solutions into the equation:
+    \eq
+    {
+      &e^{-Ax}U_0\left( -\w^2\cos\tt-(\alpha+\beta)\sin\tt
+      +\alpha\beta\cos\tt\right)=
+      \\
+      &\quad\quad e^{-Ax}U_0
+      \left( 2AB\sin\tt+(A^2-B^2)\cos\tt \right)
+    }
+    this gives us the requirement:
+    \eq
+    {
+    A^2-B^2=\alpha\beta-\w^2\\
+    2AB=-(\alpha\beta)
+    }
+    which determines $A$ and $B$ once $\alpha$, $\beta$, $\w$ 
+    is given.
+  \end{vv286_ms}
+  \begin{vv286_mp}{6}
+These follow immediately from the last assignment:
+\eq
+    {
+      2vJ_v(x)&=xJ_{v-1}(x)+xJ_{v+1}(x)\\
+      2J_v'(x)&=J_{v-1}(x)-J_{v+1}(x)
+    }
+    solve for $J_{v-1}$ from the first one and plugging into the second equation:
+    \eq
+    {
+      J'_v(x)=-J_{v+1}(x)+\frac{vJ_v(x)}{x}
+    }
+    solve for $J_{v+1}$ from the first one and plugging into the second equation:
+    \eq
+    {
+      J'_v(x)=J_{v-1}(x)-\frac{vJ_v(x)}{x}    
+    }
+    After long research {\bf I essentially doubt the result we are asked to prove.} 
+    \\
+    In fact:
+  \eq
+  {
+    &\frac{\partial}{\partial \beta}\left( 
+    \beta J_v(\alpha)J_v(\alpha)
+    -
+    \alpha J_v'(\alpha)J_v(\beta)
+    \right)
+    \\
+    =&\beta J_v(\alpha)J_v''(\beta)
+    +J_v(\alpha)J_v'(\beta)
+    -\alpha J_v'(\alpha)J_v'(\beta)
+  }
+  Now since the Bessel function must satisfy Bessel equation:
+  \eq
+  {
+    J_v''(\alpha)+\ff{J'_v(\alpha)}{\alpha}
+  =\left( \frac{v^2}{\alpha^2}-1 \right)J_v(\alpha)
+  \numberthis{1}
+  }
+  let $\alpha\to\beta$ in the limit, apply L'Hospital's rule , we have:
+  \eq
+  {
+    \lim_{\beta\to\alpha}
+    \frac{\beta J_v(\alpha)J_v(\alpha)
+    -
+    \alpha J_v'(\alpha)J_v(\beta)
+}{\alpha^2-\beta^2}
+&=\frac{\alpha J_v(\alpha)J_v''(\alpha)
+    +J_v(\alpha)J_v'(\alpha)
+    -\alpha
+  J_v'(\alpha)J_v'(\alpha)}{-2\alpha}
+    \\
+    &=\frac{1}{2}J_v'^2(\alpha)
+    -\frac{1}{2}J_v(\alpha)
+    \left( 
+    J_v''(\alpha)+\frac{J'_v(\alpha)}{\alpha}
+    \right)\\  
+    & =\frac{1}{2}J_v'^2(\alpha)
+      -\frac{1}{2}J_v^2(\alpha)
+      \left( \frac{v^2}{\alpha^2}-1 \right)
+      \quad\text{using \eqref{1}}
+}
+In fact, when $\alpha$ is a zero of $J_v$, the desired limit in the assignment holds.
+  \end{vv286_mp}
+ \begin{vv286_mp}{7}
+ \item[i)]
+   This follows immediately from the fact that:
+   \eq
+   {
+     \left( i \right)^{2m+v}=
+     \left( e^{\pi i/2} \right)^{2m+v}
+     =e^{\pi mi+\pi i v/2}
+     =(-1)^{m}e^{\pi iv/2}
+   }
+   and the series representation of Bessel function:
+   \eq{
+     J_v(ix)=\sum_{m=0}^{\infty}\frac{(-1)^m}{m!\Gamma(1+m+v)}
+     \left( \frac{ix}{2} \right)^{2m+v}
+     =\sum_{m=0}^{\infty}\frac{1}{m!\Gamma(1+m+v)}
+     \left( \frac{x}{2} \right)^{2m+v}e^{\pi iv/2}
+   }
+   multiply by $e^{-v\pi i/2}$ and we obtain the series for $I_v$.
+ \item[ii)]
+   We recall from the last assignment:
+   \eq
+   {
+     Y_{0}(ix)
+     &=\frac{2}{\pi}J_0(ix)
+     \left( \ln\left( \frac{ix}{2} \right)+\gamma \right)
+     -\frac{2}{\pi}
+     \sum_{n=1}^{\infty}\frac{(-1)^n}{(n!)^2}
+     \left( \frac{ix}{2} \right)^{2n}
+     H_n\\
+     &=\frac{2}{\pi}J_0(ix)
+     \left( \ln\left( \frac{x}{2} \right)+i\frac{\pi}{2}+\gamma \right)
+     -\frac{2}{\pi}
+     \sum_{n=1}^{\infty}\frac{(-1)^n}{(n!)^2}
+     \left( \frac{ix}{2} \right)^{2n}H_n
+     \\
+     &=
+     J_0(ix)
+     +\frac{2}{\pi}J_0(ix)
+     \left( \ln\left( \frac{x}{2} \right)+\gamma \right)
+     -\frac{2}{\pi}
+     \sum_{n=1}^{\infty}\frac{1}{(n!)^2}
+     \left( \frac{x}{2} \right)^{2n}H_n
+   }
+ where a suitable branch for $\ln$ is chosen such that $\ln \i=\pi/2 i$.\\
+   From the above derivation in $i)$:
+   \eq{
+   J_0(ix)=\sum_{m=0}^{\infty}\frac{1}{(m!)^2}
+     \left( \frac{x}{2} \right)^{2m}
+   }
+   we have:
+   \eq
+   {
+     K_0(x)&=
+     \sum_{n=1}^{\infty}\frac{1}{(n!)^2}
+     \left( \frac{x}{2} \right)^{2n}H_n
+-J_0(ix)
+     \left( \ln\left( \frac{x}{2} \right)+\gamma \right)\\
+     &=\sum_{n=1}^{\infty}\frac{1}{(n!)^2}
+     \left( \frac{x}{2} \right)^{2n}
+     \left( 
+     H_n-\ln\left( \frac{x}{2} \right)-\gamma 
+     \right)
+   }
+   and indeed the series diverges at $x=0$ due to the $\ln\left( x/2 \right)$ term.
+ \item[iii)]
+   Note:
+   \eq
+   {
+     (J_v(ix))'=iJ_v(ix),\quad(J_v(ix))''=-J_v(ix)
+   }
+   therefore:
+   \eq
+   {
+   &x^2(J_v(ix))''+x(J_v(ix))'-(x^2-v^2)J_v(ix)\\
+   =&(ix)^2J_v(ix)+ixJ_v(ix)+\left( (ix)^2-v^2 \right)J_v(ix)
+   }
+   But this is the Bessel equation in $ix$ of order $v$, and this is by definition 0. Thus $J_v(ix)$ solves:
+   \eq
+   {
+   x^2y''+xy'-(x^2+v^2)y=0
+   }
+   and by linearity $I_v(x)=J_v(ix)e^{-v\pi i/2}$ solves the equation.
+   As for $K_v(x)$, note
+   \eq
+   {
+     iJ_v(ix)
+   }
+   solves the equation by our previous argument, and recall
+   \eq
+   {
+     Y_v(ix)=\frac{J_v(ix)\cos v\pi-J_{-v}(ix)}{\sin(v\pi)}
+   }
+   note each linear part solves the equation by our previous argument, so is $Y_v(ix)$, and is 
+   \eq
+   {
+     K_v(x)=\frac{\pi}{2}e^{v\pi i/2}\left( iJ_v(ix)-Y_v(ix) \right)
+   }
+   This completes the proof.
+  \end{vv286_mp}
+
+\end{vv286}
+\end{document}

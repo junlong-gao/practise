@@ -1,0 +1,119 @@
+\input mla
+\begin{document}
+\titlehm{6}
+\begin{vv286_mp}{1}
+\item[(i)]
+    By Cauchy-Riemann equation:
+    \eq
+    {
+    \pd{u}{x}&=\pd{v}{y}\\
+    \pd{u}{y}&=-\pd{v}{x}
+    } 
+    and this implies:
+    \eq
+    {
+    \dpd{u}{x}&=\spd{v}{x}{y}\\
+    \dpd{u}{y}&=-\spd{v}{x}{y}
+    }
+    thus $u$ is harmonic, a similar procedure shows $v$ is harmonic, 
+    this completes the proof.
+\item[(ii)]
+	One harmonic conjugate:
+	\eq
+	{
+	v=3x^2-3y^2
+	}
+\end{vv286_mp}
+
+\begin{vv286_ms}{2}
+\item[]
+	We use the residue to calculate the integral:
+	\eq
+	{
+	\res_{z=a}f(z)=\lim_{z\to a}\ff{1}{z-b}=\ff{1}{a-b}
+	}
+	Thus by Cauchy Integral formula:
+	\eq
+	{
+	\oint_{\gamma}\ff{1}{(z-a)(z-b)}=2\pi i
+	\ff{1}{a-b}
+	}
+\end{vv286_ms}
+
+\begin{vv286_mp}{3}
+\item[]
+	We consider the function: $f(z)=e^{iz^2}$, following the
+	path given in the question:\\
+	$\Gamma_1$: The path on the real line.\\
+	$\Gamma_R$: The path rotating the sector.\\
+	$\Gamma_2$: The path returning to the origin.\\
+	Then on $\Gamma_R$ we have
+	\eq
+	{
+	|e^{iz^2}|=e^{\Re  iz^2}=e^{-\Im  z^2}=e^{-R^2\sin2\ta}	
+	}
+	where $z=R\cos\ta+iR\sin\ta$. Then using the fact that
+	\eq
+	{
+	\ff{2\ta}{\pi}<\sin\ta
+	}
+	thus the estimate:
+	\eq
+	{
+	|\int_{\Gamma_R}e^{iz^2}|\leq \ff{\pi}{4}\int_{0}^{\pi/4}e^{-R^2\ta\ff{2}{\pi}}R\,d\ta\le C\ff{1}{R}\to0
+	}
+	as $R\to\infty$.\\
+	On $\Gamma_2$ we use the parametrization:
+	$z=(1+i)t$, $t:\ff{\sq{R}}{2}\to 0$, then we have:
+	\eq
+	{
+	\int_{\Gamma_3}f(z)=(1+i)\int_{\ff{\sq2}{2}}^{0}e^{i(2it^2)}\,dt \to-\int_0^{\infty}e^{-2t^2},\,dt=-\ff{\sq{2\pi}}{2}(1+i)
+	}
+	thus we have:
+	\eq
+	{
+	0=\oint_{\Gamma}f(z)=\int_0^{\infty}e^{ix^2}\,dx+0-\frac{\sq{2\pi}}{2}(1+i)\\
+	f(z)=e^{iz^2}=\cos z^2+i\sin z^2
+	}
+	comparing the real and imaginary part we
+	get the desired result.
+\end{vv286_mp}
+
+\begin{vv286_ms}{4}
+\item[]
+	We consider the
+	function:$f(z)=e^{iz}-1/(2iz)$
+	and the path of integral in the question:\\
+	In the inner most semi-circle:
+	\eq
+	{
+	\left|\int_{-C_{\e}}f\right|=\left|\int_{-C_{\e}}\ff{iz+(iz)^2+(iz)^3}{2iz}\,dz\right|=\frac{1}{2}\int_{-C_{\e}}1+|iz|+|o(iz)|
+	\le\frac{\pi\e}{2}\to0
+	}
+	as $\e\to0$.\\
+	And the greater semi-circle gives:
+	\eq
+	{
+	\int_{C_{R}}\frac{e^iz-1}{2iz}\,dz=\int\frac{e^{iz}}{2iz}\,dz-
+	\int\frac{1}{2iz}\,dz
+	=0-\frac{\pi}{2}
+	}
+	since the first integral vanishes due to Jordan's
+	lemma as $R\to\infty$ and the second comes from
+	parametrization:$z=e^{i\ta}$.\\
+	Finally, the total integral of the closed circle is
+	zero, we conclude that:
+	\eq
+	{
+	\oint
+	f(z)=\int_{-\infty}^{\infty}\frac{e^{iz}-1}{2iz}\,dz-\frac{\pi}{2}
+	=0
+	}
+	and 
+	\begin{align*}
+		\frac{e^{ix}-1}{2ix}=\frac{\cos x-1}{x}+\frac{\sin x}{x}
+	\end{align*}
+	where $x\in\R$ and the first term have no
+	contribution to the integration since it's odd.
+\end{vv286_ms}
+\end{document}

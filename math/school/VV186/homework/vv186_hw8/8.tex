@@ -1,0 +1,318 @@
+%lead
+\input my_macros
+\mydoc
+\baselineskip 16pt plus 2pt
+\vv8 November {18}
+%
+
+%problem 1
+\snum1
+\noindent1) $$\sum_{n=1}^{\infty}{2^{2n}3^{3n}\over5^{3n}}=\sum_{n=1}^{\infty}\Big({108\over125}\Big)^n$$
+Now, since it's geometric series with $|q|<1$, it {\bf converges}.
+\medskip
+\noindent2) $$ {n+4\over n^2-3n+1}\cdot n={n^2+4n\over n^2-3n+1}\to 1$$
+So by comparison test $\sum{n+4\over n^2-3n+1}$ and  $\sum{1\over n}$ shares same series behavior. Since  $\sum{1\over n}$ diverges, $\sum{n+4\over n^2-3n+1}$ {\bf diverges}.
+\medskip
+\noindent3) $$ {(n+1)^4\over 3^{(n+1)}}\cdot{3^n\over n^4}={(1+{1\over n})^4\over 3}\to{1\over3}<1$$
+So by ratio test the series {\bf converges}.
+\medskip
+\noindent4) $${2^{n+1}\over (n+1)!}\cdot{n!\over2^n}={2\over n+1}\to 0<1$$
+So by ratio test the series {\bf converges}.
+\medskip
+\noindent5) $${ \root n \of {\left(2\over n\right)^n}}={2\over n}\to 0<1$$
+So by root test the series {\bf converges}.
+\medskip
+\noindent6) $$ {n\over 10n^3-100}\cdot n^2={n^3\over10n^3-100}\to{1\over10}$$
+So by comparison test $\sum{n\over 10n^3-100}$ and  $\sum{1\over n^2}$ shares same series behavior. Since  $\sum{1\over n^2}$ converges, $\sum{n\over 10n^3-100}$ {\bf converges}.
+\bigskip
+%problem 2
+\pnum2
+\noindent i) Given $x-p>0$, we can find $N>0$ such that for all $n>N$, we have
+$$
+\left|{a_{n+1}\over a_n}-p\right|<x-p
+$$
+Then for any $n>N$, we conclude:
+$$
+|a_n|\left|{a_{n+1}\over a_n}-p\right|<|a_n||x-p|\Longrightarrow \left|a_{n+1}-pa_n\right|<|x-p||a_n|
+$$
+By triangle inequality we get
+$$|a_{n+1}|\le\left|a_{n+1}-pa_n\right|+|pa_n|<|xa_n|<x^{n-N+1}|a_N|
+$$
+Take nth root of both side, noticing all terms are positive:
+$$
+{\root n \of{ a_{n}}}<x^{n-N\over n}{\root n \of {a_N}}\le\max(x^{n-N\over n},x)\cdot \max(1,{\root n \of {a_N}})
+$$
+So for sufficiently large $n>0$, we have
+$$
+\sup_{m>n}\root m \of {a_m}\le\max(\lim_{m\to \infty}x^{m-n\over m},x)\cdot \max(1,\lim_{m\to \infty}{\root m \of {a_m}})=x
+$$
+So we conclude 
+$$
+\varlimsup_{n\to\infty}{a_{n+1}\over a_n}<x
+$$
+for any $x>p>0$ (so the equality sign never holds), so $p$ is the least upper bound of $\displaystyle\varlimsup_{n\to\infty}{a_{n+1}\over a_n}$. So $\displaystyle\varlimsup_{n\to\infty}{a_{n+1}\over a_n}\le p$.
+\medskip
+\noindent ii)Given $p-x>0$, we can find $N>0$ such that for all $n>N$, we have
+$$
+\left|{a_{n+1}\over a_n}-p\right|<p-x
+$$
+Then for any $n>N$, we conclude:
+$$
+|a_n|\left|{a_{n+1}\over a_n}-p\right|<|a_n||p-x|\Longrightarrow \left|a_{n+1}-pa_n\right|<|p-x||a_n|
+$$
+Taking off the absolute value we have
+$$a_{n+1}>-|p-x||a_n|+|pa_n|=|xa_n|>x^{n-N+1}|a_N|
+$$
+Take nth root of both side, noticing all terms are positive:
+$$
+{\root n \of{ a_{n}}}>x^{n-N\over n}{\root n \of {a_N}}\le\min(x^{n-N\over n},x)\cdot \min(1,{\root n \of {a_N}})
+$$
+So for sufficiently large $n>0$, we have
+$$
+\inf_{m>n}\root m \of {a_m}\ge\min(\lim_{m\to \infty}x^{m-n\over m},x)\cdot \min(1,\lim_{m\to \infty}{\root m \of {a_m}})=x
+$$
+So we conclude 
+$$
+\varliminf_{n\to\infty}{a_{n+1}\over a_n}>x
+$$
+for any $0<x<p$ (so the equality sign never holds), so $p$ is the greatest lower bound of $\displaystyle\varliminf_{n\to\infty}{a_{n+1}\over a_n}$. So $\displaystyle\varliminf_{n\to\infty}{a_{n+1}\over a_n}\ge p$.
+\smallskip
+By assignment 3 exercise 1,  $\displaystyle\varliminf_{n\to\infty}{a_{n+1}\over a_n}\le\lim_{n\to\infty}{a_{n+1}\over a_n}\le\varlimsup_{n\to\infty}{a_{n+1}\over a_n}$, so the limit exists and equals to  $p$.
+\medskip
+\noindent iii) When $p=0$, we have, for $\forall \varepsilon>0$, $\exists N>0$ such that $\forall n>N$:
+$$
+\left|{a_{n+1}\over a_n}-0\right|<\varepsilon
+$$
+Then by triangle inequality we have 
+$$
+a_{n+1}<\varepsilon a_n<{\varepsilon}^{n-N+1} a_N
+$$
+Take n th root we have
+$$
+{\root n\of {a_n}}<{\varepsilon}^{n-N+1\over n} {\root n\of {a_N}}
+$$
+Let $n\to\infty$ on both sides we have
+$$
+\lim_{n\to\infty}{\root n\of {a_n}}<\varepsilon
+$$
+for arbitrary $\varepsilon>0$. Also, we have $\displaystyle\lim_{n\to\infty}{\root n\of {a_n}}\ge0$, we conclude $\displaystyle\lim_{n\to\infty}{\root n\of {a_n}}=0$
+\smallskip
+When $p=+\infty$, $\forall M>0$, $\forall N>0$, $\exists n>N$ such that:
+$${a_{n+1}\over a_n}>M
+$$
+Then we conclude that
+$$
+a_n\ge M^{n-N}a_N
+$$
+Take nth root we have
+$$
+{\root n\of {a_n}}\ge M^{n-N\over n}{\root n\of {a_N}}
+$$
+Since $M^{n-N\over n}\to M$, ${\root n\of {a_N}}\to 1$ as $n\to \infty$, we can find sufficiently large $n$ such that $M^{n-N\over n}>M/2$, ${\root n\of {a_N}}> 1/2$. This shows that given arbitrary $M'>0$, we just pick a large enough $M>4M'$, then
+$$
+{\root n\of {a_n}}\ge M^{n-N\over n}{\root n\of {a_N}}>M/4>M'
+$$
+This shows that  ${\root n\of {a_n}}$ diverges to infinity. 
+\bigskip
+%problem 3
+\pnum3
+First for ratio test:
+$$
+{2+(-1)^{n+1}\over 2^n}\cdot{2^{n-1}\over 2+(-1)^n}={1\over2}{2+(-1)^{n+1}\over2+(-1)^n}
+$$
+then the $\varlimsup=3/2>1$, $\varliminf=1/6<1$. The test tells us nothing.
+
+Now for root test, we have:
+$$
+{\root n\of {2+(-1)^n\over 2^{n-1}}}={{\root n\of{ 4+2(-1)^n} }\over2}\to {1\over2} <1
+$$
+as $n\to\infty$, so the series converges.
+\bigskip
+%problem 4
+\pnum4
+\noindent i) First partial sum 
+$$
+\sum_{k=0}^n(-1)^m\le1
+$$
+is bounded. Then sequence ${1\over\sqrt{n+1}}$ decrease to 0, so by Leibniz Theorem the series converges.
+
+Also 
+$$
+\sum_{k=0}^{\infty}\left|{(-1)^k\over\sqrt{k+1}}\right|=
+\sum_{k=0}^{\infty}{1\over\sqrt{k+1}}>\sum_{k=0}^{\infty}{1\over k+1}\to\infty
+$$
+So it doesn't absolute converge, thus it is conditionally converge.
+\smallskip
+\noindent ii) Now the Cauchy product:
+$$
+A^2=\sum_{k=0}^{\infty}\sum_{j=0}^k{(-1)^j\over\sqrt{j+1}}{(-1)^{k-j}\over\sqrt{k-j+1}}
+$$
+But $$
+\eqalign{
+|{(-1)^j\over\sqrt{j+1}}{(-1)^{k-j}\over\sqrt{k-j+1}}|
+&=\sum_{j=0}^k{1\over\sqrt{j+1}\sqrt{k-j+1}}\cr
+&\quad\ge
+\sum_{j=0}^k{2\over j+1 + k-j+1}
+={2(k+1)\over k+2}\to 2\not=0
+}$$ so it doesn't converge.
+\bigskip
+%problem 5
+\pnum5
+\noindent i) Since ${1\over \sqrt n}>{1\over n}$ we have
+$$
+{1\over\sqrt n}+{(-1)^n\over n}\ge{1\over\sqrt n}-{1\over n}>0
+$$
+So the summand is alternating its sign.
+\noindent ii) Now, if the series converges, it implies
+$$
+\sum_{n=2}^{\infty}(-1)^n\left({1\over\sqrt n}+{(-1)^n\over n}\right)=\sum_{n=2}^{\infty}{(-1)^n\over\sqrt n}+\sum_{n=2}^{\infty}{1\over n}
+$$
+converges. But by Leibniz Theorem $ \sum_{n=2}^{\infty}{(-1)^n\over\sqrt n}$ converges, this implies $\sum_{n=2}^{\infty}{1\over n}$ converges, which is impossible, so the original series diverges.
+
+This does not contradict Leibniz criterion since the sequence ${1\over\sqrt n}+{(-1)^n\over n}$ is not strictly decreasing. Take, for example, odd number $n$, we have:
+$$\eqalign{
+&{1\over\sqrt{n+1}}+{1\over n+1}\ge{1\over\sqrt n}-{1\over n}\cr
+&\Longleftarrow{n+1+\sqrt{n+1}\over(n+1)\sqrt{n+1}}\ge{n+\sqrt{n}\over(n)\sqrt{n}}\cr
+&\Longleftarrow{1+\sqrt{n+1}\over n+1}\ge{\sqrt{n}-1\over n}\cr
+&\Longleftarrow2n+1\ge{\sqrt n\sqrt{n+1}\over \sqrt{n+1}-\sqrt{n}}\cr
+}
+$$
+And we always have
+$$
+{\sqrt n\sqrt{n+1}\over \sqrt{n+1}-\sqrt{n}}\le{{n+n+1\over 2}\over \sqrt{n+1}-\sqrt{n}}<2n+1
+$$
+Thus for odd $n$, we have
+$$
+{1\over\sqrt{n+1}}+{1\over n+1}\ge{1\over\sqrt n}-{1\over n}
+$$
+which is not decreasing, and Leibniz criterion can't be applied.
+\bigskip
+\pnum6
+\noindent i)
+$$
+{1\over\rho}=\root n \of {n^3\over n^2-5}\to1\Longrightarrow\rho=1
+$$
+and when $\rho=1$ or $\rho=-1$ the terms ${n^3\over n^2-5}\to\infty$ so they both {\bf diverge}.
+\medskip
+\noindent ii)
+$$
+{1\over\rho}={(n+1)^2\over 4^{(n+1)}+3(n+1)}\cdot{4^{n}+3n\over n^2}\to{1\over4}\Longrightarrow \rho=4
+$$
+and when $\rho=4$ or $\rho=-4$ the terms' absolute value $\displaystyle{n^2\over1+{3n\over4^n}}$ doesn't converge to zero, so they both {\bf diverge}.\medskip
+\noindent iii)
+$$
+{1\over\rho}=\root n\of {(\ln n)^2}=\exp\{{{2\over n}\ln\ln n}\}\to1\Longrightarrow \rho=1
+$$
+and when $\rho=1$ or $\rho=-1$   terms' absolute value $(\ln n)^2$ doesn't converge to zero so the series {\bf diverges}.
+\medskip
+\noindent iv) Regard $z^{2n}$ as $(z^2)^n$
+$$
+{1\over\rho'}=\root n\of {n\over 2^{n+1}}={1\over2}\Longrightarrow \rho'=2
+$$
+And since $\rho=\sqrt{\rho'}$, we have $\rho=\sqrt 2$. When $\rho=\sqrt 2$ or $\rho=-\sqrt 2$, the series becomes $\sum (-1)^n {n\over 2}$ and {\bf diverges}.
+\bigskip
+\pnum7
+\noindent i) For sufficiently large n, we have:
+$$
+{1\over \rho}=\left|{\alpha\choose n+1}\Big/{\alpha\choose n}\right|={n-\alpha\over n+1}\to 1\Longrightarrow \rho=1
+$$
+Now, consider 
+$$\eqalign{
+{d\over dx}[(1+x)^{-\alpha}&B_{\alpha}(x)]
+=\sum_{n\ge0}{\alpha \choose n}\left(nx^{n-1}(1+x)^{-\alpha}+(-\alpha)(1+x)^{-\alpha-1}x^n\right)\cr
+&=\sum_{n\ge0}{\alpha \choose n}\left(nx^{n-1}(1+x)^{-\alpha-1}(1+x)+(-\alpha)(1+x)^{-\alpha-1}x^n\right)\cr
+&=(1+x)^{-\alpha-1}\left(\sum_{n\ge0}{\alpha \choose n}\left(nx^{n-1}+nx^{n}+(-\alpha)x^n\right)\right)\cr
+&=(1+x)^{-\alpha-1}\left(\sum_{n\ge0}{\alpha \choose n}nx^{n-1}+
+\sum_{n\ge0}{\alpha \choose n}nx^{n}+
+\sum_{n\ge0}{\alpha \choose n}(-\alpha)x^n\right)\cr
+&=(1+x)^{-\alpha-1}\alpha\left(\sum_{n\ge0}{\alpha-1 \choose n-1}x^{n-1}+
+\sum_{n\ge0}{\alpha-1 \choose n-1}x^{n}+
+\sum_{n\ge0}{\alpha \choose n}(-1)x^n\right)\cr
+&=(1+x)^{-\alpha-1}\alpha\left(\sum_{n\ge0}{\alpha-1 \choose n}x^{n}+
+\sum_{n\ge0}{\alpha-1 \choose n-1}x^{n}-
+\sum_{n\ge0}{\alpha \choose n}x^n\right)\cr
+&=(1+x)^{-\alpha-1}\alpha\left(\sum_{n\ge0}{\alpha-1 \choose n}x^{n}+
+{\alpha-1 \choose n-1}x^{n}-
+\sum_{n\ge0}{\alpha \choose n}x^n\right)\cr
+&=(1+x)^{-\alpha-1}\alpha\left(\sum_{n\ge0}{\alpha \choose n}x^{n}-
+\sum_{n\ge0}{\alpha \choose n}x^n\right)\cr
+&=0
+}
+$$
+So the product is constant, which means $(1+x)^{-\alpha}B_{\alpha}(x)=(1+0)^{-\alpha}B_{\alpha}(0)=1$ for all $|x|<1$, namely
+$$
+(1+x)^{\alpha}=\sum_{n=0}^{\infty}{\alpha \choose n}x^n
+$$
+\medskip
+\noindent ii) Now  for $\alpha\in {\rm I\!N}$, for all integer $j>\alpha$, the product 
+$$
+\alpha(\alpha-1)\cdots(\alpha-(j-1))
+$$
+will turn to zero because for some $k$ in the product such that $k=\alpha\le j-1$, $\alpha-k =0$. Then the sum is finite since ${\alpha \choose j}=0$ when $j>\alpha$
+\medskip
+\noindent iii) Let $\alpha=1/2$ in $B_{\alpha}(x)$ we have
+$$\eqalign{
+\sqrt{x+1}&=B_{1/2}(x)=\sum_{n=0}^{\infty}{1/2 \choose n}x^n\cr
+&=\sum_{n=0}^{\infty}{{1\over 2}({1\over 2}-1)\cdots({1\over 2}-(n-1))\over 2n!}x^n\cr
+&=\sum_{n=0}^{\infty}\left(-{1\over 2}\right)^{n-1}
+{(1\cdot 3\cdot 5\cdots (2n-3))\over 2n!}x^n\cr
+&=\sum_{n=1}^{\infty}\left(-{1\over 2}\right)^{n-1}
+{(1\cdot 2\cdot 3\cdot 4 \cdots (2n-3)(2n-2))\over 2n!2^{n-1}(n-1)!}x^n+1\cr
+&=\sum_{n=1}^{\infty}\left(-{1\over 4}\right)^{n}(-2){(1\cdot 2\cdot 3\cdot 4 \cdots (2n-3)(2n-2))\over (n-1)!(n-1)!}{x^n\over n}+1\cr
+&=1-2\sum_{n=1}^{\infty}{(-1)^n\over 4^n}{2n-2\choose n-1}{x^n\over n}
+}
+$$
+\medskip
+\noindent iv) When $x=-1$,  note that
+$$
+{\alpha \choose n}(-1)^n={(n-1-\alpha)(n-2-\alpha)\cdots (2-\alpha)\cdot (1-\alpha)\cdot(-\alpha)\over n!}>{1\over n}
+$$
+for $\alpha<0$,
+So the sum diverges by comparison test.
+
+As for $\alpha=0$, all summand (except the first one) becomes 0, clearly it converges to 1;
+
+Now, for $k\ge\alpha>k-1\ge0$
+$$\eqalign{
+{\alpha\choose n}=&{\alpha(\alpha-1)\cdots(\alpha-(k-1))(\alpha-k)\cdots(\alpha-(n-1))\over n!}\cr
+&\quad=(-1)^{n-k}{\alpha(\alpha-1)\cdots(\alpha-(k-1))(k-\alpha)\cdots((n-1)-\alpha)\over n!}=(-1)^{n-k}b_n
+}
+$$
+So $b_n>0$, also, the sum deduced to 
+$$
+\sum_{n=0}^{\infty}{\alpha \choose n}(-1)^n=\sum_{n=0}^{\infty}=b_n(-1)^{2n-k}=(-1)^{-k}\sum_{n=0}^{\infty}b_n
+$$
+Now by ratio test:
+$$
+b_{n+1}/b_n={n-\alpha\over n+1}\le1
+$$ for sufficiently large $n$, so the series converges.
+\medskip
+\noindent v) Note that 
+$$
+{\alpha \choose n}={n-\alpha-1\choose n}(-1)^n
+$$
+Since $n-\alpha-1> n$ when $\alpha\le -1$ implies ${n-\alpha-1\choose n}>0$, so we have an alternating sum and by Leibiniz test we find that
+$$
+{n+1-\alpha-1\choose n+1}\Big/{n-\alpha-1\choose n}=1-{\alpha+1\over n+1}\ge 1\Longrightarrow b_{n+1}\ge  b_n
+$$
+So by comparison test the series diverges.
+\medskip
+\noindent vi) Let $b_n:={\alpha \choose n}$. First we notice that
+$$
+b_{n+1}/b_n={\alpha-n\over n+1}<0
+$$
+for $n>N_0>\alpha$, so the series is alternating. Also noticing that:
+$$
+|b_{n+1}|/|b_n|={n-\alpha\over n+1}<1
+$$
+So $b_n$ is decreasing for $n>N_0$.
+
+Now consider $f(x)=1-x-e^{-x}$, $f'(x)=-1+e^{-x}<0$ for $x>0$, so we have $f(x)<f(0)=0$, that is,  $1-x<e^{-x}$ for $x>0$. In previous proof we already have $|b_{n+1}|/|b_n|=(\alpha-n)/ (n+1)=1-{(\alpha+1)/(n+1)}$, so 
+$$
+0\le\left|{b_n\over b_{N_0}}\right|=\left|{b_n\over b_{n-1}}\right|\left|{b_{n-1}\over b_{n-2}}\right|\cdots\left|{b_{N_0+1}\over b_{N_0}}\right|\le
+\exp\{-{\alpha+1\over n}-{\alpha+1\over n-1}+\cdots-{\alpha+1\over N_0+1}\}\to 0
+$$
+Since the right hand side is negative harmonic series except finite many terms and it must diverges to $-\infty$.
+So by Leibiniz test the series converges.
+%end
+\end

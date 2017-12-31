@@ -1,0 +1,100 @@
+\documentclass{article}
+\input mla
+\begin{document}
+\titlehm{1}
+\begin{vv286_ms}{1}
+\item[]
+We consider the difference:
+\eq
+{
+d=s_1-s
+}
+the second derivative:
+\eq
+{
+\ddot{d}=\ddot{s_1}-\ddot{s}=-GM(\ff{1}{s_1}+\ff{1}{s})(\ff{1}{s_1}-\ff{1}{s})=GM(\ff{1}{s_1}+\ff{1}{s})\ff{d}{s_1s}>0\numberthis{1}
+}
+provided that $s$ and $s_1$ are positive solution on the interval and
+$d>0$.
+And $d(t)>0$ near the neighborhood of  $t_0$, this can be shown by
+noting that
+\eq
+{
+\dot{d}(t_0)=\dot{s_1}(t_0)-\dot{s}(t_0)>0
+}
+and $\dot{d}$ itself is continuous (since differentiable), the intermediate value theorem applies that $\dot{d}>0$ near $t_0$, thus $d>d(t_0)=0$ near $t_0$. \\
+Combing  \eqref{1} we conclude that $\dot{d}(t)>\dot{d}(t_0)>0$ on the interval and thus $\dot{s_1}>\dot{s}$ for all $t$. Also, since $\dot{d}>0$, we conclude that $d>d(t_0)=0$ thereby $s_1>s$ for all $t$.\\
+Furthermore, from \eqref{1} we also notice that $\dot{d}$ is monotonically increasing, yet by the differential equation we see that 
+both $s_1$ and $s$ is decreasing. Also $\dot{s_1}=2/3\a t^{-1/3}\to 0$, then given $t^*$, pick $t^{**}>t^*$ large enough such that $\dot{s_1}(t^{**})<\dot{d}(t^*)$, then $\dot{s}(t^{**})=\dot{s_1}(t^{**})-\dot{d}(t^{**})<\dot{s_1}(t^{**})-\dot{d}(t^{*})<0$ since $\dot{d}(t^{**})>\dot{d}(t^{*})$. This implies $\dot{s}$ has one zero and $s$ is bounded (above) since the sign of its derivative around the zero. \\
+This establishes that $s$ is a return trajectory. 
+\end{vv286_ms}
+
+\begin{vv286_ms}{2}
+1):b 2):e 3):d 4):c 5):f 6):a
+\end{vv286_ms}
+
+\begin{vv286_ms}{3}
+{
+See attachment (hand drawn)\\
+a:)
+No explicit solution\\
+b:)
+\eq
+{
+y+\ff{1}{3}y^3=x+C\quad C\in\R
+}
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{4}
+We consider the carbon-dating method:
+\eq
+{
+-\lam(t-t_0)=\ln\ff{N(t)}{N(t_0)}
+}
+where $\lam$ is the constant for carbon and the duration $t-t_0$ is of
+the primary interest:
+\eq
+{
+T=t-t_0=\ff{1}{\lam}\ln\ff{N(t_0)}{N(t)}=
+}
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{5}
+To be discussed
+\end{vv286_ms}
+
+
+\begin{vv286_ms}{6}
+The general solution to the ODE is:
+\eq
+{
+y=\ff{1}{1-cx},\, C\ge0\quad\hbox{ or }\quad y=0\numberthis{3}
+}
+thus, for a):
+\[
+y=\ff{2}{2+3x}
+\]
+for b):
+\[
+y=\ff{1}{1+2x}
+\]
+for c): No solution\\
+for d): Notice infinitive many solution in \eqref{3} solves the IVP. In
+particular:
+\[
+y=1
+\]
+\end{vv286_ms}
+
+\begin{vv286_ms}{7}
+{
+for a):
+\[
+y=Ce^{x+\ff{1}{2}x^2}-1\quad C>0\quad\hbox{ or } y=-1
+\]
+for b): No solution.
+\end{vv286_ms}
+
+\end{document}
