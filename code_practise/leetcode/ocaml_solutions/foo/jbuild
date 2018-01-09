@@ -2,9 +2,9 @@
 
 (library
    (
-      (name lc)
+      (name foo)
       (library_flags -linkall)
-      (libraries (core base))
+      (libraries (core base core_bench))
       (preprocess (pps (ppx_jane)))
    )
 )

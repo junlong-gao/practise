@@ -1,0 +1,14 @@
+(executable
+ ((name test_runner)
+  (modules (test_runner))
+  (libraries (foo
+              ppx_inline_test.runner.lib ppx_expect.evaluator ppx_inline_test.runtime-lib))))
+
+(alias
+ ((name    runtest)
+  (deps    (test_runner.exe))
+  (action  (bash "
+./test_runner.exe inline-test-runner foo -verbose
+           "))
+  )
+)

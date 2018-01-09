@@ -1,0 +1,18 @@
+(jbuild_version 1)
+
+(executable
+ (
+    (name main)
+    (libraries (foo core base core_bench))
+    (preprocess (pps (ppx_jane)))
+ )
+)
+
+
+(install
+ (
+  (section bin)
+  (package foo)
+  (files ((main.exe as lc)))
+ )
+)

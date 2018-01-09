@@ -1,5 +1,61 @@
 open Core
 
+module Fib = struct
+let fib_helper n =
+ (* note an array is created outside of the rec call scope *)
+  let dp = Array.create (n + 1) (-1) in
+  let rec fib n =
+    (* dp table lookup *)
+    match dp.(n) with
+    (* is it kind of awkward that the actual induction logic
+     * is in the indentation? *)
+    | -1 -> let ret = match n with
+                      | 0 -> 0
+                      | 1 -> 1
+                      | _ -> (fib (n - 1)) + (fib (n-2))
+            (* dp table fillin *)
+            in dp.(n) <- ret; ret
+    | _  -> dp.(n)
+  in fib n
+
+let%expect_test "fib dp" =
+(* begin test cases *)
+List.iter
+  ~f:(fun x -> print_int (fib_helper x); print_endline "")
+  [0;1;2;3;4;5;];
+[%expect {|
+  0
+  1
+  1
+  2
+  3
+  5
+|}]
+end
+
+module Fib_no_dp = struct
+let rec fib n =
+  match n with
+  | 0 -> 0
+  | 1 -> 1
+  | _ -> (fib (n - 1)) + (fib (n-2))
+
+let%expect_test "fib no dp" =
+(* begin test cases *)
+List.iter
+  ~f:(fun x -> print_int (fib x); print_endline "")
+  [0;1;2;3;4;5;];
+[%expect {|
+  0
+  1
+  1
+  2
+  3
+  5
+|}]
+end
+open Core
+
 let printer list_of_a print_fun=
   ignore(print_string "[");
   let rec intern_p l =
