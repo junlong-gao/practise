@@ -68,4 +68,63 @@ public:
 5
 4
 10
-*/
+
+Suboptimial structure:
+Because the round trip are two path going down and right (law of symmetry)
+if we draw an anti-diag, it must touch each of the path exaclty once.
+***********************************************************************************
+* Therefore, for each anti-diag, we specify the position of the two interactions, *
+* then we uniquely identify a whole round trip.                                   *
+***********************************************************************************
+
+The recursive structure looks like this: to solve point P, Q at the longer
+diag, we reduce it to the pairs on the previous diag, with the following
+4 subproblems:
+(P up, Q up)
+(P up, Q left)
+(P left, Q up)
+(P left, Q left)
+if none of them can construct a valid P Q pair (all four points are not reachable),
+then pair P Q is considered not reachable. Use -1 to mark not reachable.
+Of course if P or Q is -1, the pair is also not reachable.
+ +--------------------------------------------------/-----------------                   
+ |                                                /-               -/|                   
+ |                                        P up  /-               -/  |                   
+ |                                            /|               -/    |                   
+ |                                          /- |             -/      |                   
+ |                                        /-   |           -/        |                   
+ |                                      /-     |         -/          |                   
+ |                                    /-       |       -/            |                   
+ |                                  /-         |     -/              |                   
+ |                                /-           |   -/                |                   
+ |                      P left  /-             | -/                  |                   
+ |                            -----------------|/                    |                   
+ |                          /-               -/ P                    |                   
+ |                   Q up /-               -/                        |                   
+ |                      /|               -/                          |                   
+ |                    /- |             -/                            |                   
+ |                  /-   |           -/                              |                   
+ |                /-     |         -/                                |                   
+ |              /-       |       -/                                  |                   
+ |            /-         |     -/                                    |                   
+ |          /-           |   -/                                      |                   
+ |        /-             | -/                                        |                   
+  Q left/----------------|/                                          |                   
+ |    /-               -/ Q                                          |                   
+ |  /-               -/                                              |                   
+ |/-               -/                                                |                   
+ -               -/                                                  |                   
+ |             -/                                                    |                   
+ |           -/                                                      |                   
+ |         -/                                                        |                   
+ |       -/                                                          |                   
+ |     -/                                                            |                   
+ |   -/                                                              |                   
+ | -/                                                                |                   
+ -/------------------------------------------------------------------+  
+ 
+ Implementation considerations:
+ P and Q are uniquely identified by their x coordinate given the diag.
+ When diag is on the lower part of the matrix, we must do a coordinate transformation
+ to get the correct grid[P_x][P_y] and grid[Q_x][Q_y].
+ Also, note the nature symmetricity bettween the solution dp[l][P][Q] and dp[l][Q][P].
