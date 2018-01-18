@@ -14,6 +14,7 @@ int main(int argc, char* argv[]){
     //concurrency::demo();
     //concurrency::test_rwlock();
     //concurrency::test_bb();
+    /*
     stack4::demo();
     stack5dc1::demo();
     stack6dec1::demo();
@@ -21,6 +22,7 @@ int main(int argc, char* argv[]){
     Tricks::demo_2_2();
     Tricks::demo_2_3();
     Tricks::s5::demo();
+    */
 
 
     return 0;

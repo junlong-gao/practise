@@ -2,6 +2,11 @@
 #define TRICKS_H_
 #include <iostream>
 namespace Tricks{
+   /*
+    * "How do you pronounce SFINE? S-FINE or sfine? I prefer the first as
+    * it sounds like latin, makes you look more educated. Unlike the latter,
+    * sounds like you are spitting or something."
+    */
 /*
 2.1
 Compile time assertions
@@ -141,7 +146,8 @@ and function overloading
         }
     };
     /*
-    the following partial specialization is not going to work:
+    the following partial specialization is not going to work as you cannot
+    partially specialize functions:
     template <class U>
     Widget* Create<Widget, U>(const U& arg){
         return new Widget(arg, -1);
@@ -165,7 +171,7 @@ and function overloading
     T* Create(const U& arg, Type2Type<T>){
         return new T(arg);
     }
-    // "fake" partial specializaton for widget:
+    // "fake" partial specialization for widget:
     template <class U>
     Widget* Create(const U& arg, Type2Type<Widget>){
         return new Widget(arg, -1);
@@ -177,7 +183,7 @@ and function overloading
     }
     }
     /*
-    type selection 
+    type selection
     the following type selection suggested in mcppd 2.6 selects T
     if flag is true, U otherwise
     */
@@ -211,6 +217,38 @@ and function overloading
         much as you would make runtime decisions based on values"
         */
     }
+}
+
+namespace YouShouldNotBeHere {
+   namespace EnableIf {
+      template<bool B, class T= void>
+      struct enable_if {};
+
+      template<class T>
+      struct enable_if<true, T> { using type = T; };
+
+      template<bool B, class T = void>
+      using enable_if_t = typename enable_if<B, T>::type;
+
+      template <typename T>
+      struct is_int { enum { value = false }; };
+
+      template <>
+      struct is_int<int> { enum { value = true }; };
+
+      template <typename W, typename T = enable_if_t<is_int<W>::value, W>>
+      void say() {
+         std::cout << "hello" << std::endl;
+      }
+
+      void demo() {
+         say<int>();
+         say<float>(); // this will not compile as the enable_if selection
+         //failure
+         //Tricks.hpp:240:12: note: candidate template ignored: requirement 'is_int<float>::value' was not satisfied [with W = float]
+         //      void say() {
+      }
+   }
 }
 
 

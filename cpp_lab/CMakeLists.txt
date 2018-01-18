@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(cpp_lab)
 enable_testing()
-set(CMAKE_CXX_COMPILER "g++-8")
+set(CMAKE_CXX_COMPILER "clang++")
 
 include_directories(include)
 

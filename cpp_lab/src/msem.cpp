@@ -244,6 +244,9 @@ namespace msem {
         cout << endl << " 1 move" << endl << endl;
 
         cout << endl << "---> push back with obj but use move" << endl;
+        /*
+         * warning: moving a temporary object prevents copy elision [-Wpessimizing-move]
+         */
         better_foos.push_back(move(Foo("foo10")));
         cout << endl << " 1 move!" << endl;
         /****/
