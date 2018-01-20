@@ -38,6 +38,7 @@ Therefore, the magic is to use dp[j][delta] directly:
 dp[i][delta] += dp[j][delta] + 1;
 The complete implementation:
 */
+  using ll = long long;
 
     int numberOfArithmeticSlices(vector<int>& A) {
       if (A.size() < 3) {
@@ -81,6 +82,7 @@ the contirbution is either the arithmetic seq ... A[k] ... A[j] (in dp[j][k]), o
 
 Complete implementation.
 */
+  using ll = long long;
 
     int numberOfArithmeticSlices(vector<int>& A) {
       if (A.size() < 3) {
