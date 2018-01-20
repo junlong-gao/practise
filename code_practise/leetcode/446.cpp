@@ -17,13 +17,14 @@ A[i] - A[j] = delta.
 then the recursion is simple: dp[i][delta] = \sum_{0<= j < i && A[i] - A[j] = delta} (dp[j][delta] + 1) 
 note each j contribute 1 + dp[j][delta], as (i, j) is a valid form in the new def of subproblem.
 
-this dp[i][delta] contains more than we need, but we know when looking at subproblem dp[i][delta], all 
-dp[j][delta] where 0 <= j < i && A[i] - A[j] = delta consititute to our final solution (glue slice end at j
-with difference delta with i as A[i] - A[j] = delta). In other words we just need to strip off the +1 from each j term.
+this def of dp[i][delta] contains more than we need, but we know when looking at the subproblem dp[i][delta], all 
+dp[j][delta] where 0 <= j < i && A[i] - A[j] = delta consititute to our final solution (just glue slice end at j
+with difference delta onto A[i] as A[i] - A[j] = delta). In other words we just need to strip off the +1 from each j term.
 
 How to compute? the # of delta can be huge (O(N^2)). Note, we don't need ALL dp[i][delta], 
-we just need # of arithmetic slices ended in A[i] for EACH i. Thus we calculate for each i, all the difference
-that COULD APPEAR BEFORE i:
+we just need # of arithmetic slices ended in A[i] for EACH i. Thus we calculate for each i, only consider all 
+the difference that COULD APPEAR BEFORE i:
+
 for each i:
   for all j < i:
      delta = A[i] - A[j],
@@ -38,6 +39,7 @@ Therefore, the magic is to use dp[j][delta] directly:
 dp[i][delta] += dp[j][delta] + 1;
 The complete implementation:
 */
+
   using ll = long long;
 
     int numberOfArithmeticSlices(vector<int>& A) {
@@ -66,10 +68,11 @@ directly, in fact, count is really a by-product from the computation:NONE of the
 it seems to depend on all entires dp[j][delta] to be calculated, for all j < i. In truth, dp[j][delta] is either
    2.1. calculated
    2.2. never been calculated. But the fact it is never calculated means none of the j < i can find a k < j such that
-   A[j] - A[k] = delta. So it is impossible to have an arithmetic sequence end in i with delta. So never been calculated
+   A[j] - A[k] = delta. So it is impossible to have an arithmetic sequence end in j with delta, and the 
+   contribution from j to i is 0 + 1 (you still have the pair (j, i) though). So never been calculated
    automatically means dp[j][delta]'s contribution is 0. This is a new techinique.
 
-Despite the simplicity and novelty, this solution MLE due to too many hashtable.
+Despite the simplicity and novelty, this solution MLE due to too many hashtables.
 
 Take 2:
 recall we need to add state to dp[i] = # of arithmetic slices ended in A[i],
