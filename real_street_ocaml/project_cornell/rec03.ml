@@ -24,3 +24,12 @@ let special l =
   match List.nth l 5 with
   | Some v -> v
   | None -> 0
+
+let desort l =
+  List.sort ~cmp:(fun l r -> r - l) l
+
+let last l =
+  List.hd (List.rev l)
+
+let anyzero l =
+  List.length (List.filter l ~f:(fun x -> x = 0)) > 0
