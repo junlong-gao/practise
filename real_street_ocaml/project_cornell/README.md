@@ -16,3 +16,9 @@ session. Resist that temptation. The "stale code" that was loaded from an
 earlier #use directive in the same session can cause surprising things to
 happen—surprising when you're first learning the language, anyway. So always
 exit the toplevel before re-using a file.
+
+Build and Run Tests:
+Take a look at sum.ml and sum_test.ml
+```
+ocamlbuild -package oUnit sum_test.byte
+```
