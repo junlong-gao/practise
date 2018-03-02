@@ -9,5 +9,6 @@ function lcs() {
    lc show $1 -g;
    mv $1.*.cpp $1.cpp;
    echo "\n\n/*\nTESTS\n\n*/" >> $1.cpp
+   git add $1.cpp
 }
 
