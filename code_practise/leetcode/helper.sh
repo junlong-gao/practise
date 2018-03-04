@@ -6,9 +6,13 @@ function lct() {
 
 function lcs() {
    rm -f $1.*.cpp;
-   lc show $1 -g;
+   lc show $1 -g -l cpp -x;
    mv $1.*.cpp $1.cpp;
    echo "\n\n/*\nTESTS\n\n*/" >> $1.cpp
    git add $1.cpp
+}
+
+function lcsubmit() {
+	leetcode submit $1.cpp
 }
 

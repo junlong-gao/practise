@@ -6,49 +6,38 @@
   ✔ Your runtime beats 11.02 % of cpp submissions
  */
 class Solution {
-    unordered_map<string, int> s;
+    unordered_map<string, int> bag;
     vector<string> tokens;
-    void formula(int start, int end, int count) {
-       int i = start, last = i;
-       while (i < end) {
-          //cout << tokens[i] << endl;
-          if (tokens[i] == "(") {
-             int newcount = count;
-             int compondEnd = i;
-             int match = 0;     // <------- remember to match the outmost ")"
-             while (i < end) {  // <------- this can be faster using single scan
-                if (tokens[i] == "(") {
-                   match++;
-                } else if (tokens[i] == ")") {
-                   match--;
-                }
+    vector<int> semanticStack;
+    int idx = 0;
 
-                if (match == 0) {
-                   break;
-                }
+    void match() {
+       idx--;
+    }
 
-                i++;
-                compondEnd++;
-             }
-
-             if (i + 1 < end && std::isdigit(tokens[i+1][0])) {
-                newcount *= std::stoi(tokens[i+1]);
-                i++;
-             }
-
-             formula(last + 1, compondEnd, newcount);
-          } else {
-             int newcount = count;
-             if (i + 1 < end && std::isdigit(tokens[i+1][0])) {
-                newcount *= std::stoi(tokens[i+1]);
-                i++;
-             }
-
-             s[tokens[last]] += newcount;
+    void formula() {
+       idx = tokens.size() - 1;
+       semanticStack.push_back(1);
+       while (idx >= 0) {
+          if (tokens[idx] == "(") {
+             semanticStack.pop_back();
+             match();
+             continue;
           }
 
-          i++;
-          last = i;
+          int newcount = semanticStack.back();
+          if (std::isdigit(tokens[idx][0])) {
+             newcount *= std::stoi(tokens[idx]);
+             match();
+          }
+
+          if (tokens[idx] == ")") {
+             semanticStack.push_back(newcount);
+             match();
+          } else {
+             bag[tokens[idx]] += newcount;
+             match();
+          }
        }
     }
 
@@ -79,8 +68,8 @@ public:
           }
        }
 
-       formula(0, tokens.size(), 1);
-       map<string, int> output(s.begin(), s.end());
+       formula();
+       map<string, int> output(bag.begin(), bag.end());
        string ret;
        for (const auto &pr : output) {
           ret += pr.first;
@@ -92,10 +81,6 @@ public:
        return ret;
     }
 };
-
-/*
- *
-*/
 
 /*
 TESTS
