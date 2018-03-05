@@ -5,7 +5,7 @@ function lct() {
 }
 
 function lctl() {
-   lc test $1.cpp -t "$(sed -n '/TESTS/,$p' $1.cpp | sed '1d;$d')" --local ;
+   lc test $1.cpp --local -t "$(sed -n '/TESTS/,$p' $1.cpp | sed '1d;$d')" ;
 }
 
 function lcs() {
@@ -16,7 +16,7 @@ function lcs() {
    git add $1.cpp
 }
 
-function lcsubmit() {
+function lcg() {
 	leetcode submit $1.cpp
 }
 

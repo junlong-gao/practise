@@ -43,17 +43,48 @@
  * After the rain, water is trapped between the blocks. The total volume of
  * water trapped is 4.
  *
- */
-/*
  * Digestion:
+ * There is a nice intuition behind the problem: the wooden bucket principle:
  * For every cell, the water level it can trap = the minimal level of a the
  * highest cell of each path it can go to the boundary.
- * We maintain a boundary, starting from the original boundary, and use BFS
- * to iteratively update new inner cell's trapped water. Every time we pick the
- * minimal height cell. And we propagate the highest cell information into the
- * maintained boundary.
  *
- * Think single source shortest path.
+ * It is very difficult in the normal direction: for every cell, find all
+ * the path it can go to the boundary, and for each of the path track the max
+ * height, and finally take a minimal. This is not efficient and difficult
+ * to implement.
+ *
+ * Think in the opposite direction: if there is a boundary (A, B, M, C) where
+ * each cell tracks the minimal of the highest height it can reach to the
+ * external boundary (not crossing inner), what can be said about the water
+ * trapped internally? We are interested in the cell of the MINIMAL height in
+ * this boundary group (M). Because the inner cells adjacent to it can at most
+ * hold that height of water (if it is lower than that height). Think the wood
+ * bucket principle. Now after we have tracked the new inner cells, we use them
+ * as the new boundary (N_1, N_2) and discard the old one (M). Of course, their
+ * heights have to be adjusted (recall the cell on the boundary tracks the
+ * minimal of the highest height it can reach to the external boundary). For
+ * each neighbour, say N_1, the way it can reach external boundary without
+ * crossing inner must pass the original boundary cells B and M. So we need to  <------- This is a key argument in Dijkstra's SSSP as well
+ * update
+ *
+ *    A B E
+ *    M N_1
+ *  C N_2
+ *  D
+ *
+ *     d[N_1] = min(max (all path from N_1 to M to external),
+ *                  max (all path from N_1 to B to external)).
+ *            = min(max (h[N_1], d[M]), max (h[N_1], d[B]))
+ *            = max(h[N_1], d[M]) as d[M] <= d[B] implies max (x, d[M]) <= max (x, d[B])
+ *
+ * Therefore, we maintain a boundary, starting from the original boundary, and
+ * use BFS to iteratively update new inner cell's trapped water.
+ *  1). Every time we pick the minimal height cell and use it to update its
+ *      neighbours, calculate the water trapped using wood bucket principle.
+ *  2). And we propagate the highest cell information into the maintained
+ *      boundary.
+ *
+ * The idea of boundary is a recurring theme in Prim's MST and Dijkstra's SSSP.
  */
 class Solution {
    vector<vector<int>> g;
