@@ -1,8 +1,8 @@
 /*
- * > leetcode submit 668.cpp
- *   ✔ Accepted
- *     69/69 cases passed (58 ms)
- *     Your runtime beats 4.64 % of cpp submissions
+   > lcg 668
+  ✔ Accepted
+  ✔ 69/69 cases passed (30 ms)
+    Your runtime beats 15.71 % of cpp submissions
  *
  * [668] Kth Smallest Number in Multiplication Table
  *
@@ -72,10 +72,12 @@
  *
  * The 6-th smallest number is 6 (1, 2, 2, 3, 4, 6).
  * n * m + 1 = 7:
- * 
- * value: 1, 2, 2, 3, 4, 5, 6, 7
- * count: 1, 3, 3, 4, 5, 5, 6, 6
- * rank : 1, 2, 3, 4, 5, X, 6, X
+ *
+ * k = 5
+ * value:    1, 2, 2, 3, 4, 5, 6, 7
+ * count:    1, 3, 3, 4, 5, 5, 6, 6
+ * cnt >= k: f, f, f, f, t, t, t, t
+ * rank :    1, 2, 3, 4, 5, X, 6, X
  *
  * The first column list the search space (not necessarily the values in
  * the table)
@@ -86,55 +88,65 @@
  * Given rank k, we wish to find the first value in range [1, m*n+1)
  * so that count(val) greater or equal to k.
  *
- * Recall how stl lower_bound, upper_bound works:
- * lower_bound: given a sorted range s and a binary comparator c, return the first
- * element e so that c(e, target) is false.
- * upper_bound: given a sorted range s and a binary comparator c, return the first
- * element e so that c(target, e) is true.
- * Example:
- *  std::vector<int> v(myints,myints+8);           // 10 20 30 30 20 10 10 20
+ * This goes into a deep discussion of binary search of two variants:
+ * 1) find the last value to be true
+ * 2) find the first value to be true
+ *
+ * variant       1)                            2)
+ * search
+ * range:     [lo, hi)                      (lo, hi]
 
-    std::sort (v.begin(), v.end());                // 10 10 10 20 20 20 30 30
-
-    std::vector<int>::iterator low,up;
-    low=std::lower_bound (v.begin(), v.end(), 20); //          ^
-    up= std::upper_bound (v.begin(), v.end(), 20); //                   ^
-
-    Thus for this problem we use the lower_bound.
-
-    Key idea:
-    1) How to define the comparator? Comparator should behave as if
-       it is
-       a) index into the range,
-       b) return the comparison result.
-    2) How to implement your own lower_bound and upper_bound?
+ * final
+ * condition:               hi - lo <= 1
+ *
+ * assume
+ * pattern:     t t f f                     f f t t
+ *
+ * reduce:    if check(mid)               if check(mid)
+ *              lo = mid                     hi = mid
+ *            else                        else
+ *              hi = mid                     lo = mid
+ *
+ * example
+ * check for   check(mid):                check(mid):
+ * searching   target >= val[mid]         val[mid] >= target
+ * value
+ *
+ * The only material difference is to find the first or the last,
+ * in this problem it requires variant 2)
  */
 
-using ull = unsigned long long;
-int n, m, k;
-
-bool count(ull x) {
-   int t = 0;
-   for (int i = 1; i <= m; i++) {
-      t += std::min((ull)(x / i), (ull)n);
-   }
-   return t < k;
-}
-
-struct nit {
-   bool operator<(const nit& rhs) const {
-      //cout << (ull)this << endl;
-      return count((ull)this);
-   }
-};
 
 class Solution {
+   int n, m, k;
+
+   bool count(int x) {
+      int t = 0;
+      for (int i = 1; i <= m; i++) {
+         t += std::min(x / i, n);
+      }
+
+      return t >= k;
+   }
+
 public:
     int findKthNumber(int mm, int nn, int kk) {
        m = mm, n = nn, k = kk;
-       ull ret = (ull)lower_bound((nit*)1, (nit*)(m * n + 1), nit());
+       if (n < m) {
+          std::swap(n, m);
+       }
 
-       return ret;
+       int lo = 0, hi = n * m; // (lo, hi]
+       while (hi - lo > 1) {
+          int mid = lo + (hi - lo) / 2;
+          if (count(mid)) {
+             hi = mid;
+          } else {
+             lo = mid;
+          }
+       }
+
+       return hi;
     }
 };
 
