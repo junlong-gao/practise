@@ -20,3 +20,7 @@ function lcg() {
 	leetcode submit $1.cpp
 }
 
+function lcget() {
+   leetcode show -q Dh
+}
+
