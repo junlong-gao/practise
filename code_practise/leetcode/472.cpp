@@ -1,7 +1,7 @@
 /*
   ✔ Accepted
-  ✔ 44/44 cases passed (649 ms)
-  ✔ Your runtime beats 7.31 % of cpp submissions
+  ✔ 44/44 cases passed (390 ms)
+  ✔ Your runtime beats 43.83 % of cpp submissions
  *
  */
 /*
@@ -84,7 +84,8 @@ class Solution {
       bool isWordF(const string &s) {
          return isWordHelper(s, 0);
       }
-   } root, dp;
+   } root;
+   unordered_set<string> dp; // XXX <---- faster
 
    // a word is concat if there exists at least 2 words in the set
    // such that it is the concat:
@@ -93,18 +94,15 @@ class Solution {
    //       else if remain isConcat     -> true
    //            else                   -> false
    bool isConcat(const string &s) {
-      //cout << "isConcat " << s << endl;
-      if (dp.isWordF(s)) return true;
+      if (dp.count(s)) return true;
 
       trie *walker = &root;
       int idx = 0;
       while (walker != nullptr && idx <= s.size()) { // XXX two constraint
-         //cout << "\tChecking " << s.substr(0, idx) << endl;
          if (walker->isWord && idx < s.size()) {
             string remain = s.substr(idx, s.size() - idx);
-            //cout << "\tremain " << remain << endl;
             if (root.isWordF(remain) || isConcat(remain)) {
-               dp.add(s);
+               dp.insert(s);
                return true;
             }
          }
