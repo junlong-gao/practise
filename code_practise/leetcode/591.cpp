@@ -107,6 +107,26 @@
  * '<','>','/','!','[',']' and ' '.
  *
  *
+ * Digestion:
+ *    tag          -> tagheader tagcontent tagfooter
+ *
+ *    tagheader    -> <tagname>
+ *
+ *    tagfooter    -> </tagname>
+ *
+ *    tagcontent   -> tag     tagcontent
+ *                 |  cdata   tagcontent
+ *                 |  literal tagcontent
+ *                 |  epslion
+ *
+ *    cdata        -> <![CDATA[cdatacontent]]>
+ *
+ *    cdatacontent -> alphabet seq with out ]]>
+ *
+ *    literal      -> alphabet seq without >
+ *
+ *    tagname      -> upper case seq of len [1, 9]
+ *
  */
 class Solution {
     string code;
