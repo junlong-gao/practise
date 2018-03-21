@@ -17,7 +17,7 @@ function lcs() {
 }
 
 function lcg() {
-	leetcode submit $1.cpp
+   echo  "leetcode submit $1.cpp"
 }
 
 function lcget() {
