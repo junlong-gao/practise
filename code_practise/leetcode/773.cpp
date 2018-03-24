@@ -1,17 +1,17 @@
 /*
- * > lc submit 773.cpp
-    ✔ Accepted
-    ✔ 32/32 cases passed (10 ms)
- */
-/*
+ * leetcode submit 773.cpp
+ *   ✔ Accepted
+ *   ✔ 32/32 cases passed (6 ms)
+ *   ✔ Your runtime beats 82.95 % of cpp submissions
+ *
  * [787] Sliding Puzzle
  *
  * https://leetcode.com/problems/sliding-puzzle/description/
  *
  * algorithms
- * Hard (47.08%)
- * Total Accepted:    2.2K
- * Total Submissions: 4.6K
+ * Hard (47.15%)
+ * Total Accepted:    2.4K
+ * Total Submissions: 5K
  * Testcase Example:  '[[1,2,3],[4,0,5]]'
  *
  * On a 2x3 board, there are 5 tiles represented by the integers 1 through 5,
@@ -65,16 +65,12 @@
  * board will be a 2 x 3 array as described above.
  * board[i][j] will be a permutation of [0, 1, 2, 3, 4, 5].
  * 
+ * [0 1 2
+ *  3 4 5]
  */
 class Solution {
-   int dx[4] = {0, 1, 0, -1};
-   int dy[4] = {1, 0, -1, 0};
-
-   unordered_set<string> visited;
-
-   const string t = "123450";
-
-   const vector<vector<int>> stable {
+   const string target = "123450";
+   const vector<vector<int>> next = {
       {-1, -1, 1, 3},
       {0, -1, 2, 4},
       {1, -1, -1, 5},
@@ -82,65 +78,48 @@ class Solution {
       {3, 1, 5, -1},
       {4, 2, -1, -1}
    };
-
-   struct state {
-      int zero;
-      int d;
-      string b;
-   };
 public:
     int slidingPuzzle(vector<vector<int>>& board) {
-        deque<state> q;
-        string cur = [&] {
-            string next;
-            for (int k = 0; k < 3; ++k) {
-               next += board[0][k] + '0';
-            }
+       unordered_map<string, int> g;
+       string init;
+       int zero = 0;
+       for (int i = 0; i < 2; ++i) { for (int j = 0; j < 3; ++j) {
+          init += board[i][j] + '0';
+          if (board[i][j] == 0) {
+             zero = i * 3 + j;
+          }
+       }}
 
-            for (int k = 0; k < 3; ++k) {
-               next += board[1][k] + '0';
-            }
-            return next;
-        } ();
-        int z = 0;
-        for (int i = 0; i < 6; ++i) {
-           if (cur[i] == '0') {
-              z = i;
-              break;
-           }
-        }
-        q.push_back({z, 0, cur});
-        visited.insert(cur);
-        while (!q.empty()) {
-           auto top = q.front();
-           q.pop_front();
-           if (top.b == t) {
-              return top.d;
-           }
+       deque<pair<string, int>> q;
+       q.push_back(make_pair(init, zero));
+       g[init] = 0;
+       while (!q.empty()) {
+          auto top = q.front();
+          int dist = g[top.first];
+          q.pop_front();
 
-           for (int i = 0; i < 4; ++i) {
-              int next = stable[top.zero][i];
-              if (next < 0) continue;
+          if (top.first == target) return dist;
 
-              string nb = top.b;
-              std::swap(nb[top.zero], nb[next]);
+          for (int i = 0; i < 4; ++i) {
+             int idx = next[top.second][i];
+             if (idx < 0) continue;
+             string node = top.first;
+             swap(node[top.second], node[idx]);
+             if (g.count(node) == 0) {
+                g[node] = dist + 1;
+                q.push_back(make_pair(node, idx));
+             }
+          }
+       }
 
-              if (visited.count(nb) > 0) continue;
-
-              q.push_back({next, top.d + 1, nb});
-              visited.insert(nb);
-           }
-        }
-
-        return -1;
+       return -1;
     }
 };
 
 
 /*
 TESTS
-[[1,2,3],[4,5,0]]
 [[1,2,3],[4,0,5]]
+[[3,2,4],[1,5,0]]
 [[1,2,3],[5,4,0]]
-[[4,1,2],[5,0,3]]
 */
