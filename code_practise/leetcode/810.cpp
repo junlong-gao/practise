@@ -20,64 +20,75 @@
  * bitwise XOR of all the elements of the chalkboard to become 0, then that
  * player loses.  (Also, we'll say the bitwise XOR of one element is that
  * element itself, and the bitwise XOR of no elements is 0.)
- * 
+ *
  * Also, if any player starts their turn with the bitwise XOR of all the
  * elements of the chalkboard equal to 0, then that player wins.
- * 
+ *
  * Return True if and only if Alice wins the game, assuming both players play
  * optimally.
- * 
- * 
+ *
+ *
  * Example:
  * Input: nums = [1, 1, 2]
  * Output: false
- * Explanation: 
- * Alice has two choices: erase 1 or erase 2. 
+ * Explanation:
+ * Alice has two choices: erase 1 or erase 2.
  * If she erases 1, the nums array becomes [1, 2]. The bitwise XOR of all the
  * elements of the chalkboard is 1 XOR 2 = 3. Now Bob can remove any element he
  * wants, because Alice will be the one to erase the last element and she will
- * lose. 
+ * lose.
  * If Alice erases 2 first, now nums becomes [1, 1]. The bitwise XOR of all the
  * elements of the chalkboard is 1 XOR 1 = 0. Alice will lose.
- * 
- * 
- * 
- * Notes: 
- * 
- * 
+ *
+ *
+ *
+ * Notes:
+ *
+ *
  * 1 <= N <= 1000. 
  * 0 <= nums[i] <= 2^16.
- * 
- * 
- * 
+ *
+ *
+ *
  * Digestion:
  * Consider x in nums. If x appear for even times, it does not contribute to
  * final XOR. So only the value appearing for odd time matters.
  *
- * Let c(S) = # of elements appearing for odd times in state S.
+ * Let X(S) = # of non 0 elements appearing for odd times in state S.
+ * Let Y(S) = # of non 0 elements appearing for even times in state S.
+ * Let Z(S) = # of 0 in state S.
  *
- * Let c(S) is even and fixed, 
- *    then if c(S) == 0, we are done (winning)
- *    else, we remove any value x in c (appearing for odd time), because its
- *    count > 0 (appear for odd times). This makes c(S \ {x}) = c(S) - 1 and c
- *    become odd.
+ * Fact: if you can find a number to remove, S -> S' and X(S') is odd, you must
+ *       not have lost.
  *
- * Let c(S) is odd and fixed,
- *    If one removes a value appearing for even time (not 0), its count will become odd,
- *    making c(s \ {x}) = c(s) + 1 even.
- *    If one removes a value appearing for odd time, its count will become even and
- *    making c(s \ {x}) = c(s) - 1 even.
+ * Let X(S) + Z(S) be even and fixed,
+ *    case 1: X(S) and Z(S) are all even.
+ *            then if X(S) == 0, we are done (winning)
+ *            else, we remove any value x in X(S) (appearing for odd time), because its
+ *            count > 0 (appear for odd times). This makes X(S \ {x}) = X(S) - 1 odd.
+ *            New Z(S \ {x}) = Z(S) = even. (could be 0)
+ *            We don't lose.
+ *    case 2: X(S) and Z(S) are all odd.
+ *            then remove a 0. (Z(S) > 0 since it is odd). Then X(S \ {0}) = X(S) odd.
+ *            New Z(S \ {0}) = even. (could be 0)
+ *            We don't lose.
  *
- * This strategy allow us to conclude inductively as long as c is even, we
- * can find a way to turn c into odd, and no matter what our opponent does, it
- * will become even again.
+ * Let X(S) be odd and Z(S) be even,
+ *     case 1: remove a value in X(S) will make X(S \ {x}) = X(S) - 1:even
+ *     case 2: remove a 0 (if there is one) will make Z(S \ {0}) = Z(S) - 1:odd
+ *     case 3: remove a value y in Y(if there is one): make X(S \ {y}) = X(S) + 1 (because now y appears for odd times) : even
  *
- * Because if state is odd, the player cannot win, and there must be one winner
- * since the game finishes in finite steps, the one maintaining even state must
- * win through the above strategy.
- * 
- * Therefore, if c is even in the beginning, Alice can win, otherwise its opponent
- * can use the strategy and Alice must lose.
+ * In all cases, X(S') + Z(S') will be even again.
+ *
+ *
+ * If we follow the above first strategy, no matter what our opponent do, X(S)
+ * + Z(S) will become even again and we can repeat our strategy. Because we
+ * cannot lose when the state we face is X(S) + Z(S) being even, and there
+ * must be one winner since the game finishes in finite steps, the one
+ * maintaining the state must win through the above strategy.
+ *
+ * Therefore, if X(S) + Z(S) is even in the beginning, Alice can win, otherwise
+ * its opponent can use the strategy and Alice must lose.
  *
  * As a special case, if originally nums has xor = 0, Alice automatically wins.
  */
@@ -99,7 +110,7 @@ public:
              counter++;
           }
        }
-        
+
        return counter%2 == 0;
     }
 };
@@ -117,4 +128,7 @@ TESTS
 [1, 2, 3, 3]
 [1, 2, 3]
 [1, 1, 1]
+[1, 1, 1, 1]
+[1, 1, 1, 0]
+[2, 2, 1, 1, 1, 0, 0, 0]
 */
