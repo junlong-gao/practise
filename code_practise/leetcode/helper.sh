@@ -33,7 +33,7 @@ function lcp() {
 function lcdump() {
    lc cache -d
    lcp > README.txt
-   lc stat -g > README.txt
+   lc stat -g >> README.txt
 }
 
 function lcg() {
