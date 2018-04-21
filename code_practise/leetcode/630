@@ -1,0 +1,42 @@
+/*
+Digestion:
+let dp[i][t] = opt of S[i ... n], given time t has been spent
+Then original problem is dp[0][0].
+
+First sort by deadline, and ith element is the ith earliest deadline course.
+At position i, we either take it (greedy argument: if we can take a course, 
+we can take the course of the earliest deadline)
+If we cannot take it, we *should replace it with the longest course scheduled so far*.
+
+Proof:
+Admitted (todo).
+*/
+class Solution {
+public:
+    int scheduleCourse(vector<vector<int>>& courses) {
+        struct course {
+            int t, idx;
+        };
+        struct comp {
+            bool operator()(const course &l, const course &r) {
+                return (l.t != r.t) ? (l.t < r.t) : (l.idx < r.idx);
+            }
+        };
+        
+        set<course, comp> current;
+        sort(courses.begin(), courses.end(),
+        [&](const vector<int> &l, const vector<int> &r) {
+           return l[1] < r[1]; 
+        });
+        int time = 0;
+        for (int i = 0; i < courses.size(); ++i) {
+            current.insert({courses[i][0], i});
+            time += courses[i][0];
+            if (time > courses[i][1]) {
+                time -= current.rbegin()->t;
+                current.erase(*current.rbegin());
+            }
+        }
+        return current.size();
+    }
+};
