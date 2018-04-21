@@ -96,14 +96,12 @@
  * Let c be the str[i] in str[i, j]
  * We know there is an opt first prints str[i] for m times,
  *
- * case 1 (m == 1):
- *    print str[i], then opt[i + 1, j]
+ * case 1 (str[i] == str[j]):
+ *    print entire str[i]
+ *    opt[i, j - 1]
  *
  * case 2 (m == k - i + 1):
- *    there exists k, such that str[i] == str[k] and i < k <= j
- *       print str[i, k] then str[k + 1, j]
- *    in order to avoid recursing to self str[i, j], we use identity
- *       opt[i, k] == opt[i, k - 1]
+ *    Some combination of opt[i, k] + opt[k + 1, j]
  */
 class Solution {
     vector<vector<int>> dp;
@@ -116,11 +114,14 @@ class Solution {
        if (dp[i][j] != INT_MAX) return dp[i][j];
 
        int &ans = dp[i][j];
-       ans = 1 + helper(i + 1, j);
+       ans = j - i + 1;
+       if (str[i] == str[j]) {
+          ans = std::min(ans, helper(i, j - 1));
+          return ans;
+       }
 
-       for (int k = i + 1; k <= j; ++k) {
-          if (str[i] != str[k]) continue;
-          ans = std::min(ans, helper(i, k - 1) + helper(k + 1, j));
+       for (int k = i; k < j; ++k) {
+          ans = std::min(ans, helper(i, k) + helper(k + 1, j));
        }
 
        return ans;
@@ -166,10 +167,6 @@ public:
 "aabbaba"
 "bacbcab"
 "badcbcabdbdcdbab"
-*/
-
-/*
-TESTS
 "aaabbb"
 "bacbcab"
 "aabbaba"
@@ -189,5 +186,48 @@ TESTS
 "aaa"
 "aabbaba"
 "bacbcab"
+"bacbca"
+"babdbdcd"
+*/
+
+/*
+TESTS
+"dbdcd"
+"badcbcabdbdcdbabd"
+"aba"
+"aaabbb"
+"abcdefg"
+"aabbaba"
+"badcbcabdbdcdbabd"
+"badcbcabd"
+"bacbcabd"
+"bacbcab"
+"aaabbb"
+"aabbaba"
+"badcbcabdbdcdbabd"
+"aaa"
+"aabbaba"
+"bacbcab"
 "badcbcabdbdcdbab"
+"aaabbb"
+"bacbcab"
+"aabbaba"
+"badcbcabdbdcdbab"
+"badcbcabdbdcdba"
+"aba"
+"aaabbb"
+"abcdefg"
+"aabbaba"
+"badcbcabdbdcdbabd"
+"badcbcabd"
+"bacbcabd"
+"bacbcab"
+"aaabbb"
+"aabbaba"
+"badcbcabdbdcdbabd"
+"aaa"
+"aabbaba"
+"bacbcab"
+"bacbca"
+"babdbdcd"
 */
