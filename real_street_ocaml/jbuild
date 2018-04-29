@@ -1,17 +1,9 @@
-(executable
- ((name test_runner)
-  (modules (test_runner))
-  (libraries (lib 
-              project_cornell
-              ppx_inline_test.runner.lib 
-              ppx_expect.evaluator 
-              ppx_inline_test.runtime-lib))))
+(jbuild_version 1)
 
-(alias
- ((name    runtest)
-  (deps    (test_runner.exe))
-  (action  (bash"
-./test_runner.exe inline-test-runner lib -verbose;
-./test_runner.exe inline-test-runner project_cornell -verbose;
-"
-))))
+(library
+   ((name lib)
+      (library_flags -linkall)
+      (libraries (core base yojson))
+      (inline_tests)
+      (preprocess (pps (ppx_jane))))
+)

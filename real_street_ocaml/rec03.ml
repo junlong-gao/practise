@@ -26,7 +26,12 @@ let special l =
   | None -> 0
 
 let desort l =
-  List.sort ~cmp:(fun l r -> r - l) l
+  List.sort ~compare:(fun left right -> right - left) l
+
+let%expect_test "revert sort" =
+  let out = desort [1;2;3;4;5]
+  in Printer.print_ints out;
+  [%expect {| [5; 4; 3; 2; 1] |}]
 
 let last l =
   List.hd (List.rev l)

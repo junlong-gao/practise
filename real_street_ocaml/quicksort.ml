@@ -1,5 +1,4 @@
 open Core
-open Core_bench
 
 let rec qs l =
    match l with
@@ -21,17 +20,9 @@ let rec make_array_rev n ~l:l =
    | 0 -> l
    | k -> make_array_rev (k - 1) ~l:(k :: l)
 
-let () =
-  let dataset     = [100;1000;5000]
-  in let data     = List.map dataset ~f: (make_array_rev ~l:[])
-  in let commands = List.map data ~f:(fun input ->
-      [ Bench.Test.create ~name:"sort tail rec"
-        (fun () -> ignore (qs input));
-        Bench.Test.create ~name:"sort non tail rec"
-        (fun () -> ignore (qs_slow input));
-        Bench.Test.create ~name:"standard sort"
-        (fun () -> ignore (List.sort ~cmp:(fun l r -> l - r) input));
-      ]
-     )
-  in let commands' = List.concat commands
-  in Command.run (Bench.make_command commands')
+let%expect_test "quicksort test" =
+  qs [5;4;3;2;1] |>
+    List.fold_left ~f:(fun acc x -> acc ^ " " ^ (string_of_int x)) ~init:""
+    |> print_endline;
+  [%expect {| 1 2 3 4 5 |}]
+

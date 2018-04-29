@@ -1,3 +1,8 @@
+A somewhat random collection of OCaml stuff
+
+with new dune and ocaml 4.06:
+https://blog.janestreet.com/repeatable-exploratory-programming/
+
 Ask utop to load the package for you
 and then utop
 # #use "rec02.ml"

@@ -1,7 +1,0 @@
-*.merlin
-*_build*
-*.native
-
-*.vscode
-*.install
-*.swp
