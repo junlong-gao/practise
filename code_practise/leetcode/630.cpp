@@ -102,5 +102,6 @@ Proof.
           F(current') = F(current) - t_{longest} + t_{i + 1}
                       < F(current)
         - if the longest is task_{i + 1}
+        // TODO
 
 */
