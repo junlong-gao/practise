@@ -3,7 +3,7 @@
 (library
    ((name lib)
       (library_flags -linkall)
-      (libraries (core base yojson))
+      (libraries (core base yojson qcheck))
       (inline_tests)
       (preprocess (pps (ppx_jane))))
 )

@@ -3,9 +3,11 @@
 *.idea
 *vs
 *.vxcode
+*settings.json
 *.*.swp
 *.out
 
 *.pyc
 *_build*
 *.merlin*
+
