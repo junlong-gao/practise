@@ -54,7 +54,7 @@ public:
         }
         
         // check path uniqueness after adding each edge
-        // by checking each node has a unique parent so far.
+        // by checking each node has a unique highest ancestor so far.
         for (int i = 1; i <= n; ++i) {
             p[i] = i;
         }
