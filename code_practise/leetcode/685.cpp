@@ -72,12 +72,13 @@ public:
                 // non unique path: a0->...->edge0->edge1 and a0->...->edge1
                 // we did not found 2de node, so this non unique path comes from cycle
                 if (undeleted.empty()) return edge;
-                // the edge we deleleted is not on the cycle path 
+                // the edge we deleleted is not right, we still have non-unique path, should
+                // delete the undeleted one.
                 return undeleted;
             }
             p[edge[1]] = edge[0];
         }
-        // paths between all nodes are unique, we deleted the right edge:
+        // paths between all nodes are unique, we have deleted the right edge:
         assert(deleted.size() == 2);
         return deleted;
     }
