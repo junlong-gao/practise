@@ -18,12 +18,15 @@ however, we know the starting states:
 and the finishing states
 ({0, 1, … n - 1), i)
 and the edges between the states:
-(cur, i) -> (cur \union {j}, j) if and only if there is a path between cities i
-and j
-and we would like to find a shortest path between any source states and target
-states, since
-a path length represents a cost for a particular path from some starting city to
-some end city.
+(cur, i) -> (cur \union {j}, j) if and only if there is a path between cities i and j
+and most importantly, we know a particular optimial path corresponds to a
+simple path in this state space (if a path corresponds to a path in the state space with
+cycle, then there exists two nodes having same set of cities and end point, so we
+can just remove the portion of the nodes visited in the cycle from the path to
+get a better solution).
+Then we can find a shortest path between any source states and
+target states, since a path length represents a cost for a particular path
+from some starting city to some end city.
 
 instead of deriving a recursive solution for the original problem, we can simply
 run bfs over the derived graph to find a shortest path, and then it is our
