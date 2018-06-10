@@ -11,8 +11,8 @@ class Solution {
       bool found = true;
       for (int i = 0; i < word.size(); ++i) {
         // greedy
-        auto it = upper_bound(S[word[i]].begin(), S[word[i]].end(), cur);
-        if (it == S[word[i]].end()) {
+        auto it = upper_bound(count[word[i]].begin(), count[word[i]].end(), cur);
+        if (it == count[word[i]].end()) {
           found = false;
           break;
         }
@@ -23,6 +23,3 @@ class Solution {
     return ans;
   }
 };
-
-
-
