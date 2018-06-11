@@ -1,8 +1,8 @@
 class Solution {
  public:
   int integerReplacement(int n) {
-    unordered_set<int> visited;
-    deque<pair<int, int>> q;
+    unordered_set<long long> visited;
+    deque<pair<long long, int>> q;
     q.push_back({n, 0});
     visited.insert(n);
     while (q.size()) {
@@ -25,3 +25,4 @@ class Solution {
     return -1;
   }
 };
+
