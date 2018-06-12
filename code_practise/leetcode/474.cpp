@@ -8,27 +8,6 @@ class Solution {
     }
     return ret;
   }
-  unordered_map<int, unordered_map<int, unordered_map<int, int>>> dp;
-  bool computed(int idx, int m, int n) {
-    if (dp.count(idx) == 0) return false;
-    if (dp[idx].count(m) == 0) return false;
-    if (dp[idx][m].count(n) == 0) return false;
-    return true;
-  }
-  int solve(int idx, int m, int n) {
-    if (computed(idx, m, n)) return dp[idx][m][n];
-    if (idx == 0) {
-        if (count_0[idx] > m || count_1[idx] > n) return dp[idx][m][n] = 0;
-        return 1;
-    }
-
-    dp[idx][m][n] = solve(idx - 1, m, n);
-    if (count_0[idx] <= m && count_1[idx] <= n) {
-        dp[idx][m][n] = max(dp[idx][m][n], solve(idx - 1, m - count_0[idx], n - count_1[idx]) + 1);
-    }
-                        
-    return dp[idx][m][n];
-  }
 
  public:
   int findMaxForm(vector<string>& strs, int m, int n) {
@@ -36,7 +15,16 @@ class Solution {
       count_0.push_back(countZero(s));
       count_1.push_back(s.length() - count_0.back());
     }
-    return solve(strs.size() - 1, m, n);
+    vector<vector<int>> dp(m + 1, vector<int>(n+1, 0));
+    for (int i = 0; i < strs.size(); ++i) {
+        for (int zeros = m; zeros >= 0; --zeros) {
+            for (int ones = n; ones >= 0; --ones) {
+                if (count_0[i] > zeros || count_1[i] > ones) continue;
+                dp[zeros][ones] = max(dp[zeros][ones], dp[zeros - count_0[i]][ones - count_1[i]] + 1);
+            }
+        }
+    }
+    return dp[m][n];
   }
 };
 
