@@ -6,6 +6,7 @@ public:
         for (int i = 0; i < nums.size(); ++i) {
             total += nums[i];
         }
+        if (total < S || S < -total) return 0;
         vector<vector<int>> dp(n + 1, vector<int>(2 * total + 1, 0));
         for (int count = 0; count <= n; ++count) {
             if (count == 0) { dp[0][total] = 1; continue; }
