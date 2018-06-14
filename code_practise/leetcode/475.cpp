@@ -3,8 +3,9 @@ public:
     int findRadius(vector<int>& houses, vector<int>& heaters) {
         using ll = long long;
         sort(houses.begin(), houses.end());
-        if (houses.empty()) return 0;
-        ll lo = 0, hi = houses.back() - houses.front() + 1;
+        sort(heaters.begin(), heaters.end());
+        if (houses.empty() || heaters.empty()) return 0;
+        ll lo = -1, hi = max(abs(heaters.back() - houses.front()), abs(houses.back() - heaters.front())) + 1;
         auto check = [&](int r) {
             int i = 0, curHeater = 0;
             // at houses i, curHeater is the first heater such that house i
