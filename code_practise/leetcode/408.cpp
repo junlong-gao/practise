@@ -5,7 +5,7 @@ public:
         while (i < abbr.size() && j < word.size()) {
             if (isdigit(abbr[i]) && abbr[i] != '0') {
                 int t = i;
-                while(i < abbr.size()) {
+                while(i < abbr.size() && isdigit(abbr[i])) {
                     i++;
                 }
                 j += stoi(abbr.substr(t, i - t));
@@ -15,6 +15,6 @@ public:
             }
         }
         
-        return j == word.size();
+        return i == abbr.size() && j == word.size();
     }
 };
