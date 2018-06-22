@@ -9,7 +9,7 @@ A repo hold various notes and examples on C++(11 + k) features, where k = 3i.
 5. cppt: "C++ Templates: The Complete Guide"
 
 ## ```sptr.cpp```
-Smart pointers, see emcpp. 
+Smart pointers, see emcpp.
 * ```std::shared_ptr```
 * ```std::weak_ptr```
 * ```std::unique_ptr```
@@ -17,7 +17,7 @@ Smart pointers, see emcpp.
 ## ```msem.cpp```
 Move semantics, see emcpp
 * Copy elision and binding
-* Perfect forwarding 
+* Perfect forwarding
 * Rvalue reference
 * Special rvalue type deduction
 * Reference collapsing
