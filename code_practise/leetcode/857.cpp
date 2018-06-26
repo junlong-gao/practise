@@ -19,12 +19,12 @@ public:
          lo = min(lo, static_cast<double>(wage[i]));
         ratio.push_back({static_cast<double>(wage[i]) / static_cast<double>(quality[i]), quality[i]});
       }
-        
-      sort(ratio.begin(), ratio.end(), 
+
+      sort(ratio.begin(), ratio.end(),
       [&](const pair<double, int> l, const pair<double, int> r) {
         return l.first > r.first;
       });
-      
+
       set<pair<int, int>, cmp> bag;
       int t = 0;
       for (int i = 0; i < K; ++i) {
@@ -42,27 +42,12 @@ public:
           }
           sums[i] = t;
       }
-    
-      const double e = 1e-6;
-      
-      auto check = [&](double w) {
-        for (int i = 0; i <= n - K; ++i) {
-          if (sums[i] != 0 && w >= ratio[i].first * sums[i]) {
-            return true;
-          }
-        }
-        return false;
-      };
-      
-      while (hi - lo > e) {
-        double mid = lo + (hi - lo) / 2;
-        if (check(mid)) {
-          hi = mid;
-        } else {
-          lo = mid;
-        }
-      };
-      
-      return hi;
+
+      double best = numeric_limits<double>::max();
+      for (int i = 0; i <= n - K; ++i) {
+         best = min(best, ratio[i].first * sums[i]);
+      }
+
+      return best;
     }
 };
