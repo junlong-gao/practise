@@ -11,30 +11,30 @@
  *
  * Given two integers representing the numerator and denominator of a fraction,
  * return the fraction in string format.
- * 
+ *
  * If the fractional part is repeating, enclose the repeating part in
  * parentheses.
- * 
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: numerator = 1, denominator = 2
  * Output: "0.5"
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: numerator = 2, denominator = 1
  * Output: "2"
- * 
+ *
  * Example 3:
- * 
- * 
+ *
+ *
  * Input: numerator = 2, denominator = 3
  * Output: "0.(6)"
- * 
- * 
+ *
+ *
  * Digestion:
  * Cute math:
  * to find the first digit of t / d
@@ -48,54 +48,54 @@
  * then, let t' = t * 10 % d, d' = d
  * thus the first digit of t' / d' is the second digit of t / d, repeat until t is 0
  * (then all follows 0)
- * 
+ *
  * if you have already seen t / d , this is the beginning of the repeat pattern
  */
 class Solution {
+    using ll = long long;
 public:
-    string fractionToDecimal(long long numerator, long long denominator) {
-       string sign = "";
-       if ((numerator > 0 && denominator < 0) || (numerator < 0 && denominator > 0)) {
-          sign = "-";
-       }
+    string fractionToDecimal(int numerator, int denominator) {
+        ll p = abs((ll)numerator); ll q = abs((ll)denominator);
+        unordered_map<ll, ll> ps;
+        vector<ll> seq;
+        if (p == 0) return "0"; // except p is 0... we have + or -
 
-       numerator = abs(numerator);
-       denominator = abs(denominator);
-
-       long long lead = numerator / denominator;
-       long long t = numerator % denominator, d = denominator;
-       vector<int> digit;
-       unordered_map<long long, int> tmap;
-       int repeat = -1;
-
-       while (t != 0) {
-          if (tmap.count(t) != 0) {
-             repeat = tmap[t];
-             break;
-          }
-
-          tmap[t] = digit.size();
-          digit.emplace_back(t * 10 / d); // t * 10 can overflow, consider 1 / INT_MAX(32bit)
-          t = (t * 10) % d;
-       }
-
-       // format the result:
-       string ret = sign + to_string(lead);
-       if (digit.empty()) return ret;
-       ret += ".";
-       if (repeat == -1) {
-         repeat = digit.size();
-       }
-       for (int i = 0; i < repeat; ++i) {
-          ret += to_string(digit[i]);
-       }
-       if (repeat == digit.size()) return ret;
-       ret += "(";
-       for (int i = repeat; i < digit.size(); ++i) {
-          ret += to_string(digit[i]);
-       }
-       ret += ")";
-       return ret;
+        string sign = ((numerator == p) ^ (denominator == q)) ? "-" : "";
+        if (p >= q) {
+            seq.push_back(p / q); p = p % q;
+        } else {
+            seq.push_back(0);
+        }
+        string ret = sign + to_string(seq[0]);
+        while (true) {
+            if (p == 0) {
+                if (seq.size() > 1) ret += ".";
+                for (ll i = 1; i < seq.size(); ++i) {
+                    ret += to_string(seq[i]);
+                }
+                return ret;
+            } else {
+                if (ps.count(p)) {
+                    if (seq.size() > 1) ret += ".";
+                    ll idx = ps[p];
+                    for (ll i = 1; i < idx; ++i) {
+                        ret += to_string(seq[i]);
+                    }
+                    ret += "(";
+                    for (ll i = idx; i < seq.size(); ++i) {
+                        ret += to_string(seq[i]);
+                    }
+                    ret += ")";
+                    return ret;
+                } else {
+                    ll d = 10 * p / q;
+                    ps[p] = seq.size();
+                    seq.push_back(d);
+                    p = (10 * p) % q;
+                }
+            }
+        }
+        assert(0);
     }
 };
 
@@ -135,4 +135,6 @@ TESTS
 90
 11
 90
+0
+-5
 */
