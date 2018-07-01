@@ -9,7 +9,6 @@ class Solution {
         {7, "Seven"},
         {8, "Eight"},
         {9, "Nine"},
-    }, twenties {
         {10, "Ten"},
         {11, "Eleven"},
         {12, "Twelve"},
@@ -33,22 +32,23 @@ class Solution {
     string printer(int n) {
         //cout << n << endl;
         assert(n > 0 && n < 1e3);
-        int h = n / 100;
         string ret;
-        if (h > 0) {
-            ret += digits.at(h) + " Hundred ";
-        }
-        n %= 100;
         
+        // 100
+        if (n >= 100) {
+            ret += digits.at(n / 100) + " Hundred ";
+            n %= 100;
+        }
+        
+        // 20
         if (n >= 20) {
             ret += tens.at(n / 10) + " ";
             n %= 10;
         }
         
-        if (n > 0 && n < 10) {
+        // 1
+        if (n >= 1) {
             ret += digits.at(n) + " ";
-        } else if (n >= 10) {
-            ret += twenties.at(n) + " ";
         }
         return ret;
     }
@@ -70,7 +70,6 @@ public:
                 num %= d;
             }
         }
-        
         if(ret.back() == ' ') {
             ret.pop_back();
         }
