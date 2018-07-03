@@ -1,0 +1,12 @@
+# use like this
+# leetcode git lc test 33.search-in-rotated-sorted-array.cpp \
+#  -t "$(cat 33.test | grep -v '\# .*')"
+[3, 0, 2]
+1
+[3, 0, 2]
+2
+[3, 0, 2]
+3
+# test simple case
+[3, 0, 2]
+0

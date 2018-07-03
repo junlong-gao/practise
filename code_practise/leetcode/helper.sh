@@ -41,3 +41,8 @@ function lcg() {
    leetcode submit $1.cpp
    lcdump
 }
+
+function run() {
+   g++ -o main -g -std=c++11 main.cpp
+   ./main
+}
