@@ -1,25 +1,31 @@
+static int x=[](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
+
 class Solution {
- public:
+public:
   int numMatchingSubseq(string S, vector<string>& words) {
-    vector<vector<int> > count(256);
-    for (int i = 0; i < S.length(); ++i) {
-      count[S[i]].push_back(i);
+    array<vector<int>, 26> buckets;
+    for (int i = 0; i < words.size(); ++i) {
+        reverse(words[i].begin(), words[i].end());
+        buckets[words[i].back() - 'a'].push_back(i);
     }
-    int ans = 0;
-    for (auto& word : words) {
-      int cur = -1;
-      bool found = true;
-      for (int i = 0; i < word.size(); ++i) {
-        // greedy
-        auto it = upper_bound(count[word[i]].begin(), count[word[i]].end(), cur);
-        if (it == count[word[i]].end()) {
-          found = false;
-          break;
+      int matched = 0;
+      for (int i = 0; i < S.size(); ++i) {
+          int nc = S[i] - 'a';
+         if (buckets[nc].empty()) { continue; }
+         vector<int> t;
+         swap(t, buckets[nc]);
+         for (auto idx : t) {
+           words[idx].pop_back();
+           if (words[idx].empty()) { matched++; }
+           else {
+             buckets[words[idx].back() - 'a'].push_back(idx);
+            }
         }
-        cur = *it;
       }
-      if (found) ans++;
-    }
-    return ans;
+      return matched;
   }
 };
