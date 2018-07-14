@@ -15,7 +15,7 @@ public:
             p[i.start] += 1;
             p[i.end] -= 1;
         }
-        
+
         int cur = 0; int best = 0;
         for (auto it = p.begin(); it != p.end(); ++it) {
             cur += it->second;
