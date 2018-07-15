@@ -1,20 +1,23 @@
 /*
-adding one edge will result in existing two nodes u and v such that path from u to v is not unique.
+adding one edge will result in existing two nodes u and v such that path from u
+to v is not unique.
 
 
-if we don't have a node with 2 indegree, there must be a cycle (so every pair of nodes have
-non-unique path). this is easy and we can remove any edge we found on the cycle.
+if we don't have a node with 2 indegree, there must be a cycle (so every pair
+of nodes have non-unique path). this is easy and we can remove any edge we
+found on the cycle.
 
-if we have a node having 2 indegree, we cannot delete either one of the edges to make sure 
-paths between all pair of nodes are unique:
+if we have a node having 2 indegree, we cannot delete either one of the edges
+to make sure paths between all pair of nodes are unique:
 
 1                 1 ---
 |                 |    |
 v                 v    v
 2 <-> 3           2 -->3
-for the left we must delete {3, 2}, for the right we can delete either {2, 3} or {1, 3}
+for the left we must delete {3, 2}, for the right we can delete either {2, 3}
+or {1, 3}
 
-the trick is we try to delete the second edge of the found 2de edges first. 
+the trick is we try to delete the second edge of the found 2de edges first.
 for the left case:
 1                   1 --> 0
 |
@@ -35,30 +38,37 @@ now if we find that after deleting one of the edges in 2de, we can still
 find a non-unique path (right graph), then we automatically conclude we
 have deleted the wrong edge and we should delete the undeleted one.
 
-if we find all paths between two nodes are unique, then it is the deleted 
+if we find all paths between two nodes are unique, then it is the deleted
 edge caused the non-unique path.
 */
+
 class Solution {
 public:
     vector<int> findRedundantDirectedConnection(vector<vector<int>>& edges) {
         int n = edges.size();
         vector<int> p(n + 1, 0), undeleted, deleted;
+        // go through all edges, for each node, track its
+        // immediate parent
         for (auto& edge : edges) {
             if (p[edge[1]] == 0) {
                 p[edge[1]] = edge[0];
             } else {
+               // we found an edge of indegree 2
+               // delete this edge but save the previous edge.
                 undeleted = {p[edge[1]], edge[1]};
                 deleted = edge;
-                edge[1] = 0; // 
+                edge[1] = 0; // delete this edge
             }
         }
-        
-        // check path uniqueness after adding each edge
-        // by checking each node has a unique path to its highest ancestor so far.
+
+        // check path uniqueness after adding each edge by checking each node
+        // has a unique path to its highest ancestor so far.
+        // since the indegree 2 edge is no longer present, we should either
+        // successfully verify the tree or found abnormality
         for (int i = 1; i <= n; ++i) {
             p[i] = i;
         }
-        
+
         for (auto& edge : edges) {
             int a0 = edge[0];
             while (p[a0] != a0) {
@@ -72,7 +82,7 @@ public:
                 // non unique path: a0->...->edge0->edge1 and a0->...->edge1
                 // we did not found 2de node, so this non unique path comes from cycle
                 if (undeleted.empty()) return edge;
-                // the edge we deleleted is not right, we still have non-unique path, should
+                // the edge we deleted is not right, we still have non-unique path, should
                 // delete the undeleted one.
                 return undeleted;
             }
