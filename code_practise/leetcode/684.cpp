@@ -1,44 +1,42 @@
 class Solution {
-  class disjoint_set {
-    vector<int> p, rank;
-
-   public:
-    disjoint_set(int n) : rank(n, 0), p(n, 0) {
-      for (int i = 0; i < n; ++i) {
-        p[i] = i;
-      }
-    }
-    int find(int x) {
-      if (p[x] == x) return x;
-      return p[x] = find(p[x]);
-    }
-    int join(int x, int y) {
-      int px = find(x);
-      int py = find(y);
-      if (px == py) return px;
-      if (rank[px] > rank[py]) {
-        p[py] = px;
-        return px;
-      } else {
-        p[px] = py;
-        if (rank[px] == rank[py]) {
-          rank[py]++;
+    struct UF {
+        vector<int> d, p;
+        UF(int size) {
+            d.resize(size, 0);
+            for (int i = 0; i < size; ++i) {
+                p.push_back(i);
+            }
         }
-        return py;
-      }
+        
+        int find(int x) {
+            if (p[x] == x) return x;
+            else return p[x] = find(p[x]);
+        }
+        
+        bool link(int x, int y) {
+            int px = find(x), py = find(y);
+            if (px == py) return false;
+            
+            if (d[px] > d[py]) {
+                p[py] = px;
+            } else {
+                p[px] = py;
+                if (d[px] == d[py]) {
+                    d[py]++;
+                }
+            }
+            return true;
+        }
+    };
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        int n = edges.size();
+        UF uf(n);
+        for (const vector<int> & e : edges) {
+            if (!uf.link(e[0] - 1, e[1] - 1)) {
+                return e;
+            }
+        }
+        assert(0);
     }
-  };
-
- public:
-  vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-    int n = edges.size();
-    disjoint_set uf(n);
-    for (int i = 0; i < edges.size(); ++i) {
-      int x = edges[i][0] - 1;
-      int y = edges[i][1] - 1;
-      if (uf.find(x) == uf.find(y)) return edges[i];
-      uf.join(x, y);
-    }
-    assert(0);
-  }
 };
