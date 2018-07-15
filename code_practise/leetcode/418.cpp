@@ -15,82 +15,28 @@ using namespace std;
 
 class Solution {
 public:
-    int wordsTyping(const vector<string>& sentence, int rows, int cols) {
-       int total = 0; int numWords = sentence.size();
-       unordered_map<int, int> cache;
-       for (int i = 0; i < rows; ++i) {
-          int idx = total % numWords;
-          if (0 == cache.count(idx)) {
-             int &count = cache[idx];
-             for (int cur = 0, j = idx;
-                  cur + sentence[j % numWords].size() <= cols;
-                  cur += sentence[j % numWords].size() + 1, ++j) { // XXX order of ++j matters
-                count++;
-             }
-             total += count;
-          } else {
-             total += cache[idx];
-          }
-       }
-       return total / numWords;
+    int wordsTyping(vector<string>& sentence, int rows, int cols) {
+        int n = sentence.size();
+        vector<int> dp(n, -1);
+        int usedWords = 0;
+        for (int i = 0; i < rows; ++i) {
+            if (dp[usedWords % n] >= 0) {
+                usedWords += dp[usedWords % n];
+                continue;
+            }
+
+            int old = usedWords;
+            int left = cols;
+            while (left >= sentence[usedWords % n].length()) {
+                if (left >= sentence[usedWords % n].length() + 1) {
+                    left -= 1;
+                }
+                left -= sentence[usedWords % n].length();
+                usedWords++;
+            }
+            dp[old % n] = usedWords - old;
+        }
+
+        return usedWords / n;
     }
 };
-
-int main() {
-   Solution s;
-
-   ASSERT(
-   1
-   ==
-   s.wordsTyping
-   (
-
-   {"I", "had", "apple", "pie"},
-   4,
-   5
-
-   ));
-
-   ASSERT(
-   3
-   ==
-   s.wordsTyping
-   (
-
-   {"I", "had", "apple", "pie"},
-   9,
-   5
-
-   ));
-
-   ASSERT(
-   2
-   ==
-   s.wordsTyping
-   (
-
-   {"a", "bcd", "e"},
-   3,
-   6
-
-   ));
-
-   ASSERT(
-   1
-   ==
-   s.wordsTyping
-   (
-
-   {"hello", "world"},
-   2,
-   8
-
-   ));
-
-   return 0;
-}
-
-/*
-TESTS
-
-*/
