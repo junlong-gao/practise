@@ -12,7 +12,7 @@ maximize abs(max[0...l) - max[l...n))
 
 int solver(const vector<int> & vals) {
   int n = vals.size();
-  const int INT_MIN = numeric_limits<int>::min();
+  //const int int_min = numeric_limits<int>::min();
   if (n < 2) return 0;
   // n >= 2;
   vector<int> maxsl(n, INT_MIN), maxsr(n, INT_MIN);
@@ -42,4 +42,5 @@ int main() {
   cout << solver({1,2,3,4}) << endl;
   cout << solver({2,14,3,1}) << endl;
   cout << solver({3,2,3,100}) << endl;
+  cout << solver({4,1,100,-2}) << endl;
 }
