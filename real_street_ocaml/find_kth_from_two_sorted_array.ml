@@ -9,7 +9,7 @@ let rec find_kth l r k =
   else
   if k < bound then
      let union = (List.take l k) @ (List.take r k)
-     in let sorted = List.sort ~compare:(fun l r -> l - r) union
+     in let sorted = List.sort ~cmp:(fun l r -> l - r) union
      in List.nth_exn sorted (k - 1)
   else
      let first_left = min ((List.length l + 1) / 2) (k - 1)
