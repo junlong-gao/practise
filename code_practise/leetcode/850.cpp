@@ -42,3 +42,65 @@ its contribution if and only if it is in some original rec.
 
 Use unique to reduce cases where dx = 0 or dy = 0 (but not impact correctness).
 */
+
+/*
+Alternative: Line sweep
+*/
+class Solution {
+public:
+    int rectangleArea(vector<vector<int>>& rectangles) {
+        unsigned long long M = 1e9 + 7;
+        unordered_map<int, vector<int>> entering, leaving;
+        vector<int> xs;
+        for (int i = 0; i < rectangles.size(); ++i) {
+            entering[rectangles[i][0]].push_back(i);
+            leaving[rectangles[i][2]].push_back(i);
+            xs.push_back(rectangles[i][0]);
+            xs.push_back(rectangles[i][2]);
+        }
+        sort(xs.begin(), xs.end());
+        xs.erase(unique(xs.begin(), xs.end()), xs.end());
+        unordered_set<int> cur;
+        
+        unsigned long long ret = 0;
+        for (int i = 0; i + 1 < xs.size(); ++i) {
+            for (int idx : leaving[xs[i]]) {
+                cur.erase(idx);
+            }
+            for (int idx : entering[xs[i]]) {
+                cur.insert(idx);
+            }
+            
+            vector<int> exts(cur.begin(), cur.end());
+            sort(exts.begin(), exts.end(), [&rectangles](int l, int r) {
+                if (rectangles[l][1] != rectangles[r][1]) {
+                    return rectangles[l][1] < rectangles[r][1];
+                }
+                if (rectangles[l][3] != rectangles[r][3]) {
+                    return rectangles[l][3] < rectangles[r][3];
+                }
+                return l < r;
+            });
+            
+            vector<pair<int, int>> sortedExt;
+            for (int j = 0; j < exts.size(); ++j) {
+                if (sortedExt.empty() || 
+                    sortedExt.back().second < rectangles[exts[j]][1]) {
+                    sortedExt.push_back(
+                        make_pair(rectangles[exts[j]][1], rectangles[exts[j]][3]));
+                } else {
+                    sortedExt.back().second = 
+                        max(sortedExt.back().second, rectangles[exts[j]][3]);
+                }
+            }
+            
+            unsigned long long w = xs[i + 1] - xs[i];
+            for (int j = 0; j < sortedExt.size(); ++j) {
+                ret = (ret + (w * (sortedExt[j].second - sortedExt[j].first)) % M) % M;
+
+            }
+        }
+        
+        return ret;
+    }
+};
