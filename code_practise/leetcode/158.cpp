@@ -1,46 +1,43 @@
-
 // Forward declaration of the read4 API.
 int read4(char *buf);
 
 class Solution {
-    deque<char> internalBuf;
-    char next(bool &success) {
-        if (internalBuf.empty()) {
-            char t[4];
-            int c = read4(t);
-            for (int i = 0; i < c; ++i) {
-                internalBuf.push_back(t[i]);
+    class Iter {
+        deque<char> buffer;
+        void fill() {
+            assert(buffer.empty());
+            vector<char> buf(4, 0);
+            int count = read4(buf.data());
+            for (int i = 0; i < count; ++i) {
+               buffer.push_back(buf[i]);
             }
         }
+      public:
+        Iter() { fill(); }
         
-        if (internalBuf.empty()) {
-            success = false;
-            return 0;
+        bool Empty() { return buffer.empty(); }
+        char Val() { return buffer.front(); }
+        void Next() {
+            buffer.pop_front();
+            
+            if (buffer.empty()) {
+                fill();
+            }
         }
-        
-        success = true;
-        char ret = internalBuf.front();
-        internalBuf.pop_front();
-        return ret;
-    }
+    } iter;
 public:
     /**
      * @param buf Destination buffer
-     * @param n   Maximum number of characters to read
-     * @return    The number of characters read
+     * @param n   Number of characters to read
+     * @return    The number of actual characters read
      */
     int read(char *buf, int n) {
-        int soFar = 0;
-        while (soFar < n) {
-            bool succ = false;
-            char ret = next(succ);
-            if (succ) {
-                buf[soFar] = ret;
-                soFar ++;
-            } else {
-                return soFar;
-            }
+        int ret = 0;
+        while(n && !iter.Empty()) {
+           *buf = iter.Val();
+            iter.Next();
+            ret++; n--; buf++;
         }
-        return soFar;
+        return ret;
     }
 };
