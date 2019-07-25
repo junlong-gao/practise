@@ -3,6 +3,8 @@
  *   ✔ Accepted
  *   ✔ 27/27 cases passed (5 ms)
  *   ✔ Your runtime beats 40.87 % of cpp submissions
+ 
+ binary search
  */
 class Solution {
    using ll = long long;
