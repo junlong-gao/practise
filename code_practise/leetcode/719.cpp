@@ -57,7 +57,8 @@ class Solution {
       if (hi == 0) return 0;
 
       //[lo, hi)
-      // count the number of distance from vals[offset] to vals[k] (k >= offset, k < vals.size, vals.size() - offset different distances)
+      // count the number of distance from vals[offset] to vals[k]
+      // (k >= offset, k < vals.size, vals.size() - offset different distances)
       // <= d
       while (hi - lo > 1) {
          int mid = lo + (hi - lo) / 2;
