@@ -1,47 +1,54 @@
-//
-// Created by Junlong Gao on 8/7/16.
-//
+/*
+Consider input array:
 
-#ifndef PRACTISE_SOLUTION_H
-#define PRACTISE_SOLUTION_H
-#include "catch.hpp"
-#include <vector>
-namespace lee162{
-	using namespace std;
+value: -infty 1 2 3 1 -infty
 
-	class Solution {
-	public:
-		int findPeakElement(vector<int>& nums) {
-			int i, j, m;
-			i = 0; j = nums.size() - 1;
-			while(i < j){
-				m = i + (j - i) /2;
-				int p = nums[m];
-				if((m + 1 <= j && nums[m+1] < p) || (m+1>j)){
-					if(m == i || nums[m - 1] < p) return m;
-					j = m;
-				} else{
-					i = m + 1;
-				}
-			}
-			return i;
-		}
-		int findPeakElement(vector<int>&& nums) { //make test suite happy
-			return this->findPeakElement(nums);
-		}
-	};
+and its first order derivative:
 
-	TEST_CASE( "test suite for 162 1", "[162 1]" ) {
-		Solution testObj;
-		REQUIRE( testObj.findPeakElement({1,2,1}) == 1 );
-	}
-	TEST_CASE( "test suite for 162 2", "[162 2]" ) {
-		Solution testObj;
-		REQUIRE( testObj.findPeakElement({1,2,3}) == 2 );
-	}
-	TEST_CASE( "test suite for 162 3", "[162 3]" ) {
-		Solution testObj;
-		REQUIRE( testObj.findPeakElement({3,2,1}) == 0 );
-	}
-}
-#endif //PRACTISE_SOLUTION_H
+derivative: -infry, 1, 1, -2, +infty
+
+derivative at index i is array[i] - array[i - 1]
+
+To find a peak element index, is to find a positive direvative so that the previous direvative is nagative.
+
+Now, if we have a range of direvatives with least 2 values, 
+first being negative and the last being positive.
+Then there must exist a direvative in the array such 
+that itself is positive and the previous value of it is nagative.
+
+Let lo = 0, hi = array.size()
+Inititially, we have
+derivative at lo: -infty < 0
+derivative at hi: +infty > 0
+So there must be a peak value in index range [lo, hi)
+
+To maintain the invariant, pick any element mid in (lo, hi):
+If derivative at mid is negative:
+<0,     +infty > 0
+[mid,    hi)
+Then the peak value is in index range [mid, hi)
+
+if derivative at mid is positive:
+-infty < 0,    > 0
+       [lo,    mid)
+then the peak value is in index range [lo, mid)
+
+This can be regarded as the discrete version of the intermediate theorem.
+
+*/
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int lo = 0, hi = nums.size();
+        while (hi - lo > 1) {
+            int mid = lo + (hi - lo) / 2;
+            int sign = nums[mid] - nums[mid - 1];
+            if (sign < 0) {
+                hi = mid;
+            } else {
+                lo = mid;
+            }
+        }
+        return lo;
+    }
+};
