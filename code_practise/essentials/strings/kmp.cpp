@@ -23,8 +23,8 @@ class KMP {
    * m[i];
    */
 
-public:
    vector<int> sl;
+public:
    string pattern_;
 
    KMP(
@@ -51,10 +51,15 @@ public:
    void match(const string &m, vector<int> &output) {
       int idx = -1;
       for (int i = 0; i < m.length(); ++i) {
-         while (idx != -1 && m[i] != pattern_[idx + 1]) {
+         // in AC, node.children.count(m[i]) is here checking idx is the
+         // end or idx next is m[i]
+         while (idx != -1 &&
+                  (idx == pattern_.size() - 1 || m[i] != pattern_[idx + 1])
+               ) {
             idx = sl[idx];
          }
-         if (pattern_[idx + 1] == m[i]) {
+
+         if (idx != pattern_.size() - 1 && m[i] == pattern_[idx + 1]) {
             idx = idx + 1;
             if (idx == pattern_.size() - 1) {
                output.push_back(i);
@@ -65,22 +70,31 @@ public:
 };
 
 int main() {
-  KMP kmp { "abba" };
-
-  auto findAndPrint = [&kmp] (const string & m) {
+  auto findAndPrint = [] (KMP &kmp, const string & m) {
      vector<int> ret;
      kmp.match(m, ret);
-     cout << "matched for " << m << ":" << endl;
+     cout << "matched for " << endl << m << ":" << kmp.pattern_ << endl;
      for (auto &w : ret) {
-       cout << "  " << w << endl;
+       for (int i = 0; i < w; ++i) {
+          cout << " ";
+       }
+       cout << "^" << endl;
      }
      cout << "--" << endl;
   };
 
-  findAndPrint("abba");
-  findAndPrint("ababba");
-  findAndPrint("aabbabba");
-  findAndPrint("ababa");
+  KMP kmp { "abba" };
+
+  findAndPrint(kmp, "abba");
+  findAndPrint(kmp, "ababba");
+  findAndPrint(kmp, "aabbabba");
+  findAndPrint(kmp, "ababa");
+
+
+  KMP kmp2 {"aa"};
+  findAndPrint(kmp2, "aa");
+  findAndPrint(kmp2, "aaa");
+
 
   cout << "Done" << endl;
   return 0;
