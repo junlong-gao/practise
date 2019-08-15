@@ -20,46 +20,38 @@ class Solution {
         int oprand;
     };
     vector<token> semanticStack;
-    void skipSpace() {
-        while (lookahead < input.size() && input[lookahead] == ' ') {
-            lookahead++;
-        }
-    }
+
     void expr();
-    void term() {
-        skipSpace();
-        
+    void term() {        
         if (input[lookahead] == '(') {
             lookahead++;
             expr();
             
-            skipSpace();
-            assert(input[lookahead] == ')');
-            lookahead++;
+            assert(input[lookahead] == ')'); lookahead++;
         } else {
             int cur = lookahead;
-            while (lookahead < input.size() && std::isdigit(input[lookahead])) {
+            while (lookahead < input.size() &&
+                      std::isdigit(input[lookahead])) {
                 lookahead++;
             }
             int v = stoi(input.substr(cur, lookahead - cur));
             semanticStack.push_back({false, 0, v});
         }
     }
-    void restTerm() {
-        skipSpace();
-        
-        if (lookahead < input.size() && 
-            (input[lookahead] == '+' || input[lookahead] == '-')) {
-            char op = input[lookahead];
-            lookahead++;
+    void restTerm() {        
+        if (lookahead < input.size() &&
+            (input[lookahead] == '+' || input[lookahead] == '-')) { 
+            char op = input[lookahead]; lookahead++;
             
             term();
             semanticStack.push_back({true, op, 0});
+            
             restTerm();
         } else {
             ; // eps
         }
     }
+
     int eval() {
         vector<int> s;
         if (semanticStack.empty()) return 0;
@@ -78,15 +70,21 @@ class Solution {
     }
 public:
     int calculate(string s) {
+        for (int i = 0; i < s.length(); ++i) {
+            if (s[i] == ' ') {
+                continue;
+            } else {
+                input.push_back(s[i]);
+            }
+        }
+        
         lookahead = 0;
-        swap(s, input);
         expr();
         return eval();
     }
 };
 
 void Solution::expr() {
-    skipSpace();
     if (lookahead < input.size()) {
         term();
         restTerm();
