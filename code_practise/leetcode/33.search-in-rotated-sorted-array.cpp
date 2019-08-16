@@ -47,7 +47,7 @@ public:
            int sign = (target - nums.front()) * (val - nums.front());
            if (sign >= 0) {
               // same side
-              return val < target;
+              return val <= target;
            } else {
               // different side
               if (target > nums.front()) {
@@ -62,8 +62,8 @@ public:
            }
         };
 
-        int lo = 0, hi = nums.size() - 1;
-        // (lo, hi]
+        int lo = 0, hi = nums.size();
+        // [lo, hi)
         while (hi - lo > 1) {
            int mid = lo + (hi - lo) / 2;
            int midVal = nums[mid];
@@ -73,6 +73,6 @@ public:
               hi = mid;
            }
         }
-        return nums[hi] == target ? hi : -1;
+        return nums[lo] == target ? lo : -1;
     }
 };
