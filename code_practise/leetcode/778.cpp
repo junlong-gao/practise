@@ -1,11 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <deque>
-#include <cassert>
-using namespace std;
-
 class Solution {
-  int t;
   int dx[4] = {0, 1, 0, -1};
   int dy[4] = {1, 0, -1, 0};
   
@@ -13,7 +6,7 @@ class Solution {
   vector<vector<bool>> visited;
   int n;
   
-  bool canMove(int x, int y) {
+  bool canMove(int x, int y, int t) {
     if (x >= n || x < 0 || y >= n || y < 0) {
       return false;
     }
@@ -26,11 +19,12 @@ class Solution {
     return true;
   }
   
-  bool check() {
-    if (!canMove(0, 0)) {
-      return false;
+  bool check(int t) {
+    for (int i = 0; i < n; ++i) {
+      visited[i].resize(n);
+      fill(visited[i].begin(), visited[i].end(), false);
     }
-    //cout << "bfs" <<endl;
+
     deque<pair<int, int>> q;
     q.push_back({0, 0});
     visited[0][0] = true;
@@ -38,10 +32,9 @@ class Solution {
       auto top = q.front();
       q.pop_front();
       int x = top.first, y = top.second;
-      //cout << "@@" <<x << " " << y << endl;
       for (int i = 0; i < 4; ++i) {
         int nx = x + dx[i], ny = y + dy[i];
-        if (!canMove(nx, ny)) {
+        if (!canMove(nx, ny, t)) {
           continue;
         }
         visited[nx][ny] = true;
@@ -55,22 +48,16 @@ class Solution {
   }
   
   int search(int lo, int hi) {
-    //cout << lo << ", " << hi << endl;
-    if (hi == lo) {
-      return lo;
+    while (hi - lo > 1) {
+        int t = lo + (hi - lo)/2;
+        if (check(t)) {
+           hi = t;
+        } else {
+           lo = t;
+        }
     }
-    
-    for (int i = 0; i < n; ++i) {
-      visited[i].resize(n);
-      fill(visited[i].begin(), visited[i].end(), false);
-    }
-    
-    t = lo + (hi - lo)/2;
-    if (check()) {
-      return search(lo, t);
-    } else {
-      return search(t + 1, hi);
-    }
+      
+    return hi;
   } 
 public:
   int swimInWater(vector<vector<int>> grid) {
@@ -78,19 +65,7 @@ public:
     n = grid.size();
     visited.resize(n);
     swap(g, grid);
-    return search(0, n*n);
+
+    return search(g[0][0] - 1, n*n - 1);
   }
 };
-
-int main() {
-  Solution s;
-  assert(3 == s.swimInWater({{0,1},{2,3}}));
-  assert(3 == s.swimInWater({{3,1},{2,1}}));
-  assert(16 ==
-  s.swimInWater({{0,1,2,3,4},{24,23,22,21,5},{12,13,14,15,16},{11,17,18,19,20},{10,9,8,7,6}}));
-}
-
-/*
-binary search in t...
-This really should be medium difficulty
-*/
