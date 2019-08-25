@@ -15,8 +15,7 @@ class Solution {
 		for (int i = 0; i < 4; ++i) {
 			int nx = x; int ny = y;
 			while (nx >= 0 && nx < n && ny >= 0 && ny < m &&
-			           g[nx][ny] == 0 &&
-!(nx == destx && ny == desty)) {
+			       g[nx][ny] == 0 && !(nx == destx && ny == desty)) {
 				nx += dx[i]; ny += dy[i];
 			}
 
