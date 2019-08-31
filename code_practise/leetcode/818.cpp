@@ -10,14 +10,6 @@ To arrive at positin p from origin, we could:
 1. go directly at p, that is, p = 2^k - 1 for some k
 2. we go past p, then *after some distance*, turn around and start with speed
    1 again.
-   the key observation is that, after we past p, we should turn around immediately.
-   this is because (opt(p) is the optimal move to reach p from 0 with speed 1 to start)
-   (recall distance are of the form 2 ^ k - 1 where k is the number of acc)
-      opt(p) <= opt(p * 2 + 1)
-      (proof: at position p, the next furthest you can travel is p * 2 + 1, assuming
-              you arrive at p with full speed)
-   and after we arrive at x > p, if we move forward, we will be at (x + 1)  * 2 - 1 = 2*x + 1
-   and the new distance to travel = 2*x + 1 - p >= 2*x + 1 - 2* p >= 2*(x - p) + 1
 3. we stop right before passing p. turn around and move back for some distance, and
    turn back towards p again.
 */
