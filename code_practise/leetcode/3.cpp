@@ -1,50 +1,22 @@
-int x = [&]() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    return 0;
-}();
-
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int m = 1;
-        list<pair<char, int>> q;
-        unordered_map<char, deque<list<pair<char, int>>::iterator>> bag;
-        int cur = 0; int tail = -1;
-        int best = 0;
+        vector<int> mp(256, -1);
         
-        // init
-        while (cur < s.length()) {
-            char c = s[cur];
-            if (bag[c].size() >= m) {
-                break;
-            } 
-            
-            q.push_front({c, cur});
-            bag[c].push_front(q.begin());
-            
-            best = max(best, cur - tail);
-            cur++;
-        }
-        
-        // update
-        while (cur < s.length()) {
-            char c = s[cur];
-            if (bag[c].size() >= m) {
-                tail = bag[c].back()->second;
-                auto it = bag[c].back();
-                while(it != q.end()) {
-                    bag[it->first].pop_back();
-                    it = q.erase(it);
-                }
+        int i = 0, j = 0, m = 0;
+        // s[i...j) is a range of substr of unique char, it uses mp for tracking
+        // the appearance index of each char in the range.
+        while (i < s.size()) {
+            if (mp[s[i]] >= j) {
+                assert(mp[s[i]] < i);
+                j = mp[s[i]] + 1;
             }
-                
-            q.push_front({c, cur});
-            bag[c].push_front(q.begin());
-            best = max(best, cur - tail);
-            cur++;
+            mp[s[i]] = i;
+            i++;
+            
+            m = max(m, i - j);
         }
         
-        return best;
+        return m;
     }
 };
