@@ -1,6 +1,13 @@
 // Forward declaration of the read4 API.
 int read4(char *buf);
-
+/*
+   read(buf, n)
+   |<----->|<------->|<---->|
+       A        B        C
+   A: bounce buffer (size <= 4), copy from bounce buffer
+   B: aligned read
+   C: unaligned read (size <= 4), copy into bounce buffer
+*/
 class Solution {
     char bounce[4];
     int head=0, tail=0;
