@@ -5,7 +5,7 @@ public:
         for (int i = 0; i < nums.size(); ++i) {
             t += nums[i];
         }
-        
+
         if (t % 2) return false;
         t /= 2;
         
@@ -15,8 +15,9 @@ public:
         dp[0][nums[0]] = dp[0][0] = true;
         for (int i = 1; i < nums.size(); ++i) {
             dp[i][0] = true;
-            for (int j = nums[i]; j <= t; ++j) {
-                dp[i][j] = dp[i - 1][j] || dp [i - 1][j - nums[i]];
+            for (int j = 0; j <= t; ++j) {
+                dp[i][j] = dp[i - 1][j];
+                if (j >= nums[i]) { dp[i][j] = dp[i][j] || dp [i - 1][j - nums[i]]; }
             }
         }
         

@@ -78,6 +78,13 @@
  * permutation), we enforce ordering when we pick next element into our constructed
  * solution set.
  *
+ * Special ordering:
+ * [https://leetcode.com/problems/stickers-to-spell-word/discuss/108318/C%2B%2BJavaPython-DP-%2B-Memoization-with-optimization-29-ms-(C%2B%2B)]
+ * >>>
+ * Optimization: If the target can be spelled out by a group of stickers, at
+ * least one of them has to contain character target[0]. So I explicitly
+ * require next sticker containing target[0], which significantly reduced the
+ * search space.
  *
  */
 class Solution {
@@ -133,3 +140,4 @@ TESTS
 ["with", "example", "science"]
 "thehat"
 */
+
