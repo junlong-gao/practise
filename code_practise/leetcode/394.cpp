@@ -1,10 +1,10 @@
 /*
 
-encoded = expr # pop # encoded # pop, concat, push
-               |  expr
+encoded = expr (#pop) encoded (#pop, concat, push)
+        | eplison
 
-expr = <literal> # push literal
-         | <number> [ encoded ] # pop, repeat for number times, push
+expr = <literal> (# push literal)
+     | <number> [ encoded ] (# pop, repeat for number times, push)
 
 literal -> alphabets
 number -> digit*
