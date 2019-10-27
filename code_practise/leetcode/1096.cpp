@@ -1,3 +1,16 @@
+/*
+expr -> { comma } Rexpr <parse(comma) X parse(Rexpr)>
+     |   literal Rexpr <{literal} X parse(Rexpr)>
+
+Rexpr -> expr
+      |  epslion (look ahead char is end, ',', or '}' This is the termination of this expression)
+      
+comma -> expr Rcomma <parse(expr) U parse(Rcomma)>
+      | Rcomma
+
+Rcomma -> ,comma
+       | epslion (look ahead char is end or '}]. This is the termination of this comma seperated list)
+*/
 class Solution {
     int lh = 0;
     set<string> expr(const string& S);
