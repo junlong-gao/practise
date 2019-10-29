@@ -1,25 +1,19 @@
 /*
-expr -> { comma } Rexpr <parse(comma) X parse(Rexpr)>
-     |   literal Rexpr <{literal} X parse(Rexpr)>
-
-Rexpr -> expr
-      |  epslion (look ahead char is end, ',', or '}' This is the termination of this expression)
+expr -> { comma } expr
+      |  literal expr
+      |  eps <{""}>
       
-comma -> expr Rcomma <parse(expr) U parse(Rcomma)>
-      | Rcomma
-
-Rcomma -> ,comma
-       | epslion (look ahead char is end or '}]. This is the termination of this comma seperated list)
+comma -> expr Rcomma
+Rcomma -> , comma
+       | eps <{}>
 */
 class Solution {
     int lh = 0;
     set<string> expr(const string& S);
-    set<string> Rexpr(const string& S) {
-        if (lh == S.length() || S[lh] == ',' || S[lh] == '}') return {""};
-        return expr(S);
-    }
     
     set<string> comma(const string& S) {
+        //cout << "comma " << lh << endl;
+
         auto first = expr(S);
         auto second = Rcomma(S);
         for (auto& s : second) {
@@ -28,9 +22,14 @@ class Solution {
         return first;
     }
     set<string> Rcomma(const string& S) {
-        if (lh == S.length() || S[lh] == '}') return {};
-        assert(S[lh] == ','); lh++;
-        return comma(S);
+        //cout << "Rcomma " << lh << endl;
+
+        if (S[lh] == ',') {
+            assert(S[lh] == ','); lh++;
+            return comma(S);
+        } else {
+            return {};
+        }
     }
 public:
     vector<string> braceExpansionII(string expression) {
@@ -41,22 +40,26 @@ public:
 
 set<string> Solution::expr(const string& S)
 {
+    //cout << "expr " << lh << endl;
     set<string> opt;
-    if (S[lh] == '{') {
+    if (lh < S.length() && S[lh] == '{') {
         lh++;
         opt = comma(S);
         assert(S[lh]=='}');
         lh++;
-    } else {
+    } else if (lh < S.length() && isalpha(S[lh])){
         int cur = lh;
         while (isalpha(S[lh])) {
             lh++;
         }
         opt.insert(S.substr(cur, lh - cur));
+    } else {
+        // eps
+        return {""};
     }
 
     set<string> ret;
-    auto rest = Rexpr(S);
+    auto rest = expr(S);
     for (auto& f : opt) {
         for (auto& l : rest) {
             ret.insert(f + l);
