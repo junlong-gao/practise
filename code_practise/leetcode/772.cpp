@@ -1,90 +1,126 @@
 class Solution {
   using ll = long long;
-  string in;
-  int lh;
-  struct token {
-     ll val;
-     char op = 0;
-     token (ll val_) : val(val_) {;}
-     token (char op_) : op(op_) {;}
+  string buf;
+  int lookahead;
+  void removeSpace() {
+    string t;
+    for (int i = 0; i < buf.size(); ++i) {
+      if (buf[i] != ' ') {
+        t.push_back(buf[i]);
+      }
+    }
+    swap(buf, t);
+  }
+  
+  struct token_t {
+    bool isNum;
+    ll val;
   };
-
-  vector<token> tokens;
+  
+  vector<token_t> tokens;
+  const unordered_map<char, ll> opMap {
+    {'+', -1},
+    {'-', -2},
+    {'*', -3},
+    {'/', -4},
+  };
   const unordered_map<ll, std::function<ll(ll, ll)>> table {
-    {'+', [&](ll l, ll r) { return l + r; } },
-    {'-', [&](ll l, ll r) { return l - r; } },
-    {'*', [&](ll l, ll r) { return l * r; } },
-    {'/', [&](ll l, ll r) { return l / r; } }
+    {-1, [&](ll l, ll r) { return l + r; } },
+    {-2, [&](ll l, ll r) { return l - r; } },
+    {-3, [&](ll l, ll r) { return l * r; } },
+    {-4, [&](ll l, ll r) { return l / r; } }
   };
-
+  
   void expr();
-
   void factor() {
-    if (lh == in.size()) return;
-    if (in[lh] == '(') {
-      lh++; expr();
-      assert(in[lh] == ')'); lh++;
+    assert(lookahead < buf.size());
+    if (buf[lookahead] == '(') {
+      lookahead++;
+      expr();
+        
+      assert(buf[lookahead] == ')');
+      lookahead++;
     } else {
-      ll sign = 1;
-      if (in[lh] == '-') {
-         sign = -1; lh++;
+      int cur = lookahead;
+      if (!std::isdigit(buf[lookahead])) {
+          assert(buf[lookahead++] == '-');
       }
-
-      int cur = lh;
-      while(lh < in.size() && isdigit(in[lh])) {
-         lh++;
+      assert(std::isdigit(buf[lookahead]));
+      while(lookahead < buf.size() && std::isdigit(buf[lookahead])) {
+        lookahead++;
       }
-
-      tokens.push_back(sign * stoll(in.substr(cur, lh - cur)));
+      tokens.push_back(token_t{true, std::stoll(buf.substr(cur, lookahead - cur))});
     }
   }
-  void restFactor() {
-    while (lh < in.size() &&
-            (in[lh] == '*' || in[lh] == '/')) {
-       char op = in[lh]; lh++; factor();
-       tokens.push_back(op);
-    }
-  }
-
-  void term() {
-    factor();
-    restFactor();
-  }
-
+    
   void restTerm() {
-    while (lh < in.size() &&
-           (in[lh] == '+' || in[lh] == '-')) {
-       char op = in[lh]; lh++; term();
-       tokens.push_back(op);
+     if (lookahead != buf.size() && buf[lookahead] == '*') {
+        char op = buf[lookahead++];
+        factor();
+        tokens.push_back(token_t{false, opMap.at(op)});
+        restTerm();     
+     } else if (lookahead != buf.size() && buf[lookahead] == '/') {
+        char op = buf[lookahead++];
+        factor();
+        tokens.push_back(token_t{false, opMap.at(op)});
+        restTerm();
+     } else {
+        // empty production
+        return;
+     }
+  }
+  
+  void term() {
+    assert(lookahead < buf.size());
+    factor();
+    restTerm();
+  }
+  
+  void restExpr() {
+    if (lookahead != buf.size() && buf[lookahead] == '+') {
+        char op = buf[lookahead++];
+        term();
+        tokens.push_back(token_t{false, opMap.at(op)});
+        restExpr();
+    } else if (lookahead != buf.size() && buf[lookahead] == '-') {
+        char op = buf[lookahead++];
+        term();
+        tokens.push_back(token_t{false, opMap.at(op)});
+        restExpr();
+    } else {
+        // empty production
+        return;
     }
   }
-
+  
   int eval() {
-    vector<ll> s;
+    vector<int> s;
     for (auto t : tokens) {
-      if (t.op == 0) s.push_back(t.val);
+      if (t.isNum) s.push_back(t.val);
       else {
         assert (s.size() >= 2);
-        int r = s.back(); s.pop_back();
-        int l = s.back(); s.pop_back();
-        s.push_back(table.at(t.op)(l, r));
+        int second = s.back(); s.pop_back();
+        int first = s.back(); s.pop_back();
+        s.push_back(table.at(t.val)(first, second));
       }
     }
-
     assert(s.size() == 1);
     return s.back();
   }
-
+  
 public:
   int calculate(string s) {
-    for (int i = 0; i < s.size(); ++i) {
-      if (s[i] != ' ') { in.push_back(s[i]); }
-    }
-    expr(); return eval();
+    lookahead = 0;
+    swap(s, buf);
+    removeSpace();
+    expr();
+    return eval();
   }
 };
 
 void Solution::expr() {
+  if (lookahead == buf.size()) return;
   term();
-  restTerm();
+  restExpr();
 }
+
