@@ -1,35 +1,43 @@
+/*
+Using prefix sum, this is essentially the following problem: Let A be an
+array of int, and let K be a non-negative int. Define opt(j) to be the
+largest index i <= j such that A[j] - A[i] >= K, for all j in index range [0,
+len(A) - 1]. Find min_{0 <= j < len(A)} opt(j).
+
+Assume we already know how to solve for problem arr[0...n], adding element
+arr[n + 1]. Naively, we can construct a "candidate set" for arr[n + 1]:
+set[n + 1], in which we can examine diff arr[n+1] - e for e in set[n+1].
+This, however, will take too much time in the inductive step if we naively
+use arr[0...n] as set[n + 1].
+
+From induction, we know we will have such set for arr[n]: set[n]. The
+question becomes how to compute set[n+1] from set[n], perhaps discarding some
+elements in set[n] to obtain set[n+1] in order to efficiently update opt via
+arr[n+1].
+Of course, arr[n] will join set[n] to form set[n+1]. To consider which
+elements we can discard from set[n] in order to get set[n+1], we first see
+for any e in set[n], if e >= arr[n], e is useless for arr[n + 1] because
+   1. if arr[n + 1] - e >= K, then arr[n] is a better solution 
+   2. else, then e is not a valid candidate and not considered for computing
+      a solution arr[n + 1]
+This hints the sorted nature of set[n]: when adding arr[n], we always remove
+elements >= arr[n], so it is not decreasing. Second, if arr[n] - e >= K, then
+e is not worth keeping when adding arr[n + 1] because 
+   1. if arr[n + 1] - e >= K, then arr[n] is a shorter solution, 
+   2. else it is not a valid candiate and not used at all for computing
+      a solution arr[n + 1].
+
+Now by inductive hypothesis, we know we can compute the candidate set for all
+arr[n + 1] and use it to compute opt(n + 1) and update the best opt(j) seen
+so far. This is much more efficient than computing arr[n+1] from nothing.
+This both gives an efficient algorithm and proof (correct by construct).
+
+Curiously, if we would like to find opt(n) for all n, we cannot apply the
+second optimization in the inductive step. This eventually gives a O(nlogn)
+solution using binary search in the queue.
+*/
+
 class Solution {
-    /*
-    Let opt[j] be the largest index i such that P[j] - P[i] >= K,
-    where P is the prefix sum (hence P[j] - P[i] is sum [i...j-1], of length
-    j - i).
-    Let mq[i] be the candidate set for opt[i+1], such that
-    1. it is increasing (x < y in mq[i] => P[x] < P[y])
-    2. opt[i+1], if exists and is better than all previous solutions, 
-       must be in mq[i] (thus not empty), and
-       is the largest element x such that P[i + 1] - P[x] >= K
-       
-     mq[i] is maintained (into mq[i+1]) via poping matched front (smaller
-     size) of the set whenever P[i + 1] - mq.front() >= K and poping back 
-     whenever P[i + 1] >= mq.back();
-     
-     proof:
-     mq[0], trivial
-     assume after maintaining, the invariant no longer holds for mq[i + 1].
-     i.e. x = opt[i + 2], assmuing exists and better than previous solutions, 
-     is not in mq[i + 1]. note each element is enqueued exactly once,
-     to lose x is to pop it in the front or back in previous maintaining.
-     1. x is discarded during some previous pop front:
-        contradiction: as x is discarded in the previous pop front, the
-        index difference between x and i' is strictly better than x and i + 2
-        for i' < i + 2
-     2. x is discarded during some previous pop back:
-        contradiction: as P[some previous mq.back()] <= x, 
-        if P[some previous mq.back()] is in mq[i+1], then this is a 
-        strictly batter solution. otherwise 
-        mq[i+1].back() <= P[some previous mq.back()] is also a strictly better
-        solution.
-    */
 public:
     int shortestSubarray(vector<int>& A, int K) {
         deque<int> mq;
@@ -39,10 +47,19 @@ public:
         }
         int ans = P.size() + 1;
         for (int i = 0; i < P.size(); ++i) {
+            /*
+            Inv: mq is the candidate set for P[i]
+            */
+
+            // Use the candidate set to update ans
             while (mq.size() && P[i] - P[mq.front()] >= K) {
                 ans = min(ans, i - mq.front());
                 mq.pop_front();
             }
+
+            // Construct candidate set for P[i + 1], essentially,
+            // the only new candidate is P[i], and we can remove a
+            // few.
             while (mq.size() && P[i] <= P[mq.back()]) {
                 mq.pop_back();
             }
