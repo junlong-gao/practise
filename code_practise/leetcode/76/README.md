@@ -1,1 +1,0 @@
-Perfection is achieved only on the point of collapse. – C. N. Parkinson

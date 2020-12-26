@@ -37,7 +37,7 @@ public:
           return subtree;
       }
    }
-   
+
     int Find(double t) {
         return kFind(t, root);
     }
@@ -103,17 +103,17 @@ public:
             }
             k--;
         }
-        
+
         while (k && f.Valid()) {
             ret.push_back(f.Val());
             f.Next(); k--;
         }
-        
+
         while (k && b.Valid()) {
             ret.push_back(b.Val());
             b.Prev(); k--;
         }
-        
+
         return ret;
     }
 };

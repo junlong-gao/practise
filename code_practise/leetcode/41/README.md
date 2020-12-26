@@ -1,1 +1,0 @@
-The trickiest part is how the rotation works. Keep swapping yet keep the index unchanged.

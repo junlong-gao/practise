@@ -36,7 +36,7 @@ public:
           return subtree;
       }
    }
-   
+
     int Find(double t) {
         return kFind(t, root);
     }
