@@ -1,43 +1,33 @@
-// Forward declaration of the read4 API.
-int read4(char *buf);
-/*
-   read(buf, n)
-   |<----->|<------->|<---->|
-       A        B        C
-   A: bounce buffer (size <= 4), copy from bounce buffer
-   B: aligned read
-   C: unaligned read (size <= 4), copy into bounce buffer
-*/
+/**
+ * The read4 API is defined in the parent class Reader4.
+ *     int read4(char *buf4);
+ */
+
 class Solution {
-    char bounce[4];
-    int head=0, tail=0;
+    deque<char> buf;
+    void refill() {
+        assert(buf.empty());
+        char in[4];
+        int n = read4(in);
+        for (int j = 0; j < n; ++j) {
+            buf.push_back(in[j]);
+        }
+    }
 public:
     /**
      * @param buf Destination buffer
      * @param n   Number of characters to read
      * @return    The number of actual characters read
      */
-    int read(char *buf, int n) {
-        int ret = 0;
-        while (n && tail > head) {
-            *buf = bounce[head % 4];
-            buf++; ret++; n--; head++;
+    int read(char *buffer, int n) {
+        int re = 0;
+        while (n) {
+            if (buf.empty()) refill();
+            if (buf.empty()) return re;
+            *buffer = buf.front();
+            buf.pop_front();
+            re++;n--;buffer++;
         }
-        
-        int size = 0;
-        while ((n >= 4) && (size = read4(buf))) {
-            n -= size; buf += size; ret += size;
-        }
-        
-        if (n) {
-            assert(tail == head);
-            tail += read4(bounce);
-            while (n && tail > head) {
-               *buf = bounce[head % 4];
-                buf++; ret++; n--; head++;
-            }
-        }
-        
-        return ret;
+        return re;
     }
 };
