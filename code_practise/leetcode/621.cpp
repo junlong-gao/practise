@@ -1,46 +1,32 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        //cout << " --- " << endl;
-        vector<int> pending(26, 0);
-        for (auto t : tasks) {
-            pending[t - 'A']++;
+        unordered_map<char, int> ref;
+        int fmax = 0;
+        for (int i = 0; i < tasks.size(); ++i) {
+            ref[tasks[i]]++;
+            fmax = max(fmax, ref[tasks[i]]);
         }
-        
-        int m = 0;
-        for (int i = 0; i < pending.size(); ++i) {
-            m = max(pending[i], m);
-        }
-        
-        int nm = 0;
-        for (int i = 0; i < pending.size(); ++i) {
-            if (pending[i] == m) {
-                nm++;
+        int count = 0;
+        for (auto &pr:ref) {
+            if (pr.second == fmax) {
+                count++;
             }
         }
-        
-        // the scheduling diagram is:
-        int remaining = (n + 1 - nm) * (m - 1);
+        // Now here is the tricky part...
         /*
-        case 1 (n = 3):
-        A B C D
-        A B F /
-        A B / /
-        A B
-        
-        case 2 (n = 3):
-        A B C D E
-        A B C F
-        A B C G
-        A B
-        or (n = 0)
-        A B C
-        A B
-        A B
+               A B
+             - A B ...
+             | ...
+      fmax - 1 A B
+             | ...
+             - A B ...
+                   |<- n + 1 - count ->|
+        Any remaining tasks in tasks \ fmax * count can fit in the above region (fmax - 1) * (n + 1 - count).
+        If they cannot fit in total, then there exists a schedule to run all tasks without idle.
         */
-        //cout << remaining << endl;
-        if (remaining >= (int)tasks.size() - nm * m) {
-            return nm * m + remaining;
+        if ((int)(tasks.size() - fmax * count) <= (int)((fmax - 1) * (n + 1 - count))) {
+            return (fmax - 1) * (n + 1) + count;
         } else {
             return tasks.size();
         }
