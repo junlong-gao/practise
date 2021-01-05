@@ -1,45 +1,53 @@
 class Solution {
-    /*
-    find kth element (k is rank, not index in the sorted array)
-    nums1 [s1, l) [l, e1)
-    nums2 [s2, r) [r, e2)
-
-    wlg, let e1 - s1 <= e2 - s2, e1 - s1 >= 1, pick l, r such that (l + r) <= k (k > 1)
-    if (nums1[l - 1] > nums2[r - 1]) {
-        // why? can any element in nums2[s2...r] be the kth element?
-       return search(nums1, s1, e1, nums2, s2 + r, e2, k - r);
-    } else {
-       return search(nums1, s1 + l, e1, nums2, s2, e2, k - l);
-    }
-    */
-    int search(const vector<int>& n1, int s1, int e1,
-               const vector<int> &n2, int s2, int e2,
-               int k) {
-        if (e1 - s1 > e2 - s2) {
-            return search(n2, s2, e2, n1, s1, e1, k);
-        }
-        if (e1 - s1 == 0) {
-            return n2[s2 + k - 1];
+#define V vector
+    // find kth element, 1th is the smallest. For the kth element, at least
+    // k elements <= it.
+    // On average we reduce size by k/2, T(k) = T(k/2) + O(1), k = O(m + n), T(m+n)=O(log(m+n))
+    
+    // key idea: divide and conquer by discarding a region:
+    // the region's element cannot be the solution because the rank we search > the rank they can
+    // have
+    // 1. pick the first part of each array, make sure they are small enough to reason about their ranks.
+    //    => their total size is <= k
+    // 2. the "smaller" one will then have rank <= k - 1, hence all of them will have rank at most k - 1
+    // 3. they are the region to be discarded.
+    // 4. make sure each time we discard a non-empty region so it will always terminate
+    //    => just let each region be the min of (k/2, original region length), and handle cases k/2 = 0 -> k = 1
+    //       and original region length = 0 -> pick the other region.
+    int findK(int k, V<int> &a, V<int> &b, int as, int ae, int bs, int be) {
+        if (as == ae) {
+            return b[bs+k-1];
+        } else if (bs == be) {
+            return a[as+k-1];
         }
         if (k == 1) {
-            return min(n1[s1], n2[s2]);
+            return min(a[as], b[bs]);
         }
-        int l = min(e1 - s1, k / 2); // since e1 - s1 >= 1, l >= 1
-        int r = min(e2 - s2, k / 2); // r >= l >= 1
-        // so the below recursion must terminate
-        if (n1[s1 + l - 1] > n2[s2 + r - 1]) {
-            return search(n1, s1, e1, n2, s2 + r, e2, k - r);
+        
+        int am = min(k/2, (ae - as));
+        int bm = min(k/2, (be - bs));
+        // l + m <= k;
+        
+        if (a[as + am - 1] >= b[bs + bm - 1]) {
+           /*
+           ... a[as + am - 1] a[as + am] ...
+           ... b[bs + bm - 1] b[bs + bm] ...
+           all elements b[bs ... bs + bm - 1] (m of them) cannot be of rank k
+           because they are at most rank (am + bm) - 1 <= k - 1 < k
+           */
+           return findK(k - bm, a, b, as, ae, bs + bm, be);
         } else {
-            return search(n1, s1 + l, e1, n2, s2, e2, k - l);
+           return findK(k - am, a, b, as + am, ae, bs, be);
         }
     }
 public:
-    // 1 2 3 4 5
-    // 1 2 3 4
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int l = (nums1.size() + nums2.size() + 1) / 2;
-        int r = (nums1.size() + nums2.size() + 2) / 2;
-        return ((double)search(nums1, 0, nums1.size(), nums2, 0, nums2.size(), l) +
-               (double)search(nums1, 0, nums1.size(), nums2, 0, nums2.size(), r)) / 2.0;
+        int n = nums1.size(); int m = nums2.size();
+        double m1 = findK((n+m)/2 + 1, nums1, nums2, 0, n, 0, m);
+        if ((n+m)%2) {
+            return m1;
+        }
+        double m2 = findK((n+m)/2, nums1, nums2, 0, n, 0, m);
+        return (m1 + m2) / 2;
     }
 };
