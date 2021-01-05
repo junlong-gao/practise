@@ -1,42 +1,39 @@
-//
-//  main.cpp
-//  3Sum Smaller
-//
-//  Created by John on 9/14/15.
-//  Copyright © 2015 John. All rights reserved.
-//
-
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-class Solution {
+class MedianFinder {
+    priority_queue<int, vector<int>, std::greater<int>> upper;
+    priority_queue<int, vector<int>, std::less<int>> lower; // top largest
 public:
-    int threeSumSmaller(vector<int>& nums, int target) {
-        int counter = 0;
-        sort(nums.begin(), nums.end());
-        for (auto i = 0 ; i < nums.size(); i ++) {
-            int front = i + 1;
-            auto back = nums.size()-1;
-            while (front < back) {
-                if (nums[i]+nums[front]+nums[back] >= target) {
-                    back -- ;
-                }else{
-                    counter += back-front;
-                    front ++;
-                }
+    /** initialize your data structure here. */
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        if (upper.empty() || num > upper.top()) {
+            upper.push(num);
+            if (upper.size() > lower.size() + 1){
+                lower.push(upper.top());
+                upper.pop();
+            }
+        } else {
+            lower.push(num);
+            if (lower.size() > upper.size()) {
+                upper.push(lower.top());
+                lower.pop();
             }
         }
-        return counter;
+    }
+    
+    double findMedian() {
+        if ((upper.size() + lower.size()) % 2) {
+            return upper.top();
+        }
+        return (upper.top() + lower.top()) / 2.0;
     }
 };
 
-int main(int argc, const char * argv[]) {
-    vector<int> v{1,-1};
-    
-    Solution mysolutions;
-    mysolutions.threeSumSmaller(v, 0);
-    
-    return 0;
-}
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */

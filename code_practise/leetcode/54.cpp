@@ -1,108 +1,28 @@
-#include <string>
-#include <vector>
-#include <deque>
-#include <unordered_map>
-#include <unordered_set>
-#include <iostream>
-#include <limits>
-#include "catch.hpp"
-#include "printer.h"
-
-namespace lee54{
-	using namespace std;
-	class Solution {
-        void helper(vector<int>& sofar, vector<vector<int>>& m, int i, int j){
-            int r = m[i].size() - j;
-            int d = m.size() - i;
-            if(r - 1 < j || d - 1 < i) return;
-            if(r - 1 == j && d - 1 == i){
-                sofar.push_back(m[i][j]);
-                return;
+class Solution {
+    int dx[4] = {0, 1, 0, -1};
+    int dy[4] = {1, 0, -1, 0};
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int i = 0;
+        int n = matrix.size();
+        if (n == 0) { return {}; }
+        n *= matrix[0].size();
+        int x = 0; int y = 0;
+        vector<int> ret;
+        while (n-->0) {
+            ret.push_back(matrix[x][y]);
+            int nx = x + dx[i%4];
+            int ny = y + dy[i%4];
+            matrix[x][y] = 101;
+            if (nx >= matrix.size() || nx < 0 || ny >= matrix[0].size() || ny < 0 || matrix[nx][ny] == 101) {
+                i++;
+                nx = x + dx[i%4];
+                ny = y + dy[i%4];
             }
-            if(r - 1 == j){
-                for(int k = i; k < d; ++k){
-                    sofar.push_back(m[k][r-1]);
-                }
-                return;
-            }
-            if(d - 1 == i){
-                for(int k = j; k < r; ++k){
-                    sofar.push_back(m[i][k]);
-                }
-                return;
-            }
-            for(int k = j; k < r - 1; ++k){
-                sofar.push_back(m[i][k]);
-            }
-            for(int k = i; k < d - 1; ++k){
-                sofar.push_back(m[k][r-1]);
-            }
-            for(int k = r - 1; k > j; --k){
-                sofar.push_back(m[d-1][k]);
-            }
-            for(int k = d - 1; k > i; --k){
-                sofar.push_back(m[k][j]);
-            }
-            helper(sofar, m, i+1, j+1);
+            x = nx;
+            y = ny;
+        
         }
-	public:
-        vector<int> spiralOrder(vector<vector<int>>& matrix) {
-            vector<int> ret;
-            helper(ret, matrix, 0, 0);
-            return ret;
-        }
-	};
-
-
-	TEST_CASE("smoke 54"){
-		Solution testObj;
-		SECTION("sample 0"){
-            vector<vector<int>> testcase({{1,2,3},{8,9,4},{7,6,5}});
-            vector<int> expected = {1,2,3,4,5,6,7,8,9};
-            auto rst = testObj.spiralOrder(testcase);
-            for(int i = 0; i < expected.size(); ++i){
-                REQUIRE(rst[i] == expected[i]);
-            }
-		}
-		SECTION("sample 1"){
-            vector<vector<int>> testcase({{1,2},{4,3}});
-            vector<int> expected = {1,2,3,4};
-            auto rst = testObj.spiralOrder(testcase);
-            for(int i = 0; i < expected.size(); ++i){
-                REQUIRE(rst[i] == expected[i]);
-            }
-		}
-		SECTION("sample 2"){
-            vector<vector<int>> testcase({{1,2}});
-            vector<int> expected = {1,2};
-            auto rst = testObj.spiralOrder(testcase);
-            for(int i = 0; i < expected.size(); ++i){
-                REQUIRE(rst[i] == expected[i]);
-            }
-		}
-		SECTION("sample 3"){
-            vector<vector<int>> testcase({{1}});
-            vector<int> expected = {1};
-            auto rst = testObj.spiralOrder(testcase);
-            for(int i = 0; i < expected.size(); ++i){
-                REQUIRE(rst[i] == expected[i]);
-            }
-		}
-		SECTION("sample 3"){
-            vector<vector<int>> testcase({{1},{2},{3}, {4}});
-            vector<int> expected = {1,2,3,4};
-            auto rst = testObj.spiralOrder(testcase);
-            for(int i = 0; i < expected.size(); ++i){
-                REQUIRE(rst[i] == expected[i]);
-            }
-		}
-		SECTION("sample 4"){
-            vector<vector<int>> testcase({{1,2,3,4}});
-            vector<int> expected = {1,2,3,4};
-            auto rst = testObj.spiralOrder(testcase);
-            for(int i = 0; i < expected.size(); ++i){
-                REQUIRE(rst[i] == expected[i]);
-            }
-		}
-	}
-}
+        return ret;
+    }
+};
