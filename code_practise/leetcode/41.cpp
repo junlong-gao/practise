@@ -1,36 +1,28 @@
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include <vector>
-#include <deque>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
-
-
-namespace{
-	using namespace std;
-    class Solution {
-    public:
-        int firstMissingPositive(vector<int>& nums) {
-            for(int i = 0; i < nums.size(); ++i){
-                while(nums[i] > 0 && nums[i] <= nums.size() && nums[nums[i]-1]!=nums[i]){
-                    cout << nums[i] << " " << nums[nums[i]-1]<<endl;
-                    swap(nums[i], nums[nums[i]-1]);
-                }
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        for (int i = 0; i < nums.size(); ++i) {
+            if (nums[i] <= 0) {
+                nums[i] = 0;
             }
-            for(int i = 0; i < nums.size(); ++i){
-                if(nums[i] != i+1) return i+1;
+            if (nums[i] > nums.size()) {
+                nums[i] = nums.size() + 1;
             }
-            return nums.size()+1;
         }
-    };
-    
-    TEST_CASE("tests"){
-		Solution testObj;
-		SECTION("sample"){
-            
-		}
-	}
-}
-
-
+        
+        for (int i = 0; i < nums.size(); ++i) {
+            int val = nums[i] & ((1U << 31) - 1);
+            if (val == 0 || val == nums.size() + 1) {
+                continue;
+            }
+            nums[val - 1] = nums[val - 1] | (1<<31);
+        }
+        for (int i = 0; i < nums.size(); ++i) {
+            int bit = nums[i] >> 31;
+            if (bit == 0) {
+                return i + 1;
+            }
+        }
+        return nums.size() + 1;
+    }
+};
