@@ -1,4 +1,7 @@
 class Solution {
+    /*
+    key idea: e <= 0 or e > nums.size() does not contribute to the solution
+    */
 public:
     int firstMissingPositive(vector<int>& nums) {
         for (int i = 0; i < nums.size(); ++i) {
