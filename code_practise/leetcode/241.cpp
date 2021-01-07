@@ -1,31 +1,45 @@
 class Solution {
-    vector<int> dfs(const string& in, int s, int e) {
-        if (s == e) return {};
+    vector<int> search(vector<int> &nums, vector<char> &ops,
+                      int bi, int ei) {
+        if (ei - bi == 1) {
+            return {nums[bi]};
+        }
         vector<int> ret;
-        for (int i = s; i < e; ++i) {
-            if (std::isdigit(in[i])) {
-                continue;
+        for (int j = bi; j < ei - 1; ++j) {
+            auto l = search(nums, ops, bi, j + 1);
+            auto r = search(nums, ops, j + 1, ei);
+            for (auto ll : l) {
+                for (auto rr : r) {
+                    if (ops[j] == '+') {
+                        ret.push_back(ll + rr);
+                    } else if (ops[j] == '-') {
+                        ret.push_back(ll - rr);
+                    } else if (ops[j] == '*') {
+                        ret.push_back(ll * rr);
+                    }
+                }
             }
-            vector<int> l = dfs(in, s, i);
-            vector<int> r = dfs(in, i + 1, e);
-            for (auto lv : l) { for (auto rv : r) {
-                ret.push_back([&](){
-                    if (in[i] == '+') {  return lv + rv; }
-                    else if (in[i] == '-') { return lv - rv; } 
-                    else if (in[i] == '*') { return lv * rv; }
-                    assert(0);
-                }());
-            }}
         }
-        
-        if (ret.empty()) {
-            return {stoi(in.substr(s, e - s))};
-        } else {
-            return ret;
-        }
+        return ret;
     }
 public:
     vector<int> diffWaysToCompute(string input) {
-        return dfs(input, 0, input.length());
+        vector<int> nums;
+        vector<char> ops;
+        int i = 0;
+        while (i < input.size()) {
+            int j = i;
+            while (j < input.size() && std::isdigit(input[j])) {
+                j++;
+            }
+            nums.push_back(stoi(input.substr(i, j - i)));
+            if (j < input.size()) {
+                ops.push_back(input[j]);
+            }
+            j++;
+            i = j;
+        }
+        assert(ops.size() + 1 == nums.size());
+        return search(nums, ops, 0, nums.size());
     }
 };
