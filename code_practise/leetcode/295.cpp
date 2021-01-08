@@ -1,40 +1,39 @@
 class MedianFinder {
     priority_queue<int, vector<int>, std::greater<int>> upper;
-    priority_queue<int, vector<int>, std::less<int>> lower;
-
-    template<typename T1, typename T2>
-    void balance(T1& larger, T2& smaller){
-        while(!larger.empty() && larger.size() - smaller.size() >= 2){
-            auto top = larger.top(); larger.pop();
-            smaller.push(top);
-        }
-    }
+    priority_queue<int, vector<int>, std::less<int>> lower; // top largest
 public:
-
-    // Adds a number into the data structure.
+    /** initialize your data structure here. */
+    MedianFinder() {
+        
+    }
+    
     void addNum(int num) {
-        if(lower.empty() || num <= lower.top()){
-			lower.push(num);
-        }else{
+        if (upper.empty() || num > upper.top()) {
             upper.push(num);
-        }
-        
-        if((int)(lower.size() - upper.size()) >= 2){
-            balance(lower, upper);
-        }
-        
-        if((int)(lower.size() - upper.size()) <= -2){
-            balance(upper, lower);
+            if (upper.size() > lower.size() + 1){
+                lower.push(upper.top());
+                upper.pop();
+            }
+        } else {
+            lower.push(num);
+            if (lower.size() > upper.size()) {
+                upper.push(lower.top());
+                lower.pop();
+            }
         }
     }
-
-    // Returns the median of current data stream
+    
     double findMedian() {
-        if(upper.size() != lower.size()){
-            return upper.size() > lower.size() ? 
-                      (double)upper.top() :
-                      (double)lower.top();
+        if ((upper.size() + lower.size()) % 2) {
+            return upper.top();
         }
-        return (double)(upper.top() + lower.top())/2.0;
+        return (upper.top() + lower.top()) / 2.0;
     }
 };
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */
