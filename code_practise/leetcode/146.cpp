@@ -1,71 +1,53 @@
-//
-// Created by Junlong Gao on 7/29/16.
-//
-
-#ifndef PRACTISE_SOLUTION_H
-#define PRACTISE_SOLUTION_H
-
-#include <list>
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
-#include <iostream>
-
-using namespace std;
-
 class LRUCache {
-    list<pair<int, int>> caches;
-    unordered_map<int, list<pair<int,int>>::iterator> pointers;
-    const size_t size;
-    size_t curSize;
-
-public:
-    LRUCache(int capacity):size(capacity), curSize(0){;}
-
-    list<pair<int, int>>::iterator getRef(int key){
-        auto it = pointers.find(key);
-        if(it==pointers.end()){
-            return caches.end();
-        }
-        auto tmp = caches.begin();
-        int tmpKey = tmp->first;
-        if(tmpKey == key) return tmp; // try remove this line.
-
-        caches.push_front(*(pointers[key]));
-        caches.erase(it->second);
-
-        pointers[key] = caches.begin();
-        pointers[tmpKey] = tmp;
-
-        return caches.begin();
-
+    struct ent {
+        int key; int val;
     };
-
-    int get(int key){
-        auto ret = getRef(key);
-        if(ret != caches.end()){
-            return ret->second;
+    list<ent> data;
+    unordered_map<int, list<ent>::iterator> links;
+    int cap_;
+    list<ent>::iterator ref(int key) {
+        if (links.count(key) == 0) {
+            return data.end();
+        }
+        auto it = links[key];
+        ent e = *it;
+        data.erase(it);
+        data.push_front(e);
+        links[e.key] = data.begin();
+        return data.begin();
+    }
+public:
+    LRUCache(int capacity) {
+        cap_ = capacity;
+    }
+    
+    int get(int key) {
+        auto it = ref(key);
+        if (it != data.end()) {
+            return it->val;
         }
         return -1;
     }
-
-    void set(int key, int value){
-        if(pointers.find(key)!=pointers.end()){
-            auto target = getRef(key);
-            target->second = value;
+    
+    void put(int key, int value) {
+        auto it = ref(key);
+        if (it != data.end()) {
+            it->val = value;
             return;
         }
-        if(curSize >= size){
-            int tmp = caches.back().first;
-            caches.pop_back();
-            pointers.erase(tmp);
-            curSize--;
+        if (data.size() == cap_) {
+            auto victim = data.back();
+            links.erase(victim.key);
+            data.pop_back();
         }
-        caches.push_front(make_pair(key, value));
-        curSize++;
-        pointers[key] = caches.begin();
+        data.push_front(ent{key, value});
+        links[key] = data.begin();
     }
 };
 
-
-#endif //PRACTISE_SOLUTION_H
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
