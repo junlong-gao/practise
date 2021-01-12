@@ -1,33 +1,30 @@
 class Solution {
-    struct p {
-        int f, s;
+    struct ent_t {
+        int s; int f;
     };
 public:
     vector<int> partitionLabels(string S) {
-        vector<int> count;
-        vector<p> intervals(256, p{-1, -1});
-        for (size_t i = 0; i < S.size(); ++i) {
-            if (intervals[S[i]].f == -1) {
-                intervals[S[i]].f = i;
-            }
-            
-            intervals[S[i]].s = i;
-        }
-        
-        int i = 0;
-        p cur = intervals[S[i++]];
+       vector<ent_t> lk(256, ent_t{-1, -1});
+       for (int i = 0; i < S.size(); ++i) {
+           if (lk[S[i]].s == -1) {
+               lk[S[i]].s = i;
+           }
+           lk[S[i]].f = i;
+       }
+       int i = 1;
+       int curStart = lk[S[0]].s;
+        vector<int> ret{lk[S[0]].f - lk[S[0]].s + 1};
         while (i < S.size()) {
-            p next = intervals[S[i]];
-            if (next.f <= cur.s) {
-                cur.s = max(cur.s, next.s);
+            if (lk[S[i]].s < curStart + ret.back() - 1) {
+                ret.back() = max(ret.back(), lk[S[i]].f - curStart + 1);
             } else {
-                assert(cur.s == next.f - 1);
-                count.push_back(cur.s - cur.f + 1);
-                cur = next;
+                assert(curStart + ret.back() - 1 + 1 == i);
+                assert(lk[S[i]].s == i);
+                ret.push_back(lk[S[i]].f - lk[S[i]].s + 1);
+                curStart = lk[S[i]].s;
             }
             i++;
         }
-        count.push_back(cur.s - cur.f + 1);
-        return count;
+        return ret;
     }
 };
