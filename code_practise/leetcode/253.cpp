@@ -1,23 +1,34 @@
 class Solution {
+    struct ent_t {
+        int t;
+        bool isEnd;
+        int idx;
+    };
 public:
     int minMeetingRooms(vector<vector<int>>& intervals) {
-        vector<int> st, et;
-        for (auto & i : intervals) {
-            st.push_back(i[0]);
-            et.push_back(i[1]);
+        vector<ent_t> t;
+        for (int i = 0; i < intervals.size(); ++i) {
+            t.push_back(ent_t{intervals[i][0], false, i});
+            t.push_back(ent_t{intervals[i][1], true, i});
         }
-        
-        sort(st.begin(), st.end());
-        sort(et.begin(), et.end());
-        int sp = 0; int ep = 0;
-        int ret = 0;
-        while (sp < st.size()) {
-            if (st[sp] < et[ep]) {
-                ret++;
-            } else {
-                ep++;
+        sort(t.begin(), t.end(), [](const ent_t &l, const ent_t &r) {
+            if (l.t != r.t) {
+                return l.t < r.t;
             }
-            sp++;
+            if (l.isEnd != r.isEnd) {
+                return l.isEnd;
+            }
+            return l.idx < r.idx;
+        });
+        int ret = 0;
+        int cur = 0;
+        for (int i = 0; i < t.size(); ++i) {
+            if (t[i].isEnd) {
+                cur--;
+            } else {
+                cur++;
+            }
+            ret = max(ret, cur);
         }
         return ret;
     }
