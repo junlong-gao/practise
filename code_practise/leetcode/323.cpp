@@ -1,37 +1,49 @@
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include <vector>
-#include <deque>
-#include <queue>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
+class Solution {
+    struct uf_t {
+        vector<int> p, d;
+        int tot;
+        uf_t(int n) {
+           for (int i = 0; i < n; ++i) {
+               p.push_back(i);
+               d.push_back(0);
+           }
+           tot = n;
+        }
 
+        int find(int x) {
+            if (p[x] == x) {
+                return x;
+            }
+            int ret = find(p[x]);
+            p[x] = ret;
+            return ret;
+        }
 
-namespace{
-	using namespace std;
-	struct TreeNode {
-		int val;
-		TreeNode *left;
-		TreeNode *right;
-		TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-	};
-    struct ListNode {
-        int val;
-        ListNode *next;
-        ListNode(int x) : val(x), next(NULL) {}
+        void link(int x, int y) {
+            int px = find(x);
+            int py = find(y);
+            if (px == py) {
+                return;
+            }
+            tot--;
+            if (d[px] > d[py]) {
+                p[py] = px;
+            } else {
+                p[px] = py;
+                if (d[px] == d[py]) {
+                    d[py]++;
+                }
+            }
+        }
+
     };
-	class Solution {
-	public:
+public:
+    int countComponents(int n, vector<vector<int>>& edges) {
+        uf_t uf(n);
+        for (auto &e : edges) {
+            uf.link(e[0], e[1]);
+        }
 
-	};
-
-	TEST_CASE("tests"){
-		Solution testObj;
-		SECTION("sample"){
-
-		}
-	}
-}
-
-
+        return uf.tot;
+    }
+};

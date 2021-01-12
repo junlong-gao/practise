@@ -4,3 +4,7 @@ image:
 tasks:
   - init: 'true'
     command: 'true'
+
+vscode:
+  extensions:
+    - entepe85.gitlens@11.0.2:FJr9g9ULgySyb06Us88Qww==
