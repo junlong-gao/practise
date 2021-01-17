@@ -1,78 +1,115 @@
 class LFUCache {
-    using pr_t = pair<int, int>;
-    using C_t = list<int>;
-    int cap;
-    int size;
-    int cur_min_key;
-    unordered_map<int, pr_t> kv;                //k->freq, value
-    unordered_map<int, C_t::iterator> key_to_ptr; 
-    unordered_map<int, C_t>  f_to_keyC; 
-
+    class LRUCache {
+        struct ent_t {
+          int key, val;  
+        };
+        list<ent_t> data;
+        unordered_map<int, list<ent_t>::iterator> pt;
+        int notFound = -1;
+        
+        list<ent_t>::iterator ref(int key) {
+            assert(pt.count(key));
+            auto ent = *pt[key];
+            data.erase(pt[key]);
+            data.push_front(ent);
+            pt[key] = data.begin();
+            return data.begin();
+        }
+    public:
+        int size() {
+            return data.size();
+        }
+        
+        int& get(int key) {
+            if (pt.count(key)) {
+                return ref(key)->val;
+            }
+            return notFound;
+        }
+        
+        void put(int key, int val) {
+            if (pt.count(key)) {
+                ref(key)->val = val;
+            } else {
+                data.push_front(ent_t{key, val});
+                pt[key] = data.begin();
+            }
+        }
+        
+        int evict() {
+            int ret = data.back().key;
+            pt.erase(ret);
+            data.pop_back();
+            return ret;
+        }
+        
+        int remove(int key) {
+            assert(pt.count(key));
+            int ret = pt[key]->val;
+            
+            data.erase(pt[key]);
+            pt.erase(key);
+            
+            return ret;
+        }
+    };
+    
+    unordered_map<int, int> refcount;
+    map<int, LRUCache> buckets;
+    int n, cap;
+    
+    int& ref(int key) {
+        int val = buckets[refcount[key]].remove(key);
+        if (buckets[refcount[key]].size() == 0) {
+            buckets.erase(refcount[key]);
+        }
+        refcount[key]++;
+        buckets[refcount[key]].put(key, val);
+        return buckets[refcount[key]].get(key);
+    }
 public:
     LFUCache(int capacity) {
+        n = 0;
         cap = capacity;
-        size = 0;
     }
     
     int get(int key) {
-        if(kv.find(key) == kv.end()) return -1;
-        hit(key);
-        return kv[key].second;
+        if (cap == 0) {
+            return -1;
+        }
+        
+        if (refcount.count(key)) {
+            return ref(key);
+        }
+        return -1;
     }
     
     void put(int key, int value) {
-        //test();
-        if(cap == 0) return;
-        if(kv.find(key) == kv.end()){
-            if(size == cap){
-                int f = kv[cur_min_key].first;
-                kv.erase(cur_min_key);
-                assert(f_to_keyC[f].back() == cur_min_key);
-                f_to_keyC[f].erase(key_to_ptr[cur_min_key]);
-                key_to_ptr.erase(key);
-                size--;
-            }
-            kv[key] = make_pair(1, value);
-            size++;
-            f_to_keyC[1].push_front(key);
-            key_to_ptr[key] = f_to_keyC[1].begin();
-            cur_min_key = f_to_keyC[1].back(); //
-        }else{
-            hit(key);
-            kv[key].second = value;
+        if (cap == 0) {
+            return;
         }
-        //test();
-    }
-    
-    void hit(int key){
-        //test();
-        int f = kv[key].first;
-        kv[key].first++;
-        f_to_keyC[f].erase(key_to_ptr[key]);
-        f_to_keyC[f+1].push_front(key);
-        key_to_ptr[key] = f_to_keyC[f+1].begin();
-        //update min:
-        if(cur_min_key == key){
-            if(!f_to_keyC[f].empty()){
-                cur_min_key = f_to_keyC[f].back();
-            }else{
-                cur_min_key = f_to_keyC[f+1].back();
+        
+        if (refcount.count(key)) {
+            ref(key) = value;
+        } else {
+            if (n == cap) {
+                int lfuKey = buckets.begin()->second.evict();
+                n--;
+                refcount.erase(lfuKey);
+                if (buckets.begin()->second.size() == 0) {
+                    buckets.erase(buckets.begin());
+                }
             }
+            n++;
+            refcount[key] = 1;
+            buckets[refcount[key]].put(key, value);
         }
-        //test();
     }
-    
-    void test(){
-        //invariant
-        if(kv.size() == 0) return;
-        assert(f_to_keyC[kv[cur_min_key].first].back() == cur_min_key);
-    }
-    
 };
 
 /**
  * Your LFUCache object will be instantiated and called as such:
- * LFUCache obj = new LFUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.put(key,value);
+ * LFUCache* obj = new LFUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
  */
