@@ -16,35 +16,37 @@
  *     void clean();
  * };
  */
+
 class Solution {
-    int dx[4] = {-1, 0, 1, 0};
+    int x, y, d;
+    int dx[4] = {1, 0, -1, 0};
     int dy[4] = {0, 1, 0, -1};
-    unordered_set<string> visited;
-    void visit(int x, int y, int dir, Robot& r) {
-        r.clean();
-        auto rep = [](int xx, int yy) {
-            return to_string(xx) + "$" + to_string(yy);
-        };
+    unordered_map<int, unordered_map<int, int>> visited;
+    
+    void run(Robot& robot) {
+        visited[x][y] = 1;
+        robot.clean();
         
-        visited.insert(rep(x, y));
+        int curx = x; int cury = y;
         for (int i = 0; i < 4; ++i) {
-            int ndir = (i + dir) % 4;
-            int nx = dx[ndir] + x;
-            int ny = dy[ndir] + y;
-            if (visited.count(rep(nx, ny)) == 0 && r.move()) {
-                visit(nx, ny, ndir, r);
+            int nx = curx + dx[d%4];
+            int ny = cury + dy[d%4];
+            if (!visited[nx][ny] && robot.move()) {
+                x = nx; y = ny;
+                run(robot);
+                // now we are at (nx, ny), go back to (x, y)
+                robot.turnRight(); robot.turnRight();
+                assert(robot.move());
+                robot.turnRight(); robot.turnRight();
             }
-            r.turnRight();
-        }
-        
-        if (!(x == 0 && y == 0)) {
-            r.turnRight(); r.turnRight();
-            assert(r.move());
-            r.turnRight(); r.turnRight();
+            
+            d++;
+            robot.turnRight();
         }
     }
 public:
     void cleanRoom(Robot& robot) {
-        visit(0, 0, 0, robot);
+        x = 0; y = 0; d = 0;        
+        run(robot);
     }
 };
