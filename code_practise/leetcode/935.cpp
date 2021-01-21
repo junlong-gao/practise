@@ -1,42 +1,44 @@
 class Solution {
-    long long M = 1e9 + 7;
-    vector<vector<int>> dp;
-    vector<vector<int>> valid_move{
-        {4, 6}, //0
-        {8, 6}, //1
-        {7, 9}, //2
-        {4, 8}, //3
-        {3, 9, 0}, //4
-        {}, //5
-        {1, 7, 0}, //6
-        {2, 6}, //7
-        {1, 3}, //8
-        {2, 4}, //9
+    vector<vector<int>> prev = {
+        {4, 6},
+        {6, 8},
+        {7, 9},
+        {4, 8},
+        {3, 9, 0},
+        {},
+        {1, 7, 0},
+        {2, 6},
+        {1, 3},
+        {2, 4},
     };
     
-    long long helper(int N, int pos) {
-        int & ret = dp[N][pos];
-        if (ret != -1) {
-            return ret;
+    vector<vector<int>> dp;
+    const int M = 1e9+7;
+    
+    int search(int n, int pos) {
+        if (dp[n][pos] != -1) {
+            return dp[n][pos];
         }
+        int &ret = dp[n][pos];
         
-        if (N == 0) return ret = 1;
         ret = 0;
-        for (auto n : valid_move[pos]) {
-            ret = ((long long)ret + helper(N - 1, n)) % M;
+        if (n == 1) {
+            return ret = 1;
+        }
+        for (int ppos : prev[pos]) {
+            ret = (ret + search(n - 1, ppos)) % M;
         }
         
         return ret;
     }
 public:
-    int knightDialer(int N) {
-        dp.resize(N + 1, vector<int>(10, -1));
-        
-        long long ret = 0;
+    int knightDialer(int n) {
+        dp.resize(n + 1, vector<int>(10, -1));
+        int ret = 0;
         for (int i = 0; i < 10; ++i) {
-            ret = (ret + helper(N - 1, i)) % M;
+            ret =  (ret + search(n, i)) % M;
         }
-
+        
         return ret;
     }
 };

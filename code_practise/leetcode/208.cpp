@@ -1,89 +1,65 @@
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include <vector>
-#include <deque>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
-
-
-namespace{
-	using namespace std;
-    class TrieNode {
-
-    public:
-        unordered_map<char, TrieNode*> children;
-        bool isWord;
-        // Initialize your data structure here.
-        TrieNode() {
-
+class Trie {
+    unordered_map<char, Trie*> children;
+    bool isWord {false};
+    void add(string &word, int idx) {
+        if (idx == word.size()) {
+            isWord = true;
+            return;
         }
-    };
-
-    class Trie {
-    public:
-        Trie() {
-            root = new TrieNode();
+        if (children.count(word[idx]) == 0) {
+            children[word[idx]] = new Trie;
         }
-
-        void insert_helper(string& word, int pos, TrieNode* node){
-            if(pos == word.length()){
-                node->isWord = true;
-                return;
-            }
-            if(node->children.find(word[pos])==node->children.end()){
-                node->children[word[pos]] = new TrieNode();
-            }
-            insert_helper(word, pos+1, node->children[word[pos]]);
+        children[word[idx]]->add(word, idx + 1);
+    }
+    
+    Trie *find(string &w) {
+        Trie *cur = this;
+        int idx = 0;
+        while (idx < w.size() && cur->children.count(w[idx])) {
+            cur = cur->children[w[idx]];
+            idx++;
         }
-
-        // Inserts a word into the trie.
-        void insert(string word) {
-            insert_helper(word, 0, root);
+        
+        if (idx == w.size()) {
+            return cur;
         }
-
-        bool search_helper(string& word, int pos, TrieNode* node){
-            if(pos == word.length()){
-                return node->isWord;
-            }
-            if(node->children.find(word[pos]) == node->children.end()){
-                return false;
-            }
-            return search_helper(word, pos+1, node->children[word[pos]]);
+        return nullptr;
+    }
+public:
+    ~Trie() {
+        for (auto pr : children) {
+            delete pr.second;
         }
-        // Returns if the word is in the trie.
-        bool search(string word) {
-            return search_helper(word, 0, root);
+    }
+    /** Initialize your data structure here. */
+    Trie() {
+        
+    }
+    
+    /** Inserts a word into the trie. */
+    void insert(string word) {
+       add(word, 0);
+    }
+    
+    /** Returns if the word is in the trie. */
+    bool search(string word) {
+       Trie *node = find(word);
+        if (node == nullptr) {
+            return false;
         }
+        return node->isWord;
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    bool startsWith(string prefix) {
+       return find(prefix) != nullptr; 
+    }
+};
 
-
-        bool startsWith_helper(string& word, int pos, TrieNode* node){
-            if(pos == word.length()){
-                return true;
-            }
-            if(node->children.find(word[pos]) == node->children.end()){
-                return false;
-            }
-            return startsWith_helper(word, pos+1, node->children[word[pos]]);
-        }
-        // Returns if there is any word in the trie
-        // that starts with the given prefix.
-        bool startsWith(string prefix) {
-            return startsWith_helper(prefix, 0, root);
-        }
-
-    private:
-        TrieNode* root;
-    };
-
-	TEST_CASE("tests"){
-		Trie testObj;
-		SECTION("sample"){
-            testObj.insert("ab");
-            REQUIRE(!testObj.search("a"));
-            REQUIRE(testObj.startsWith("a"));
-		}
-	}
-}
-
-
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */

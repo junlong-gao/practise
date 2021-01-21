@@ -1,68 +1,39 @@
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include <vector>
-#include <deque>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
-
-
-namespace{
-	using namespace std;
-	struct TreeNode {
-		int val;
-		TreeNode *left;
-		TreeNode *right;
-		TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-	};
-    class Solution {
-        using g_t = unordered_map<string, vector<string>>;
-        using mask_t = unordered_map<string, vector<bool>>;
-
-        int edges = 0;
-        g_t graph;
-        mask_t mask;
-
-        vector<string> bucket;
-        bool dfs(string current){
-            //cout << "at " << current << endl;
-            if(edges == 0) return true;
-            auto& dests = graph[current];
-            for(int i = 0; i < dests.size(); ++i){
-                if(mask[current][i]){
-                    mask[current][i] = false;
-                    edges--;
-                    bucket.push_back(dests[i]);
-                    if(dfs(dests[i])) return true;
-                    bucket.pop_back();
-                    mask[current][i] = true;
-                    edges++;
-                }
-            }
-            return false;
+class Solution {
+    /*
+    DFS to backtrack a path visiting all edges.
+    */
+    unordered_map<string, vector<string>> g;
+    unordered_map<string, vector<bool>> used;
+    bool search(string pos, int rem, vector<string> *output) {
+        if (rem == 0) {
+            return true;
         }
-    public:
-        vector<string> findItinerary(vector<pair<string, string>> tickets) {
-            for(auto& ticket : tickets){
-                graph[ticket.first].push_back(ticket.second);
-                edges++;
+        
+        for (int i = 0; i < g[pos].size(); ++i) {
+            if (used[pos][i]) continue;
+            
+            output->push_back(g[pos][i]);
+            used[pos][i] = true;
+            if (search(g[pos][i], rem - 1, output)) {
+                return true;
             }
-            for(auto& edges: graph){
-                sort(edges.second.begin(), edges.second.end());
-                mask[edges.first].resize(edges.second.size(), true);
-            }
-            bucket.push_back("JFK");
-            dfs("JFK");
-            return bucket;
+            used[pos][i] = false;
+            output->pop_back();
         }
-    };
-
-	TEST_CASE("tests"){
-		Solution testObj;
-		SECTION("sample"){
-
-		}
-	}
-}
-
-
+        
+        return false;
+    }
+public:
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        for (auto ticket : tickets) {
+            g[ticket[0]].push_back(ticket[1]);
+        }
+        for (auto &pr : g) {
+            sort(pr.second.begin(), pr.second.end());
+            used[pr.first].resize(pr.second.size(), false);
+        }
+        vector<string> ret {"JFK"};
+        search("JFK", tickets.size(), &ret);
+        return ret;
+    }
+};

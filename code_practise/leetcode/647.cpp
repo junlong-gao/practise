@@ -1,18 +1,20 @@
 class Solution {
 public:
-    int countSubstrings(string S) {
-        vector<vector<bool>> dp(S.size(), vector<bool>(S.size(), false));
+    int countSubstrings(string s) {
         int ret = 0;
-        for (int l = 1; l <= S.size(); ++l) {
-            for (int i = 0; i + l - 1 < S.size(); ++i) {
+        vector<vector<bool>> dp(s.size(), vector<bool>(s.size(), false));
+        
+        for (int l = 1; l <= s.size(); ++l) {
+            for (int i = 0; i + l - 1 < s.size(); ++i) {
                 int j = i + l - 1;
-                if (i == j) {
+                if (l == 1) {
                     dp[i][j] = true;
-                } else if (i == j - 1) {
-                    dp[i][j] = S[i] == S[j];
+                } else if (l == 2) {
+                    dp[i][j] = (s[i] == s[j]);
                 } else {
-                    dp[i][j] = (S[i] == S[j]) && dp[i+1][j-1];
+                    dp[i][j] = dp[i+1][j-1] && (s[i] == s[j]);
                 }
+                
                 if (dp[i][j]) {
                     ret++;
                 }
@@ -20,5 +22,6 @@ public:
         }
         
         return ret;
+        
     }
 };

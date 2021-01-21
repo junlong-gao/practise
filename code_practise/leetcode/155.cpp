@@ -1,42 +1,54 @@
-#include <vector>
-using namespace std;
 class MinStack {
-    vector<int> internal_stack;
-    vector<int> mins;
-
+    struct ent_t {
+        int minv;
+        int count;
+    };
+    vector<int> data;
+    vector<ent_t> ms;
 public:
     /** initialize your data structure here. */
     MinStack() {
-
+        
     }
+    
     void push(int x) {
-        internal_stack.push_back(x);
-        if(mins.empty() || x <= mins.back()){
-            mins.push_back(x);
+        data.push_back(x);
+        if (ms.empty()) {
+            ms.push_back(ent_t{x, 1});
+        } else {
+            if (x < ms.back().minv) {
+                ms.push_back(ent_t{x, 1});
+            } else if (x == ms.back().minv) {
+                ms.back().count++;
+            }
         }
     }
-
+    
     void pop() {
-        if(!mins.empty() && internal_stack.back() == mins.back()){
-            mins.pop_back();
+        int back = data.back(); data.pop_back();
+        assert(back >= ms.back().minv);
+        if (back == ms.back().minv) {
+            ms.back().count--;
+            if (ms.back().count == 0) {
+                ms.pop_back();
+            }
         }
-        internal_stack.pop_back();
     }
-
+    
     int top() {
-        return internal_stack.back();
+        return data.back();
     }
-
+    
     int getMin() {
-        return mins.back();
+        return ms.back().minv;
     }
 };
 
 /**
  * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(x);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
  */
