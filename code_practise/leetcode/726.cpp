@@ -1,92 +1,66 @@
-/*
- * 40:06
- > leetcode submit 726.cpp
-  ✔ Accepted
-  ✔ 28/28 cases passed (3 ms)
-  ✔ Your runtime beats 11.02 % of cpp submissions
- */
 class Solution {
-    unordered_map<string, int> bag;
-    vector<string> tokens;
-    vector<int> semanticStack;
-    int idx = 0;
-
-    void match() {
-       idx--;
+    map<string, int> parse(const string &str, int i, int j) {
+        map<string, int> ret;
+        if (i == j) {
+            return ret;
+        }
+        
+        int idx = i;
+        while (idx < j) {
+            if (str[idx] == '(') {
+                int nextIdx = idx + 1;
+                int open = 1;
+                while (open > 0) {
+                    if (str[nextIdx] == ')') open--;
+                    if (str[nextIdx] == '(') open++;
+                    nextIdx++;
+                }
+                auto sol = parse(str, idx + 1, nextIdx - 1);
+                int count = 1;
+                
+                if (nextIdx < j && isdigit(str[nextIdx])) {
+                    int tmp = nextIdx;
+                    while (isdigit(str[nextIdx])) {
+                        nextIdx++;
+                    }
+                    count = stoi(str.substr(tmp, nextIdx - tmp));
+                }
+                for (auto &pr : sol) {
+                    ret[pr.first] += (pr.second * count);
+                }
+                idx = nextIdx;
+            } else if (isupper(str[idx])) {
+                int nextIdx = idx + 1;
+                while (islower(str[nextIdx])) {
+                    nextIdx++;
+                }
+                string atom = str.substr(idx, nextIdx - idx);
+                int count = 1;
+                
+                if (nextIdx < j && isdigit(str[nextIdx])) {
+                    int tmp = nextIdx;
+                    while (isdigit(str[nextIdx])) {
+                        nextIdx++;
+                    }
+                    count = stoi(str.substr(tmp, nextIdx - tmp));
+                }
+                ret[atom] += count;
+                idx = nextIdx;
+            }
+        }
+        return ret;
     }
-
-    void formula() {
-       idx = tokens.size() - 1;
-       semanticStack.push_back(1);
-       while (idx >= 0) {
-          if (tokens[idx] == "(") {
-             semanticStack.pop_back();
-             match();
-             continue;
-          }
-
-          int newcount = semanticStack.back();
-          if (std::isdigit(tokens[idx][0])) {
-             newcount *= std::stoi(tokens[idx]);
-             match();
-          }
-
-          if (tokens[idx] == ")") {
-             semanticStack.push_back(newcount);
-             match();
-          } else {
-             bag[tokens[idx]] += newcount;
-             match();
-          }
-       }
-    }
-
 public:
-    string countOfAtoms(string f) {
-       int i = 0;
-       while (i < f.size()) {
-          if (std::isdigit(f[i])) {
-             tokens.emplace_back();
-             while (i < f.size() && std::isdigit(f[i])) {
-                tokens.back() += f[i];
-                i++;
-             }
-          } else if (f[i] == '(') {
-             tokens.push_back("(");
-             i++;
-          } else if (f[i] == ')') {
-             tokens.push_back(")");
-             i++;
-          } else {
-             assert(std::isupper(f[i]));
-             tokens.emplace_back();
-             tokens.back() += f[i]; i++;
-             while (i < f.size() && std::islower(f[i])) {
-                tokens.back() += f[i];
-                i++;
-             }
-          }
-       }
-
-       formula();
-       map<string, int> output(bag.begin(), bag.end());
-       string ret;
-       for (const auto &pr : output) {
-          ret += pr.first;
-          if (pr.second > 1) {
-             ret += std::to_string(pr.second);
-          }
-       }
-
-       return ret;
+    string countOfAtoms(string formula) {
+        auto res = parse(formula, 0, formula.size());
+        string ret;
+        for (auto &pr: res) {
+            ret += pr.first;
+            if (pr.second > 1) {
+                ret += to_string(pr.second);
+            }
+        }
+        
+        return ret;
     }
 };
-
-/*
-TESTS
-"K4(ON(SO3)2)2"
-"H2O"
-"Mg(OH)2"
-"Ca(OH2O)"
-"Ca(O(H2O)4)"
-*/
