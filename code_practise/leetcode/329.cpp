@@ -1,47 +1,37 @@
 class Solution {
+    vector<vector<int>> dp;
     int dx[4] = {0, 1, 0, -1};
     int dy[4] = {1, 0, -1, 0};
-    vector<vector<int>> dp;
-    vector<vector<int>> g;
-    bool isValid(int x, int y) {
-        if (x < 0 || x >= g.size()) {
-            return false;
-        }
-        if (y < 0 || y >= g[0].size()) {
-            return false;
-        }
-        return true;
-    }
-    int dfs(int x, int y) {
-        if (dp[x][y] != 0) {
-            return dp[x][y];
-        }
+    int search(int x, int y, vector<vector<int>> &matrix) {
         int &ret = dp[x][y];
+        if (ret != -1) {
+            return ret;
+        }
+        
         ret = 1;
         for (int i = 0; i < 4; ++i) {
             int nx = x + dx[i];
             int ny = y + dy[i];
-            if (isValid(nx, ny) && g[nx][ny] > g[x][y]) {
-                ret = max(1 + dfs(nx, ny), ret);
+            if (nx < 0 || nx >= matrix.size() || ny < 0 || ny >= matrix[0].size() || matrix[nx][ny] <= matrix[x][y]) {
+                continue;
             }
+            
+            ret = max(ret, search(nx, ny, matrix) + 1);
         }
+        
         return ret;
     }
+    
 public:
     int longestIncreasingPath(vector<vector<int>>& matrix) {
-        swap(g, matrix);
-        dp = g;
-        for (int i = 0; i < g.size(); ++i) {
-            for (int j = 0; j < g[i].size(); ++j) {
-                dp[i][j] = 0;
-            }
-        }
+       dp.resize(matrix.size(), vector<int>(matrix[0].size(), -1)); 
         int ret = 0;
-        for (int i = 0; i < g.size(); ++i) {
-            for (int j = 0; j < g[i].size(); ++j) {
-                ret = max(ret, dfs(i, j));
+        for (int x = 0; x < matrix.size(); ++x) {
+            for (int y = 0; y < matrix[x].size(); ++y) {
+                ret = max(ret, search(x, y, matrix));
             }
         }
+        
         return ret;
     }
 };

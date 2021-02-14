@@ -8,47 +8,52 @@
  * };
  */
 class Solution {
-    
-    void ctor(TreeNode *root, unordered_map<int, vector<int>> &g) {
-        if (root == nullptr) return;
-        if (root->left) {
-            g[root->val].push_back(root->left->val);
-            g[root->left->val].push_back(root->val);
-            ctor(root->left, g);
+    void createGraph(TreeNode *r, unordered_map<TreeNode *, vector<TreeNode *>> &g) {
+        if (r == nullptr) return;
+        if (r->left) {
+            g[r].push_back(r->left);
+            g[r->left].push_back(r);
+            createGraph(r->left, g);
         }
-        if (root->right) {
-            g[root->val].push_back(root->right->val);
-            g[root->right->val].push_back(root->val);
-            ctor(root->right, g);
+        if (r->right) {
+            g[r].push_back(r->right);
+            g[r->right].push_back(r);
+            createGraph(r->right, g);
         }
     }
 public:
     vector<int> distanceK(TreeNode* root, TreeNode* target, int K) {
-        unordered_map<int, vector<int>> g;
-        ctor(root, g);
+        unordered_map<TreeNode *, vector<TreeNode *>> g;
+        createGraph(root, g);
         
-        vector<int> q; int d = 0;
-        unordered_set<int> visited;
+        deque<TreeNode *> q;
+        set<TreeNode *> visited;
+        int d = 0;
         
-        visited.insert(target->val);
-        q.emplace_back(target->val);
+        visited.insert(target);
+        q.push_back(target);
         while (q.size()) {
             if (d == K) {
-                return q;
-            }
-            vector<int> tmp;
-            for (auto node : q) {
-                for (auto n : g[node]) {
-                    //cout << n << " " << visited.count(n) << " " << visited.size() << endl;
-                    if (visited.count(n) == 0) {
-                        //cout << "p:"<<n<<endl;
-                        tmp.push_back(n);
+                vector<int> ret;
+                for (auto v : q) {
+                    ret.push_back(v->val);
+                }
+                return ret;
+            } else {
+                d++;
+                int sz = q.size();
+                for (int i = 0; i < sz; ++i) {
+                    TreeNode *top = q.front(); q.pop_front();
+                    for (auto n : g[top]) {
+                        if (visited.count(n)) {
+                            continue;
+                        }
+                        
                         visited.insert(n);
+                        q.push_back(n);
                     }
                 }
             }
-            d++; 
-            swap(tmp, q);   
         }
         return {};
     }

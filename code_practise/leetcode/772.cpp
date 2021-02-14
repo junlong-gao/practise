@@ -1,126 +1,123 @@
 class Solution {
-  using ll = long long;
-  string buf;
-  int lookahead;
-  void removeSpace() {
-    string t;
-    for (int i = 0; i < buf.size(); ++i) {
-      if (buf[i] != ' ') {
-        t.push_back(buf[i]);
-      }
-    }
-    swap(buf, t);
-  }
-  
-  struct token_t {
-    bool isNum;
-    ll val;
-  };
-  
-  vector<token_t> tokens;
-  const unordered_map<char, ll> opMap {
-    {'+', -1},
-    {'-', -2},
-    {'*', -3},
-    {'/', -4},
-  };
-  const unordered_map<ll, std::function<ll(ll, ll)>> table {
-    {-1, [&](ll l, ll r) { return l + r; } },
-    {-2, [&](ll l, ll r) { return l - r; } },
-    {-3, [&](ll l, ll r) { return l * r; } },
-    {-4, [&](ll l, ll r) { return l / r; } }
-  };
-  
-  void expr();
-  void factor() {
-    assert(lookahead < buf.size());
-    if (buf[lookahead] == '(') {
-      lookahead++;
-      expr();
-        
-      assert(buf[lookahead] == ')');
-      lookahead++;
-    } else {
-      int cur = lookahead;
-      if (!std::isdigit(buf[lookahead])) {
-          assert(buf[lookahead++] == '-');
-      }
-      assert(std::isdigit(buf[lookahead]));
-      while(lookahead < buf.size() && std::isdigit(buf[lookahead])) {
-        lookahead++;
-      }
-      tokens.push_back(token_t{true, std::stoll(buf.substr(cur, lookahead - cur))});
-    }
-  }
+    struct ent_t {
+        char op;
+        int oprand;
+        bool isOp;
+        bool isLeftOpen;
+        bool isRightOpen;
+    };
     
-  void restTerm() {
-     if (lookahead != buf.size() && buf[lookahead] == '*') {
-        char op = buf[lookahead++];
-        factor();
-        tokens.push_back(token_t{false, opMap.at(op)});
-        restTerm();     
-     } else if (lookahead != buf.size() && buf[lookahead] == '/') {
-        char op = buf[lookahead++];
-        factor();
-        tokens.push_back(token_t{false, opMap.at(op)});
-        restTerm();
-     } else {
-        // empty production
-        return;
-     }
-  }
-  
-  void term() {
-    assert(lookahead < buf.size());
-    factor();
-    restTerm();
-  }
-  
-  void restExpr() {
-    if (lookahead != buf.size() && buf[lookahead] == '+') {
-        char op = buf[lookahead++];
-        term();
-        tokens.push_back(token_t{false, opMap.at(op)});
-        restExpr();
-    } else if (lookahead != buf.size() && buf[lookahead] == '-') {
-        char op = buf[lookahead++];
-        term();
-        tokens.push_back(token_t{false, opMap.at(op)});
-        restExpr();
-    } else {
-        // empty production
-        return;
+    vector<ent_t> parse(const string &s) {
+        int i = 0;
+        vector<ent_t> ret;
+        while (i < s.size()) {
+            while (i < s.size() && s[i] == ' ') {
+                i++;
+            }
+            if (i == s.size()) {
+                break;
+            }
+            int j = i;
+            if (isdigit(s[j])) {
+                while (j < s.size() && isdigit(s[j])) {
+                    j++;
+                }
+                ret.push_back(ent_t{0, stoi(s.substr(i, j - i)),
+                                   false, false, false});
+                i = j;
+            } else {
+                if (s[j] == ')') {
+                    ret.push_back(ent_t{0, 0, false, false, true});
+                } else if (s[j] == '(') {
+                    ret.push_back(ent_t{0, 0, false, true, false});
+                } else {
+                    ret.push_back(ent_t{s[j], 0, true, false, false});
+                }
+                i = j + 1;
+            }
+        }
+        
+        return ret;
     }
-  }
-  
-  int eval() {
-    vector<int> s;
-    for (auto t : tokens) {
-      if (t.isNum) s.push_back(t.val);
-      else {
-        assert (s.size() >= 2);
-        int second = s.back(); s.pop_back();
-        int first = s.back(); s.pop_back();
-        s.push_back(table.at(t.val)(first, second));
-      }
-    }
-    assert(s.size() == 1);
-    return s.back();
-  }
-  
+    /*
+    if it is an op or left open: push it to the stack
+    if it is a number:
+        eval the number with the stack:
+           assert stack top is an op
+           if the op is + or -:
+              save the number with sign for future use
+           else
+              eval the number with the op and the next element in the stack
+    if it is a right: sum to the left open, treat this sum as a new number and
+    eval it with the remaining stack
+    */
 public:
-  int calculate(string s) {
-    lookahead = 0;
-    swap(s, buf);
-    removeSpace();
-    expr();
-    return eval();
-  }
+    int calculate(string str) {
+        vector<ent_t> s; // only number or left open or + or -
+        auto tokens = parse(str);
+        
+        if (tokens.empty()) {
+            return 0;
+        }
+        
+        auto eval = [&s](ent_t t) {
+            if (s.size() == 0 || s.back().isLeftOpen) {
+                s.push_back(t);
+            } else {
+                assert(s.back().isOp);
+                if (s.back().op == '+') {
+                    s.push_back(t);
+                } else if (s.back().op == '-') {
+                    t.oprand = 0 - t.oprand;
+                    s.push_back(t);
+                } else if (s.back().op == '*') {
+                    s.pop_back();
+                    int prev = s.back().oprand; s.pop_back();
+                    s.push_back(ent_t{0, prev * t.oprand, false, false, false});
+                } else if (s.back().op == '/') {
+                    s.pop_back();
+                    int prev = s.back().oprand; s.pop_back();
+                    s.push_back(ent_t{0, prev / t.oprand, false, false, false});
+                }
+            }
+        }; 
+        
+        for (int i = 0; i < tokens.size(); ++i) {
+            auto &t = tokens[i];
+            if (t.isOp || t.isLeftOpen) {
+                s.push_back(t);
+            } else if (t.isRightOpen) {
+                int sum = 0;
+                while (!s.back().isLeftOpen) {
+                    auto v = s.back(); s.pop_back();
+                    if (v.isOp) {
+                        assert(v.op == '+' || v.op == '-');
+                        continue;
+                    }
+                    assert(!v.isLeftOpen && !v.isRightOpen);
+                    sum += v.oprand; 
+                }
+                
+                if (!s.empty()) {
+                    assert(s.back().isLeftOpen);
+                    s.pop_back();
+                }
+                
+                ent_t tt = ent_t{0, sum, false, false, false};
+                eval(tt);
+            } else {
+                eval(t);
+            }
+        }
+        
+        int ret = 0;
+        while (s.size()) {
+            if (!s.back().isOp) {
+                ret += s.back().oprand;
+            }
+            s.pop_back();
+        }
+        
+        return ret;
+    }
 };
-
-void Solution::expr() {
-  if (lookahead == buf.size()) return;
-  term();
-  restExpr();
-}
-

@@ -1,66 +1,49 @@
 class Solution {
-    int helper(vector<int>& nums, int s, int e) {
-        if (s == e || s == e - 1) {
+    int count(vector<int> &in, int i, int j) {
+        if (i == j) {
+            return 0;
+        } else if (i == j - 1) {
             return 0;
         }
-        int mid = s + (e - s) / 2;
-        int left = helper(nums, s, mid);
-        int right = helper(nums, mid, e);
-        int cross = 0;
         
-        int i = s, j = mid;
-        while (i < mid && j < e) {
-            if ((long long) nums[i] <= 2 * (long long) nums[j]) {
-                cross += j - mid;
-                i++;
-            } else {
-                j++;
+        int mid = (i + j) / 2;
+        int ret = count(in, i, mid) + count(in, mid, j);
+        
+        {
+            int li = i, ri = mid;
+            while (ri < j) {
+                while (li < mid && (long long)in[li] <= (long long)2 * (long long)in[ri]) {
+                    li++;
+                }
+                ret += mid - li;
+                ri++;
             }
         }
         
-        while (i < mid) {
-            cross += j - mid;
-            i++;
-        }
-        
+        int lidx = i, ridx = mid;
         vector<int> out;
-        i = s, j = mid;
-        while (i < mid && j < e) {
-            if (nums[i] <= nums[j]) {
-                out.push_back(nums[i]);
-                i++;
+        while (lidx < mid && ridx < j) {
+            if (in[lidx] < in[ridx]) {
+                out.push_back(in[lidx++]);
             } else {
-                out.push_back(nums[j]);
-                j++;
+                out.push_back(in[ridx++]);
             }
         }
         
-        while (i < mid) {
-            out.push_back(nums[i]);
-            i++;
+        while (lidx < mid) {
+            out.push_back(in[lidx++]);
+        }
+        while (ridx < j) {
+            out.push_back(in[ridx++]);
         }
         
-        while (j < e) {
-            out.push_back(nums[j]);
-            j++;
+        for (int idx = i; idx < j; ++idx) {
+            in[idx] = out[idx - i];
         }
-        
-        for (int i = s; i < e; ++i) {
-            nums[i] = out[i-s];
-        }
-        return left + right + cross;
+        return ret;
     }
 public:
     int reversePairs(vector<int>& nums) {
-        return helper(nums, 0, nums.size());
+        return count(nums, 0, nums.size());
     }
 };
-
-/*
-[1,3,2,3,1]
-[0]
-[1,3]
-[3,1]
-[]
-[2147483647,2147483647,2147483647,2147483647,2147483647,2147483647]
-*/

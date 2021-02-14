@@ -1,37 +1,42 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
-  /*
-  reverse in range [l...r)
-  */
-  ListNode *reverse(ListNode *l, ListNode *r) {
-    ListNode *prev = r;
-    while (l != r) {
-      auto t = l->next;
-      l->next = prev;
-      prev = l;
-      l = t;
-    }
-    return prev;
-  }
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-      if (k <= 1) return head;
-      ListNode dummy(0);
-      dummy.next = head;
-      ListNode *cur = &dummy;
-      
-      while (cur && cur->next) {
-        ListNode *tail = cur->next;
-        int count = k;
-        while (count > 0 && tail) {
-          tail = tail->next;
-          count--;
+        ListNode dummy; dummy.next = head;
+        ListNode *prevGroupLast = &dummy;
+        while (prevGroupLast != nullptr) {
+            ListNode *newGroupFirst = prevGroupLast->next;
+            
+            ListNode *last = prevGroupLast;
+            for (int i = 0; i < k; ++i) {
+                last = last->next;
+                if (last == nullptr) {
+                    return dummy.next;
+                }
+            }
+            
+            ListNode *nextFirst = last->next;
+            ListNode *probe = newGroupFirst, *prev = prevGroupLast;
+            for (int i = 0; i < k; ++i) {
+                ListNode *tmp = probe->next;
+                probe->next = prev;
+                prev = probe;
+                probe = tmp;
+            }
+            
+            prevGroupLast->next = last;
+            newGroupFirst->next = nextFirst;
+            prevGroupLast = newGroupFirst;
         }
-        if (count) break;
-
-        auto t = cur->next;
-        cur->next = reverse(cur->next, tail);
-        cur = t;
-      }
-      return dummy.next;
+        
+        return dummy.next;
     }
-};
