@@ -1,34 +1,35 @@
 class Solution {
 public:
-    vector<int> sortedSquares(vector<int>& A) {
-        if (A.empty()) return A;
-        int m = abs(A[0]); int idx = 0;
-        for (int i = 1; i < A.size(); ++i) {
-            if (abs(A[i]) < m) {
-                idx = i;
-                m = abs(A[i]);
+    vector<int> sortedSquares(vector<int>& nums) {
+        int pivit = 0;
+        int minAbs = INT_MAX;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (abs(nums[i]) < minAbs) {
+                pivit = i;
+                minAbs = abs(nums[i]);
             }
         }
-        
-        int i = idx, j = i + 1;
+
         vector<int> ret;
-        while (i >= 0 && j < A.size()) {
-            if (abs(A[i]) < abs(A[j])) {
-                ret.push_back(A[i] * A[i]);
-                i--;
+        int l = pivit, r = pivit + 1;
+        while (l >= 0 && r < nums.size()) {
+            if (nums[l] * nums[l] <= nums[r] * nums[r]) {
+                ret.push_back(nums[l] * nums[l]);
+                l--;
             } else {
-                ret.push_back(A[j] * A[j]);
-                j++;
+                ret.push_back(nums[r] * nums[r]);
+                r++;
             }
         }
-        
-        while (i >= 0) {
-            ret.push_back(A[i] * A[i]); i--;
+        while (l >= 0) {
+            ret.push_back(nums[l] * nums[l]);
+            l--;
         }
-        while (j < A.size()) {
-            ret.push_back(A[j] * A[j]); j++;
+        while (r < nums.size()) {
+            ret.push_back(nums[r] * nums[r]);
+            r++;
         }
-        
+
         return ret;
     }
 };

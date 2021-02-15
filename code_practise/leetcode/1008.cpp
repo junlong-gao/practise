@@ -4,25 +4,24 @@
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
-    TreeNode* ctor(vector<int>& preorder,
-                   int& head,
-                   int lo,
-                   int hi) {
-        if (head == preorder.size()) return nullptr;
-        if (preorder[head] > hi || preorder[head] < lo) return nullptr;
-        TreeNode* root = new TreeNode(preorder[head]);
-        head++;
-        root->left = ctor(preorder, head, lo, root->val);
-        root->right = ctor(preorder, head, root->val, hi);
-        return root;
+    TreeNode *solve(const vector<int> &token, int &idx, int l, int r) {
+        if (idx == token.size()) return nullptr;
+        if (token[idx] <= l || token[idx] >= r) return nullptr;
+        TreeNode *ret = new TreeNode(token[idx]);
+        idx++;
+        ret->left = solve(token, idx, l, ret->val);
+        ret->right = solve(token, idx, ret->val, r);
+        return ret;
     }
 public:
     TreeNode* bstFromPreorder(vector<int>& preorder) {
-        int head = 0;
-        return ctor(preorder, head, INT_MIN, INT_MAX);
+        int tmp = 0;
+        return solve(preorder, tmp, INT_MIN, INT_MAX);
     }
 };

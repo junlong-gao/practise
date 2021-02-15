@@ -1,58 +1,35 @@
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include <vector>
-#include <deque>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
-
-
-namespace{
-    using namespace std;
-    
-    struct TreeNode {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-    };
-     
-    class Solution {
-	public:
-        vector<int> inorderTraversal(TreeNode* root) {
-            vector<int> rst;
-            vector<TreeNode*> s;
-            while(root){
-                s.push_back(root);
-                root = root->left;
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        TreeNode *cur = root;
+        vector<TreeNode *> s;
+        vector<int> ret;
+        while (true) {
+            while (cur) {
+                s.push_back(cur);
+                cur = cur->left;
             }
-            while(!s.empty()){
-                auto top = s.back();
-                rst.push_back(s.back()->val);
-                s.pop_back();
-                top = top->right;
-                while(top){
-                    s.push_back(top);
-                    top = top->left;
-                }
+            if (s.empty()) {
+                break;
             }
-            return rst;
+            cur = s.back(); s.pop_back();
+
+            ret.push_back(cur->val);
+
+            cur = cur->right;
         }
-	};
-	TEST_CASE("tests"){
-        Solution testObj;
-        TreeNode root{5}, left{1}, right{6};
-        root.left = &left;
-        root.right = &right;
-        
-        SECTION("sample"){
-            auto rst = testObj.inorderTraversal(&root);
-            vector<int> expected{1,5,6};
-            for(int i = 0; i < rst.size(); ++i){
-                REQUIRE(rst[i] == expected[i]);
-            }
-        }
-	}
-}
 
-
+        return ret;
+    }
+};
