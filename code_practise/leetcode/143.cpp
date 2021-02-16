@@ -1,71 +1,50 @@
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include <vector>
-#include <deque>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        if (head == nullptr) { return; }
+        int n = 0;
 
-
-namespace{
-	using namespace std;
-	struct TreeNode {
-		int val;
-		TreeNode *left;
-		TreeNode *right;
-		TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-	};
-    struct ListNode {
-        int val;
-        ListNode *next;
-        ListNode(int x) : val(x), next(NULL) {}
-    };
-    class Solution {
-    public:
-        void reorderList(ListNode* head) {
-            if(head==nullptr) return;
-            ListNode* fast = head, *slow=head, *tmp = nullptr;
-            while(fast && fast->next){
-                fast = fast->next;
-                if(fast){
-                    fast = fast->next;
-                    tmp = slow;
-                    slow = slow->next;
-                }
+        {
+            ListNode *cur = head;
+            while (cur) {
+                n++; cur = cur->next;
             }
-            ListNode* mid = slow;
-            if(fast){
-                mid = mid->next;
-                slow->next = nullptr;
-            }else{
-                tmp->next = nullptr;
-            }
-            ListNode* prev = nullptr, *walker = mid;
-            while(walker){
-                ListNode* next = walker->next;
-                walker->next = prev;
-                prev = walker;
-                walker = next;
-            }
-            walker = head;
-            while(walker && prev){
-                ListNode* next = walker->next;
-                walker->next = prev;
-                ListNode* prev_next = prev->next;
-                prev->next = next;
-                walker = next;
-                prev = prev_next;
-            }
-            
         }
-    };
-    
-    TEST_CASE("tests"){
-        Solution testObj;
-		SECTION("sample"){
 
-		}
-	}
-}
+        int mid = (n - 1) / 2; ListNode *midNode = head;
+        while (mid-->0) {
+            midNode = midNode->next;
+        }
 
+        ListNode *prev = nullptr;
+        {
+            ListNode *cur = midNode->next;
+            midNode->next = nullptr;
+            while (cur) {
+                ListNode *tmp = cur->next;
+                cur->next = prev;
+                prev = cur;
+                cur = tmp;
+            }
+        }
 
+        ListNode *firstHalf = head, *secondHalf = prev;
+        while (firstHalf && secondHalf) {
+            ListNode *tmp1 = firstHalf->next, *tmp2 = secondHalf->next;
+            firstHalf->next = secondHalf;
+            secondHalf->next = tmp1;
+            firstHalf = tmp1;
+            secondHalf = tmp2;
+        }
+    }
+};
