@@ -1,38 +1,35 @@
 class Solution {
-    /*
-    dp[n][r] =
-       | n = 0 and r = 0 ->
-          0
-       | n = 0 ->
-          -1
-       | _ ->
-          let t = (k + r - num[n-1]) in
-          if (dp[n-1][t] == -1) dp[n-1][r]
-          else max(dp[n-1][r], dp[n-1][t] + num[n-1])
-
-        XXX use -1 for impossible cases so max above works.
-    */
-    int rem(int val, int k, int T) {
-        k += (val / T + 1) * T;
-        assert (k >= val);
-        return (k - val) % T;
-    }
 public:
     int maxSumDivThree(vector<int>& nums) {
-        int T = 3;
-        vector<vector<int>> dp(nums.size() + 1, vector<int>(T, -1));
-        for (int i = 0; i <= nums.size(); ++i) {
-            for (int k = 0; k < T; ++k) {
+        // dp[i][d] = max sum of numbers from 0...i such that its
+        // residue is d;
+        // dp[0][d] = -1 if nums[0] % 3 != d, else nums[0]
+        // dp[i][d] = max(dp[i-1][d], dp[i-1][d'] + nums[i]), check -1 first;
+        vector<vector<int>> dp(nums.size(), vector<int>(3, -1));
+
+        for (int i = 0; i < nums.size(); ++i) {
+            for (int d = 0; d < 3; ++d) {
                 if (i == 0) {
-                    if (k == 0) {
-                        dp[i][k] = 0;
+                    if (nums[0] % 3 == d) {
+                        dp[i][d] = nums[0];
+                    } else {
+                        if (d == 0) {
+                            dp[i][d] = 0;
+                        } else {
+                            dp[i][d] = -1;
+                        }
                     }
                 } else {
-                    dp[i][k] = dp[i - 1][k];
-                    int r = dp[i - 1][rem(nums[i - 1], k, T)];
-                    if (r >= 0) {
-                        dp[i][k] = max(dp[i][k], r + nums[i - 1]);
+                    dp[i][d] = dp[i-1][d];
+
+                    int dprime = (3 + d - nums[i] % 3) % 3;
+                    if (dp[i-1][dprime] != -1) { // since we +nums[i]
+                        dp[i][d] = max(dp[i][d], dp[i-1][dprime] + nums[i]);
                     }
                 }
             }
         }
+
+        return dp[nums.size() - 1][0];
+    }
+};

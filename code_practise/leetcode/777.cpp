@@ -6,41 +6,28 @@ if 1. removing all X will result the same
 class Solution {
 public:
     bool canTransform(string start, string end) {
-            if (start.size() != end.size()) return false;
-	int i = 0; int j = 0;
-	while (true) {
-		while (i < start.size() && start[i] == 'X') { i++; }
-		while (j < end.size() && end[j] == 'X')   { j++; }
-		if (i != start.size() && j != end.size()) {
-			if (start[i] != end[j]) 	    { return false; }
-			if (start[i] == 'L' && i < j)  { return false; }
-			if (start[i] == 'R' && i > j)  { return false; }
-			i++; j++;
-			continue;
-		}
+        if (start.length() != end.length()) return false;
+        int i = 0;
+        int j = 0;
 
-		if (i == start.size() && j == end.size()) { break; }
+        while (i < start.size()) {
+            while (i < start.size() && start[i] == 'X') {i++;}
+            if (i == start.size()) break;
 
-		return false;
-	}
-	return true;
+            while (j < end.size() && end[j] == 'X') {j++;}
+            if (j == end.size()) return false;
+
+            if (start[i] != end[j]) return false;
+            if (start[i] == 'L' && i < j) return false;
+            if (start[i] == 'R' && i > j) return false;
+
+            i++;j++;
+        }
+        while(j < end.size()) {
+            if (end[j] != 'X') return false;
+            j++;
+        }
+
+        return true;
     }
 };
-
-/*
-XL
-LX
-
-RX
-XR
-
-LX
-XL
-
-"RXXLRXRXL"
-"XRLXXRRLX"
-
-"XRR"
-"XXR"
-
-*/

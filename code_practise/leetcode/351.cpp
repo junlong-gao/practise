@@ -1,65 +1,35 @@
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include <vector>
-#include <deque>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
+class Solution {
+    vector<vector<int>> skips{10, vector<int>(10, 0)}; // i -> j need pass skips[i][j];
+    int search(int last, vector<bool> &used, int len, int target) {
+        if (len == target) {
+            return 1;
+        }
 
-
-namespace{
-    using namespace std;
-    class Solution {
         int ret = 0;
-        int n, m;
-        vector<int> visited;
-        void helper(int pos, int k){
-            if(k >= m){
-                ret ++;
-                if(k >= n) return;
-            }
-            for(int i = 0; i < 9; ++i){
-                if(!visited[i] && checker(pos, i)){
-                    visited[i] = true;
-                    helper(i, k + 1);
-                    visited[i] = false;
-                }
-            }
+        for (int i = 1; i <= 9; ++i) {
+            if (used[i]) continue;
+            if (len != 0 && skips[last][i] != 0 && !used[skips[last][i]]) continue;
+            used[i] = true;
+            ret += search(i, used, len + 1, target);
+            used[i] = false;
         }
-        bool checker(int pos, int next){
-            int coldiff = abs(pos%3 - next%3);
-            int rowdiff = abs(pos/3 - next/3);
-            if(coldiff == 2 && rowdiff == 2){
-                return visited[4];
-            }
-            if(coldiff == 2 && rowdiff == 0){
-                return visited[pos/3 * 3 + 1];
-            }
-            if(coldiff == 0 && rowdiff == 2){
-                return visited[3 + pos%3];
-            }
-            return true;
-        }
-    public:
-        int numberOfPatterns(int m, int n) {
-            this->m = m;
-            this->n = n;
-            visited.resize(10, false);
-            for(int i = 0; i < 9; ++i){
-                visited[i] = true;
-                helper(i, 1);
-                visited[i] = false;
-            }
-            return ret;
-        }
-    };
-    
-    TEST_CASE("tests"){
-        Solution testObj;
-		SECTION("sample"){
-            REQUIRE(testObj.numberOfPatterns(1, 1) == 9);
-		}
-	}
-}
 
+        return ret;
+    }
+public:
+    int numberOfPatterns(int m, int n) {
+        skips[1][3] = skips[3][1] = 2;
+        skips[1][7] = skips[7][1] = 4;
+        skips[1][9] = skips[2][8] = skips[3][7] = skips[4][6] = 5;
+        skips[9][1] = skips[8][2] = skips[7][3] = skips[6][4] = 5;
+        skips[3][9] = skips[9][3] = 6;
+        skips[7][9] = skips[9][7] = 8;
+        vector<bool> used(10, false);
+        int ret = 0;
+        for (int l = m; l <= n; ++l) {
+            ret += search(0, used, 0, l);
+        }
 
+        return ret;
+    }
+};

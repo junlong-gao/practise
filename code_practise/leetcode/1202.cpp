@@ -1,52 +1,55 @@
 class Solution {
-    struct UF {
-        vector<int> p, d;
-        UF(int n) {
+    struct uf_t {
+        vector<int> p;
+        uf_t(int n) {
             for (int i = 0; i < n; ++i) {
                 p.push_back(i);
-                d.push_back(0);
             }
         }
         int find(int x) {
             if (p[x] == x) {
-                return x;
+                return p[x];
+            } else {
+                int px = find(p[x]);
+                p[x] = px;
+                return px;
             }
-            return p[x] = find(p[x]);
         }
         void link(int x, int y) {
             int px = find(x);
             int py = find(y);
-            if (d[px] > d[py]) {
-                p[py] = px;
-            } else {
-                p[px] = py;
-                if (d[px] == d[py]) {
-                    d[py]++;
-                }
+            if (px == py) {
+                return;
             }
+            p[px] = py;
         }
     };
 public:
     string smallestStringWithSwaps(string s, vector<vector<int>>& pairs) {
-        UF uf(s.length());
+        uf_t uf(s.size());
         for (auto pr : pairs) {
             uf.link(pr[0], pr[1]);
         }
-        unordered_map<int, vector<int>> mp;
-        for (int i = 0; i < s.length(); ++i) {
-            mp[uf.find(i)].push_back(i);
+        unordered_map<int, vector<int>> groups;
+        for (int i = 0; i < s.size(); ++i) {
+            groups[uf.find(i)].push_back(i);
         }
-        for (auto &pr : mp) {
-            sort(pr.second.begin(), pr.second.end());
+
+        for (auto &pr : groups) {
+            vector<int> &idxs = pr.second;
+            std::sort(idxs.begin(), idxs.end());
+
             string tmp;
-            for (int i = 0; i < pr.second.size(); ++i) {
-                tmp.push_back(s[pr.second[i]]);
+            for (auto idx : idxs) {
+                tmp.push_back(s[idx]);
             }
-            sort(tmp.begin(), tmp.end());
-            for (int i = 0; i < pr.second.size(); ++i) {
-                s[pr.second[i]] = tmp[i];
+            std::sort(tmp.begin(), tmp.end());
+
+            for (int i = 0; i < idxs.size(); ++i) {
+                s[idxs[i]] = tmp[i];
             }
         }
+
         return s;
     }
 };

@@ -1,45 +1,40 @@
 class Solution {
     using ll = long long;
-    
-    // count tree size of prefix whose value <= n
     ll count(ll prefix, ll n) {
+        ll lo = prefix; ll hi = prefix;
         ll ret = 0;
-        ll lo = prefix, hi = prefix;
-        while (n >= lo) {
+        while (lo <= n) {
             ret += min(hi - lo + 1, n - lo + 1);
             lo = lo * 10;
             hi = hi * 10 + 9;
         }
         return ret;
     }
-    
-    ll search(ll prefix, ll n, ll k) {
-        if (k == 1) {
+
+    ll search(ll rank, ll prefix, ll n) {
+        if (rank == 1) {
             return prefix;
         }
-        
-        ll skipped = 1; // skip prefix
-        for (ll lastDigit = 0; lastDigit <= 9; ++lastDigit) {
-            if (prefix == 0 && lastDigit == 0) {
-                // no such subtree;
+
+        ll skipped = 1; // prefix itself
+        for (ll d = 0; d <= 9; ++d) {
+            if (prefix == 0 && d == 0) {
                 continue;
             }
-            
-            ll nextNode = prefix * 10 + lastDigit;
-            ll subTreeSize = count(nextNode, n);
-            if (k <= skipped + subTreeSize) { 
-                // decend into the node in tree nextnode which has rank: 
-                // [skipped + 1, skipped + subtreesize]
-                return search(nextNode, n, k - skipped);
+
+            ll next = prefix * 10 + d;
+            ll tmp = count(next, n);
+            if (skipped + tmp >= rank) {
+                return search(rank - skipped, next, n);
             } else {
-                skipped += subTreeSize;
+                skipped += tmp;
             }
         }
-        
+
         assert(0);
     }
 public:
     int findKthNumber(int n, int k) {
-        return search(0, n, k + 1); // the virtual root has rank 1, so shift by 1
+        return search(k + 1, 0, n);
     }
 };
