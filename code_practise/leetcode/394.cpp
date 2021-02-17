@@ -1,36 +1,31 @@
 class Solution {
-    
-    string decode(int& start, string& s) {
-        if (start == s.size() || s[start] == ']') {
+    string build(const string &s, int &head) {
+        if (head == s.size() || s[head] == ']') {
             return "";
-        } else if (std::isdigit(s[start])) {
-            int cur = start;
-            while (start < s.size() && std::isdigit(s[start])) {
-                start++;
+        }
+        string ret;
+        if (isdigit(s[head])) {
+            int tmp = head;
+            while (isdigit(s[head])) {head++;}
+            int rep = stoi(s.substr(tmp, head - tmp));
+            assert(s[head] == '['); head++;
+            string inter = build(s, head);
+            assert(s[head] == ']'); head++;
+            while (rep-->0) {
+                ret += inter;
             }
-            int n_rep = stoi(s.substr(cur, start - cur));
-            assert(s[start] == '['); start++;
-            string temp = decode(start, s);
-            assert(s[start] == ']'); start++;
-                
-            string ret;
-            for (int i = 0; i < n_rep; ++i) {
-                ret += temp;
-            }
-            return ret + decode(start, s);
+            return ret + build(s, head);
         } else {
-            int cur = start; assert(std::isalpha(s[start]));
-            while (start < s.size() && std::isalpha(s[start])) {
-                start++;
-            }
-            string t = s.substr(cur, start - cur);
-            return  t + decode(start, s);
-            // return s.substr(cur, start - cur) + decode(start, s); is wrong. Why?
+            assert(isalpha(s[head]));
+            int tmp = head;
+            while (head < s.size() && isalpha(s[head])) { head++; }
+            string first = s.substr(tmp, head - tmp);
+            return first + build(s, head); // do not put above line and and concat here: no order of evaluation of c++ expression
         }
     }
 public:
     string decodeString(string s) {
-        int start = 0;
-        return decode(start, s);
+        int head = 0;
+        return build(s, head);
     }
 };
