@@ -1,27 +1,28 @@
-/*
-A = ...x...y...
-B = ...y...x...
-
-xy < yx => A < B
-
-*/
-
 class Solution {
 public:
     string largestNumber(vector<int>& nums) {
-        sort(nums.begin(), nums.end(), [&](int l, int r){
-            return to_string(r) + to_string(l) < to_string(l) + to_string(r);
-        });
-        string init {""};
+        vector<string> v;
         for (auto e : nums) {
-            init += to_string(e);
+            v.push_back(to_string(e));
         }
-        int buf = 0;
-        for (int i = 0; i < init.length(); ++i) {
-            if (init[i] == '0') buf++;
-            else break;
+        
+        /*
+        Normal sort should give lex largest, but here, the comp
+        of the final result is by individual char, not by unit
+        of the sort.
+        */
+        sort(v.begin(), v.end(), [](const string &l, const string &r){
+           return l + r > r + l; 
+        });
+        
+        if (v.front()[0] == '0') {
+            return "0";
         }
-        if (buf == init.length()) return "0";
-        return init.substr(buf, init.length() - buf);
+        
+        string ret;
+        for (auto &r : v) {
+            ret += r;
+        }
+        return ret;
     }
 };

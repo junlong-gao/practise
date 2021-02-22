@@ -1,21 +1,21 @@
 class Solution {
-    using ll = long long;
 public:
     int subarraysDivByK(vector<int>& A, int K) {
-        unordered_map<int, ll> refcount;
-        refcount[0] = 1;
-        int sum = 0;
+        vector<int> ref(K, 0);
+        vector<int> pfx{0};
+        int ret = 0;
         for (int i = 0; i < A.size(); ++i) {
-            sum += A[i];
-            while (sum < 0) {
-                sum += K;
-            }
-            refcount[sum % K]++;
+            pfx.push_back(pfx.back() + A[i]);
         }
         
-        ll ret = 0;
-        for (auto &pr : refcount) {
-            ret += pr.second * (pr.second - 1) / 2;
+        for (int i = 0; i < pfx.size(); ++i) {
+            int v = pfx[i];
+            if (v < 0) {
+                v += K * ((0-v) / K + 1);
+            }
+            
+            ret += ref[v%K];
+            ref[v%K]++;
         }
         
         return ret;

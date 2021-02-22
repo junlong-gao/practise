@@ -1,15 +1,15 @@
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
-        unordered_set<int> mp;
-        for (auto n : nums1) {
-            mp.insert(n);
+        if (nums1.size() > nums2.size()) {
+            swap(nums1, nums2);
         }
+        unordered_set<int> nums1C(nums1.begin(), nums1.end());
         vector<int> ret;
-        for (auto n : nums2) {
-            if (mp.count(n)) {
-                ret.push_back(n);
-                mp.erase(n);
+        for (auto e : nums2) {
+            if (nums1C.count(e)) {
+                ret.push_back(e);
+                nums1C.erase(e);
             }
         }
         

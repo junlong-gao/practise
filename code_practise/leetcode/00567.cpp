@@ -1,20 +1,22 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        if (s1.size() > s2.size()) return false;
-        vector<int> refcount(26, 0), sofar(26, 0);
-        for (int i = 0; i < s1.size(); ++i) {
-            refcount[s1[i] - 'a']++;
-            sofar[s2[i] - 'a']++;
+        vector<int> refcount(256, 0), tmp(256, 0);
+        for (auto c : s1) {
+            refcount[c]++;
         }
         
-        if (refcount == sofar) return true;
-        for (int j = 1; j + s1.size() <= s2.size(); ++j) {
-            sofar[s2[j - 1] - 'a']--;
-            sofar[s2[j + s1.size() - 1] - 'a']++;
-            if (refcount == sofar) return true;
+        int i = 0;
+        while (i < s2.size()) {
+            tmp[s2[i]]++;
+            if (i + 1 >= s1.size()) {
+                if (refcount == tmp) {
+                    return true;
+                }
+                tmp[s2[i - s1.size() + 1]]--;
+            }
+            i++;
         }
-        
         return false;
     }
 };
