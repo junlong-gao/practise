@@ -1,62 +1,33 @@
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include <vector>
-#include <deque>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
-
-
-namespace{
-   using namespace std;
-   struct TreeNode {
-      int val;
-      TreeNode *left;
-      TreeNode *right;
-      TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-   };
-    struct ListNode {
-        int val;
-        ListNode *next;
-        ListNode(int x) : val(x), next(NULL) {}
-    };
-   class Solution {
-   public:
-      ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-         int carry = 0;
-         ListNode ret(0);
-         ListNode* walker = &ret;
-         while(l1 && l2){
-            int val = (l1->val + l2->val + carry) % 10;
-            carry = (l1->val + l2->val + carry) / 10;
-            walker->next = new ListNode(val);
-            walker = walker->next; l1 = l1->next; l2=l2->next;
-         }
-         while(l1){
-            int val = (l1->val + carry) % 10;
-            carry = (l1->val + carry) / 10;
-            walker->next = new ListNode(val);
-            walker = walker->next; l1 = l1->next;
-         }
-         while(l2){
-            int val = (l2->val + carry) % 10;
-            carry = (l2->val + carry) / 10;
-            walker->next = new ListNode(val);
-            walker = walker->next; l2 = l2->next;
-         }
-         if(carry){
-            walker->next = new ListNode(carry);
-         }
-         return ret.next;
-      }
-   };
-
-   TEST_CASE("tests"){
-      Solution testObj;
-      SECTION("sample"){
-
-      }
-   }
-}
-
-
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        int carry = 0;
+        ListNode dummy;
+        ListNode *head = &dummy;
+        
+        while (carry || l1 || l2) {
+            int v = carry;
+            if (l1) {
+                v += l1->val; l1 = l1->next;
+            }
+            if (l2) {
+                v += l2->val; l2 = l2->next;
+            }
+            head->next = new ListNode(v%10);
+            carry = v / 10;
+            head = head->next;
+        }
+        
+        return dummy.next;
+    }
+};

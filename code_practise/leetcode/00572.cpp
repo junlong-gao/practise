@@ -10,26 +10,30 @@
  * };
  */
 class Solution {
-    size_t search(TreeNode *r, unordered_set<size_t> *fp) {
-        if (r == nullptr) {
-            if (fp) {
-                fp->insert(hash<string>{}(""));
-            }
-            return hash<string>{}("");
+    unordered_map<int, unordered_map<int, unordered_map<int, int>>> treeMap; // (val, id1, id2) -> id
+    int id {1};
+    int getId(TreeNode *root, unordered_set<int> *output) {
+        if (root == nullptr) {
+            return 0;
         }
-        
-        size_t ret = hash<string>{}(to_string(search(r->left, fp)) + to_string(r->val) + to_string(search(r->right, fp)));
-        if (fp) {
-            fp->insert(ret);
+        int leftId = getId(root->left, output);
+        int rightId = getId(root->right, output);
+        int gotId = treeMap[root->val][leftId][rightId];
+        if (gotId == 0) {
+            gotId = id++;
+            treeMap[root->val][leftId][rightId] = gotId;
         }
-        return ret;
+        if (output) {
+            output->insert(gotId);
+        }
+        return gotId;
     }
     
 public:
     bool isSubtree(TreeNode* s, TreeNode* t) {
-        unordered_set<size_t> fp;
-        search(s, &fp);
-        return fp.count(search(t, nullptr));
-        
+        int target = getId(t, nullptr);
+        unordered_set<int> trees;
+        getId(s, &trees);
+        return trees.count(target) > 0;
     }
 };
